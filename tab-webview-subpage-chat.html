@@ -381,13 +381,6 @@
 	
 	<script>
 		
-		document.getElementById('from_1').addEventListener('tap',function(){
-			 mui.openWindow({
-		    url: 'from_1.html', 
-		    id:'from_1'
-		  });
-		});
-		
 		
 	mui.plusReady(function(){
 			//开启回弹
@@ -399,61 +392,35 @@
 			
 			//获取社区列表
 			mui.ajax('http://192.168.1.104:8080/app?cmd=getcommunitylist',{
-				dataType:'json',//服务器返回json格式数据
-				type:'get',//HTTP请求类型
+				dataType:'json',
+				type:'get',
 				success:function(data){
 				var area_name = '<option value="" selected="selected">请选择</option>';
 				
 				for (i=0;i<data.data.length;i++) {
-					console.log(data.data[i].area_name);
 					area_name += 
 					'<option value="'+
 					data.data[i].area_id
 					+'">'+ data.data[i].area_name+'</option>';
 					
 				}
-				document.getElementById("shequID").innerHTML = area_name;
-				
-				
+				document.getElementById("shequID").innerHTML = area_name;				
 				},
 				error: function(xhr,type,errorThrown){
 					
 				}
 			});
 
-			// 获取	小区列表
-			var str = '<option value="">请选择</option>';
-			//发送网络请求,获取小区列表;
-			var data = new Array(
-						'<option value="item-2">抚梅源</option>',
-						'<option value="item-3">紫东花园</option>',
-						'<option value="item-4">紫金苑</option>',
-						'<option value="item-5">华府山水</option>',
-						'<option value="item-6">水云间</option>',
-						'<option value="item-7">瑞景新城</option>',
-						'<option value="item-8">香语城</option>',
-						'<option value="item-9">弈景嘉园</option>',
-						'<option value="item-10">荣盛家园</option>'
-				);
-			
-			for ( i = 0; i < data.length;i++) {
-				str += data[i];
-				
-			};
-			
-			
-			document.getElementById('communityInfo').innerHTML = str;
-			});
-			
-			
-			
+		//点击跳转到新增人员界面
+		document.getElementById('from_1').addEventListener('tap',function(){
+			 mui.openWindow({
+			    url: 'from_1.html', 
+			    id:'from_1'
+		  });
+		});
+	});
 	
-
-			
-			
 		</script>
-
-
 
 	</body>
 </html>
