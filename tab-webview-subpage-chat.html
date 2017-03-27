@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<title>Hello MUI</title>
@@ -26,7 +25,6 @@
 			}
 		</style>
 	</head>
-
 	<body>
 		
 		<div class="mui-content">
@@ -41,10 +39,13 @@
 					<div class="mui-card-content">
 						<form class="mui-input-group">
 							<div class="mui-input-row">
-								<label style="width: 30%;">社区</label>
-								<select style="width: 70%;" class="mui-btn-block" >
+								<label style="width: 30%;" >社区</label>
+								<select style="width: 70%;" id="shequID" class="mui-btn-block" >
+									
+									<option value="">请选择</option>
 									
 								</select>
+								
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">小区</label>
@@ -64,7 +65,6 @@
 							<div class="mui-input-row">
 							<label style="width: 30%;">房号</label>
 							<select style="width: 70%;" class="mui-btn-block">
-									
 								<option value="item-1">请选择</option>
 									<option value="item-2">1单元101</option>
 									<option value="item-3">1单元102</option>
@@ -333,9 +333,7 @@
 		 function getBuildingInfo(){
 
 			console.log('plusready');
-	
 		 	console.log(common.getBuildingInfo());
-		 	
 		 }
 		 
 		 //获取房间信息
@@ -354,6 +352,7 @@
 	
 	
 			var info = document.getElementById("info");
+			//删除提示框
 			document.getElementById("confirmBtn").addEventListener('tap', function() {
 				var btnArray = ['取消', '删除'];
 				mui.confirm('您确定要删除此住户？', '提示', btnArray, function(e) {
@@ -389,6 +388,7 @@
 		  });
 		});
 		
+		
 	mui.plusReady(function(){
 			//开启回弹
 			_self = plus.webview.currentWebview();
@@ -397,6 +397,29 @@
 				bounceBackground:"#efeff4"
 			});
 			
+			//获取社区列表
+			mui.ajax('http://192.168.1.104:8080/app?cmd=getcommunitylist',{
+				dataType:'json',//服务器返回json格式数据
+				type:'get',//HTTP请求类型
+				success:function(data){
+				var area_name = '<option value="" selected="selected">请选择</option>';
+				
+				for (i=0;i<data.data.length;i++) {
+					console.log(data.data[i].area_name);
+					area_name += 
+					'<option value="'+
+					data.data[i].area_id
+					+'">'+ data.data[i].area_name+'</option>';
+					
+				}
+				document.getElementById("shequID").innerHTML = area_name;
+				
+				
+				},
+				error: function(xhr,type,errorThrown){
+					
+				}
+			});
 
 			// 获取	小区列表
 			var str = '<option value="">请选择</option>';
@@ -420,9 +443,12 @@
 			
 			
 			document.getElementById('communityInfo').innerHTML = str;
-					 var idinfo = '123';
 			});
 			
+			
+			
+	
+
 			
 			
 		</script>
