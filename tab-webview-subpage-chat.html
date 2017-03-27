@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.yl_txt { font-size: 17px; line-height: 37px; color: #222; }
+		</style>
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			.title {
+				padding: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+				background-color: #fff;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<div class="mui-content">
+			<div class="mui-content">
+				<div class="mui-card">
+					<div class="mui-card-header">
+						<h4 style="font-weight: normal;">
+							<span style="font-size: 20px;" class="mui-icon mui-icon-search"></span>
+							<span>搜索</span>
+						</h4>
+					</div>
+					<div class="mui-card-content">
+						<form class="mui-input-group">
+							<div class="mui-input-row">
+								<label style="width: 30%;">小区</label>
+								<select style="width: 70%;" class="mui-btn-block" id="communityInfo" onchange="getBuildingInfo()">
+									
+								</select>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">楼栋</label>
+								<select style="width: 70%;" class="mui-btn-block" onchange="getRoomInfo()">
+									<option value="item-1">请选择</option>
+									<option value="item-2">1号楼</option>
+									<option value="item-3">2号楼</option>
+									<option value="item-4">3号楼</option>
+								</select>
+							</div>
+							<div class="mui-input-row">
+							<label style="width: 30%;">房号</label>
+							<select style="width: 70%;" class="mui-btn-block">
+									
+								<option value="item-1">请选择</option>
+									<option value="item-2">1单元101</option>
+									<option value="item-3">1单元102</option>
+									<option value="item-4">1单元103</option>
+									<option value="item-2">2单元101</option>
+									<option value="item-3">2单元102</option>
+									<option value="item-4">2单元103</option>
+							</select>
+							
+							</div>
+						</form>
+					</div>
+					<div class="mui-card-footer">
+						<div class="mui-button-row" style="margin: 0 auto;">
+							<button type="button" class="mui-btn mui-btn-primary" id="searchBtn" onclick="return false;">搜索</button>&nbsp;&nbsp;
+							<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
+						</div>
+					</div>
+				</div>
+				
+				<div class="mui-card">
+					<div class="mui-card-header">
+						<h4 style="font-weight: normal;">
+							<span style="font-size: 20px;" class="mui-icon mui-icon-map"></span>
+							<span>恩源智湾</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span>
+							<span>2</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span>
+							<span>2-102</span>
+						</h4>
+					</div>
+					
+					
+					<div class="mui-card-content">
+						
+						<form class="mui-input-group">
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">姓名</label>
+								<p class="yl_txt">张涵予</p>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">性别</label>
+								<p class="yl_txt">男</p>
+								
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">族别</label>
+								<p class="yl_txt">汉</p>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 35%;">与业主关系</label>
+								<p class="yl_txt">业主</p>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">出生日期</label>
+								<p class="yl_txt">1970.2.8</p>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">电话</label>
+								<p class="yl_txt">
+								<a href="tel:186-9999-9999">186-9999-9999</a>
+									
+								</p>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">血型</label>
+								<p class="yl_txt">AB型</p>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">职业</label>
+								<p class="yl_txt">银行职员</p>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">籍贯</label>
+								<p class="yl_txt">北京</p>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">文化程度</label>
+								<p class="yl_txt">大学</p>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">政治面貌</label>
+								<p class="yl_txt">党员</p>
+							</div>
+						</form>
+					</div>
+					
+					<div class="mui-card-footer">
+						<div class="mui-button-row" style="margin: 0 auto;">
+							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;">修改</button>&nbsp;&nbsp;
+						</div>
+					</div>
+				</div>
+				
+				<div class="mui-card">
+					
+					<div class="mui-card-header">
+						<h4 style="font-weight: normal;">
+							<span style="font-size: 20px;" class="mui-icon mui-icon-map"></span>
+							<span>恩源智湾</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span>
+							<span>2</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span>
+							<span>2-102</span>
+						</h4>
+					</div>
+					<div class="mui-card-content">
+						<form class="mui-input-group">
+							<div class="mui-input-row">
+								<label style="width: 30%;">姓名</label>
+								<p class="yl_txt">张婉</p>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">性别</label>
+								<p class="yl_txt">女</p>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">族别</label>
+								<p class="yl_txt">汉</p>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">与业主关系</label>
+								<p class="yl_txt">子女</p>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">出生日期</label>
+								<p class="yl_txt">1972.12.58</p>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">电话</label>
+								<p class="yl_txt">
+								<a href="tel:186-6666-6666">186-6666-6666</a>
+								</p>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">血型</label>
+								<p class="yl_txt">A型</p>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">职业</label>
+								<p class="yl_txt">职员</p>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">籍贯</label>
+								<p class="yl_txt">新疆</p>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">文化程度</label>
+								<p class="yl_txt">大学</p>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">政治面貌</label>
+								<p class="yl_txt">群众</p>
+							</div>
+						</form>
+					</div>
+					
+					<div class="mui-card-footer">
+						<div class="mui-button-row" style="margin: 0 auto;">
+							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;">修改</button>&nbsp;&nbsp;
+							<button id='confirmBtn' type="button" class="mui-btn mui-btn-danger mui-btn-outlined" onclick="return false;">删除</button>
+							<div id="info"></div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="mui-card">
+					<div class="mui-card-header">
+						<h4 style="font-weight: normal;">
+							<span style="font-size: 20px;" class="mui-icon mui-icon-map"></span>
+							<span>恩源智湾</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span>
+							<span>2</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span>
+							<span>2-102</span>
+						</h4>
+					</div>
+					
+					<div class="mui-card-content">
+						<form class="mui-input-group">
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">姓名</label>
+								<p class="yl_txt">顾小顾</p>
+							</div>
+				
+							<div class="mui-input-row">
+								<label style="width: 30%;">性别</label>
+								<p class="yl_txt">男</p>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">族别</label>
+								<p class="yl_txt">汉</p>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">与业主关系</label>
+								<p class="yl_txt">父子</p>
+							</div>
+							
+							<div class="mui-input-row">
+								<label  style="width: 30%;">出生日期</label>
+								<p class="yl_txt">1993.12.58</p>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">电话</label>
+								<p class="yl_txt">
+								<a href="tel:186-8888-8888">186-8888-8888</a>
+								</p>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">身份证号</label>
+								<p class="yl_txt">412721199303163915</p>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">职业</label>
+								<p class="yl_txt">银行职员</p>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">籍贯</label>
+								<p class="yl_txt">新疆</p>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">文化程度</label>
+								<p class="yl_txt">大学</p>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">政治面貌</label>
+								<p class="yl_txt">群众</p>
+							</div>
+							
+						</form>
+					</div>
+					
+					<div class="mui-card-footer ">
+						
+						<div class="mui-button-row" style="margin: 0 auto;">
+							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;">修改</button>&nbsp;&nbsp;
+							<button id='confirmBtn1' type="button" class="mui-btn mui-btn-danger mui-btn-outlined" onclick="return false;">删除</button>
+						</div>
+						
+					</div>
+				</div>
+				
+					<div class="mui-content-padded" > 
+						<a id="from_1">
+						<button style="padding: 10px 0; margin: 16px 0;" type="button" class="mui-btn mui-btn-primary mui-btn-block">
+							新增成员
+						</button>
+						
+							</a>
+					</div>	
+			</div>
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/Common.js"></script>	
+		<script type="text/javascript" charset="utf-8">
+
+		 //获取楼栋信息
+		 function getBuildingInfo(){
+
+			console.log('plusready');
+	
+		 	console.log(common.getBuildingInfo());
+		 	
+		 }
+		 
+		 //获取房间信息
+		 function getRoomInfo(){
+		 	
+		 	console.log(common.getRoomInfo());
+		 	
+		 }
+		 
+		 
+		//搜索按钮
+		document.getElementById("searchBtn").addEventListener('tap',function(){
+			//获取 id ,发送请求,在回调函数中执行插入数据的操作;如果数据不存在 ,则添加一个;
+			
+		});
+	
+	
+			var info = document.getElementById("info");
+			document.getElementById("confirmBtn").addEventListener('tap', function() {
+				var btnArray = ['取消', '删除'];
+				mui.confirm('您确定要删除此住户？', '提示', btnArray, function(e) {
+					if (e.index == 1) {
+						mui.toast('删除成功');
+					} else {
+						mui.toast('已取消');
+					}
+				})
+			});
+			
+			
+			document.getElementById("confirmBtn1").addEventListener('tap', function() {
+				var btnArray = ['取消', '删除'];
+				mui.confirm('您确定要删除此住户？', '提示', btnArray, function(e) {
+					if (e.index == 1) {
+						mui.toast('删除成功');
+					} else {
+						mui.toast('已取消');
+					}
+				})
+			});
+			
+		</script>	
+	
+	
+	<script>
+		
+		document.getElementById('from_1').addEventListener('tap',function(){
+			 mui.openWindow({
+		    url: 'from_1.html', 
+		    id:'from_1'
+		  });
+		});
+		
+	mui.plusReady(function(){
+			//开启回弹
+			_self = plus.webview.currentWebview();
+			_self.setStyle({
+				bounce: "vertical",
+				bounceBackground:"#efeff4"
+			});
+			
+
+			// 获取	小区列表
+			var str = '<option value="">请选择</option>';
+			//发送网络请求,获取小区列表;
+			var data = new Array(
+						'<option value="item-2">抚梅源</option>',
+						'<option value="item-3">紫东花园</option>',
+						'<option value="item-4">紫金苑</option>',
+						'<option value="item-5">华府山水</option>',
+						'<option value="item-6">水云间</option>',
+						'<option value="item-7">瑞景新城</option>',
+						'<option value="item-8">香语城</option>',
+						'<option value="item-9">弈景嘉园</option>',
+						'<option value="item-10">荣盛家园</option>'
+				);
+			
+			for ( i = 0; i < data.length;i++) {
+				str += data[i];
+				
+			};
+			
+			
+			document.getElementById('communityInfo').innerHTML = str;
+					 var idinfo = '123';
+			});
+			
+			
+			
+		</script>
+
+
+
+	</body>
+</html>

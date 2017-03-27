@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/mui.picker.min.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="css/mui.min.css">
+		<style>
+			html,body {
+				background-color: #efeff4;
+			}
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			 .oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0;
+				vertical-align: middle;
+			}
+			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}
+	
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			.oa-contact-content {
+				width: 100%;
+			}
+			.oa-contact-name {
+				margin-right: 20px;
+			}
+			.oa-contact-name, oa-contact-position {
+				float: left;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div class="mui-content">
+				<div class="mui-card">
+					<div class="mui-card-header">新增业主</div>
+					<div class="mui-card-content">
+						<form class="mui-input-group">
+							<div class="mui-input-row">
+								<label style="width: 30%;">小区</label>
+								<select style="width: 70%;" class="mui-btn-block">
+									<option value="item-1">请选择</option>
+									<option value="item-2">州检察院小区</option>
+									<option value="item-3">青岛花苑西区</option>
+									<option value="item-4">青岛花园东区</option>
+									<option value="item-5">恩源智湾</option>
+									<option value="item-6">通宝小区</option>
+									
+								</select>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">楼栋</label>
+								<select style="width: 70%;" class="mui-btn-block">
+									<option value="item-1">请选择</option>
+									<option value="item-2">1号楼</option>
+									<option value="item-3">2号楼</option>
+									<option value="item-4">3号楼</option>
+								</select>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">房号</label>
+							<select style="width: 70%;" class="mui-btn-block">
+									<option value="item-1">请选择</option>
+									<option value="item-2">1单元101</option>
+									<option value="item-3">1单元102</option>
+									<option value="item-4">1单元103</option>
+									<option value="item-2">2单元101</option>
+									<option value="item-3">2单元102</option>
+									<option value="item-4">2单元103</option>
+								</select>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">姓名</label>
+								<input style="width: 70%;" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">性别</label>
+								<select style="width: 70%;" class="mui-btn-block">
+									<option value="item-1">请选择</option>
+									<option value="item-2">男</option>
+									<option value="item-3">女</option>
+								</select>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">族别</label>
+								<select style="width: 70%;" class="mui-btn-block">
+									<option value="item-1">请选择</option>
+									<option value="item-2">汉族</option>
+									<option value="item-3">回族</option>
+									<option value="item-4">维吾尔族</option>
+									<option value="item-5">哈萨克族</option>
+								</select>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">出生日期</label>
+								<div id="result" style="line-height: 40px; display: inline-block; " class="ui-alert"></div>
+								<button id="demo2" data-options='{"type":"date","beginYear":1950,"endYear":2020}' class=" btn mui-btn mui-btn-block yl_date_xz" style="float: right; width: 18%; padding: 5px 0; margin-top:6px; font-size: 14px; margin-right: 20px; ">选择</button>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">血型</label>
+								<select style="width: 70%;" class="mui-btn-block">
+									<option value="item-1">请选择</option>
+									<option value="item-2">A型</option>
+									<option value="item-3">B型</option>
+									<option value="item-4">AB型</option>
+									<option value="item-5">0型</option>
+								</select>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">职业</label>
+								<select style="width: 70%;" class="mui-btn-block">
+									<option value="item-1">请选择</option>
+									<option value="item-2">个体</option>
+									<option value="item-3">职员</option>
+									<option value="item-4">公务员</option>
+									<option value="item-5">其他</option>
+								</select>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">籍贯</label>
+								<select style="width: 70%;" class="mui-btn-block">
+									<option value="item-1">请选择</option>
+									<option value="item-2">新疆</option>
+									<option value="item-3">北京</option>
+									<option value="item-4">上海</option>
+									<option value="item-5">安徽</option>
+								</select>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">文化程度</label>
+								<select style="width: 70%;" class="mui-btn-block">
+									<option value="item-1">请选择</option>
+									<option value="item-2">小学</option>
+									<option value="item-3">初中</option>
+									<option value="item-4">高中</option>
+									<option value="item-5">大学</option>
+									<option value="item-5">研究生</option>
+								</select>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">政治面貌</label>
+								<select style="width: 70%;" class="mui-btn-block">
+									<option value="item-1">请选择</option>
+									<option value="item-2">群众</option>
+									<option value="item-3">党员</option>
+								</select>
+							</div>
+							
+						</form>
+						
+						<div id='result' class="ui-alert"></div>
+					</div>
+					<div class="mui-card-footer">
+						<div class="mui-button-row" style="margin: 0 auto;">
+							<button type="button" class="mui-btn mui-btn-primary" id="addnewperson" onclick="return false;">确认</button>&nbsp;&nbsp;
+							<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+	</script>
+</html>
