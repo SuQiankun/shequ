@@ -94,7 +94,7 @@
 		function getXiaoquInfo(){
 			var selected_val = document.getElementById('shequID').value;
 			
-				mui.ajax('http://192.168.1.7:8080/app?cmd=getvillagebycommunityid&communityid='+selected_val,{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=getvillagebycommunityid&communityid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -117,7 +117,7 @@
 		//发送请求加载楼栋数据
 		 function getBuildingInfo(){
 				var selected_val = document.getElementById('communityInfo').value;
-				mui.ajax('http://192.168.1.7:8080/app?cmd=getbuildingbyvillageid&villageid='+selected_val,{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=getbuildingbyvillageid&villageid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -141,7 +141,7 @@
 		 	
 		 	var selected_val = document.getElementById('LouDongID').value;
 		 	
-				mui.ajax('http://192.168.1.7:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -164,16 +164,19 @@
 			function searchPersionList(){
 				var selected_val = document.getElementById('FangHaoID').value;
 				console.log(selected_val);
-				mui.ajax('http://192.168.1.7:8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
-				var area_name='<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span>当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row"><label style="width: 35%;">姓名</label>' ;
-				
+				var area_name='' ;
+				//(data == "" || data == undefined || data == null) ? "暂无" : data
 				for (i=0;i<data.data.length;i++) {
-					area_name 
+					
+					var czy_str =(data.data[i].czy_username == "" || data.data[i].czy_username == undefined || data.data[i].czy_username == null) ? "暂无" : data.data[i].czy_username; 
+					area_name
 					+=
-					'<p class="yl_txt">'
+					'<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span>当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">'
+					+'<label style="width: 35%;">姓名</label><p class="yl_txt">'
 					+ data.data[i].peo_name
 					+'</p>'+'</div><div class="mui-input-row"><label style="width: 35%;">性别</label>'+'<p class="yl_txt">'
 					+data.data[i].peo_sex
@@ -190,10 +193,11 @@
 					+'</p></div><div class="mui-input-row"><label style="width: 35%;">出生日期</label><p class="yl_txt">'
 					+data.data[i].peo_birthday
 					+'</p></div><div class="mui-input-row"><label style="width: 35%;">操作员</label><p class="yl_txt">'
-					+data.data[i].czy_username+':'+ data.data[i].czy_names
+					+czy_str+':'+ data.data[i].czy_names
 					+'</p></div></form></div><div class="mui-card-footer"><div class="mui-button-row" style="margin: 0 auto;"><button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;">修改</button>&nbsp;&nbsp;</div></div></div>'
 					;
 				}
+				console.log(area_name);
 				document.getElementById("personList").innerHTML = area_name;				
 				},
 				error: function(xhr,type,errorThrown){
