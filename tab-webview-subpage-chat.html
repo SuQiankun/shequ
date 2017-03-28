@@ -40,38 +40,26 @@
 						<form class="mui-input-group">
 							<div class="mui-input-row">
 								<label style="width: 30%;" >社区</label>
-								<select style="width: 70%;" id="shequID" class="mui-btn-block" >
-									
+								<select style="width: 70%;" id="shequID" class="mui-btn-block" onchange="getXiaoquInfo()" >
 									<option value="">请选择</option>
-									
 								</select>
-								
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">小区</label>
 								<select style="width: 70%;" class="mui-btn-block" id="communityInfo" onchange="getBuildingInfo()">
-									
+									<option value="">请选择</option>
 								</select>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">楼栋</label>
-								<select style="width: 70%;" class="mui-btn-block" onchange="getRoomInfo()">
-									<option value="item-1">请选择</option>
-									<option value="item-2">1号楼</option>
-									<option value="item-3">2号楼</option>
-									<option value="item-4">3号楼</option>
+								<select style="width: 70%;" id="LouDongID" class="mui-btn-block" onchange="getRoomInfo()">
+									<option value="">请选择</option>
 								</select>
 							</div>
 							<div class="mui-input-row">
 							<label style="width: 30%;">房号</label>
-							<select style="width: 70%;" class="mui-btn-block">
-								<option value="item-1">请选择</option>
-									<option value="item-2">1单元101</option>
-									<option value="item-3">1单元102</option>
-									<option value="item-4">1单元103</option>
-									<option value="item-2">2单元101</option>
-									<option value="item-3">2单元102</option>
-									<option value="item-4">2单元103</option>
+							<select style="width: 70%;" id="FangHaoID" class="mui-btn-block">
+								<option value="">请选择</option>
 							</select>
 							
 							</div>
@@ -319,7 +307,6 @@
 						<button style="padding: 10px 0; margin: 16px 0;" type="button" class="mui-btn mui-btn-primary mui-btn-block">
 							新增成员
 						</button>
-						
 							</a>
 					</div>	
 			</div>
@@ -328,18 +315,84 @@
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript" src="js/Common.js"></script>	
 		<script type="text/javascript" charset="utf-8">
-
-		 //获取楼栋信息
+	
+	
+		//发送请求加载小区数据;
+		function getXiaoquInfo(){
+			var selected_val = document.getElementById('shequID').value;
+			
+				mui.ajax('http://192.168.1.7:8080/app?cmd=getvillagebycommunityid&communityid='+selected_val,{
+				dataType:'json',
+				type:'get',
+				success:function(data){
+				var area_name = '<option value="" selected="selected">请选择</option>';
+				
+				for (i=0;i<data.data.length;i++) {
+					area_name += 
+					'<option value="'+
+					data.data[i].area_id
+					+'">'+ data.data[i].area_name+'</option>';
+				}
+				document.getElementById("communityInfo").innerHTML = area_name;				
+				},
+				error: function(xhr,type,errorThrown){
+						
+				}
+			});
+			
+			
+			
+		}
+		
+		//发送请求加载楼栋数据
 		 function getBuildingInfo(){
-
-			console.log('plusready');
-		 	console.log(common.getBuildingInfo());
-		 }
+				var selected_val = document.getElementById('communityInfo').value;
+				mui.ajax('http://192.168.1.7:8080/app?cmd=getbuildingbyvillageid&villageid='+selected_val,{
+				dataType:'json',
+				type:'get',
+				success:function(data){
+				var area_name = '<option value="" selected="selected">请选择</option>';
+				for (i=0;i<data.data.length;i++) {
+					area_name += 
+					'<option value="'+
+					data.data[i].area_id
+					+'">'+ data.data[i].area_name+'</option>';
+				}
+				document.getElementById("LouDongID").innerHTML = area_name;				
+				},
+				error: function(xhr,type,errorThrown){
+						
+				}
+			});
 		 
+		 
+		 }
+			
 		 //获取房间信息
 		 function getRoomInfo(){
 		 	
-		 	console.log(common.getRoomInfo());
+		 	var selected_val = document.getElementById('LouDongID').value;
+		 	console.log(selected_val);
+				mui.ajax('http://192.168.1.7:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
+				dataType:'json',
+				type:'get',
+				success:function(data){
+				var area_name = '<option value="" selected="selected">请选择</option>';
+				for (i=0;i<data.data.length;i++) {
+					area_name += 
+					'<option value="'+
+					data.data[i].house_num_id
+					+'">'+ data.data[i].house_num+'</option>';
+				}
+				console.log(area_name);
+				document.getElementById("FangHaoID").innerHTML = area_name;				
+				},
+				error: function(xhr,type,errorThrown){
+						
+				}
+			});
+		 	
+		 	
 		 	
 		 }
 		 
@@ -391,7 +444,8 @@
 			});
 			
 			//获取社区列表
-			mui.ajax('http://192.168.1.104:8080/app?cmd=getcommunitylist',{
+			mui.ajax('http://124.117.230.75:8080/app?cmd=getcommunitylist',{
+				
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -404,15 +458,13 @@
 					+'">'+ data.data[i].area_name+'</option>';
 					
 				}
+			
 				document.getElementById("shequID").innerHTML = area_name;				
 				},
 				error: function(xhr,type,errorThrown){
 					
 				}
 			});
-
-			var data = common.getAjax(getcommunitylist);
-			print(data)
 			
 		//点击跳转到新增人员界面
 		document.getElementById('from_1').addEventListener('tap',function(){
