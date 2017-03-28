@@ -41,25 +41,21 @@
 							<div class="mui-input-row">
 								<label style="width: 30%;" >社区</label>
 								<select style="width: 70%;" id="shequID" class="mui-btn-block" onchange="getXiaoquInfo()" >
-									<option value="">请选择</option>
 								</select>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">小区</label>
 								<select style="width: 70%;" class="mui-btn-block" id="communityInfo" onchange="getBuildingInfo()">
-									<option value="">请选择</option>
 								</select>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">楼栋</label>
 								<select style="width: 70%;" id="LouDongID" class="mui-btn-block" onchange="getRoomInfo()">
-									<option value="">请选择</option>
 								</select>
 							</div>
 							<div class="mui-input-row">
 							<label style="width: 30%;">房号</label>
 							<select style="width: 70%;" id="FangHaoID" class="mui-btn-block">
-								<option value="">请选择</option>
 							</select>
 							
 							</div>
@@ -67,241 +63,17 @@
 					</div>
 					<div class="mui-card-footer">
 						<div class="mui-button-row" style="margin: 0 auto;">
-							<button type="button" class="mui-btn mui-btn-primary" id="searchBtn" onclick="return false;">搜索</button>&nbsp;&nbsp;
+							<button type="button" class="mui-btn mui-btn-primary" onclick="searchPersionList()" >搜索</button>&nbsp;&nbsp;
 							<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
 						</div>
 					</div>
 				</div>
 				
-				<div class="mui-card">
-					<div class="mui-card-header">
-						<h4 style="font-weight: normal;">
-							<span style="font-size: 20px;" class="mui-icon mui-icon-map"></span>
-							<span>恩源智湾</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span>
-							<span>2</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span>
-							<span>2-102</span>
-						</h4>
-					</div>
+				<div id="personList">
 					
-					
-					<div class="mui-card-content">
-						
-						<form class="mui-input-group">
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">姓名</label>
-								<p class="yl_txt">张涵予</p>
-							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">性别</label>
-								<p class="yl_txt">男</p>
-								
-							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">族别</label>
-								<p class="yl_txt">汉</p>
-							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 35%;">与业主关系</label>
-								<p class="yl_txt">业主</p>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">出生日期</label>
-								<p class="yl_txt">1970.2.8</p>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">电话</label>
-								<p class="yl_txt">
-								<a href="tel:186-9999-9999">186-9999-9999</a>
-									
-								</p>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">血型</label>
-								<p class="yl_txt">AB型</p>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">职业</label>
-								<p class="yl_txt">银行职员</p>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">籍贯</label>
-								<p class="yl_txt">北京</p>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">文化程度</label>
-								<p class="yl_txt">大学</p>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">政治面貌</label>
-								<p class="yl_txt">党员</p>
-							</div>
-						</form>
-					</div>
-					
-					<div class="mui-card-footer">
-						<div class="mui-button-row" style="margin: 0 auto;">
-							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;">修改</button>&nbsp;&nbsp;
-						</div>
-					</div>
 				</div>
 				
-				<div class="mui-card">
-					
-					<div class="mui-card-header">
-						<h4 style="font-weight: normal;">
-							<span style="font-size: 20px;" class="mui-icon mui-icon-map"></span>
-							<span>恩源智湾</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span>
-							<span>2</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span>
-							<span>2-102</span>
-						</h4>
-					</div>
-					<div class="mui-card-content">
-						<form class="mui-input-group">
-							<div class="mui-input-row">
-								<label style="width: 30%;">姓名</label>
-								<p class="yl_txt">张婉</p>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">性别</label>
-								<p class="yl_txt">女</p>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">族别</label>
-								<p class="yl_txt">汉</p>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">与业主关系</label>
-								<p class="yl_txt">子女</p>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">出生日期</label>
-								<p class="yl_txt">1972.12.58</p>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">电话</label>
-								<p class="yl_txt">
-								<a href="tel:186-6666-6666">186-6666-6666</a>
-								</p>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">血型</label>
-								<p class="yl_txt">A型</p>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">职业</label>
-								<p class="yl_txt">职员</p>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">籍贯</label>
-								<p class="yl_txt">新疆</p>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">文化程度</label>
-								<p class="yl_txt">大学</p>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">政治面貌</label>
-								<p class="yl_txt">群众</p>
-							</div>
-						</form>
-					</div>
-					
-					<div class="mui-card-footer">
-						<div class="mui-button-row" style="margin: 0 auto;">
-							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;">修改</button>&nbsp;&nbsp;
-							<button id='confirmBtn' type="button" class="mui-btn mui-btn-danger mui-btn-outlined" onclick="return false;">删除</button>
-							<div id="info"></div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="mui-card">
-					<div class="mui-card-header">
-						<h4 style="font-weight: normal;">
-							<span style="font-size: 20px;" class="mui-icon mui-icon-map"></span>
-							<span>恩源智湾</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span>
-							<span>2</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span>
-							<span>2-102</span>
-						</h4>
-					</div>
-					
-					<div class="mui-card-content">
-						<form class="mui-input-group">
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">姓名</label>
-								<p class="yl_txt">顾小顾</p>
-							</div>
-				
-							<div class="mui-input-row">
-								<label style="width: 30%;">性别</label>
-								<p class="yl_txt">男</p>
-							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">族别</label>
-								<p class="yl_txt">汉</p>
-							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">与业主关系</label>
-								<p class="yl_txt">父子</p>
-							</div>
-							
-							<div class="mui-input-row">
-								<label  style="width: 30%;">出生日期</label>
-								<p class="yl_txt">1993.12.58</p>
-							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">电话</label>
-								<p class="yl_txt">
-								<a href="tel:186-8888-8888">186-8888-8888</a>
-								</p>
-							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">身份证号</label>
-								<p class="yl_txt">412721199303163915</p>
-							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">职业</label>
-								<p class="yl_txt">银行职员</p>
-							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">籍贯</label>
-								<p class="yl_txt">新疆</p>
-							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">文化程度</label>
-								<p class="yl_txt">大学</p>
-							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">政治面貌</label>
-								<p class="yl_txt">群众</p>
-							</div>
-							
-						</form>
-					</div>
-					
-					<div class="mui-card-footer ">
-						
-						<div class="mui-button-row" style="margin: 0 auto;">
-							<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;">修改</button>&nbsp;&nbsp;
-							<button id='confirmBtn1' type="button" class="mui-btn mui-btn-danger mui-btn-outlined" onclick="return false;">删除</button>
-						</div>
-						
-					</div>
-				</div>
-				
+
 					<div class="mui-content-padded" > 
 						<a id="from_1">
 						<button style="padding: 10px 0; margin: 16px 0;" type="button" class="mui-btn mui-btn-primary mui-btn-block">
@@ -315,8 +87,9 @@
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript" src="js/Common.js"></script>	
 		<script type="text/javascript" charset="utf-8">
-	
-	
+		
+			
+		
 		//发送请求加载小区数据;
 		function getXiaoquInfo(){
 			var selected_val = document.getElementById('shequID').value;
@@ -325,7 +98,7 @@
 				dataType:'json',
 				type:'get',
 				success:function(data){
-				var area_name = '<option value="" selected="selected">请选择</option>';
+				var area_name = '<option value="">请选择</option>';
 				
 				for (i=0;i<data.data.length;i++) {
 					area_name += 
@@ -339,9 +112,6 @@
 						
 				}
 			});
-			
-			
-			
 		}
 		
 		//发送请求加载楼栋数据
@@ -351,7 +121,7 @@
 				dataType:'json',
 				type:'get',
 				success:function(data){
-				var area_name = '<option value="" selected="selected">请选择</option>';
+				var area_name = '<option value="" >请选择</option>';
 				for (i=0;i<data.data.length;i++) {
 					area_name += 
 					'<option value="'+
@@ -361,80 +131,82 @@
 				document.getElementById("LouDongID").innerHTML = area_name;				
 				},
 				error: function(xhr,type,errorThrown){
-						
 				}
 			});
 		 
 		 
 		 }
-			
 		 //获取房间信息
 		 function getRoomInfo(){
 		 	
 		 	var selected_val = document.getElementById('LouDongID').value;
-		 	console.log(selected_val);
+		 	
 				mui.ajax('http://192.168.1.7:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
-				var area_name = '<option value="" selected="selected">请选择</option>';
+				var area_name = '<option value="">请选择</option>';
 				for (i=0;i<data.data.length;i++) {
 					area_name += 
 					'<option value="'+
 					data.data[i].house_num_id
 					+'">'+ data.data[i].house_num+'</option>';
 				}
-				console.log(area_name);
 				document.getElementById("FangHaoID").innerHTML = area_name;				
 				},
 				error: function(xhr,type,errorThrown){
 						
 				}
 			});
-		 	
-		 	
-		 	
 		 }
-		 
-		 
-		//搜索按钮
-		document.getElementById("searchBtn").addEventListener('tap',function(){
-			//获取 id ,发送请求,在回调函数中执行插入数据的操作;如果数据不存在 ,则添加一个;
-			
-		});
-	
-	
-			var info = document.getElementById("info");
-			//删除提示框
-			document.getElementById("confirmBtn").addEventListener('tap', function() {
-				var btnArray = ['取消', '删除'];
-				mui.confirm('您确定要删除此住户？', '提示', btnArray, function(e) {
-					if (e.index == 1) {
-						mui.toast('删除成功');
-					} else {
-						mui.toast('已取消');
-					}
-				})
+		
+			//执行搜索
+			function searchPersionList(){
+				var selected_val = document.getElementById('FangHaoID').value;
+				console.log(selected_val);
+				mui.ajax('http://192.168.1.7:8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
+				dataType:'json',
+				type:'get',
+				success:function(data){
+				var area_name='<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span>当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row"><label style="width: 35%;">姓名</label>' ;
+				
+				for (i=0;i<data.data.length;i++) {
+					area_name 
+					+=
+					'<p class="yl_txt">'
+					+ data.data[i].peo_name
+					+'</p>'+'</div><div class="mui-input-row"><label style="width: 35%;">性别</label>'+'<p class="yl_txt">'
+					+data.data[i].peo_sex
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">族别</label><p class="yl_txt">'
+					+data.data[i].peo_nation_id
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">与业主关系</label><p class="yl_txt">'
+					+data.data[i].peo_yz_relation
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">身份证</label><p class="yl_txt">'
+					+data.data[i].peo_card_num
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">籍贯</label><p class="yl_txt">'
+					+data.data[i].peo_jg_id
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">电话</label><p class="yl_txt">'
+					+data.data[i].peo_phone
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">出生日期</label><p class="yl_txt">'
+					+data.data[i].peo_birthday
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">操作员</label><p class="yl_txt">'
+					+data.data[i].czy_username+':'+ data.data[i].czy_names
+					+'</p></div></form></div><div class="mui-card-footer"><div class="mui-button-row" style="margin: 0 auto;"><button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;">修改</button>&nbsp;&nbsp;</div></div></div>'
+					;
+				}
+				document.getElementById("personList").innerHTML = area_name;				
+				},
+				error: function(xhr,type,errorThrown){
+						
+				}
 			});
+					
+		}
 			
-			
-			document.getElementById("confirmBtn1").addEventListener('tap', function() {
-				var btnArray = ['取消', '删除'];
-				mui.confirm('您确定要删除此住户？', '提示', btnArray, function(e) {
-					if (e.index == 1) {
-						mui.toast('删除成功');
-					} else {
-						mui.toast('已取消');
-					}
-				})
-			});
-			
+		
 		</script>	
-	
-	
+
 	<script>
-		
-		
 	mui.plusReady(function(){
 			//开启回弹
 			_self = plus.webview.currentWebview();
@@ -442,14 +214,19 @@
 				bounce: "vertical",
 				bounceBackground:"#efeff4"
 			});
-			
+
+			var placeholderText = '<option value="">请选择</option>';
+			document.getElementById('shequID').innerHTML =placeholderText ;
+			document.getElementById('communityInfo').innerHTML =placeholderText ;
+			document.getElementById('LouDongID').innerHTML =placeholderText ;
+			document.getElementById('FangHaoID').innerHTML =placeholderText ;
 			//获取社区列表
 			mui.ajax('http://124.117.230.75:8080/app?cmd=getcommunitylist',{
 				
 				dataType:'json',
 				type:'get',
 				success:function(data){
-				var area_name = '<option value="" selected="selected">请选择</option>';
+				var area_name ='<option value="">请选择</option>';
 				
 				for (i=0;i<data.data.length;i++) {
 					area_name += 
@@ -474,8 +251,6 @@
 		  });
 		});
 	});
-	
-		</script>
-
+	</script>
 	</body>
 </html>
