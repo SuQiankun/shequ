@@ -8,7 +8,7 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 		<link rel="stylesheet" href="css/mui.min.css">
-		<style>
+			<style>
 			html,body {
 				background-color: #efeff4;
 			}
@@ -17,55 +17,87 @@
 				color: #6d6d72;
 				font-size: 15px;
 			}
+			.yl_div { width: 46%; float: left; margin-right:0; margin-bottom: 2px; text-align: center; }
+			.yl_div span { color: #888; }
+			.yl_div .mui-card-content-inner { padding-bottom: 8px; padding-top: 10px;}
+			
+			.yl_btn { padding: 8px 0; background: #fff; }
+			.yl_btn span { font-size: 16px; line-height: 20px;}
 		</style>
 	</head>
-	<body>
+	<body class="mui-ios mui-ios-9 mui-ios-9-1">
+		
 				<div class="mui-content">
-				<div class="mui-content">
 					<div class="mui-card">
 						<div class="mui-card-content-inner">
-							<h3 class="yl_color">欢迎您: admins</h3>
-							
+							<h3 class="yl_color">欢迎您：张三</h3>
+							<h5>社区管理系统 V1.0</h5>
 						</div>
 					</div>
-					<div class="mui-card">
+					<div class="mui-card yl_div" >
 						<div class="mui-card-content-inner">
-							<h4 class="yl_color">总小区数：24</h4>
+							<h4 class="yl_color">3</h4>
+							<span class="yl_color">总社区数</span>
 						</div>
 					</div>
 					
-					<div class="mui-card">
+					<div class="mui-card yl_div" >
 						<div class="mui-card-content-inner">
-							<h4 class="yl_color">总楼栋：584</h4>
-						</div>
-					</div>
-
-					<div class="mui-card">
-						<div class="mui-card-content-inner">
-							<h4 class="yl_color">总住户：1485</h4>
+							<h4 class="yl_color">10</h4>
+							<span class="yl_color">总小区数</span>
 						</div>
 					</div>
 					
-					<div class="mui-card">
-						<div class="mui-card-content-inner" id="showmessage">
-							<h4 class="yl_color">预警信息：20</h4>
+					<div class="mui-card yl_div" >
+						<div class="mui-card-content-inner">
+							<h4 class="yl_color">19</h4>
+							<span class="yl_color">总楼数</span>
 						</div>
 					</div>
 					
+					<div class="mui-card yl_div" >
+						<div class="mui-card-content-inner">
+							<h4 class="yl_color">28</h4>
+							<span class="yl_color">总住户数</span>
+						</div>
+					</div>
+					
+					<div class="mui-card yl_div" >
+						<div class="mui-card-content-inner">
+							<h4 class="yl_color">暂无</h4>
+							<span class="yl_color">总街道数</span>
+						</div>
+					</div>
+					
+					<div class="mui-card yl_div" >
+						<div class="mui-card-content-inner">
+							<h4 class="yl_color">暂无</h4>
+							<span class="yl_color">总县市数</span>
+						</div>
+					</div>
+					<div style="clear:both"></div>
 				</div>
-		</div>
+				
+				<div style="height: 10px;" ></div>
+				
+				<div class="mui-content">
+				    <div class="mui-content-padded">
+				        <button type="button" class="yl_btn mui-btn-block mui-btn-danger mui-btn-outlined" onclick="showMessage()">信息预警<span class="mui-badge mui-badge-danger">20</span></button>
+				        <button type="button" class="yl_btn mui-btn-block mui-btn-success mui-btn-outlined">走访统计<span class="mui-badge mui-badge-success">290</span></button>
+				    </div>
+				</div>
 	</body>
 	<script src="js/mui.min.js"></script>
 	
 	
 	<script>
-		//添加信息提醒的点击事件
-		document.getElementById('showmessage').addEventListener('tap',function(){
-				 mui.openWindow({
+		function showMessage(){
+			 mui.openWindow({
 			    url: 'showMessage.html', 
 			    id:'showmessage'
 		  });
-		});
+			
+		}
 		
 		
 		mui.init({

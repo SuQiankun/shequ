@@ -236,5 +236,16 @@
 			]
 		}
 	},
-	"unpackage":[]
+	"unpackage":[
+	  "css/mui.css",
+	  "css/style.css",
+	  "js/app.js",
+	  "js/mui.enterfocus.js",
+	  "js/mui.js",
+	  "js/mui.locker.js",
+	  "js/mui.picker.min.js",
+	  "from_1.html",
+	  "index.html",
+	  "readme.md"
+	]
 }
