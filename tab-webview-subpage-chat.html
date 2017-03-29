@@ -70,7 +70,6 @@
 				<div id="personList" class="mui-content">
 					
 				</div>
-				
 					<div class="mui-content-padded" > 
 						<a id="from_1">
 						<button style="padding: 10px 0; margin: 16px 0;" type="button" class="mui-btn mui-btn-primary mui-btn-block">
@@ -135,7 +134,9 @@
 		 function getRoomInfo(){
 		 	
 		 	var selected_val = document.getElementById('LouDongID').value;
-		 	
+		 	if (selected_val == null || selected_val ==undefined || selected_val == '') {
+					mui.toast('请选择楼栋');
+				}
 				mui.ajax('http://124.117.230.75:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
 				dataType:'json',
 				type:'get',
@@ -158,17 +159,24 @@
 			//执行搜索
 			function searchPersionList(){
 				var selected_val = document.getElementById('FangHaoID').value;
-				//
-				
+				if (selected_val == null || selected_val ==undefined || selected_val == '') {
+					mui.toast('请选择房间号');
+					return;
+				}
 				
 				mui.ajax('http://124.117.230.75:8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
-				dataType:'json',
-				type:'get',
-				success:function(data){
-				var area_name='' ;
-			
+						dataType:'json',
+						type:'get',
+						success:function(data){
+						var area_name='' ;
+						if(data.data.length<1){
+							mui.toast('暂无人员');
+							//如果没有列表,插入空内容
+							document.getElementById("personList").innerHTML = '';
+							return;
+						}
 				for (i=0;i<data.data.length;i++) {
-					
+					//判断数据是否为空,如果为空,设置默认值;
 					 var name = changeString(data.data[i].peo_name);
 					 var sex = changeString(data.data[i].peo_sex);
 					 var nation = changeString(data.data[i].peo_nation_id);
@@ -179,7 +187,6 @@
 					 var birth = changeString(data.data[i].peo_birthday);
 					 var username = changeString(data.data[i].czy_username);
 					 var names =   changeString(data.data[i].czy_names);
-
 					area_name
 					+=
 					'<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span>当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">'
@@ -204,10 +211,11 @@
 					+'</p></div></form></div><div class="mui-card-footer"><div class="mui-button-row" style="margin: 0 auto;"><button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;">修改</button>&nbsp;&nbsp;</div></div></div>'
 					;
 				}
+				//插入数据内容;
 				document.getElementById("personList").innerHTML = area_name;				
 				},
 				error: function(xhr,type,errorThrown){
-						
+
 				}
 			});	
 		}
@@ -234,9 +242,9 @@
 			document.getElementById('communityInfo').innerHTML =placeholderText ;
 			document.getElementById('LouDongID').innerHTML =placeholderText ;
 			document.getElementById('FangHaoID').innerHTML =placeholderText ;
+			
 			//获取社区列表
 			mui.ajax('http://124.117.230.75:8080/app?cmd=getcommunitylist',{
-				
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -247,9 +255,8 @@
 					'<option value="'+
 					data.data[i].area_id
 					+'">'+ data.data[i].area_name+'</option>';
-					
 				}
-			
+				
 				document.getElementById("shequID").innerHTML = area_name;				
 				},
 				error: function(xhr,type,errorThrown){

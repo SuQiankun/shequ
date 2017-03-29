@@ -24,8 +24,8 @@
 				<div class="mui-content">
 					<div class="mui-card">
 						<div class="mui-card-content-inner">
-							<h3 class="yl_color">欢迎您：张三</h3>
-							<h5>社区管理系统 V1.0</h5>
+							<h3 class="yl_color">欢迎您: admins</h3>
+							
 						</div>
 					</div>
 					<div class="mui-card">
@@ -46,14 +46,28 @@
 						</div>
 					</div>
 					
+					<div class="mui-card">
+						<div class="mui-card-content-inner" id="showmessage">
+							<h4 class="yl_color">预警信息：20</h4>
+						</div>
+					</div>
+					
 				</div>
 		</div>
-		
 	</body>
 	<script src="js/mui.min.js"></script>
 	
 	
 	<script>
+		//添加信息提醒的点击事件
+		document.getElementById('showmessage').addEventListener('tap',function(){
+				 mui.openWindow({
+			    url: 'showMessage.html', 
+			    id:'showmessage'
+		  });
+		});
+		
+		
 		mui.init({
 			swipeBack:true //启用右滑关闭功能
 		});
