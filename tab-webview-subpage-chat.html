@@ -25,8 +25,7 @@
 			}
 		</style>
 	</head>
-	<body>
-		
+	<body >
 		<div class="mui-content">
 			<div class="mui-content">
 				<div class="mui-card">
@@ -57,7 +56,6 @@
 							<label style="width: 30%;">房号</label>
 							<select style="width: 70%;" id="FangHaoID" class="mui-btn-block">
 							</select>
-							
 							</div>
 						</form>
 					</div>
@@ -69,17 +67,16 @@
 					</div>
 				</div>
 				
-				<div id="personList">
+				<div id="personList" class="mui-content">
 					
 				</div>
 				
-
 					<div class="mui-content-padded" > 
 						<a id="from_1">
 						<button style="padding: 10px 0; margin: 16px 0;" type="button" class="mui-btn mui-btn-primary mui-btn-block">
 							新增成员
 						</button>
-							</a>
+						</a>
 					</div>	
 			</div>
 		</div>
@@ -87,9 +84,7 @@
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript" src="js/Common.js"></script>	
 		<script type="text/javascript" charset="utf-8">
-		
-			
-		
+	
 		//发送请求加载小区数据;
 		function getXiaoquInfo(){
 			var selected_val = document.getElementById('shequID').value;
@@ -163,50 +158,65 @@
 			//执行搜索
 			function searchPersionList(){
 				var selected_val = document.getElementById('FangHaoID').value;
-				console.log(selected_val);
+				//
+				
+				
 				mui.ajax('http://124.117.230.75:8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
 				var area_name='' ;
-				//(data == "" || data == undefined || data == null) ? "暂无" : data
+			
 				for (i=0;i<data.data.length;i++) {
 					
-					var czy_str =(data.data[i].czy_username == "" || data.data[i].czy_username == undefined || data.data[i].czy_username == null) ? "暂无" : data.data[i].czy_username; 
+					 var name = changeString(data.data[i].peo_name);
+					 var sex = changeString(data.data[i].peo_sex);
+					 var nation = changeString(data.data[i].peo_nation_id);
+					 var relation = changeString(data.data[i].peo_yz_relation);
+					 var idcard = changeString(data.data[i].peo_card_num);
+					 var jg =changeString(data.data[i].peo_jg_id);
+					 var phone =changeString(data.data[i].peo_phone);
+					 var birth = changeString(data.data[i].peo_birthday);
+					 var username = changeString(data.data[i].czy_username);
+					 var names =   changeString(data.data[i].czy_names);
+
 					area_name
 					+=
 					'<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span>当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">'
 					+'<label style="width: 35%;">姓名</label><p class="yl_txt">'
-					+ data.data[i].peo_name
+					+ name
 					+'</p>'+'</div><div class="mui-input-row"><label style="width: 35%;">性别</label>'+'<p class="yl_txt">'
-					+data.data[i].peo_sex
+					+sex
 					+'</p></div><div class="mui-input-row"><label style="width: 35%;">族别</label><p class="yl_txt">'
-					+data.data[i].peo_nation_id
+					+nation
 					+'</p></div><div class="mui-input-row"><label style="width: 35%;">与业主关系</label><p class="yl_txt">'
-					+data.data[i].peo_yz_relation
+					+relation
 					+'</p></div><div class="mui-input-row"><label style="width: 35%;">身份证</label><p class="yl_txt">'
-					+data.data[i].peo_card_num
+					+idcard
 					+'</p></div><div class="mui-input-row"><label style="width: 35%;">籍贯</label><p class="yl_txt">'
-					+data.data[i].peo_jg_id
+					+jg
 					+'</p></div><div class="mui-input-row"><label style="width: 35%;">电话</label><p class="yl_txt">'
-					+data.data[i].peo_phone
+					+phone
 					+'</p></div><div class="mui-input-row"><label style="width: 35%;">出生日期</label><p class="yl_txt">'
-					+data.data[i].peo_birthday
+					+birth
 					+'</p></div><div class="mui-input-row"><label style="width: 35%;">操作员</label><p class="yl_txt">'
-					+czy_str+':'+ data.data[i].czy_names
+					+username+':'+ names
 					+'</p></div></form></div><div class="mui-card-footer"><div class="mui-button-row" style="margin: 0 auto;"><button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;">修改</button>&nbsp;&nbsp;</div></div></div>'
 					;
 				}
-				console.log(area_name);
 				document.getElementById("personList").innerHTML = area_name;				
 				},
 				error: function(xhr,type,errorThrown){
 						
 				}
-			});
-					
+			});	
 		}
 			
+			
+			function changeString(data){
+				var result =(data == "" || data == undefined || data == null) ? "暂无" : data;
+				return result;
+			}
 		
 		</script>	
 

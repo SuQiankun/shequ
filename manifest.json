@@ -124,7 +124,7 @@
 				"keystore": "",/*Android应用打包使用的密钥库文件*/
 				"password": "",/*Android应用打包使用密钥库中证书的密码*/
 				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
-				"permissions": ["<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"]
+				"permissions": ["<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.ACCESS_SURFACE_FLINGER\"/>","<uses-permission android:name=\"android.permission.BLUETOOTH_PRIVILEGED\"/>","<uses-permission android:name=\"android.permission.BROADCAST_PACKAGE_REMOVED\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_CHECKIN_PROPERTIES\"/>","<uses-permission android:name=\"android.permission.ADD_VOICEMAIL\"/>","<uses-permission android:name=\"android.permission.BIND_WALLPAPER\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.ACCESS_LOCATION_EXTRA_COMMANDS\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.BIND_NFC_SERVICE\"/>","<uses-permission android:name=\"android.permission.BIND_REMOTEVIEWS\"/>","<uses-permission android:name=\"android.permission.BIND_VOICE_INTERACTION\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.ACCESS_MOCK_LOCATION\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"android.permission.WRITE_SMS\"/>","<uses-permission android:name=\"android.permission.BIND_PRINT_SERVICE\"/>","<uses-permission android:name=\"android.permission.BRICK\"/>","<uses-permission android:name=\"android.permission.BIND_DEVICE_ADMIN\"/>","<uses-permission android:name=\"android.permission.BIND_CARRIER_MESSAGING_SERVICE\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.BIND_INPUT_METHOD\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.BODY_SENSORS\"/>","<uses-permission android:name=\"android.permission.BIND_VPN_SERVICE\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.BIND_DREAM_SERVICE\"/>","<uses-permission android:name=\"android.permission.BIND_NOTIFICATION_LISTENER_SERVICE\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>","<uses-permission android:name=\"android.permission.BLUETOOTH\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.SEND_SMS\"/>","<uses-permission android:name=\"android.permission.BIND_APPWIDGET\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.BLUETOOTH_ADMIN\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.AUTHENTICATE_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-permission android:name=\"android.permission.ACCOUNT_MANAGER\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.BIND_ACCESSIBILITY_SERVICE\"/>","<uses-permission android:name=\"android.permission.BIND_TEXT_SERVICE\"/>","<uses-permission android:name=\"android.permission.BIND_TV_INPUT\"/>","<uses-permission android:name=\"android.permission.BATTERY_STATS\"/>","<uses-permission android:name=\"android.permission.READ_SMS\"/>"]
 			},
 			"orientation": ["portrait-primary"],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
 			"icons": {
@@ -189,5 +189,52 @@
 				}
 			}
 		}
-	}
+	},
+	"dependencies": {
+		"pages": {
+			"tab-webview-subpage-chat.html": {
+				"resources": [
+					"js/Common.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tab-webview-main.html": {
+				"resources": [
+					"tab-webview-subpage-about.html",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"tab-webview-subpage-setting.html",
+					"tab-webview-subpage-chat.html",
+					"tab-webview-subpage-contact.html"
+				],
+				"priority": 0
+			},
+			"tab-webview-subpage-contact.html": {
+				"resources": [
+					"css/mui.picker.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"index.html",
+				"js/app.js",
+				"js/mui.picker.min.js",
+				"css/style.css",
+				"js/mui.js",
+				"js/mui.locker.js",
+				"from_1.html",
+				"readme.md",
+				"css/mui.css",
+				"js/mui.enterfocus.js"
+			]
+		}
+	},
+	"unpackage":[]
 }
