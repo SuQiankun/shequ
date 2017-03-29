@@ -7,46 +7,98 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
 	</head>
-
+		<style type="text/css">
+			.yl_txt { font-size: 17px; line-height: 37px; color: #222; }
+		</style>
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			.title {
+				padding: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+				background-color: #fff;
+			}
+		</style>
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		    <h1 class="mui-title">信息预警</h1>
 		</header>
+		  <div class="mui-content"> 
+		<div class="mui-content">
+				<div class="mui-card">
+					<div class="mui-card-header">
+						<h4 style="font-weight: normal;">
+							<span style="font-size: 20px;" class="mui-icon mui-icon-search"></span>
+							<span>请选择</span>
+						</h4>
+					</div>
+					<div class="mui-card-content">
+						<form class="mui-input-group">
+							<div class="mui-input-row">
+								<label style="width: 30%;" >筛选条件</label>
+								<select style="width: 70%;" id="screening" class="mui-btn-block">
+									<option value="">请选择</option>
+									<option value="">房屋到期</option>
+									<option value="">重点人员</option>
+									<option value="">60高龄补贴</option>
+									<option value="">80高龄补贴</option>
+									<option value="">新生儿信息</option>
+									<option value="">低保户</option>
+									<option value="">预产期</option>
+									<option value="">生育年龄</option>
+									<option value="">水费异常</option>
+									<option value="">电费异常</option>
+								</select>
+							</div>
+						</form>
+					</div>
+					<div class="mui-card-footer">
+						<div class="mui-button-row" style="margin: 0 auto;">
+							<button type="button" class="mui-btn mui-btn-primary" onclick="showTipMessage()" >搜索</button>&nbsp;&nbsp;
+							<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
+						</div>
+					</div>
+				</div>
+					
+					<div id="showList" class="mui-content">
+						
+					</div>
+				
+				
 		
-	   <div class="mui-content"> 
-		
-		<div class="mui-card">
-			<div class="mui-card-content-inner" align="center">
-			<h5>房产到期</h5>		
-			</div>
 		</div>
-		
-		<div class="mui-card">
-			<div class="mui-card-content-inner">
-			<h5>重点人员</h5>		
-			</div>
-		</div>
-		
-		<div class="mui-card">
-			<div class="mui-card-content-inner">
-			<h5>房产到期</h5>		
-			</div>
-		</div>
-		
-	</div>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript">
+			
+			function showTipMessage(){
+			
+				var screeningStr = document.getElementById('screening');
+				var index = screeningStr.selectedIndex;
+				var textstr  = screeningStr.options[index].text;
+				
+				console.log(textstr);
+
+				var str =
+				'<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span>'
+				+ '<span>恩源智湾</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span><span>2</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span><span>2-102</span>'
+				+'</h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row"><label style="width: 30%;">业主</label>'
+				+'<p class="yl_txt">梁红玉</p></div><div class="mui-input-row"><label style="width: 30%;">人员</label><p class="yl_txt">周华强</p></div>'
+				+'<div class="mui-input-row"><label style="width: 30%;">电话</label><p class="yl_txt">18688979867</p></div><div class="mui-input-row"><label style="width: 35%;">备注</label><p class="yl_txt">劳教</p>'
+				+'</div></form></div><div class="mui-card-footer"><div class="mui-button-row" style="margin: 0 auto;"><button type="button" class="mui-btn  mui-badge-red" onclick="return false;">忽略</button>&nbsp;&nbsp;'
+				+'<button type="button" class="mui-btn  mui-btn-primary mui-btn-outlined " onclick="return false;">查看</button>&nbsp;&nbsp;</div></div></div>';
+				
+				
+				document.getElementById('showList').innerHTML = str;
+				
+			}
+			
+			
+			
 			mui.init()
 		</script>
 	</body>
