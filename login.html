@@ -130,16 +130,30 @@
 			//获取用户名和密码
 			var account = document.getElementById('account').value;
 			var psw = document.getElementById('password').value;
-			//判断登陆字符串是否为空
-				if(account.length < 1 || psw.length < 1) {
-					mui.alert(' ', '账号或密码不能为空!', function() {});
+			
+			mui.ajax('http://192.168.1.7/platform/login/vali',{
+				data:{
+					username:account,
+					password:psw,
+					returnText:'formapp',
+					},
+				dataType:'text',
+				type:'post',
+				success:function(data){
+					//如果返回 success 就登陆成功;
+					if(data == 'success'){
+						mui.openWindow({
+							url: 'tab-webview-main.html',
+							id: 'index'
+						});
+					}
 					
-				} else {
-					var str = common.login(account,psw);
-					console.log(str);
+				},
+				error: function(xhr,type,errorThrown){
+			
 				}
 			});
-			
+			});
 		</script>
 	</body>
 

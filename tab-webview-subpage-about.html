@@ -10,8 +10,7 @@
 		<link rel="stylesheet" href="css/mui.min.css">
 			<style>
 			html,body {
-				/*<color name="cosmic_latte">#FFFAE8</color>*/
-				background-color: #FFFAE8;
+				background-color: #EFEFF4;
 			}
 			.title{
 				margin: 20px 15px 10px;
@@ -26,76 +25,62 @@
 			.yl_btn span { font-size: 16px; line-height: 20px;}
 		</style>
 	</head>
-	<body class="mui-ios mui-ios-9 mui-ios-9-1" style="background-color: #FFFAE8;">
-		
-				<div class="mui-content"  style="background-color: #FFFAE8;" >
-					<div class="mui-card" style="background-color: #FFFAE8;">
+		<body class="mui-ios mui-ios-9 mui-ios-9-1" >
+				<div class = "mui-content">
+					
+				</div> 
+
+
+				<div class="mui-content"  >
+				
+					<!--<div class="mui-card" >
 						<div class="mui-card-content-inner" >
 							<h3 class="yl_color">欢迎您：admins</h3>
-							<h5>社区管理系统 V1.0</h5>
+							<h5>社区管理系统</h5>ßß
 						</div>
-					</div>
-				<ul  style="background-color: #FFFAE8;" class="mui-table-view mui-grid-view mui-grid-9">
-		            <li  class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+					</div>-->
+				<ul  style="background-color: #FEFEFE;" class="mui-table-view mui-grid-view mui-grid-9"><a href="#">
+		            <li  id="VisitInfo" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
 		                    <span class="mui-icon mui-icon-home"></span>
-		                    <div class="mui-media-body">走访记录</div></a></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+		                    <div class="mui-media-body" >走访记录</div></a>
+		            </li>
+		            
+		            <li  id="showMessage" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 		                    <span class="mui-icon mui-icon-email"><span class="mui-badge">5</span></span>
-		                    <div class="mui-media-body">信息预警</div></a></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-		                    <span class="mui-icon mui-icon-chatbubble"></span>
-		                    <div class="mui-media-body">Chat</div></a></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-		                    <span class="mui-icon mui-icon-location"></span>
-		                    <div class="mui-media-body">location</div></a></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-		                    <span class="mui-icon mui-icon-search"></span>
-		                    <div class="mui-media-body">Search</div></a></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-		                    <span class="mui-icon mui-icon-phone"></span>
-		                    <div class="mui-media-body">Phone</div></a></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-		                    <span class="mui-icon mui-icon-gear"></span>
-		                    <div class="mui-media-body">Setting</div></a></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-		                    <span class="mui-icon mui-icon-info"></span>
-		                    <div class="mui-media-body">about</div></a></li>
-		           <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-		                    <span class="mui-icon mui-icon-more"></span>
-		                    <div class="mui-media-body">more</div></a></li>
+		                    <div class="mui-media-body">信息预警</div></a>
+		            </li>
+		              <li  id="showMessage" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+		                    <span class="mui-icon mui-icon-email"><span class="mui-badge">5</span></span>
+		                    <div class="mui-media-body">信息预警</div></a>
+		            </li>
+		         
 		        </ul> 
 				
 				
-					<div style="clear:both"></div>
-				</div>
+				<div style="clear:both"></div>
 				
+				</div>
 				<div style="height: 10px;" ></div>
-				
-				<div class="mui-content">
-				    <div class="mui-content-padded">
-				        <button type="button" class="yl_btn mui-btn-block mui-btn-danger mui-btn-outlined" onclick="showMessage()">信息预警<span class="mui-badge mui-badge-danger">20</span></button>
-				    <!--<button type="button" class="yl_btn mui-btn-block mui-btn-success mui-btn-outlined">走访统计<span class="mui-badge mui-badge-success">290</span></button>-->
-				    </div>
-				</div>
 	</body>
 	<script src="js/mui.min.js"></script>
-	
-	
 	<script>
-		function showMessage(){
-			 mui.openWindow({
+		document.getElementById('VisitInfo').addEventListener('tap',function(){
+		
+			mui.openWindow({
+			    url: 'visitList.html', 
+			    id:'visitList'
+			});
+		});
+	document.getElementById('showMessage').addEventListener('tap',function(){
+		
+			mui.openWindow({
 			    url: 'showMessage.html', 
-			    id:'showmessage'
-		  });
-			
-		}
-		
-		
+			    id:'showMessage'
+			});
+		});
 		mui.init({
 			swipeBack:true //启用右滑关闭功能
 		});
-		
-		
-		
 	</script>
+	
 </html>

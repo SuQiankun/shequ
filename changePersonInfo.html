@@ -44,6 +44,13 @@
 								</select>
 							</div>
 							
+								<div class="mui-input-row">
+								<label style="width: 30%;">族别</label>
+								
+								<select id="nationID" style="width: 70%;" class="mui-btn-block">
+								
+								</select>
+							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">出生日期</label>
 								<div id="result" style="line-height: 40px; display: inline-block; " class="ui-alert"></div>
@@ -82,6 +89,35 @@
 			  document.getElementById('phoneStr').value = web.phone;
 			  document.getElementById('birthStr').value = web.birth;
 			  document.getElementById('jgStr').value = web.jg;
+			  
+			  mui.ajax('http://192.168.1.7:8080/app?cmd=getnationlist',{
+				dataType:'json',
+				type:'get',
+				success:function(data){
+				var area_name = '<option value="">请选择</option>';
+				
+				for (i=0;i<data.data.length;i++) {
+					//判断是否加载初始值;
+					if( data.data[i].val == web.nation){
+						area_name +=
+							'<option selected="selected"  value="'+
+							data.data[i].ids
+							+'">'+ data.data[i].val+'</option>';
+					}
+					area_name +=
+						'<option value="'+
+						data.data[i].val
+						+'">'+ data.data[i].area_name+'</option>';
+				}
+				document.getElementById("nationID").innerHTML = area_name;
+				
+				},
+				error: function(xhr,type,errorThrown){
+						
+				}
+			});
+			  
+			  
 			  
 			});
 			

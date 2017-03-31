@@ -9,8 +9,60 @@
 	</head>
 
 	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">入户走访</h1>
+		</header>
 		
-		
+	<div class="mui-content" >
+			<div class="mui-content" >
+				<div class="mui-card" >
+					<div class="mui-card-header">
+						<h4 style="font-weight: normal;">
+							<span style="font-size: 20px;" class="mui-icon mui-icon-search"></span>
+							<span>搜索</span>
+						</h4>
+					</div>
+					<div class="mui-card-content">
+						<form class="mui-input-group" >
+							<div class="mui-input-row" >
+								<label style="width: 30%;" >社区</label>
+								<select  style="width: 70%;" id="shequID" class="mui-btn-block" onchange="getXiaoquInfo()" >
+								</select>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">小区</label>
+								<select   style="width: 70%;" class="mui-btn-block" id="communityInfo" onchange="getBuildingInfo()">
+								</select>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">楼栋</label>
+								<select  style="width: 70%;" id="LouDongID" class="mui-btn-block" onchange="getRoomInfo()">
+								</select>
+							</div>
+							<div class="mui-input-row">
+							<label style="width: 30%;">房号</label>
+							<select style="width: 70%;" id="FangHaoID" class="mui-btn-block">
+							</select>
+							</div>
+							
+							<div id="mui-input-row">
+							<div class="mui-input-row" style="margin: 10px 5px; height: 100%; ">
+								<textarea id="textarea" rows="6" placeholder="请输入备注信息,或者住户反映的情况"></textarea>
+							</div>
+							</div>
+							
+						</form>
+					</div>
+					<div class="mui-card-footer">
+						<div class="mui-button-row" style="margin: 0 auto;">
+							<button type="button" class="mui-btn mui-btn-primary" onclick="searchPersionList()" >提交</button>&nbsp;&nbsp;
+						</div>
+					</div>
+				</div>
+
+
+			
 
 
 		
