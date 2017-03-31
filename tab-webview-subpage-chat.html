@@ -165,7 +165,6 @@
 					mui.toast('请选择房间号');
 					return;
 				}
-				
 				mui.ajax('http://124.117.230.75:8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
 						dataType:'json',
 						type:'get',
@@ -232,8 +231,9 @@
 					+data.data[i].peo_id
 					+'" onclick="changePersonInfo(this.id)">修改</button>&nbsp;&nbsp;</div></div></div>'
 					;
+							console.log(data.data[i].peo_id);
 				}
-//				console.log(area_name);
+		
 				//插入数据内容;
 				document.getElementById("personList").innerHTML = area_name;				
 				},
