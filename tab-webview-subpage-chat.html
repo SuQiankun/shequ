@@ -101,7 +101,8 @@
 					data.data[i].area_id
 					+'">'+ data.data[i].area_name+'</option>';
 				}
-				document.getElementById("communityInfo").innerHTML = area_name;				
+				document.getElementById("communityInfo").innerHTML = area_name;
+				
 				},
 				error: function(xhr,type,errorThrown){
 						
@@ -178,41 +179,61 @@
 						}
 				for (i=0;i<data.data.length;i++) {
 					//判断数据是否为空,如果为空,设置默认值;
-					 var name = changeString(data.data[i].peo_name);
-					 var sex = changeString(data.data[i].peo_sex);
-					 var nation = changeString(data.data[i].peo_nation_id);
-					 var relation = changeString(data.data[i].peo_yz_relation);
-					 var idcard = changeString(data.data[i].peo_card_num);
-					 var jg =changeString(data.data[i].peo_jg_id);
-					 var phone =changeString(data.data[i].peo_phone);
-					 var birth = changeString(data.data[i].peo_birthday);
-					 var username = changeString(data.data[i].czy_username);
-					 var names =   changeString(data.data[i].czy_names);
+					 var name = common.changestr(data.data[i].peo_name);
+					 var sex = common.changestr(data.data[i].peo_sex);
+					 var nation = common.changestr(data.data[i].peo_nation_id);
+					 var relation = common.changestr(data.data[i].peo_yz_relation);
+					 var idcard = common.changestr(data.data[i].peo_card_num);
+					 var jg =common.changestr(data.data[i].peo_jg_id);
+					 var phone =common.changestr(data.data[i].peo_phone);
+					 var birth = common.changestr(data.data[i].peo_birthday);
+					 var username = common.changestr(data.data[i].czy_username);
+					 var names =   common.changestr(data.data[i].czy_names);
 					
 					area_name
 					+=
 					'<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span>当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">'
-					+'<label style="width: 35%;">姓名</label><p class="yl_txt">'
+					+'<label style="width: 35%;">姓名</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'name'
+					+'">'
 					+ name
-					+'</p>'+'</div><div class="mui-input-row"><label style="width: 35%;">性别</label>'+'<p class="yl_txt">'
+					+'</p>'+'</div><div class="mui-input-row"><label style="width: 35%;">性别</label>'+'<p class="yl_txt" id="'
+					+data.data[i].peo_id+'sex'
+					+'">'
 					+sex
-					+'</p></div><div class="mui-input-row"><label style="width: 35%;">族别</label><p class="yl_txt">'
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">族别</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'nation'
+					+'">'
 					+nation
-					+'</p></div><div class="mui-input-row"><label style="width: 35%;">与业主关系</label><p class="yl_txt">'
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">与业主关系</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'relation'
+					+'">'
 					+relation
-					+'</p></div><div class="mui-input-row"><label style="width: 35%;">身份证</label><p class="yl_txt">'
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">身份证</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'idcard'
+					+'">'
 					+idcard
-					+'</p></div><div class="mui-input-row"><label style="width: 35%;">籍贯</label><p class="yl_txt">'
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">籍贯</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'jg'
+					+'">'
 					+jg
-					+'</p></div><div class="mui-input-row"><label style="width: 35%;">电话</label><p class="yl_txt">'
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">电话</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'phone'
+					+'">'
 					+phone
-					+'</p></div><div class="mui-input-row"><label style="width: 35%;">出生日期</label><p class="yl_txt">'
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">出生日期</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'birth'
+					+'">'
 					+birth
 					+'</p></div><div class="mui-input-row"><label style="width: 35%;">操作员</label><p class="yl_txt">'
 					+username+':'+ names
-					+'</p></div></form></div><div class="mui-card-footer"><div class="mui-button-row" style="margin: 0 auto;"><button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;">修改</button>&nbsp;&nbsp;</div></div></div>'
+					+'</p></div></form></div><div class="mui-card-footer"><div class="mui-button-row" style="margin: 0 auto;">'
+					+'<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined"  id="'
+					+data.data[i].peo_id
+					+'" onclick="changePersonInfo(this.id)">修改</button>&nbsp;&nbsp;</div></div></div>'
 					;
 				}
+//				console.log(area_name);
 				//插入数据内容;
 				document.getElementById("personList").innerHTML = area_name;				
 				},
@@ -221,19 +242,45 @@
 				}
 			});	
 		}
-			
-			
-			function changeString(data){
-				var result =(data == "" || data == undefined || data == null) ? "暂无" : data;
-				return result;
-			}
-		
+
+			//跳转到新增人员的界面;
 			function addPersion(){
 					mui.openWindow({
 					    url: 'addPerson.html', 
-					    id:'addPerson'
+					    id:'addPerson',
 				     });
 			}
+			
+			//跳转到修改人员资料的界面,
+			function changePersonInfo(peroid){
+			var name =  document.getElementById(peroid+'name').textContent;		
+			var sex =  document.getElementById(peroid+'sex').textContent;
+			var nation =  document.getElementById(peroid+'nation').textContent;
+			var relation =  document.getElementById(peroid+'relation').textContent;
+			var idcard =  document.getElementById(peroid+'idcard').textContent;
+			var jg =  document.getElementById(peroid+'jg').textContent;
+			var phone =  document.getElementById(peroid+'phone').textContent;
+			var birth =  document.getElementById(peroid+'birth').textContent;
+			
+					mui.openWindow({
+					    url: 'changePersonInfo.html', 
+					    id:'changePersonInfo',
+					    extras:{
+							name:name,
+							sex:sex,
+							nation:nation,
+							relation:relation,
+							idcard:idcard,
+							jg:jg,
+							phone:phone,
+							birth:birth
+							
+					    },
+				     });
+	
+			}
+		
+		
 		
 		</script>	
 

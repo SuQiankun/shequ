@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">修改资料</h1>
+		</header>
+		
+			<div class="mui-content">
+			<div class="mui-card">
+					<div class="mui-card-header">修改人员资料</div>
+					<div class="mui-card-content">
+						<form class="mui-input-group">
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">姓名</label>
+								<input style="width: 70%;" id="nameStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">身份证号</label>
+								<input style="width: 70%;" id="idcardStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">手机号码</label>
+								<input style="width: 70%;" id="phoneStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+						
+							<div class="mui-input-row">
+								<label style="width: 30%;">性别</label>
+								<select style="width: 70%;" class="mui-btn-block">
+									<option value="item-1">请选择</option>
+									<option value="item-2">男</option>
+									<option value="item-3">女</option>
+								</select>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">出生日期</label>
+								<div id="result" style="line-height: 40px; display: inline-block; " class="ui-alert"></div>
+									<input style="width: 70%;" id="birthStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+
+							<div class="mui-input-row">
+								<label style="width: 30%;">籍贯</label>
+								<input style="width: 70%;" id="jgStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+						</form>
+						
+						<div id='result' class="ui-alert"></div>
+					</div>
+					<div class="mui-card-footer">
+						<div class="mui-button-row" style="margin: 0 auto;">
+							<button type="button" class="mui-btn mui-btn-primary" id="addnewperson" onclick="return false;">确认</button>&nbsp;&nbsp;
+							<button type="button" class="mui-btn mui-btn-danger" onclick="tip()">取消</button>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			function tip(){
+				
+				
+			}
+			
+			mui.plusReady(function () {
+			   var web = plus.webview.currentWebview();
+			  document.getElementById('nameStr').value = web.name;
+			  document.getElementById('idcardStr').value = web.idcard;
+			  document.getElementById('phoneStr').value = web.phone;
+			  document.getElementById('birthStr').value = web.birth;
+			  document.getElementById('jgStr').value = web.jg;
+			  
+			});
+			
+			
+			mui.init()
+		</script>
+	</body>
+
+</html>

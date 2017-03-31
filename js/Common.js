@@ -40,7 +40,11 @@ login: function loginActive(account, psw) {
 	//获取房间信息
 	getRoomInfo: function getRoomInfo() {
 		return "getRoomInfo";
-	}
+	},
+	changestr: function changeString(data){
+				var result =(data == "" || data == undefined || data == null) ? "暂无" : data;
+				return result;
+			}
 
 
 }
