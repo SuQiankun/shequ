@@ -4,7 +4,7 @@ login: function loginActive(account, psw) {
 		//判断密码&用户名
 		if(account == 'admins' & psw == '123456') {
 			mui.openWindow({
-				url: 'index.html',
+				url: 'tab-webview-main.html',
 				id: 'index'
 			});
 

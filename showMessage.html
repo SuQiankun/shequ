@@ -80,6 +80,11 @@
 				var screeningStr = document.getElementById('screening');
 				var index = screeningStr.selectedIndex;
 				var textstr  = screeningStr.options[index].text;
+				if(textstr == '请选择'){
+						mui.toast('请选择查询条件');
+						return;
+				}
+				
 				
 				console.log(textstr);
 

@@ -9,13 +9,14 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<script src="js/mui.min.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
-		<style type="text/css">
-			.yl_txt { font-size: 17px; line-height: 37px; color: #222; }
-		</style>
-		<style>
+			<style type="text/css">
+				.yl_txt { font-size: 17px; line-height: 37px; color: #222; }
+			</style>
+			<style>
 			html,
 			body {
-				background-color: #efeff4;
+				
+				background-color: #FFFAE8;
 			}
 			.title {
 				padding: 20px 15px 10px;
@@ -26,9 +27,9 @@
 		</style>
 	</head>
 	<body >
-		<div class="mui-content">
-			<div class="mui-content">
-				<div class="mui-card">
+		<div class="mui-content" style="background-color: #FFFAE8;">
+			<div class="mui-content" style="background-color: #FFFAE8;">
+				<div class="mui-card" style="background-color: #FFFAE8;">
 					<div class="mui-card-header">
 						<h4 style="font-weight: normal;">
 							<span style="font-size: 20px;" class="mui-icon mui-icon-search"></span>
@@ -36,25 +37,25 @@
 						</h4>
 					</div>
 					<div class="mui-card-content">
-						<form class="mui-input-group">
-							<div class="mui-input-row">
+						<form class="mui-input-group" style="background-color: #FFFAE8;">
+							<div class="mui-input-row" >
 								<label style="width: 30%;" >社区</label>
-								<select style="width: 70%;" id="shequID" class="mui-btn-block" onchange="getXiaoquInfo()" >
+								<select style="background-color: #FFFAE8;" style="width: 70%;" id="shequID" class="mui-btn-block" onchange="getXiaoquInfo()" >
 								</select>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">小区</label>
-								<select style="width: 70%;" class="mui-btn-block" id="communityInfo" onchange="getBuildingInfo()">
+								<select  style="background-color: #FFFAE8;" style="width: 70%;" class="mui-btn-block" id="communityInfo" onchange="getBuildingInfo()">
 								</select>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">楼栋</label>
-								<select style="width: 70%;" id="LouDongID" class="mui-btn-block" onchange="getRoomInfo()">
+								<select style="background-color: #FFFAE8;" style="width: 70%;" id="LouDongID" class="mui-btn-block" onchange="getRoomInfo()">
 								</select>
 							</div>
 							<div class="mui-input-row">
 							<label style="width: 30%;">房号</label>
-							<select style="width: 70%;" id="FangHaoID" class="mui-btn-block">
+							<select style="background-color: #FFFAE8;" style="width: 70%;" id="FangHaoID" class="mui-btn-block">
 							</select>
 							</div>
 						</form>
@@ -72,7 +73,7 @@
 				</div>
 					<div class="mui-content-padded" > 
 						<a id="from_1">
-						<button style="padding: 10px 0; margin: 16px 0;" type="button" class="mui-btn mui-btn-primary mui-btn-block">
+						<button onclick="addPersion()" style="padding: 10px 0; margin: 16px 0;" type="button" class="mui-btn mui-btn-primary mui-btn-block">
 							新增成员
 						</button>
 						</a>
@@ -187,6 +188,7 @@
 					 var birth = changeString(data.data[i].peo_birthday);
 					 var username = changeString(data.data[i].czy_username);
 					 var names =   changeString(data.data[i].czy_names);
+					
 					area_name
 					+=
 					'<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span>当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">'
@@ -226,6 +228,13 @@
 				return result;
 			}
 		
+			function addPersion(){
+					mui.openWindow({
+					    url: 'addPerson.html', 
+					    id:'addPerson'
+				     });
+			}
+		
 		</script>	
 
 	<script>
@@ -259,12 +268,9 @@
 				}
 			});
 			
+			
 		//点击跳转到新增人员界面
 		document.getElementById('from_1').addEventListener('tap',function(){
-			 mui.openWindow({
-			    url: 'from_1.html', 
-			    id:'from_1'
-		  });
 		});
 	});
 	</script>
