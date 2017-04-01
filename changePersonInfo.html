@@ -43,9 +43,7 @@
 							
 								<div class="mui-input-row">
 								<label style="width: 30%;">族别</label>
-								
 								<select id="nationID" style="width: 70%;" class="mui-btn-block">
-								
 								</select>
 							</div>
 							<div class="mui-input-row">
@@ -53,19 +51,20 @@
 								<div id="result" style="line-height: 40px; display: inline-block; " class="ui-alert"></div>
 									<input style="width: 70%;" id="birthStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
-
+							
 							<div class="mui-input-row">
 								<label style="width: 30%;">籍贯</label>
 								<input style="width: 70%;" id="jgStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
+							
 						</form>
 						
 						<div id='result' class="ui-alert"></div>
 					</div>
 					<div class="mui-card-footer">
 						<div class="mui-button-row" style="margin: 0 auto;">
-							<button type="button" class="mui-btn mui-btn-primary" onclick="changePersonInfo();">确认</button>&nbsp;&nbsp;
-							<button type="button" class="mui-btn mui-btn-danger" onclick="tip()">取消</button>
+							<button type="button" class="mui-btn mui-btn-primary" onclick="changePersonInfo();">提交修改</button>&nbsp;&nbsp;
+							<!--<button type="button" class="mui-btn mui-btn-danger" onclick="tip()">取消</button>-->
 						</div>
 					</div>
 				</div>
@@ -87,8 +86,8 @@
 				var idcardStr = document.getElementById('idcardStr').value;
 				var phoneStr = document.getElementById('phoneStr').value;
 				var sexStr = document.getElementById('sexID').value;
-				var birthStr = "";
-				var jgStr = "";
+				var birthStr = document.getElementById('birthStr').value;
+				var jgStr = document.getElementById('jgStr').value;
 				
 				console.log(nameStr,idcardStr,phoneStr,sexStr,nationStr,self.personid,);
 				
@@ -101,8 +100,8 @@
 						peo_card_num:idcardStr,
 						peo_phone:phoneStr,
 						peo_sex:sexStr,
-						peo_birthday:"1999-01-01",
-						peo_jg_id:'北京'
+						peo_birthday:birthStr,
+						peo_jg_id:jgStr
 					},
 					dataType:'json',//服务器返回json格式数据
 					type:'post',//HTTP请求类型
@@ -126,14 +125,15 @@
 			}
 			
 			mui.plusReady(function () {
-			   var web = plus.webview.currentWebview();
+			  var web = plus.webview.currentWebview();
+				//获取传递参数
 			  document.getElementById('nameStr').value = web.name;
 			  document.getElementById('idcardStr').value = web.idcard;
 			  document.getElementById('phoneStr').value = web.phone;
 			  document.getElementById('birthStr').value = web.birth;
 			  document.getElementById('jgStr').value = web.jg;
-			  
-			  //判断是否加载初始值;
+
+				//判断是否加载初始值;
 				if (web.sex == '男') {
 					var area_name = '<option selected="selected" value="c1670767bf2840a1aab00f364f781cdb">男</option><option  value="c14b60b63693440089304675e6dbcfc8">女</option>';
 					document.getElementById('sexID').innerHTML = 	area_name;	 			
@@ -142,7 +142,7 @@
 					document.getElementById('sexID').innerHTML = 	area_name;	
 				}
 			  
-			  
+			  //获取民族列表
 			  mui.ajax('http://124.117.230.75:8080/app?cmd=getnationlist',{
 				dataType:'json',
 				type:'get',
