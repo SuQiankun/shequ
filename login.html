@@ -137,11 +137,11 @@
 					password:psw,
 					returnText:'formapp',
 					},
-				dataType:'text',
+				dataType:'json',
 				type:'post',
 				success:function(data){
 					//如果返回 success 就登陆成功;
-					if(data == 'success'){
+					if(data.data == 'success'){
 						mui.openWindow({
 							url: 'tab-webview-main.html',
 							id: 'index'
