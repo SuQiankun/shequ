@@ -38,7 +38,6 @@
 							<div class="mui-input-row">
 								<label style="width: 30%;">性别</label>
 								<select id="sexID" style="width: 70%;" class="mui-btn-block">
-									
 								</select>
 							</div>
 							
@@ -65,7 +64,7 @@
 					</div>
 					<div class="mui-card-footer">
 						<div class="mui-button-row" style="margin: 0 auto;">
-							<button type="button" class="mui-btn mui-btn-primary" id="addnewperson" onclick="return false;">确认</button>&nbsp;&nbsp;
+							<button type="button" class="mui-btn mui-btn-primary" onclick="changePersonInfo();">确认</button>&nbsp;&nbsp;
 							<button type="button" class="mui-btn mui-btn-danger" onclick="tip()">取消</button>
 						</div>
 					</div>
@@ -74,6 +73,52 @@
 			</div>
 		
 		<script src="js/mui.min.js"></script>
+		
+		<script>
+			
+			//提交修改的人员信息
+			function changePersonInfo(){
+			
+				var self = plus.webview.currentWebview();
+				//获取参数 人员id 人员姓名 民族 id  身份证号 电话号码,性别 id ,出生日期,籍贯
+				var peoid = self.personid;
+				var nameStr = document.getElementById('nameStr').value;
+				var nationStr = document.getElementById('nationID').value;
+				var idcardStr = document.getElementById('idcardStr').value;
+				var phoneStr = document.getElementById('phoneStr').value;
+				var sexStr = document.getElementById('sexID').value;
+				var birthStr = "";
+				var jgStr = "";
+				
+				console.log(nameStr,idcardStr,phoneStr,sexStr,nationStr,self.personid,);
+				
+				mui.ajax('http://124.117.230.75:8080/app?',{
+					data:{
+						cmd:'modifylivepeople',
+						peo_id:peoid,
+						peo_name:nameStr,
+						peo_nation_id:nationStr,
+						peo_card_num:idcardStr,
+						peo_phone:phoneStr,
+						peo_sex:sexStr,
+						peo_birthday:"1999-01-01",
+						peo_jg_id:'北京'
+					},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					success:function(data){
+						console.log(data.data);
+					},
+					error:function(xhr,type,errorThrown){
+						
+					}
+				});			
+				
+			}
+			
+			
+		</script>
+		
 		<script type="text/javascript">
 			function tip(){
 				
@@ -95,11 +140,10 @@
 				} else{
 					var area_name = '<option selected="selected" value="c14b60b63693440089304675e6dbcfc8">女</option> <option value="c1670767bf2840a1aab00f364f781cdb">男</option>';
 					document.getElementById('sexID').innerHTML = 	area_name;	
-					
 				}
 			  
 			  
-			  mui.ajax('http://192.168.1.7:8080/app?cmd=getnationlist',{
+			  mui.ajax('http://124.117.230.75:8080/app?cmd=getnationlist',{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -120,7 +164,6 @@
 						}
 				}
 				document.getElementById("nationID").innerHTML = area_name;
-				
 				},
 				error: function(xhr,type,errorThrown){
 						
