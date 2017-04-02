@@ -81,11 +81,11 @@
 					<div class="mui-content">
 				        <ul class="mui-table-view mui-grid-view mui-grid-9" style="background: #fff;" >
 				           
-				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id="showMessage"><a href="#">
 				            	<i class="iconfont icon-tixing" style=" display: block; font-size: 2em; margin-bottom: 14px; color:red ; " ></i>
 			                    <div class="mui-media-body" style="font-size: 14px;" >信息预警</div></a>
 				            </li>
-				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id="visitID"><a href="#">
 				            	<i class="iconfont icon-bianji" style=" display: block; font-size: 2em; margin-bottom: 14px; " ></i>
 			                    <div class="mui-media-body" style="font-size: 14px;" >走访统计</div></a>
 				            </li>
@@ -94,43 +94,6 @@
 				</div>
 				
 				<div style="height: 10px;" ></div>
-				
-				<!--<div class="mui-content">
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell" style="font-weight: bold;" >
-							信息统计
-						</li>
-						<li class="mui-table-view-cell">
-							总住户数
-							<span class="mui-badge">588</span>
-						</li>
-						<li class="mui-table-view-cell">
-							总人数
-							<span class="mui-badge">588</span>
-						</li>
-						<li class="mui-table-view-cell">
-							出租人数
-							<span class="mui-badge">588</span>
-						</li>
-						<li class="mui-table-view-cell">
-							男性
-							<span class="mui-badge">588</span>
-						</li>
-						<li class="mui-table-view-cell">
-							女性
-							<span class="mui-badge">588</span>
-						</li>
-						<li class="mui-table-view-cell">
-							汉族
-							<span class="mui-badge">588</span>
-						</li>
-						<li class="mui-table-view-cell">
-							其他民族
-							<span class="mui-badge">588</span>
-						</li>
-					</ul>
-				</div>	-->
-				
 			<div style="height: 10px;" ></div>
 			<div style="height: 10px;" ></div>	
 			
@@ -141,6 +104,9 @@
 </body>
 	
 	<script>
+	
+		
+		
 	mui.plusReady(function(){
 	//开启回弹
 		_self = plus.webview.currentWebview();
