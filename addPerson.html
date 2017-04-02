@@ -75,10 +75,10 @@
 				</div>
 			</div>
 		</div>
+		<script src="js/jquery-3.2.0.min.js"></script>
 		<script>
 			
 			function addPerson(){
-
 				
 				 //获取参数列表
 			var self = plus.webview.currentWebview();
@@ -92,7 +92,7 @@
 				var jg = document.getElementById("jgStr").value;
 				var relation = document.getElementById("relationList").value;
 		
-			console.log(name,sex,idcard,phone,nation,birth,jg,self.houseid);
+//			console.log(name,sex,idcard,phone,nation,birth,relation,jg,self.fanghaoid,self.xiaoquid,self.loudongid,self.shequid);
 		
 				if (idcard.length != 18) {
 					mui.toast('请检查身份证号是否正确');
@@ -102,26 +102,35 @@
 					mui.toast('请手机号码是否正确');
 					return;
 				}
-				mui.ajax('http://192.168.1.7/sw/livePeopleInfo/live/add_zh/'+self.houseid,{
-					data:{
-					"livePeopleInfo.peo_name":name,
-					"livePeopleInfo.peo_nation_id":nation,
-					"livePeopleInfo.peo_jg_id":jg,
-					"livePeopleInfo.peo_card_num":idcard,
-					"livePeopleInfo.peo_phone":phone,
-					"livePeopleInfo.peo_sex":sex,
-					"livePeopleInfolivePeopleInfo.peo_birthday":birth,
-					"livePeopleInfo.peo_yz_relation":relation,
-					"formapp":'1',
-					},
-					dataType:'html',//服务器返回json格式数据
+				var data = {
+					"peo_hs_num":self.fanghaoid,
+					"peo_sq_id":self.shequid,
+					"peo_xq_id":self.xiaoquid,
+					"peo_ld_id":self.loudongid,
+					"peo_name":name,
+					"peo_nation_id":nation,
+					"peo_jg_id":jg,
+					"peo_card_num":idcard,
+					"peo_phone":phone,
+					"peo_sex":sex,
+					"peo_birthday":birth,
+					"peo_yz_relation":relation,
+				};
+			
+				mui.ajax('http://192.168.1.7:8080/app?cmd=newlive',{
+					
+					dataType:'json',//服务器返回json格式数据
 					type:'post',//HTTP请求类型
 					timeout:10000,//超时时间设置为10秒；
-					success:function(result){
-				
+					success:function(data){
+						console.log('success');
+						console.log(data.data);
 					},
 					error:function(xhr,type,errorThrown){
 						console.log('fail');
+						console.log(xhr);
+						console.log(type);
+						console.log(errorThrown);
 					}
 				});
 				
@@ -143,7 +152,6 @@
 								data.data[i].ids
 								+'">'+ data.data[i].val+'</option>';
 						}
-						console.log(area_name);
 						document.getElementById("relationList").innerHTML = area_name;
 					},
 					error:function(xhr,type,errorThrown){

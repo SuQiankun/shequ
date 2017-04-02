@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<title>Hello MUI</title>
@@ -10,7 +9,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-
 		<script src="js/mui.min.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link href="css/mui.picker.min.css" rel="stylesheet" type="text/css" />
@@ -51,7 +49,6 @@
 			}
 		</style>
 	</head>
-
 	<body>
 		<div class="mui-content">
 			<div class="mui-content">
@@ -59,107 +56,68 @@
 					<div class="mui-card-header">新增业主</div>
 					<div class="mui-card-content">
 						<form class="mui-input-group">
-							<div class="mui-input-row">
+						
+						<div class="mui-input-row">
 								<label style="width: 30%;">社区</label>
-								<select style="width: 70%;" id="shequID" class="mui-btn-block" onchange="getXiaoquInfo()">
-									<option value="">请选择</option>
-
+								<select style="width: 65%;" id="shequID" class="mui-btn-block" onchange="getXiaoquInfo()">
+									<option >请选择</option>
 								</select>
 							</div>
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">小区</label>
-								<select style="width: 70%;" class="mui-btn-block" id='communityInfo' onchange="getBuildingInfo()">
+								<select style="width: 65%;" class="mui-btn-block" id='communityInfo' onchange="getBuildingInfo()">
 									<option value="">请选择</option>
 								</select>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">楼栋</label>
-								<select style="width: 70%;" class="mui-btn-block" id="LouDongID"  onchange="getRoomInfo()">
+								<select style="width: 65%;" class="mui-btn-block" id="LouDongID"  onchange="getRoomInfo()">
 									<option value="item-1">请选择</option>
 								</select>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">房号</label>
-							<select style="width: 70%;" class="mui-btn-block" id="FangHaoID">
+							<select style="width: 65%;" class="mui-btn-block" id="FangHaoID">
 									<option value="item-1">请选择</option>
 								</select>
 							</div>
+							
 							<div class="mui-input-row">
 								<label style="width: 30%;">姓名</label>
-								<input style="width: 70%;" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input id="nameStr" style="width: 65%;" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
+								<div class="mui-input-row">
+								<label style="width: 30%;">性别</label>
+								<select   id="sexStr" style="width: 65%;" class="mui-btn-block">
+									<option value="">请选择</option>
+									<option value="c1670767bf2840a1aab00f364f781cdb">男</option>
+									<option value="c14b60b63693440089304675e6dbcfc8">女</option>
+								</select>
 							</div>
 							<div class="mui-input-row">
-								<label style="width: 30%;">性别</label>
-								<select style="width: 70%;" class="mui-btn-block">
-									<option value="item-1">请选择</option>
-									<option value="item-2">男</option>
-									<option value="item-3">女</option>
-								</select>
+								<label style="width: 30%;">身份证号</label>
+								<input  id="idcardStr" style="width: 65%;" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">手机号</label>
+								<input  id="phoneStr" style="width: 65%;" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">族别</label>
-								<select style="width: 70%;" class="mui-btn-block">
-									<option value="item-1">请选择</option>
-									<option value="item-2">汉族</option>
-									<option value="item-3">回族</option>
-									<option value="item-4">维吾尔族</option>
-									<option value="item-5">哈萨克族</option>
+								<select  id="nationID" style="width: 65%;"  class="mui-btn-block" >
 								</select>
 							</div>
+							
 							<div class="mui-input-row">
 								<label style="width: 30%;">出生日期</label>
-								<div id="result" style="line-height: 40px; display: inline-block; " class="ui-alert"></div>
-								<button id="demo2" data-options='{"type":"date","beginYear":1950,"endYear":2020}' class=" btn mui-btn mui-btn-block yl_date_xz" style="float: right; width: 18%; padding: 5px 0; margin-top:6px; font-size: 14px; margin-right: 20px; ">选择</button>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">血型</label>
-								<select style="width: 70%;" class="mui-btn-block">
-									<option value="item-1">请选择</option>
-									<option value="item-2">A型</option>
-									<option value="item-3">B型</option>
-									<option value="item-4">AB型</option>
-									<option value="item-5">0型</option>
-								</select>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">职业</label>
-								<select style="width: 70%;" class="mui-btn-block">
-									<option value="item-1">请选择</option>
-									<option value="item-2">个体</option>
-									<option value="item-3">职员</option>
-									<option value="item-4">公务员</option>
-									<option value="item-5">其他</option>
-								</select>
+								<label  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择出生时间" data-input-clear="5">点击选择出生日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
+								
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">籍贯</label>
-								<select style="width: 70%;" class="mui-btn-block">
-									<option value="item-1">请选择</option>
-									<option value="item-2">新疆</option>
-									<option value="item-3">北京</option>
-									<option value="item-4">上海</option>
-									<option value="item-5">安徽</option>
-								</select>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">文化程度</label>
-								<select style="width: 70%;" class="mui-btn-block">
-									<option value="item-1">请选择</option>
-									<option value="item-2">小学</option>
-									<option value="item-3">初中</option>
-									<option value="item-4">高中</option>
-									<option value="item-5">大学</option>
-									<option value="item-5">研究生</option>
-								</select>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">政治面貌</label>
-								<select style="width: 70%;" class="mui-btn-block">
-									<option value="item-1">请选择</option>
-									<option value="item-2">群众</option>
-									<option value="item-3">党员</option>
-								</select>
+								<input  id="jgStr" style="width: 65%;" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 						</form>
@@ -168,18 +126,65 @@
 					</div>
 					<div class="mui-card-footer">
 						<div class="mui-button-row" style="margin: 0 auto;">
-							<button type="button" class="mui-btn mui-btn-primary" id="addnewperson" onclick="return false;">确认</button>&nbsp;&nbsp;
+							<button type="button" class="mui-btn mui-btn-primary" id="addnewperson" >确认</button>&nbsp;&nbsp;
 							<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
-	</body>
-	<script src="../js/mui.min.js"></script>
+	<script src="../js/mui.min.js"></script>	
+	<!--时间选择器-->	
+	<script>
+				var info = document.getElementById("pickDateBtn");
+				document.getElementById("pickDateBtn").addEventListener('tap', function() {
+				var dDate = new Date();
+				dDate.setFullYear(2016, 7, 16);
+				var minDate = new Date();
+				minDate.setFullYear(2010, 0, 1);
+				var maxDate = new Date();
+				maxDate.setFullYear(2050, 01, 01);
+				plus.nativeUI.pickDate(function(e) {
+					var d = e.date;
+					info.textContent = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+				}, function(e) {
+					info.innerText = "您没有选择日期";
+				}, {
+					title: "请选择日期",
+					date: dDate,
+					minDate: minDate,
+					maxDate: maxDate
+				});
+			})
+		</script>
+	<!--提交新增人员-->
 	<script type="text/javascript">
-	
+		
+		document.getElementById("addnewperson").addEventListener('tap',function(){
+			//获取参数列表
+			var shequID = document.getElementById("shequID").value;
+			var xiaoquID = document.getElementById("communityInfo").value;
+			var loudongID = document.getElementById("LouDongID").value;
+			var fanghaoID = document.getElementById("FangHaoID").value;
+			var nameStr = document.getElementById("nameStr").value;
+			var sexStr = document.getElementById("sexStr").value;
+			var idcardStr = document.getElementById("idcardStr").value;
+			var phoneStr = document.getElementById("phoneStr").value;
+			var nationStr = document.getElementById("nationID").value;
+			var birthStr = document.getElementById("pickDateBtn").textContent;
+			var jgStr = document.getElementById("jgStr").value;
+			
+			console.log(shequID,xiaoquID,loudongID,fanghaoID,nameStr,sexStr,idcardStr,phoneStr,nationStr,birthStr,jgStr);
+			//发送请求 
+		
+			
+			
+			
+		});
+		
+	</script>	
+	<!--获取动态小区 楼栋 房间信息-->
+	<script type="text/javascript">
 		//发送请求加载小区数据;
 		function getXiaoquInfo(){
 			var selected_val = document.getElementById('shequID').value;
@@ -252,10 +257,12 @@
 			});
 		 }		
 	</script>
+	<!--页面初始化页面-->
 	<script>
+			//页面加载后触发的函数
 			mui.plusReady(function(){
-			//获取社区列表
-			mui.ajax('http://124.117.230.75:8080/app?cmd=getcommunitylist',{
+				//获取社区列表
+				mui.ajax('http://124.117.230.75:8080/app?cmd=getcommunitylist',{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -272,12 +279,34 @@
 				error: function(xhr,type,errorThrown){
 				}
 			});
-	});
 			
-		
-		mui.init({
-			swipeBack:true //启用右滑关闭功能
-		});
+				//获取民族列表
+				mui.ajax('http://192.168.1.7:8080/app?cmd=getnationlist',{
+					dataType:'json',//服务器返回json格式数据
+					type:'get',//HTTP请求类型
+					success:function(data){
+						var area_name = '<option value="">请选择</option>';
+						for (i=0;i<data.data.length;i++) {
+								area_name +=
+								'<option value="'+
+								data.data[i].ids
+								+'">'+ data.data[i].val+'</option>';
+						}
+						document.getElementById("nationID").innerHTML = area_name;
+					},
+					error:function(xhr,type,errorThrown){
+						
+					}
+				});
+			
+			});
+	
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
 	</script>
 	
+	
+	
+	</body>
 </html>

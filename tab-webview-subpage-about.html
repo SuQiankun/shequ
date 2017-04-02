@@ -105,7 +105,6 @@
 </body>
 	
 	<script>
-		
 			//添加点击事件
 		document.getElementById('showMessage').addEventListener('tap',function(){
 					mui.openWindow({
@@ -122,8 +121,14 @@
 		});
 		
 		
-		
 	mui.plusReady(function(){
+		
+		//设置时间
+		var y = new Date().getYear();
+		var m = new Date().getMonth();
+		var d = new Date().getDay();
+		console.log(y,m,d);
+		
 	//开启回弹
 		_self = plus.webview.currentWebview();
 		_self.setStyle({
