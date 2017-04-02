@@ -32,47 +32,47 @@
 				        <ul class="mui-table-view mui-grid-view mui-grid-9" style="background: #fff;pointer-events: none; position:;" >
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				             	<i class="iconfont icon-zhusu" style="color: #0DAED3;" ></i>
-			                    <h4>200</h4>
+			                    <h4 id="zhuhu">200</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >住户数</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-jianyuede" style="color: #F37B53;" ></i>
-			                   	<h4>43</h4>
+			                   	<h4 id="chuzu">43</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >租房数</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-geren" style="color: #9D4A9C;" ></i>
-			                   	<h4>4</h4>
+			                   	<h4 id="changzhu">4</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >常住人口</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 								<i class="iconfont icon-feiji" style="color: #74B749;" ></i>
-			                   	<h4>276</h4>
+			                   	<h4 id="liudong">276</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >流动人口</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-shoucang" style="color: #DE577B;" ></i>
-			                   	<h4>67</h4>
+			                   	<h4 id="zhongdian">67</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >重点人员</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-xiangqu1" style="color: #FFB400;" ></i>
-			                   	<h4>67</h4>
+			                   	<h4 id="minzu">67</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >民族</div> 
 				            </li>
 				             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				             	<i class="iconfont icon-zonghe" style="color: #DE577B;" ></i>
-			                    <h4>200/188</h4>
+			                    <h4 id="yearvisit">200/188</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >年计划/实际</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
 				            	<i class="iconfont icon-listview" style="color: #FFB400;" ></i>
-			                   	<h4>30/13</h4>
+			                   	<h4 id="mouthVisit">30/13</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >月计划/实际</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
 				            	<i class="iconfont icon-24xiaoshiqiantai" style="color: #74B749;" ></i>
-			                   	<h4>4</h4>
+			                   	<h4 id="todaycnt">4</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >日累计</div> 
 				            </li>
 				        </ul> 
@@ -130,6 +130,42 @@
 			bounce: "vertical",
 			bounceBackground:"#efeff4"
 		});
+		//获取首页数据
+		
+		var zhuhu = document.getElementById("zhuhu");
+		var chuzu = document.getElementById("chuzu");
+		var changzhu = document.getElementById("changzhu");
+		var liudong = document.getElementById("liudong");
+		var zhongdian = document.getElementById("zhongdian");
+		var minzu = document.getElementById("minzu");
+		var yearvisit = document.getElementById("yearvisit");
+		var mouthvisit = document.getElementById("mouthVisit");
+		var todaycnt = document.getElementById("todaycnt");
+		
+		mui.ajax('http://192.168.1.7/platform/index/?fromapp=1',{
+			dataType:'json',//服务器返回json格式数据
+			type:'get',//HTTP请求类型
+			success:function(data){
+				//设置首页信息
+				changzhu.textContent = data.data[0].changzhu;
+				chuzu.textContent = data.data[0].chuzu;
+				liudong.textContent = data.data[0].liudong;
+				minzu.textContent = data.data[0].minzu;
+				zhongdian.textContent = data.data[0].zhongdian;
+				zhuhu.textContent = data.data[0].zhuhu;
+				yearvisit.textContent = data.data[0].yearplan + '/'+data.data[0].yearvisited;
+				mouthvisit.textContent = data.data[0].monthplan + '/'+data.data[0].monthvisited;
+				
+			},
+			error:function(xhr,type,errorThrown){
+				console.log(xhr,type,errorThrown);
+			}
+		});
+		
+		
+		
+		
+		
 	});
 	</script>
 	

@@ -47,7 +47,7 @@
 							</div>
 							<div id="mui-input-row">
 							<div class="mui-input-row" style="margin: 10px 5px; height: 100%; ">
-								<textarea id="textarea" rows="6" placeholder="请输入备注信息,或者住户反映的情况"></textarea>
+								<textarea id="memoinfo" rows="6" placeholder="请输入备注信息,或者住户反映的情况"></textarea>
 							</div>
 							</div>
 							
@@ -55,15 +55,158 @@
 					</div>
 					<div class="mui-card-footer">
 						<div class="mui-button-row" style="margin: 0 auto;">
-							<button type="button" class="mui-btn mui-btn-primary" onclick="searchPersionList()" >提交</button>&nbsp;&nbsp;
+							<button type="button" id="commitVisitInfo" class="mui-btn mui-btn-primary" >提交</button>&nbsp;&nbsp;
 						</div>
 					</div>
 				</div>
 		
+		
+		
 		<script src="js/mui.min.js"></script>
+		
 		<script type="text/javascript">
-			mui.init()
+			
+			document.getElementById("commitVisitInfo").addEventListener('tap',function(){
+			
+				var visitdate = new Date().valueOf();
+				var shequid = document.getElementById("shequID").value;
+				var xiaoquid = document.getElementById("communityInfo").value;
+				var loudongid = document.getElementById("LouDongID").value;
+				var fanghaoid = document.getElementById("FangHaoID").value;
+				var memoinfo = document.getElementById("memoinfo").value;
+				mui.ajax('http://192.168.1.7:8080/app?cmd=addvisitrecord',{
+					data:{
+						"VisitDate":visitdate,
+						"PEO_SQ_ID":shequid,
+						"PEO_XQ_ID":xiaoquid,
+						"PEO_LD_ID":loudongid,
+						"PEO_HS_NUM":fanghaoid,
+						"MemoInfo":memoinfo
+					},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:10000,//超时时间设置为10秒；
+					success:function(data){
+						if (data.data == '写入成功') {
+							mui.toast('添加走访记录成功');
+						} else{
+							
+						}
+					},
+					error:function(xhr,type,errorThrown){
+						
+					}
+				});		
+				
+			});
+				
 		</script>
+		<!--加载小区 楼栋 房间号信息-->
+		<script type="text/javascript">
+		//发送请求加载小区数据;
+		function getXiaoquInfo(){
+			var selected_val = document.getElementById('shequID').value;
+			
+				mui.ajax('http://192.168.1.7:8080/app?cmd=getvillagebycommunityid&communityid='+selected_val,{
+				dataType:'json',
+				type:'get',
+				success:function(data){
+				var area_name = '<option value="">请选择</option>';
+				
+				for (i=0;i<data.data.length;i++) {
+					area_name += 
+					'<option value="'+
+					data.data[i].area_id
+					+'">'+ data.data[i].area_name+'</option>';
+				}
+				document.getElementById("communityInfo").innerHTML = area_name;
+				
+				},
+				error: function(xhr,type,errorThrown){
+						
+				}
+			});
+		}
+		
+		//发送请求加载楼栋数据
+		 function getBuildingInfo(){
+				var selected_val = document.getElementById('communityInfo').value;
+				mui.ajax('http://192.168.1.7:8080/app?cmd=getbuildingbyvillageid&villageid='+selected_val,{
+				dataType:'json',
+				type:'get',
+				success:function(data){
+				var area_name = '<option value="" >请选择</option>';
+				for (i=0;i<data.data.length;i++) {
+					area_name += 
+					'<option value="'+
+					data.data[i].area_id
+					+'">'+ data.data[i].area_name+'</option>';
+				}
+				document.getElementById("LouDongID").innerHTML = area_name;				
+				},
+				error: function(xhr,type,errorThrown){
+				}
+			});
+		 
+		 
+		 }
+		 //获取房间信息
+		 function getRoomInfo(){
+		 	
+		 	var selected_val = document.getElementById('LouDongID').value;
+		 	if (selected_val == null || selected_val ==undefined || selected_val == '') {
+					mui.toast('请选择楼栋');
+				}
+				mui.ajax('http://192.168.1.7:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
+				dataType:'json',
+				type:'get',
+				success:function(data){
+				var area_name = '<option value="">请选择</option>';
+				for (i=0;i<data.data.length;i++) {
+					area_name += 
+					'<option value="'+
+					data.data[i].house_num_id
+					+'">'+ data.data[i].house_num+'</option>';
+				}
+				document.getElementById("FangHaoID").innerHTML = area_name;				
+				},
+				error: function(xhr,type,errorThrown){
+						
+				}
+			});
+		 }
+		
+		
+		</script>
+		<!--加载社区信息-->
+		<script type="text/javascript">
+		
+		mui.plusReady(function () {
+			   mui.ajax('http://192.168.1.7:8080/app?cmd=getcommunitylist',{
+				dataType:'json',
+				type:'get',
+				success:function(data){
+				var area_name ='<option value="">请选择</option>';
+				
+				for (i=0;i<data.data.length;i++) {
+					area_name += 
+					'<option value="'+
+					data.data[i].area_id
+					+'">'+ data.data[i].area_name+'</option>';
+				}
+				
+				document.getElementById("shequID").innerHTML = area_name;				
+				},
+				error: function(xhr,type,errorThrown){
+					
+				}
+			});
+		   
+		   
+		});
+		
+		</script>
+		
 	</body>
 
 </html>
