@@ -28,52 +28,53 @@
 		    <h1 class="mui-title">信息预警</h1>
 		</header>
 		  <div class="mui-content"> 
-		<div class="mui-content">
-				<div class="mui-card">
-					<div class="mui-card-header">
-						<h4 style="font-weight: normal;">
-							<span style="font-size: 20px;" class="mui-icon mui-icon-search"></span>
-							<span>请选择</span>
-						</h4>
-					</div>
-					<div class="mui-card-content">
-						<form class="mui-input-group">
-							<div class="mui-input-row">
-								<label style="width: 30%;" >筛选条件</label>
-								<select style="width: 70%;" id="screening" class="mui-btn-block">
-									<option value="">请选择</option>
-									<option value="">房屋到期</option>
-									<option value="">重点人员</option>
-									<option value="">60高龄补贴</option>
-									<option value="">80高龄补贴</option>
-									<option value="">新生儿信息</option>
-									<option value="">低保户</option>
-									<option value="">预产期</option>
-									<option value="">生育年龄</option>
-									<option value="">水费异常</option>
-									<option value="">电费异常</option>
-								</select>
-							</div>
-						</form>
-					</div>
-					<div class="mui-card-footer">
-						<div class="mui-button-row" style="margin: 0 auto;">
-							<button type="button" class="mui-btn mui-btn-primary" onclick="showTipMessage()" >搜索</button>&nbsp;&nbsp;
-							<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
-						</div>
-					</div>
-				</div>
-					
 					<div id="showList" class="mui-content">
-						
 					</div>
-				
-				
-		
-		</div>
+		  </div>
 
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript">
+			mui.plusReady(function () {
+				mui.ajax('http://192.168.1.7/sw/warning/index',{
+					data:{
+						idx:'0',
+						fromapp:'1'
+					},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:10000,//超时时间设置为10秒；
+					success:function(data){
+						for (i = 0; i<data.data.length;i++) {
+							console.log(data.data[i].peo_name);
+							
+				var str =
+				'<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span>'
+				+data.data[i].xq_name
+				+'</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span><span>'
+				+data.data[i].ld_name
+				+'</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span><span>'
+				+data.data[i].house_num
+				+'</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row"><label style="width: 30%;">承租人</label><p class="yl_txt">'
+				+data.data[i].peo_name
+				+'</p></div><div class="mui-input-row"><label style="width: 30%;">电话</label><p class="yl_txt">'
+				+data.data[i].peo_phone
+				+'</p></div><div class="mui-input-row"><label style="width: 35%;">备注</label><p class="yl_txt">房租到期</p>'
+				+'</div></form></div><div class="mui-card-footer"><div class="mui-button-row" style="margin: 0 auto;"><button type="button" class="mui-btn  mui-badge-red" onclick="return false;">忽略</button>&nbsp;&nbsp;'
+				+'<button type="button" class="mui-btn  mui-btn-primary mui-btn-outlined " onclick="return false;">查看</button>&nbsp;&nbsp;</div></div></div>';
+				
+				document.getElementById('showList').innerHTML = str;
+							
+						}
+					},
+					error:function(xhr,type,errorThrown){
+						
+					}
+				});
+			
+			
+			});
+			
+			
 			
 			function showTipMessage(){
 			
