@@ -70,6 +70,7 @@
 				<div id="personList" class="mui-content">
 					
 				</div>
+				
 					<div class="mui-content-padded" > 
 						<a id="from_1">
 						<button onclick="addPersion()" style="padding: 10px 0; margin: 16px 0;" type="button" class="mui-btn mui-btn-primary mui-btn-block">
@@ -88,7 +89,7 @@
 		function getXiaoquInfo(){
 			var selected_val = document.getElementById('shequID').value;
 			
-				mui.ajax('http://192.168.1.7:8080/app?cmd=getvillagebycommunityid&communityid='+selected_val,{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=getvillagebycommunityid&communityid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -112,7 +113,7 @@
 		//发送请求加载楼栋数据
 		 function getBuildingInfo(){
 				var selected_val = document.getElementById('communityInfo').value;
-				mui.ajax('http://192.168.1.7:8080/app?cmd=getbuildingbyvillageid&villageid='+selected_val,{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=getbuildingbyvillageid&villageid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -138,7 +139,7 @@
 		 	if (selected_val == null || selected_val ==undefined || selected_val == '') {
 					mui.toast('请选择楼栋');
 				}
-				mui.ajax('http://192.168.1.7:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -164,7 +165,7 @@
 					mui.toast('请选择房间号');
 					return;
 				}
-				mui.ajax('http://192.168.1.7:8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
 						dataType:'json',
 						type:'get',
 						success:function(data){
@@ -312,7 +313,7 @@
 			document.getElementById('FangHaoID').innerHTML =placeholderText ;
 			
 			//获取社区列表
-			mui.ajax('http://192.168.1.7:8080/app?cmd=getcommunitylist',{
+			mui.ajax('http://124.117.230.75:8080/app?cmd=getcommunitylist',{
 				dataType:'json',
 				type:'get',
 				success:function(data){

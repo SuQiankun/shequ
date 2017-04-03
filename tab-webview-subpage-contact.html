@@ -210,7 +210,7 @@
 				};
 			//
 				var params = $.toJSON(data);
-				mui.ajax('http://192.168.1.7:8080/app?cmd=newlive',{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=newlive',{
 					data:params,
 					headers:{'Content-Type':'application/json'},	
 					dataType:'json',//服务器返回json格式数据
@@ -337,7 +337,7 @@
 			});
 			
 				//获取民族列表
-				mui.ajax('http://192.168.1.7:8080/app?cmd=getnationlist',{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=getnationlist',{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
 					success:function(data){
@@ -356,7 +356,7 @@
 				});
 			
 							//获取业主关系列表
-				mui.ajax('http://192.168.1.7:8080/app?cmd=getyzrelationlist',{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=getyzrelationlist',{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
 					success:function(data){

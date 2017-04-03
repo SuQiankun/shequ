@@ -2,6 +2,9 @@
   "tab-webview-subpage-chat.html": {
     "resources": [
       "js/Common.js"
+    ],
+    "refer": [
+      "addPerson.html"
     ]
   },
   "tab-webview-main.html": {
@@ -20,7 +23,37 @@
   },
   "tab-webview-subpage-contact.html": {
     "resources": [
-      "css/mui.picker.min.css"
+      "css/mui.picker.min.css",
+      "js/json.js"
+    ],
+    "refer": []
+  },
+  "login.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.min.js",
+      "js/jquery-3.2.0.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/Common.js",
+      "js/mui.enterfocus.js"
+    ],
+    "refer": [
+      "tab-webview-main.html"
+    ]
+  },
+  "tab-webview-subpage-about.html": {
+    "resources": [
+      "font_icon/iconfont.css",
+      "js/jquery.cookie.js",
+      "js/js.cookie.js",
+      "font_icon/iconfont.woff"
+    ],
+    "refer": []
+  },
+  "addPerson.html": {
+    "resources": [
+      "js/mui.picker.min.js"
     ]
   }
 }

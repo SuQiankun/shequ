@@ -196,7 +196,9 @@
 				"resources": [
 					"js/Common.js"
 				],
-				"refer": [],
+				"refer": [
+					"addPerson.html"
+				],
 				"priority": 0
 			},
 			"tab-webview-main.html": {
@@ -215,7 +217,40 @@
 			},
 			"tab-webview-subpage-contact.html": {
 				"resources": [
-					"css/mui.picker.min.css"
+					"css/mui.picker.min.css",
+					"js/json.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"login.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/Common.js",
+					"js/mui.enterfocus.js"
+				],
+				"refer": [
+					"tab-webview-main.html"
+				],
+				"priority": 0
+			},
+			"tab-webview-subpage-about.html": {
+				"resources": [
+					"font_icon/iconfont.css",
+					"js/jquery.cookie.js",
+					"js/js.cookie.js",
+					"font_icon/iconfont.woff"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"addPerson.html": {
+				"resources": [
+					"js/mui.picker.min.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -224,15 +259,12 @@
 		"idle": {
 			"resources": [
 				"index.html",
-				"js/app.js",
-				"js/mui.picker.min.js",
 				"css/style.css",
 				"js/mui.js",
 				"js/mui.locker.js",
 				"from_1.html",
 				"readme.md",
-				"css/mui.css",
-				"js/mui.enterfocus.js"
+				"css/mui.css"
 			]
 		}
 	},

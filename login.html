@@ -124,35 +124,56 @@
 		<script src="js/mui.enterfocus.js"></script>
 		<script src="js/app.js"></script>
 		<script src="js/Common.js"></script>
+		<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			//登录功能实现区域
 			document.getElementById('login').addEventListener('tap', function() {
 			//获取用户名和密码
 			var account = document.getElementById('account').value;
 			var psw = document.getElementById('password').value;
-			
-			mui.ajax('http://192.168.1.7/platform/login/vali',{
-				data:{
-					username:account,
+								
+			jQuery.ajax({
+			    url: "http://124.117.230.75/platform/login/vali",
+			    type: "post",
+			    xhrFields: { withCredentials: true },
+     			crossDomain: true,
+			    data: {
+			       	username:account,
 					password:psw,
 					returnText:'formapp',
-					},
-				dataType:'json',
-				type:'post',
-				success:function(data){
-					//如果返回 success 就登陆成功;
-					if(data.data == 'success'){
+			    },
+			   
+			})
+			.done(function(data, textStatus, jqXHR) {
+				
+			    var resultStr = jqXHR.getResponseHeader('set-cookie');
+			    var resultArr = resultStr.split(';');
+			    var usernameStr = resultArr[0];
+			    var usernameArr = usernameStr.split('=');
+			    loginName = decodeURI(usernameArr[1]);
+				localStorage.setItem("loginName",loginName);	
+			
+				if(data.data == 'success'){
+						mui.confirm('d登陆成功');
 						mui.openWindow({
 							url: 'tab-webview-main.html',
-							id: 'index'
+							id: 'main',
+							extras:{
+							loginName:loginName,
+					    }, 
 						});
 					}
-					
-				},
-				error: function(xhr,type,errorThrown){
-			
-				}
+
+			})
+			.fail(function(jqXHR, textStatus, errorThrown) {
+			    mui.confirm('登录失败,请检查网络设置');
+			})
+			.always(function() {
+			    /* ... */
 			});
+		
+			
+			
 			});
 		</script>
 	</body>
