@@ -194,10 +194,14 @@
 		"pages": {
 			"tab-webview-subpage-chat.html": {
 				"resources": [
-					"js/Common.js"
+					"js/Common.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
 				],
 				"refer": [
-					"addPerson.html"
+					"addPerson.html",
+					"changePersonInfo.html"
 				],
 				"priority": 0
 			},
@@ -243,16 +247,64 @@
 					"font_icon/iconfont.css",
 					"js/jquery.cookie.js",
 					"js/js.cookie.js",
-					"font_icon/iconfont.woff"
+					"font_icon/iconfont.woff",
+					"js/jquery-3.2.0.min.js",
+					"js/mui.min.js",
+					"css/mui.min.css"
 				],
-				"refer": [],
+				"refer": [
+					"showMessage.html",
+					"visitList.html"
+				],
 				"priority": 0
 			},
 			"addPerson.html": {
 				"resources": [
-					"js/mui.picker.min.js"
+					"js/mui.picker.min.js",
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/json.js",
+					"css/mui.picker.min.css"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"visitList.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"changePersonInfo.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"showMessage.html": {
+				"resources": [
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tab-webview-subpage-setting.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"login.html"
+				],
 				"priority": 0
 			}
 		},

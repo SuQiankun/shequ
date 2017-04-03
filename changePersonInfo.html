@@ -49,7 +49,7 @@
 							<div class="mui-input-row">
 								<label style="width: 30%;">出生日期</label>
 								<div id="result" style="line-height: 40px; display: inline-block; " class="ui-alert"></div>
-									<input style="width: 70%;" id="birthStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+										<label  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择出生时间" data-input-clear="5">点击选择出生日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row">
@@ -63,7 +63,7 @@
 					</div>
 					<div class="mui-card-footer">
 						<div class="mui-button-row" style="margin: 0 auto;">
-							<button type="button" class="mui-btn mui-btn-primary" onclick="changePersonInfo();">提交修改</button>&nbsp;&nbsp;
+							<button type="button" class="mui-btn mui-btn-primary" id="changePersonInfo">提交修改</button>&nbsp;&nbsp;
 							<!--<button type="button" class="mui-btn mui-btn-danger" onclick="tip()">取消</button>-->
 						</div>
 					</div>
@@ -75,9 +75,8 @@
 		
 		<script>
 			
-			//提交修改的人员信息
-			function changePersonInfo(){
-			
+			document.getElementById("changePersonInfo").addEventListener('tap',function(){
+				
 				var self = plus.webview.currentWebview();
 				//获取参数 人员id 人员姓名 民族 id  身份证号 电话号码,性别 id ,出生日期,籍贯
 				var peoid = self.personid;
@@ -86,12 +85,10 @@
 				var idcardStr = document.getElementById('idcardStr').value;
 				var phoneStr = document.getElementById('phoneStr').value;
 				var sexStr = document.getElementById('sexID').value;
-				var birthStr = document.getElementById('birthStr').value;
+				var birthStr = document.getElementById('pickDateBtn').textContent;
 				var jgStr = document.getElementById('jgStr').value;
 				
-				console.log(nameStr,idcardStr,phoneStr,sexStr,nationStr,self.personid,);
-				
-				mui.ajax('http://124.117.230.75:8080/app?',{
+				mui.ajax('http://192.168.1.7:8080/app?',{
 					data:{
 						cmd:'modifylivepeople',
 						peo_id:peoid,
@@ -106,12 +103,21 @@
 					dataType:'json',//服务器返回json格式数据
 					type:'post',//HTTP请求类型
 					success:function(data){
-						console.log(data.data);
+							mui.confirm('提交成功');
 					},
 					error:function(xhr,type,errorThrown){
-						
+						mui.confirm('失败');
 					}
 				});			
+					
+				
+				
+			});
+			
+			
+			//提交修改的人员信息
+			function changePersonInfo(){
+			
 				
 			}
 			
@@ -130,9 +136,9 @@
 			  document.getElementById('nameStr').value = web.name;
 			  document.getElementById('idcardStr').value = web.idcard;
 			  document.getElementById('phoneStr').value = web.phone;
-			  document.getElementById('birthStr').value = web.birth;
+			  document.getElementById('pickDateBtn').value = web.birth;
 			  document.getElementById('jgStr').value = web.jg;
-
+				console.log(web.sex,web.nation);
 				//判断是否加载初始值;
 				if (web.sex == '男') {
 					var area_name = '<option selected="selected" value="c1670767bf2840a1aab00f364f781cdb">男</option><option  value="c14b60b63693440089304675e6dbcfc8">女</option>';
@@ -143,7 +149,7 @@
 				}
 			  
 			  //获取民族列表
-			  mui.ajax('http://124.117.230.75:8080/app?cmd=getnationlist',{
+			  mui.ajax('http://192.168.1.7:8080/app?cmd=getnationlist',{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -173,6 +179,32 @@
 			
 			mui.init()
 		</script>
+		
+			<!--时间选择器-->	
+<script>
+			var info = document.getElementById("pickDateBtn");
+				document.getElementById("pickDateBtn").addEventListener('tap', function() {
+				var dDate = new Date();
+				dDate.setFullYear(2016, 7, 16);
+				var minDate = new Date();
+				minDate.setFullYear(2010, 0, 1);
+				var maxDate = new Date();
+				maxDate.setFullYear(2050, 01, 01);
+				plus.nativeUI.pickDate(function(e) {
+					var d = e.date;
+					info.textContent = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+				}, function(e) {
+					info.innerText = "您没有选择日期";
+				}, {
+					title: "请选择日期",
+					date: dDate,
+					minDate: minDate,
+					maxDate: maxDate
+				});
+			})
+		</script>
+
+		
 	</body>
 
 </html>

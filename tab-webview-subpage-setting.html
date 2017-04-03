@@ -31,7 +31,7 @@
 				</li>
 			</ul>
 			<ul class="mui-table-view" style="margin-top: 25px;">
-				<li class="mui-table-view-cell">
+				<li class="mui-table-view-cell" id="loginout">
 					<a style="text-align: center;color: #FF3B30;">
 						退出登录
 					</a>
@@ -45,6 +45,23 @@
 		mui.init({
 			swipeBack:true //启用右滑关闭功能
 		});
+		
+		document.getElementById('loginout').addEventListener('tap',function(){
+	
+				mui.openWindowWithTitle({
+					    url:'login.html',
+					    id:'login'
+					},{
+					    title:{//标题配置
+
+					    },
+					    back:{//左上角返回箭头
+					        image:{
+					        }
+					    }
+					})		
+		});
+		
 		document.getElementById("about").addEventListener('tap',function () {
 			//获得主页面的webview
 			var main = plus.webview.currentWebview().parent();

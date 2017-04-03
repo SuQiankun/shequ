@@ -24,7 +24,7 @@
 				<div class="mui-content">
 					<div class="mui-table-view mui-grid-view mui-grid-9" style="background: #fff;">
 						<div class="mui-card-content-inner">
-							<h3 class="yl_color">欢迎您：<label id="loginName"></label></h3>
+							<h3 class="yl_color">欢迎您: <label id="loginName"></label></h3>
 							<div style="height: 2px;"></div>
 							<h5>今天是<label id="year"></label>年<label id="mouth"></label>月<label id="day"></label>日 <label  id="xingqi"></label></h5>
 						</div>
@@ -124,8 +124,26 @@
 		
 		
 	mui.plusReady(function(){
+				var resultStr =  plus.navigator.getCookie('http://192.168.1.7/');
+	    			var resultArr = resultStr.split(';');
+	    			
+	    			
+			    for (i = 0; i< resultArr.length;i++) {
+						var keyStr = resultArr[i].split('=');
+						if ( strcmp(keyStr[0],"userNick") == 0 ) {
+							document.getElementById("loginName").innerText = decodeURI((keyStr[1]));
+							
+							
+						}
+			    }
+			    
+			function strcmp(a, b) {
+			    a = a.toString().trim(), b = b.toString();
+			    for (var i=0,n=Math.max(a.length, b.length); i<n && a.charAt(i) === b.charAt(i); ++i);
+			    if (i === n) return 0;
+			    return a.charAt(i) > b.charAt(i) ? -1 : 1;
+			}
 
-		document.getElementById("loginName").innerText = localStorage.getItem("loginName");
 
 		//设置时间
 		var y = new Date();
@@ -164,7 +182,7 @@
 		
 					
 			jQuery.ajax({
-			    url: "http://124.117.230.75/platform/index/",
+			    url: "http://192.168.1.7/platform/index/",
 			    type: "GET",
 			    xhrFields: { withCredentials: true },
      			crossDomain: true,

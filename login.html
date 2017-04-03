@@ -128,12 +128,13 @@
 		<script>
 			//登录功能实现区域
 			document.getElementById('login').addEventListener('tap', function() {
+			mui.toast('登陆中...',{ duration:'long', type:'div' }) 
 			//获取用户名和密码
 			var account = document.getElementById('account').value;
 			var psw = document.getElementById('password').value;
 								
 			jQuery.ajax({
-			    url: "http://124.117.230.75/platform/login/vali",
+			    url: "http://192.168.1.7/platform/login/vali",
 			    type: "post",
 			    xhrFields: { withCredentials: true },
      			crossDomain: true,
@@ -145,22 +146,17 @@
 			   
 			})
 			.done(function(data, textStatus, jqXHR) {
-				
 			    var resultStr = jqXHR.getResponseHeader('set-cookie');
-			    var resultArr = resultStr.split(';');
-			    var usernameStr = resultArr[0];
-			    var usernameArr = usernameStr.split('=');
-			    loginName = decodeURI(usernameArr[1]);
-				localStorage.setItem("loginName",loginName);	
+				
+				localStorage.setItem("loginName",resultStr);
 			
 				if(data.data == 'success'){
-						mui.confirm('d登陆成功');
+//						 mui.closepopup();
+						mui.confirm('登陆成功');
+						
 						mui.openWindow({
 							url: 'tab-webview-main.html',
-							id: 'main',
-							extras:{
-							loginName:loginName,
-					    }, 
+							id: 'main', 
 						});
 					}
 

@@ -17,7 +17,7 @@ login: function loginActive(account, psw) {
 	
 	getAjax: function getAjax(action){
 		var userdata;
-		mui.ajax('http://124.117.230.75:8080/app?'+action,{
+		mui.ajax('http://192.168.1.7:8080/app?'+action,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
