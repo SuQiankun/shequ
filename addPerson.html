@@ -76,12 +76,13 @@
 			</div>
 		</div>
 		<script src="js/jquery-3.2.0.min.js"></script>
+		<script src="js/json.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			
 			function addPerson(){
 				
 				 //获取参数列表
-			var self = plus.webview.currentWebview();
+				var self = plus.webview.currentWebview();
 			
 				var name = document.getElementById("nameStr").value;
 				var sex = document.getElementById("sexStr").value;
@@ -102,6 +103,8 @@
 					mui.toast('请手机号码是否正确');
 					return;
 				}
+
+			
 				var data = {
 					"peo_hs_num":self.fanghaoid,
 					"peo_sq_id":self.shequid,
@@ -117,11 +120,14 @@
 					"peo_yz_relation":relation,
 				};
 			
+			var params = $.toJSON(data);
+				
+				
 				mui.ajax('http://192.168.1.7:8080/app?cmd=newlive',{
-					
+					data:params,
+					headers:{'Content-Type':'application/json'},	
 					dataType:'json',//服务器返回json格式数据
 					type:'post',//HTTP请求类型
-					timeout:10000,//超时时间设置为10秒；
 					success:function(data){
 						console.log('success');
 						console.log(data.data);
@@ -134,12 +140,13 @@
 					}
 				});
 				
+			
 				
 
 				}
 			
 			mui.plusReady(function(){
-				
+
 						//获取业主关系列表
 				mui.ajax('http://192.168.1.7:8080/app?cmd=getyzrelationlist',{
 					dataType:'json',//服务器返回json格式数据
