@@ -10,6 +10,8 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<script src="js/mui.min.js"></script>
+		<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/json.js" type="text/javascript" charset="utf-8"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link href="css/mui.picker.min.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="css/mui.min.css">
@@ -82,7 +84,6 @@
 									<option value="item-1">请选择</option>
 								</select>
 							</div>
-							
 							<div class="mui-input-row">
 								<label style="width: 30%;">姓名</label>
 								<input id="nameStr" style="width: 65%;" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
@@ -109,7 +110,11 @@
 								<select  id="nationID" style="width: 65%;"  class="mui-btn-block" >
 								</select>
 							</div>
-							
+							<div class="mui-input-row">
+								<label style="width: 35%;">与业主关系</label>
+								<select  id="relationList" style="width: 65%;"class="mui-btn-block" >
+								</select>
+							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">出生日期</label>
 								<label  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择出生时间" data-input-clear="5">点击选择出生日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
@@ -126,7 +131,7 @@
 					</div>
 					<div class="mui-card-footer">
 						<div class="mui-button-row" style="margin: 0 auto;">
-							<button type="button" class="mui-btn mui-btn-primary" id="addnewperson" >确认</button>&nbsp;&nbsp;
+							<button type="button" class="mui-btn mui-btn-primary" id="addNewPerson" onclick="addNewPersonInfo()" >确认</button>&nbsp;&nbsp;
 							<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
 						</div>
 					</div>
@@ -160,24 +165,75 @@
 	<!--提交新增人员-->
 	<script type="text/javascript">
 		
-		document.getElementById("addnewperson").addEventListener('tap',function(){
+		function addNewPersonInfo(){
+			console.log('123');
 			//获取参数列表
 			var shequID = document.getElementById("shequID").value;
 			var xiaoquID = document.getElementById("communityInfo").value;
 			var loudongID = document.getElementById("LouDongID").value;
 			var fanghaoID = document.getElementById("FangHaoID").value;
-			var nameStr = document.getElementById("nameStr").value;
-			var sexStr = document.getElementById("sexStr").value;
-			var idcardStr = document.getElementById("idcardStr").value;
-			var phoneStr = document.getElementById("phoneStr").value;
-			var nationStr = document.getElementById("nationID").value;
-			var birthStr = document.getElementById("pickDateBtn").textContent;
-			var jgStr = document.getElementById("jgStr").value;
-			
-			console.log(shequID,xiaoquID,loudongID,fanghaoID,nameStr,sexStr,idcardStr,phoneStr,nationStr,birthStr,jgStr);
+		
+			//
+				var name = document.getElementById("nameStr").value;
+				var sex = document.getElementById("sexStr").value;
+				var idcard = document.getElementById("idcardStr").value;
+				var phone = document.getElementById("phoneStr").value;
+				var nation = document.getElementById("nationID").value;
+				var birth = document.getElementById("pickDateBtn").textContent;
+				var jg = document.getElementById("jgStr").value;
+				var relation = document.getElementById("relationList").value;
 			//发送请求 
 		
+				if (idcard.length != 18) {
+					mui.toast('请检查身份证号是否正确');
+					return;
+				}
+				if(phone.length != 11){
+					mui.toast('请手机号码是否正确');
+					return;
+				}
+
 			
+				var data = {
+					"peo_hs_num":fanghaoID,
+					"peo_sq_id":shequID,
+					"peo_xq_id":xiaoquID,
+					"peo_ld_id":loudongID,
+					"peo_name":name,
+					"peo_nation_id":nation,
+					"peo_jg_id":jg,
+					"peo_card_num":idcard,
+					"peo_phone":phone,
+					"peo_sex":sex,
+					"peo_birthday":birth,
+					"peo_yz_relation":relation,
+				};
+			//
+				var params = $.toJSON(data);
+				mui.ajax('http://192.168.1.7:8080/app?cmd=newlive',{
+					data:params,
+					headers:{'Content-Type':'application/json'},	
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					success:function(data){
+						console.log('success');
+						console.log(data.data);
+						console.log('123');
+					},
+					error:function(xhr,type,errorThrown){
+						
+						console.log('123');
+						console.log('fail');
+						console.log(xhr);
+						console.log(type);
+						console.log(errorThrown);
+					}
+				});
+				
+			
+		}
+		
+		document.getElementById("addNewPerson").addEventListener('tap',function(){
 			
 			
 		});
@@ -299,12 +355,34 @@
 					}
 				});
 			
+							//获取业主关系列表
+				mui.ajax('http://192.168.1.7:8080/app?cmd=getyzrelationlist',{
+					dataType:'json',//服务器返回json格式数据
+					type:'get',//HTTP请求类型
+					success:function(data){
+						var area_name = '<option value="">请选择</option>';
+						for (i=0;i<data.data.length;i++) {
+								area_name +=
+								'<option value="'+
+								data.data[i].ids
+								+'">'+ data.data[i].val+'</option>';
+						}
+						document.getElementById("relationList").innerHTML = area_name;
+					},
+					error:function(xhr,type,errorThrown){
+						
+					}
+				});
+			
+			
 			});
 	
 			mui.init({
 				swipeBack:true //启用右滑关闭功能
 			});
 	</script>
+	
+
 	
 	
 	
