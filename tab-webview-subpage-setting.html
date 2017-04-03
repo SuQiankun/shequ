@@ -31,8 +31,8 @@
 				</li>
 			</ul>
 			<ul class="mui-table-view" style="margin-top: 25px;">
-				<li class="mui-table-view-cell" id="loginout">
-					<a style="text-align: center;color: #FF3B30;">
+				<li class="mui-table-view-cell" >
+					<a style="text-align: center;color: #FF3B30;" id="exit">
 						退出登录
 					</a>
 				</li>
@@ -46,21 +46,60 @@
 			swipeBack:true //启用右滑关闭功能
 		});
 		
-		document.getElementById('loginout').addEventListener('tap',function(){
-	
-				mui.openWindowWithTitle({
-					    url:'login.html',
-					    id:'login'
-					},{
-					    title:{//标题配置
-
-					    },
-					    back:{//左上角返回箭头
-					        image:{
-					        }
-					    }
-					})		
-		});
+		document.getElementById('exit').addEventListener('tap', function() {
+			if (mui.os.ios) {
+				app.setState({});
+				mui.openWindow({
+					url: 'login.html',
+					id: 'login',
+					show: {
+						aniShow: 'pop-in'
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+				return;1
+			}
+			
+			var btnArray = [{
+				title: "注销当前账号"
+			}, {
+				title: "直接关闭应用"
+			}];
+			
+			plus.nativeUI.actionSheet({
+				cancel: "取消",
+				buttons: btnArray
+			}, function(event) {
+				var index = event.index;
+				switch (index) {
+					case 1:
+						//注销账号
+//						app.setState({});
+						/*
+						 * 注意：
+						 * 1、因本示例应用启动页就是登录页面，因此注册成功后，直接显示登录页即可；
+						 * 2、如果真实案例中，启动页不是登录页，则需修改，使用mui.openWindow打开真实的登录页面
+						 */
+						
+//						plus.webview.getLaunchWebview().show("pop-in");
+						//若启动页不是登录页，则需通过如下方式打开登录页
+						
+						mui.openWindow({
+							url: 'login.html',
+							id: 'login',
+							show: {
+								aniShow: 'pop-in'
+							}
+						});
+						break;
+					case 2:
+						plus.runtime.quit();
+						break;
+				}
+			});
+		}, false);
 		
 		document.getElementById("about").addEventListener('tap',function () {
 			//获得主页面的webview
