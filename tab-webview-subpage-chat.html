@@ -85,12 +85,6 @@
 		<script type="text/javascript" src="js/Common.js"></script>	
 		<script type="text/javascript" charset="utf-8">
 			
-			document.addEventListener('updateInfo', function() {
-				searchPeoInfo();
-			
-			});
-		
-	
 		//发送请求加载小区数据;
 		function getXiaoquInfo(){
 			var selected_val = document.getElementById('shequID').value;
@@ -164,10 +158,13 @@
 			});
 		 }
 		
-		document.getElementById("searchPersionList").addEventListener('tap',function(){
-				
+		//二级页面返回后更新数据
+		document.addEventListener('updateInfo', function() {
+				searchPeoInfo();
+		});		
+		//执行搜索
+		document.getElementById("searchPersionList").addEventListener('tap',function(){	
 			searchPeoInfo();
-			
 		});
 		
 		

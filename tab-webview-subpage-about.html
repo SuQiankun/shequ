@@ -107,21 +107,21 @@
 </body>
 	
 	<script>
-			//添加点击事件
+		//添加点击预警信息界面
 		document.getElementById('showMessage').addEventListener('tap',function(){
 					mui.openWindow({
 					    url: 'showMessage.html', 
 					    id:'showMessgae',
 				     });
 		});
-
+		//跳转到走访记录页面
 		document.getElementById('visitID').addEventListener('tap',function(){
 			mui.openWindow({
 					    url: 'visitList.html', 
 					    id:'visitID',
 				     });
 		});
-		
+		//刷新首页的数据
 		document.addEventListener('getindex', function() {
 				getIndexData();
 				
@@ -129,14 +129,13 @@
 			});
 		
 	mui.plusReady(function(){
-		
-			
+				//设置首页显示条
 				var resultStr =  plus.navigator.getCookie('http://117.146.77.26/');
 	    			var resultArr = resultStr.split(';');
 	    			
 			    for (i = 0; i< resultArr.length;i++) {
-						var keyStr = resultArr[i].split('=');
-						if ( strcmp(keyStr[0],"userNick") == 0 ) {
+					var keyStr = resultArr[i].split('=');
+					if ( strcmp(keyStr[0],"userNick") == 0 ) {
 							document.getElementById("loginName").innerText = decodeURI((keyStr[1]));
 						}
 			    }
@@ -148,13 +147,11 @@
 			    return a.charAt(i) > b.charAt(i) ? -1 : 1;
 			}
 
-
 		//设置时间
 		var y = new Date();
 		document.getElementById("year").innerText = y.getFullYear();
 		document.getElementById("mouth").innerText =  y.getMonth()+1;
 		document.getElementById("day").innerText = y.getDate();
-		
 		var week;
 			switch (y.getDay()){
 			case 1: week="星期一"; break;
@@ -176,11 +173,8 @@
 		
 	});
 	
-	
+	//获取首页数据
 	function getIndexData(){
-		
-		//获取首页数据
-		
 		var zhuhu = document.getElementById("zhuhu");
 		var chuzu = document.getElementById("chuzu");
 		var changzhu = document.getElementById("changzhu");
@@ -190,7 +184,6 @@
 		var yearvisit = document.getElementById("yearvisit");
 		var mouthvisit = document.getElementById("mouthVisit");
 		var todaycnt = document.getElementById("todaycnt");
-		
 					
 			jQuery.ajax({
 			    url: "http://117.146.77.26/platform/index/",
@@ -200,10 +193,8 @@
 			    data: {
 			        "fromapp": "1",
 			    },
-			   
 			})
 			.done(function(data, textStatus, jqXHR) {
-
 				changzhu.textContent = data.data[0].changzhu;
 				chuzu.textContent = data.data[0].chuzu;
 				liudong.textContent = data.data[0].liudong;
@@ -213,7 +204,6 @@
 				yearvisit.textContent = data.data[0].yearplan + '/'+data.data[0].yearvisited;
 				mouthvisit.textContent = data.data[0].monthplan + '/'+data.data[0].monthvisited;
 				todaycnt.textContent = data.data[0].todaycnt;	
-			   
 			})
 			.fail(function(jqXHR, textStatus, errorThrown) {
 			    console.log("HTTP Request Failed");
@@ -232,3 +222,6 @@
 			swipeBack:true //启用右滑关闭功能
 		});
 	</script>
+ody>
+
+</html>
