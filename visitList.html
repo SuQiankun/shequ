@@ -66,6 +66,18 @@
 		
 		<script type="text/javascript">
 			
+			mui.init({
+
+				beforeback: function(){
+					//获得列表界面的webview
+					var list = plus.webview.getWebviewById('tab-webview-subpage-about.html');
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+					mui.fire(list,'getindex');
+					//返回true，继续页面关闭逻辑
+					return true;
+				}
+			});
+			
 			document.getElementById("commitVisitInfo").addEventListener('tap',function(){
 			
 				var visitdate = new Date().valueOf();
@@ -89,17 +101,9 @@
 					timeout:10000,//超时时间设置为10秒；
 					success:function(data){
 						if (data.data == '写入成功') {
-						mui.toast('添加走访记录成功');
-						mui.openWindow({
-							url: 'tab-webview-main.html',
-							id: 'main',
-							show: {
-								aniShow: 'pop-in'
-							},
-							waiting: {
-								autoShow: false
-							}
-						});
+
+							mui.toast('添加走访记录成功');
+							
 						} else{
 							
 						}
@@ -191,21 +195,8 @@
 		</script>
 		<!--加载社区信息-->
 		<script type="text/javascript">
-		
-		mui.plusReady(function () {
-			
-														
-			// 获取所有Webview窗口
-	var wvs=plus.webview.all();
-	for(var i=0;i<wvs.length;i++){
-		console.log("webview"+i+": "+wvs[i].getURL());
-	}
-	
-
-			
-			
-			
-			
+			mui.plusReady(function () {
+   
 			   mui.ajax('http://117.146.77.26:8080/app?cmd=getcommunitylist',{
 				dataType:'json',
 				type:'get',

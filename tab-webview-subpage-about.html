@@ -122,10 +122,14 @@
 				     });
 		});
 		
+		document.addEventListener('getindex', function() {
+				getIndexData();
+				
+			
+			});
 		
 	mui.plusReady(function(){
 		
-			console.log('we'+plus.webview.getWebviewById());
 			
 				var resultStr =  plus.navigator.getCookie('http://117.146.77.26/');
 	    			var resultArr = resultStr.split(';');
@@ -168,6 +172,13 @@
 			bounce: "vertical",
 			bounceBackground:"#efeff4"
 		});
+		getIndexData();
+		
+	});
+	
+	
+	function getIndexData(){
+		
 		//获取首页数据
 		
 		var zhuhu = document.getElementById("zhuhu");
@@ -201,9 +212,7 @@
 				zhuhu.textContent = data.data[0].zhuhu;
 				yearvisit.textContent = data.data[0].yearplan + '/'+data.data[0].yearvisited;
 				mouthvisit.textContent = data.data[0].monthplan + '/'+data.data[0].monthvisited;
-				todaycnt.textContent = data.data[0].todaycnt;
-			
-				console.log(data.data[0].todaycnt)
+				todaycnt.textContent = data.data[0].todaycnt;	
 			   
 			})
 			.fail(function(jqXHR, textStatus, errorThrown) {
@@ -214,7 +223,8 @@
 			});
 		
 		
-	});
+	}
+	
 	</script>
 	
 	<script>

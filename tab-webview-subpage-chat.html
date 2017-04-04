@@ -84,6 +84,12 @@
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript" src="js/Common.js"></script>	
 		<script type="text/javascript" charset="utf-8">
+			
+			document.addEventListener('updateInfo', function() {
+				searchPeoInfo();
+			
+			});
+		
 	
 		//发送请求加载小区数据;
 		function getXiaoquInfo(){
@@ -160,8 +166,15 @@
 		
 		document.getElementById("searchPersionList").addEventListener('tap',function(){
 				
+			searchPeoInfo();
+			
+		});
+		
+		
+		function searchPeoInfo(){
+			
 				var selected_val = document.getElementById('FangHaoID').value;
-				console.log(selected_val);
+				
 				if (selected_val == null || selected_val ==undefined || selected_val == '') {
 					mui.toast('请选择房间号');
 					return;
@@ -248,8 +261,7 @@
 
 				}
 			});	
-			
-		});
+		}
 		
 		function checkPersonInfo(data,peoid,att){
 			var result = '';

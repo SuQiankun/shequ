@@ -74,8 +74,17 @@
 		<script src="js/mui.min.js"></script>
 		
 		<script>
+			mui.init({
 			
-				
+				beforeback: function(){
+					//获得列表界面的webview
+					var list = plus.webview.getWebviewById('tab-webview-subpage-chat.html');
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+					mui.fire(list,'updateInfo');
+					//返回true，继续页面关闭逻辑
+					return true;
+				}
+			});
 			
 			document.getElementById("changePersonInfo").addEventListener('tap',function(){
 				
@@ -106,18 +115,7 @@
 					type:'post',//HTTP请求类型
 					success:function(data){
 						mui.confirm('提交成功');
-						
-						mui.openWindow({
-								url: 'tab-webview-main.html',
-								id: 'chat',
-								show: {
-									aniShow: 'pop-in'
-								},
-								waiting: {
-									autoShow: false
-								}
-							});
-							
+										
 					},
 					error:function(xhr,type,errorThrown){
 						mui.confirm('失败');
@@ -141,8 +139,8 @@
 		<script type="text/javascript">
 		
 			mui.plusReady(function () {
-					console.log('this partent = '+plus.webview.currentWebview().parent());
-			  var web = plus.webview.currentWebview();
+
+			var web = plus.webview.currentWebview();
 				//获取传递参数
 			  document.getElementById('nameStr').value = web.name;
 			  document.getElementById('idcardStr').value = web.idcard;
