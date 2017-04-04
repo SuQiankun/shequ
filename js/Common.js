@@ -1,5 +1,4 @@
 var common = {
-
 login: function loginActive(account, psw) {
 		//判断密码&用户名
 		if(account == 'admins' & psw == '123456') {
@@ -17,7 +16,7 @@ login: function loginActive(account, psw) {
 	
 	getAjax: function getAjax(action){
 		var userdata;
-		mui.ajax('http://192.168.1.7:8080/app?'+action,{
+		mui.ajax('http://117.146.77.26:8080/app?'+action,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -45,6 +44,5 @@ login: function loginActive(account, psw) {
 				var result =(data == "" || data == undefined || data == null) ? "暂无" : data;
 				return result;
 			}
-
 
 }

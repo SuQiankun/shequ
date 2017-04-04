@@ -108,11 +108,11 @@
 			<form id='login-form' class="mui-input-group">
 				<div class="mui-input-row">
 					<label>账号</label>
-					<input id='account' type="text" class="mui-input-clear mui-input" placeholder="admins">
+					<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入账号">
 				</div>
 				<div class="mui-input-row">
 					<label>密码</label>
-					<input id='password' type="password" class="mui-input-clear mui-input" placeholder="123456">
+					<input id='password' type="password" class="mui-input-clear mui-input" placeholder="请输入密码">
 				</div>
 			</form>
 
@@ -128,13 +128,13 @@
 		<script>
 			//登录功能实现区域
 			document.getElementById('login').addEventListener('tap', function() {
-			mui.toast('登陆中...',{ duration:'long', type:'div' }) 
+			mui.toast('登录中...',{ duration:'long', type:'div' }) 
 			//获取用户名和密码
 			var account = document.getElementById('account').value;
 			var psw = document.getElementById('password').value;
 								
 			jQuery.ajax({
-			    url: "http://192.168.1.7/platform/login/vali",
+			    url: "http://117.146.77.26/platform/login/vali",
 			    type: "post",
 			    xhrFields: { withCredentials: true },
      			crossDomain: true,
@@ -146,20 +146,15 @@
 			   
 			})
 			.done(function(data, textStatus, jqXHR) {
-			    var resultStr = jqXHR.getResponseHeader('set-cookie');
-				
-				localStorage.setItem("loginName",resultStr);
-			
 				if(data.data == 'success'){
 //						 mui.closepopup();
-						mui.confirm('登陆成功');
-						
+//						mui.confirm('登录成功');
+
 						mui.openWindow({
 							url: 'tab-webview-main.html',
 							id: 'main', 
 						});
 					}
-
 			})
 			.fail(function(jqXHR, textStatus, errorThrown) {
 			    mui.confirm('登录失败,请检查网络设置');

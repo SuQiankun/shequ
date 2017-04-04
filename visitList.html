@@ -75,7 +75,7 @@
 				var fanghaoid = document.getElementById("FangHaoID").value;
 				var memoinfo = document.getElementById("memoinfo").value;
 				
-				mui.ajax('http://192.168.1.7:8080/app?cmd=addvisitrecord',{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=addvisitrecord',{
 					data:{
 						"VisitDate":visitdate,
 						"PEO_SQ_ID":shequid,
@@ -89,7 +89,17 @@
 					timeout:10000,//超时时间设置为10秒；
 					success:function(data){
 						if (data.data == '写入成功') {
-							mui.toast('添加走访记录成功');
+						mui.toast('添加走访记录成功');
+						mui.openWindow({
+							url: 'tab-webview-main.html',
+							id: 'main',
+							show: {
+								aniShow: 'pop-in'
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
 						} else{
 							
 						}
@@ -108,7 +118,7 @@
 		function getXiaoquInfo(){
 			var selected_val = document.getElementById('shequID').value;
 			
-				mui.ajax('http://192.168.1.7:8080/app?cmd=getvillagebycommunityid&communityid='+selected_val,{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=getvillagebycommunityid&communityid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -132,7 +142,7 @@
 		//发送请求加载楼栋数据
 		 function getBuildingInfo(){
 				var selected_val = document.getElementById('communityInfo').value;
-				mui.ajax('http://192.168.1.7:8080/app?cmd=getbuildingbyvillageid&villageid='+selected_val,{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=getbuildingbyvillageid&villageid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -158,7 +168,7 @@
 		 	if (selected_val == null || selected_val ==undefined || selected_val == '') {
 					mui.toast('请选择楼栋');
 				}
-				mui.ajax('http://192.168.1.7:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -183,7 +193,7 @@
 		<script type="text/javascript">
 		
 		mui.plusReady(function () {
-			   mui.ajax('http://192.168.1.7:8080/app?cmd=getcommunitylist',{
+			   mui.ajax('http://117.146.77.26:8080/app?cmd=getcommunitylist',{
 				dataType:'json',
 				type:'get',
 				success:function(data){

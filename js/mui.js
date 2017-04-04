@@ -2313,7 +2313,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 					webview.show(nShow.aniShow, nShow.duration, function() {},nShow.extras);
 					options.afterShowMethodName && webview.evalJS(options.afterShowMethodName + '(\'' + JSON.stringify(params) + '\')');
 				};
-				//titleUpdate触发时机早于loaded，192.168.1.7为titleUpdate后，可以更早的显示webview
+				//titleUpdate触发时机早于loaded，117.146.77.26为titleUpdate后，可以更早的显示webview
 				webview.addEventListener(nShow.event, showWebview, false);
 				//loaded事件发生后，触发预加载和pagebeforeshow事件
 				webview.addEventListener("loaded", function() {
@@ -2462,7 +2462,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 			//显示
 			nShow = $.showOptions(options.show);
 			if(nShow.autoShow) {
-				//titleUpdate触发时机早于loaded，192.168.1.7为titleUpdate后，可以更早的显示webview
+				//titleUpdate触发时机早于loaded，117.146.77.26为titleUpdate后，可以更早的显示webview
 				webview.addEventListener(nShow.event, function () {
 					//关闭等待框
 					if(nWaiting) {

@@ -210,13 +210,13 @@
 				};
 			//
 				var params = $.toJSON(data);
-				mui.ajax('http://192.168.1.7:8080/app?cmd=newlive',{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=newlive',{
 					data:params,
 					headers:{'Content-Type':'application/json'},	
 					dataType:'json',//服务器返回json格式数据
 					type:'post',//HTTP请求类型
 					success:function(data){
-						if (data.data == '新增人员成功') {
+						if (data.data == '新增人员成功!') {
 							mui.confirm('新增人员成功!')
 						} else{
 							mui.confirm('新增人员失败!')
@@ -242,7 +242,7 @@
 		function getXiaoquInfo(){
 			var selected_val = document.getElementById('shequID').value;
 			
-				mui.ajax('http://192.168.1.7:8080/app?cmd=getvillagebycommunityid&communityid='+selected_val,{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=getvillagebycommunityid&communityid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -265,7 +265,7 @@
 		//发送请求加载楼栋数据
 		 function getBuildingInfo(){
 				var selected_val = document.getElementById('communityInfo').value;
-				mui.ajax('http://192.168.1.7:8080/app?cmd=getbuildingbyvillageid&villageid='+selected_val,{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=getbuildingbyvillageid&villageid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -291,7 +291,7 @@
 		 	if (selected_val == null || selected_val ==undefined || selected_val == '') {
 					mui.toast('请选择楼栋');
 				}
-				mui.ajax('http://192.168.1.7:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -315,7 +315,7 @@
 			//页面加载后触发的函数
 			mui.plusReady(function(){
 				//获取社区列表
-				mui.ajax('http://192.168.1.7:8080/app?cmd=getcommunitylist',{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=getcommunitylist',{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -334,7 +334,7 @@
 			});
 			
 				//获取民族列表
-				mui.ajax('http://192.168.1.7:8080/app?cmd=getnationlist',{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=getnationlist',{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
 					success:function(data){
@@ -353,7 +353,7 @@
 				});
 			
 							//获取业主关系列表
-				mui.ajax('http://192.168.1.7:8080/app?cmd=getyzrelationlist',{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=getyzrelationlist',{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
 					success:function(data){

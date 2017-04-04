@@ -35,7 +35,7 @@
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript">
 			mui.plusReady(function () {
-				mui.ajax('http://192.168.1.7/sw/warning/index',{
+				mui.ajax('http://117.146.77.26/sw/warning/index',{
 					data:{
 						idx:'0',
 						fromapp:'1'
@@ -44,8 +44,10 @@
 					type:'post',//HTTP请求类型
 					timeout:10000,//超时时间设置为10秒；
 					success:function(data){
+						if (data.data.length<1) {
+							mui.confirm('暂无数据');
+						} 
 						for (i = 0; i<data.data.length;i++) {
-							console.log(data.data[i].peo_name);
 							
 				var str =
 				'<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span>'

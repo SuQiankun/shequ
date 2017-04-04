@@ -88,7 +88,7 @@
 				var birthStr = document.getElementById('pickDateBtn').textContent;
 				var jgStr = document.getElementById('jgStr').value;
 				
-				mui.ajax('http://192.168.1.7:8080/app?',{
+				mui.ajax('http://117.146.77.26:8080/app?',{
 					data:{
 						cmd:'modifylivepeople',
 						peo_id:peoid,
@@ -103,7 +103,18 @@
 					dataType:'json',//服务器返回json格式数据
 					type:'post',//HTTP请求类型
 					success:function(data){
-							mui.confirm('提交成功');
+						mui.confirm('提交成功');
+							mui.openWindow({
+								url: 'tab-webview-main.html',
+								id: 'chat',
+								show: {
+									aniShow: 'pop-in'
+								},
+								waiting: {
+									autoShow: false
+								}
+							});
+							
 					},
 					error:function(xhr,type,errorThrown){
 						mui.confirm('失败');
@@ -125,11 +136,7 @@
 		</script>
 		
 		<script type="text/javascript">
-			function tip(){
-				
-				
-			}
-			
+		
 			mui.plusReady(function () {
 			  var web = plus.webview.currentWebview();
 				//获取传递参数
@@ -138,6 +145,8 @@
 			  document.getElementById('phoneStr').value = web.phone;
 			  document.getElementById('pickDateBtn').value = web.birth;
 			  document.getElementById('jgStr').value = web.jg;
+			  document.getElementById("pickDateBtn").textContent = web.birth;
+			  
 				console.log(web.sex,web.nation);
 				//判断是否加载初始值;
 				if (web.sex == '男') {
@@ -149,7 +158,7 @@
 				}
 			  
 			  //获取民族列表
-			  mui.ajax('http://192.168.1.7:8080/app?cmd=getnationlist',{
+			  mui.ajax('http://117.146.77.26:8080/app?cmd=getnationlist',{
 				dataType:'json',
 				type:'get',
 				success:function(data){

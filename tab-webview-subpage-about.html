@@ -24,7 +24,7 @@
 				<div class="mui-content">
 					<div class="mui-table-view mui-grid-view mui-grid-9" style="background: #fff;">
 						<div class="mui-card-content-inner">
-							<h3 class="yl_color">欢迎您: <label id="loginName"></label></h3>
+							<h4 class="yl_color">欢迎您: <label id="loginName"></label></h4>
 							<div style="height: 2px;"></div>
 							<h5>今天是<label id="year"></label>年<label id="mouth"></label>月<label id="day"></label>日 <label  id="xingqi"></label></h5>
 						</div>
@@ -89,7 +89,7 @@
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id="visitID"><a href="#">
 				            	<i class="iconfont icon-bianji" style=" display: block; font-size: 2em; margin-bottom: 14px; " ></i>
-			                    <div class="mui-media-body" style="font-size: 14px;" >走访统计</div></a>
+			                    <div class="mui-media-body" style="font-size: 14px;" >入户走访</div></a>
 				            </li>
 				        </ul> 
 					</div>
@@ -124,7 +124,7 @@
 		
 		
 	mui.plusReady(function(){
-				var resultStr =  plus.navigator.getCookie('http://192.168.1.7/');
+				var resultStr =  plus.navigator.getCookie('http://117.146.77.26/');
 	    			var resultArr = resultStr.split(';');
 	    			
 	    			
@@ -182,7 +182,7 @@
 		
 					
 			jQuery.ajax({
-			    url: "http://192.168.1.7/platform/index/",
+			    url: "http://117.146.77.26/platform/index/",
 			    type: "GET",
 			    xhrFields: { withCredentials: true },
      			crossDomain: true,
@@ -201,7 +201,9 @@
 				zhuhu.textContent = data.data[0].zhuhu;
 				yearvisit.textContent = data.data[0].yearplan + '/'+data.data[0].yearvisited;
 				mouthvisit.textContent = data.data[0].monthplan + '/'+data.data[0].monthvisited;
-			   
+				todaycnt.textContent = data.data[0].todaycnt;
+			
+				console.log(data.data[0].todaycnt)
 			   
 			})
 			.fail(function(jqXHR, textStatus, errorThrown) {
