@@ -193,6 +193,19 @@
 		<script type="text/javascript">
 		
 		mui.plusReady(function () {
+			
+														
+			// 获取所有Webview窗口
+	var wvs=plus.webview.all();
+	for(var i=0;i<wvs.length;i++){
+		console.log("webview"+i+": "+wvs[i].getURL());
+	}
+	
+
+			
+			
+			
+			
 			   mui.ajax('http://117.146.77.26:8080/app?cmd=getcommunitylist',{
 				dataType:'json',
 				type:'get',

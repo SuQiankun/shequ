@@ -75,6 +75,8 @@
 		
 		<script>
 			
+				
+			
 			document.getElementById("changePersonInfo").addEventListener('tap',function(){
 				
 				var self = plus.webview.currentWebview();
@@ -104,7 +106,8 @@
 					type:'post',//HTTP请求类型
 					success:function(data){
 						mui.confirm('提交成功');
-							mui.openWindow({
+						
+						mui.openWindow({
 								url: 'tab-webview-main.html',
 								id: 'chat',
 								show: {
@@ -138,6 +141,7 @@
 		<script type="text/javascript">
 		
 			mui.plusReady(function () {
+					console.log('this partent = '+plus.webview.currentWebview().parent());
 			  var web = plus.webview.currentWebview();
 				//获取传递参数
 			  document.getElementById('nameStr').value = web.name;
@@ -186,12 +190,12 @@
 				});
 			});
 			
-			mui.init()
 		</script>
 		
 			<!--时间选择器-->	
 <script>
 			var info = document.getElementById("pickDateBtn");
+				var self = plus.webview.currentWebview();
 				document.getElementById("pickDateBtn").addEventListener('tap', function() {
 				var dDate = new Date();
 				dDate.setFullYear(2016, 7, 16);
@@ -203,7 +207,7 @@
 					var d = e.date;
 					info.textContent = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
 				}, function(e) {
-					info.innerText = "您没有选择日期";
+					info.innerText = self.birth;
 				}, {
 					title: "请选择日期",
 					date: dDate,

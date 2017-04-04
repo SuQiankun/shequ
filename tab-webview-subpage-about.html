@@ -124,16 +124,16 @@
 		
 		
 	mui.plusReady(function(){
+		
+			console.log('we'+plus.webview.getWebviewById());
+			
 				var resultStr =  plus.navigator.getCookie('http://117.146.77.26/');
 	    			var resultArr = resultStr.split(';');
-	    			
 	    			
 			    for (i = 0; i< resultArr.length;i++) {
 						var keyStr = resultArr[i].split('=');
 						if ( strcmp(keyStr[0],"userNick") == 0 ) {
 							document.getElementById("loginName").innerText = decodeURI((keyStr[1]));
-							
-							
 						}
 			    }
 			    

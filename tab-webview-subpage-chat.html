@@ -35,7 +35,7 @@
 							<span>搜索</span>
 						</h4>
 					</div>
-					<div class="mui-card-content">
+					<div class="mui-card-content" >
 						<form class="mui-input-group"  >
 							<div class="mui-input-row" >
 								<label style="width: 30%;" >社区</label>
@@ -67,7 +67,7 @@
 					</div>
 				</div>
 				
-				<div id="personList" class="mui-content">
+				<div id="personList" class="mui-content" >
 					
 				</div>
 				
@@ -178,6 +178,7 @@
 							document.getElementById("personList").innerHTML = '';
 							return;
 						}
+					
 				for (i=0;i<data.data.length;i++) {
 					//判断数据是否为空,如果为空,设置默认值;
 					 var name = common.changestr(data.data[i].peo_name);
@@ -190,8 +191,10 @@
 					 var birth = common.changestr(data.data[i].peo_birthday);
 					 var username = common.changestr(data.data[i].bhr_username);
 					 var names =   common.changestr(data.data[i].bhr_names);
+					var att = common.changestr(data.data[i].peo_attr_id);
 					
-					area_name
+					var resultstr = checkPersonInfo(data.data[i].peo_attr_id,data.data[i].peoid,att); 
+				area_name
 					+=
 					'<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span>当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">'
 					+'<label style="width: 35%;">姓名</label><p class="yl_txt" id="'
@@ -226,6 +229,8 @@
 					+data.data[i].peo_id+'birth'
 					+'">'
 					+birth
+					+ resultstr
+		
 					+'</p></div><div class="mui-input-row"><label style="width: 35%;">包户人</label><p class="yl_txt">'
 					+username+':'+ names
 					+'</p></div></form></div><div class="mui-card-footer"><div class="mui-button-row" style="margin: 0 auto;">'
@@ -233,6 +238,7 @@
 					+data.data[i].peo_id
 					+'" onclick="changePersonInfo(this.id)">修改</button>&nbsp;&nbsp;</div></div></div>'
 					;
+					
 				}
 					console.log(area_name);
 				//插入数据内容;
@@ -245,7 +251,19 @@
 			
 		});
 		
-		
+		function checkPersonInfo(data,peoid,att){
+			var result = '';
+			if (data == "" || data == undefined || data == null) {
+				result = '</p></div><div class="mui-input-row"><label style="width: 35%;">备注</label><p class="yl_txt"  id="'
+					+peoid+'att">'+att;
+				
+			} else{
+				
+				result = '</p></div><div class="mui-input-row"><label style="width: 35%;">备注</label><p class="yl_txt" style="color:#FF0000 ;" id="'
+					+peoid+'att">'+att;
+			}
+			return result;
+		}
 
 			//跳转到新增人员的界面;
 			function addPersion(){
@@ -308,9 +326,15 @@
 		</script>	
 
 	<script>
-	mui.plusReady(function(){
+		
+		window.onload = function(){
+			console.log('this id 1111111= '+plus.webview.currentWebview().id);	
+			
+		};
+		
+		mui.plusReady(function(){
+	
 			//开启回弹
-
 			var placeholderText = '<option value="">请选择</option>';
 			document.getElementById('shequID').innerHTML =placeholderText ;
 			document.getElementById('communityInfo').innerHTML =placeholderText ;

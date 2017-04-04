@@ -314,6 +314,9 @@
 	<script>
 			//页面加载后触发的函数
 			mui.plusReady(function(){
+				
+				console.log(plus.webview.currentWebview().id);
+				
 				//获取社区列表
 				mui.ajax('http://117.146.77.26:8080/app?cmd=getcommunitylist',{
 				dataType:'json',
