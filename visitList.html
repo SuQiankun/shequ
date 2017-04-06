@@ -40,7 +40,7 @@
 								<select  style="width: 70%;" id="LouDongID" class="mui-btn-block" onchange="getRoomInfo()">
 								</select>
 							</div>
-							<div class="mui-input-row">
+							<div  class="mui-input-row">
 							<label style="width: 30%;">房号</label>
 							<select style="width: 70%;" id="FangHaoID" class="mui-btn-block">
 							</select>
@@ -177,11 +177,23 @@
 				type:'get',
 				success:function(data){
 				var area_name = '<option value="">请选择</option>';
+				
 				for (i=0;i<data.data.length;i++) {
-					area_name += 
+					
+					if (data.data[i].visited.length > 1){
+					area_name +=
+					'<option style="color: #2AC845;" value="'+
+					data.data[i].house_num_id
+					+'">'+ data.data[i].house_num+'已走访</option>';
+					}
+					
+					
+					
+					area_name +=
 					'<option value="'+
 					data.data[i].house_num_id
-					+'">'+ data.data[i].house_num+'</option>';
+					+'"> '+ data.data[i].house_num+'</option>';
+					
 				}
 				document.getElementById("FangHaoID").innerHTML = area_name;				
 				},

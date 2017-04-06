@@ -42,19 +42,109 @@
 							</div>
 							
 								<div class="mui-input-row">
-								<label style="width: 30%;">族别</label>
-								<select id="nationID" style="width: 70%;" class="mui-btn-block">
+									<label style="width: 30%;">族别</label>
+									<select id="nationID" style="width: 70%;" class="mui-btn-block">
+									</select>
+								</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">宗教信仰</label>
+								<select name="">
+									<option value="">请选择</option>
+								</select>
+							</div>	
+							<div class="mui-input-row">
+								<label style="width: 30%;">祷告地址</label>
+								<select name="">
+									<option value="">请选择</option>
 								</select>
 							</div>
+							
 							<div class="mui-input-row">
 								<label style="width: 30%;">出生日期</label>
 								<div id="result" style="line-height: 40px; display: inline-block; " class="ui-alert"></div>
-										<label  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择出生时间" data-input-clear="5">点击选择出生日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<label  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择出生时间" data-input-clear="5">点击选择出生日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">籍贯</label>
 								<input style="width: 70%;" id="jgStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">血型</label>
+								<select name="">
+									<option value="">请选择</option>
+								</select>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">职业</label>
+								<select name="">
+									<option value="">请选择</option>
+								</select>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">工作单位</label>
+								<input style="width: 70%;" id="jgStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">户口性质</label>
+								<select name="">
+									<option value="">请选择</option>
+								</select>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">政治面貌</label>
+								<select name="">
+									<option value="">请选择</option>
+								</select>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">婚姻状况</label>
+								<select name="">
+									<option value="">请选择</option>
+								</select>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">经济状况</label>
+								<select name="">
+									<option value="">请选择</option>
+								</select>
+							</div>
+
+							<div class="mui-input-row">
+								<label style="width: 30%;">文化程度</label>
+								<select name="">
+									<option value="">请选择</option>
+								</select>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 35%;">户口所在地</label>
+								<input style="width: 70%;" id="jgStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">参保情况</label>
+								<input style="width: 70%;" id="jgStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">健康情况</label>
+								<input style="width: 70%;" id="jgStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+						
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">兵役</label>
+								<select name="">
+									<option value="">请选择</option>
+								</select>
 							</div>
 							
 						</form>
@@ -99,7 +189,7 @@
 				var birthStr = document.getElementById('pickDateBtn').textContent;
 				var jgStr = document.getElementById('jgStr').value;
 				
-				mui.ajax('http://117.146.77.26:8080/app?',{
+				mui.ajax('http://192.168.1.7:8080/app?',{
 					data:{
 						cmd:'modifylivepeople',
 						peo_id:peoid,
@@ -160,7 +250,7 @@
 				}
 			  
 			  //获取民族列表
-			  mui.ajax('http://117.146.77.26:8080/app?cmd=getnationlist',{
+			  mui.ajax('http://192.168.1.7:8080/app?cmd=getnationlist',{
 				dataType:'json',
 				type:'get',
 				success:function(data){

@@ -364,10 +364,12 @@
 				var area_name ='<option value="">请选择</option>';
 				
 				for (i=0;i<data.data.length;i++) {
-					area_name += 
+					
+					area_name +=
 					'<option value="'+
 					data.data[i].area_id
 					+'">'+ data.data[i].area_name+'</option>';
+					
 				}
 				
 				document.getElementById("shequID").innerHTML = area_name;				
