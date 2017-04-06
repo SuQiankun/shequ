@@ -31,9 +31,32 @@ login: function loginActive(account, psw) {
 	},
 	
 	
-	//获取楼栋信息;
-	getBuildingInfo: function getBuildingInfo() {
-		return "getBuildingInfo";
+	//获取type信息;
+	getType: function getType(cmd,actionid) {
+		var areaStr = '';
+		//获取宗教信仰列表
+			  mui.ajax('http://124.117.230.75:8080/app?cmd=getdictbytype&dictype='+cmd,{
+				dataType:'json',
+				type:'get',
+				success:function(data){
+				area_name = '<option value="">请选择</option>';
+				
+				for (i=0;i<data.data.length;i++) {					
+							area_name +=
+							'<option value="'+
+							data.data[i].ids
+							+'">'+ data.data[i].val+'</option>';
+							
+				}
+				console.log(area_name);
+				areaStr = area_name;
+				document.getElementById(actionid).innerHTML = area_name;
+				},
+				error: function(xhr,type,errorThrown){
+				}
+				});
+				
+				return areaStr;
 	},
 	
 	//获取房间信息

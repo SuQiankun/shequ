@@ -4,6 +4,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<script src="js/Common.js" type="text/javascript" charset="utf-8"></script>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
 	</head>
@@ -48,7 +49,7 @@
 								</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">宗教信仰</label>
-								<select name="">
+								<select id="RELIGION" >
 									<option value="">请选择</option>
 								</select>
 							</div>	
@@ -72,14 +73,14 @@
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">血型</label>
-								<select name="">
+								<select id="bloodType" name="">
 									<option value="">请选择</option>
 								</select>
 							</div>
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">职业</label>
-								<select name="">
+								<select id="career" name="">
 									<option value="">请选择</option>
 								</select>
 							</div>
@@ -91,42 +92,48 @@
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">户口性质</label>
-								<select name="">
+								<select id="popuInfo" name="">
 									<option value="">请选择</option>
 								</select>
 							</div>
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">政治面貌</label>
-								<select name="">
+								<select id="polit" name="">
 									<option value="">请选择</option>
 								</select>
 							</div>
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">婚姻状况</label>
-								<select name="">
+								<select id="marry">
 									<option value="">请选择</option>
 								</select>
 							</div>
 							
 							<div class="mui-input-row">
-								<label style="width: 30%;">经济状况</label>
-								<select name="">
+								<label  style="width: 30%;">经济状况</label>
+								<select id="income" name="">
+									<option value="">请选择</option>
+								</select>
+							</div>
+							<div class="mui-input-row">
+								<label  style="width: 30%;">健康状况</label>
+								<select id="jiankangzhuangkuang" name="">
 									<option value="">请选择</option>
 								</select>
 							</div>
 
 							<div class="mui-input-row">
 								<label style="width: 30%;">文化程度</label>
-								<select name="">
+								<select id="degree" name="">
 									<option value="">请选择</option>
 								</select>
 							</div>
 							
 							<div class="mui-input-row">
 								<label style="width: 35%;">户口所在地</label>
-								<input style="width: 70%;" id="jgStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input style="width: 65%;" id="jgStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row">
@@ -142,7 +149,7 @@
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">兵役</label>
-								<select name="">
+								<select id="military" name="">
 									<option value="">请选择</option>
 								</select>
 							</div>
@@ -189,7 +196,7 @@
 				var birthStr = document.getElementById('pickDateBtn').textContent;
 				var jgStr = document.getElementById('jgStr').value;
 				
-				mui.ajax('http://192.168.1.7:8080/app?',{
+				mui.ajax('http://124.117.230.75:8080/app?',{
 					data:{
 						cmd:'modifylivepeople',
 						peo_id:peoid,
@@ -216,20 +223,13 @@
 				
 			});
 			
-			
-			//提交修改的人员信息
-			function changePersonInfo(){
-			
-				
-			}
-			
+	
 			
 		</script>
 		
 		<script type="text/javascript">
 		
 			mui.plusReady(function () {
-
 			var web = plus.webview.currentWebview();
 				//获取传递参数
 			  document.getElementById('nameStr').value = web.name;
@@ -250,17 +250,18 @@
 				}
 			  
 			  //获取民族列表
-			  mui.ajax('http://192.168.1.7:8080/app?cmd=getnationlist',{
+			  mui.ajax('http://124.117.230.75:8080/app?cmd=getnationlist',{
 				dataType:'json',
 				type:'get',
 				success:function(data){
 				var area_name = '<option value="">请选择</option>';
 				
 				for (i=0;i<data.data.length;i++) {
+					
 						//判断是否加载初始值;
 						if( data.data[i].val == web.nation){
 							area_name +=
-								'<option selected="selected"  value="'+
+								'<option selected="selected"  value="' +
 								data.data[i].ids
 								+'">'+ data.data[i].val+'</option>';
 						}else{
@@ -270,12 +271,32 @@
 							+'">'+ data.data[i].val+'</option>';
 						}
 				}
+				
 				document.getElementById("nationID").innerHTML = area_name;
 				},
 				error: function(xhr,type,errorThrown){
 						
-					}
+				}
 				});
+				//获取宗教
+				common.getType('RELIGION','RELIGION');
+				//获取血型
+				common.getType('bloodType','bloodType');
+				//获取职业
+				common.getType('career','career');
+				//获取户口类型
+				common.getType('popuInfo','popuInfo');
+				//获取政治面貌
+				common.getType('polit','polit');
+				//获取婚姻状况
+				common.getType('marry','marry');
+				//获取经济状况
+				common.getType('income','income');
+				//获取文化程度
+				common.getType('degree','degree');
+				//获取兵役情况
+				common.getType('military','military');
+					common.getType('jiankangzhuangkuang','jiankangzhuangkuang');
 			});
 			
 		</script>
