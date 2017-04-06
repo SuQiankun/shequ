@@ -20,7 +20,7 @@
 					<div class="mui-card-header">修改人员资料</div>
 					<div class="mui-card-content">
 						<form class="mui-input-group">
-							
+							<p id="personID" style="display: none;"></p>
 							<div class="mui-input-row">
 								<label style="width: 30%;">姓名</label>
 								<input style="width: 70%;" id="nameStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
@@ -49,13 +49,14 @@
 								</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">宗教信仰</label>
-								<select id="RELIGION" >
+								<select id="RELIGION"  onchange="getAdress()">
 									<option value="">请选择</option>
 								</select>
-							</div>	
+							</div>
+						
 							<div class="mui-input-row">
 								<label style="width: 30%;">祷告地址</label>
-								<select name="">
+								<select style="width: 70%; font-size: 14px;" id="daogaoAdress" name="">
 									<option value="">请选择</option>
 								</select>
 							</div>
@@ -77,7 +78,7 @@
 									<option value="">请选择</option>
 								</select>
 							</div>
-							
+
 							<div class="mui-input-row">
 								<label style="width: 30%;">职业</label>
 								<select id="career" name="">
@@ -87,7 +88,7 @@
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">工作单位</label>
-								<input style="width: 70%;" id="jgStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input style="width: 70%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row">
@@ -140,13 +141,7 @@
 								<label style="width: 30%;">参保情况</label>
 								<input style="width: 70%;" id="jgStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">健康情况</label>
-								<input style="width: 70%;" id="jgStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
-							</div>
 						
-							
 							<div class="mui-input-row">
 								<label style="width: 30%;">兵役</label>
 								<select id="military" name="">
@@ -172,16 +167,48 @@
 		
 		<script>
 			mui.init({
-			
 				beforeback: function(){
-					//获得列表界面的webview
 					var list = plus.webview.getWebviewById('tab-webview-subpage-chat.html');
-					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
 					mui.fire(list,'updateInfo');
-					//返回true，继续页面关闭逻辑
 					return true;
 				}
 			});
+			
+			function getAdress(){
+				var reID =  document.getElementById("RELIGION").value;
+				var numberStr = '';
+				switch (reID){
+					case 'e4923f8a70564780876e6f63a5b8a6a0':
+						numberStr = 'yisilanjiao';
+						break;
+					case 'f125a8ddcb9b4e7bb00c7408b1230893':
+					numberStr = 'fojiao';
+						break;
+					case '61d2dea8ac1948dd836a404837e50aef':
+					numberStr = 'jidujiao';
+						break;
+					case '695f4ceabd674839b8847b447daded8d':
+					numberStr = '12345';
+						break;
+					default:
+						break;
+				}
+			
+			mui.ajax('http://124.117.230.75:8080/app?cmd=getdictbytype&dictype='+numberStr,{
+					dataType:'json',//服务器返回json格式数据
+					type:'get',//HTTP请求类型
+					success:function(data){
+						var area_name = '<option value="">请选择</option>';
+					for (i = 0;i<data.data.length;i++) {
+							area_name +='<option value="'+data.data[i].ids+'" >'+ data.data[i].val+'</option>';
+					}
+					document.getElementById("daogaoAdress").innerHTML = area_name;
+					},
+					error:function(xhr,type,errorThrown){
+					
+					}
+			});				
+			}
 			
 			document.getElementById("changePersonInfo").addEventListener('tap',function(){
 				
@@ -228,8 +255,9 @@
 		</script>
 		
 		<script type="text/javascript">
-		
+//		var web = plus.webview.currentWebview();
 			mui.plusReady(function () {
+		
 			var web = plus.webview.currentWebview();
 				//获取传递参数
 			  document.getElementById('nameStr').value = web.name;
@@ -238,16 +266,15 @@
 			  document.getElementById('pickDateBtn').value = web.birth;
 			  document.getElementById('jgStr').value = web.jg;
 			  document.getElementById("pickDateBtn").textContent = web.birth;
-
+			  document.getElementById("personID").innerText = web.personid;
 				//判断是否加载初始值;
 				if (web.sex == '男') {
 					var area_name = '<option selected="selected" value="c1670767bf2840a1aab00f364f781cdb">男</option><option  value="c14b60b63693440089304675e6dbcfc8">女</option>';
 					document.getElementById('sexID').innerHTML = 	area_name;	 			
 				} else{
-					var area_name = '<option selected="selected" value="c14b60b63693440089304675e6dbcfc8">女</option> <option value="c1670767bf2840a1aab00f364f781cdb">男</option>';
 					document.getElementById('sexID').innerHTML = 	area_name;	
 				}
-			  
+
 			  //获取民族列表
 			  mui.ajax('http://124.117.230.75:8080/app?cmd=getnationlist',{
 				dataType:'json',
@@ -277,26 +304,49 @@
 						
 				}
 				});
-				//获取宗教
-				common.getType('RELIGION','RELIGION');
-				//获取血型
-				common.getType('bloodType','bloodType');
-				//获取职业
-				common.getType('career','career');
-				//获取户口类型
-				common.getType('popuInfo','popuInfo');
-				//获取政治面貌
-				common.getType('polit','polit');
-				//获取婚姻状况
-				common.getType('marry','marry');
-				//获取经济状况
-				common.getType('income','income');
-				//获取文化程度
-				common.getType('degree','degree');
-				//获取兵役情况
-				common.getType('military','military');
+			
 				
-				common.getType('jiankangzhuangkuang','jiankangzhuangkuang');
+				mui.ajax('http://124.117.230.75:8080/app?cmd=getlivepeoplebyhouseid&houseid='+web.fanghaoid,{
+					dataType:'json',//服务器返回json格式数据
+					type:'get',//HTTP请求类型
+					timeout:10000,//超时时间设置为10秒；
+					success:function(data){
+						for (i=0;i<data.data.length;i++) {
+							if (data.data[i].peo_id == web.personid) {
+								//添加数据
+								console.log(data.data[i].peo_name);
+									//获取宗教
+								common.getType('RELIGION','RELIGION',data.data[i].peo_religion_id);
+								//获取血型
+								common.getType('bloodType','bloodType',data.data[i].peo_blood_id);
+								//获取职业
+								common.getType('career','career',data.data[i].peo_zy_id);
+								//获取户口类型
+								common.getType('popuInfo','popuInfo',data.data[i].peo_hk_xz_id);
+								//获取政治面貌
+								common.getType('polit','polit',data.data[i].peo_zzmm_id);
+								//获取婚姻状况
+								common.getType('marry','marry',data.data[i].peo_hyzk);
+								//获取经济状况
+								common.getType('income','income',data.data[i].peo_eco_id);
+								//获取文化程度
+								common.getType('degree','degree',data.data[i].peo_edu_deg_id);
+								//获取兵役情况
+								common.getType('military','military',data.data[i].peo_by_id);
+								//健康状况
+								common.getType('jiankangzhuangkuang','jiankangzhuangkuang',data.data[i].peo_is_able);
+							
+							}else{
+								return ;
+							}
+							
+						}
+					},
+					error:function(xhr,type,errorThrown){
+						
+					}
+				});
+				
 				
 				
 			});

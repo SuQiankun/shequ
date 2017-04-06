@@ -9,7 +9,6 @@
 		<script src="js/js.cookie.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/mui.min.js"></script>
 		<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
    	 	<link href="css/mui.min.css" rel="stylesheet"/>
     		<link rel="stylesheet" type="text/css" href="font_icon/iconfont.css">
 		<style>
@@ -20,10 +19,6 @@
 		</style>
 	</head>
 	<body class="mui-ios mui-ios-9 mui-ios-9-1">
-	<div class="mui-content">
-		
-	</div>
-
 		<div id="slider" class="mui-slider"  style="height: 150px;">
 			<div class="mui-slider-group mui-slider-loop" >
 				<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
@@ -72,6 +67,8 @@
 		</div>
 
 
+		
+		
 				<div class="mui-content">	
 					<div class="mui-content">
 				        <ul class="mui-table-view mui-grid-view mui-grid-9" style="background: #fff;pointer-events: none; position:;" >
@@ -170,6 +167,8 @@
 			});
 
 	mui.plusReady(function(){
+			
+		getIndexData();	
 		var slider = mui("#slider");
 			slider.slider({
 						interval: 5000
@@ -180,8 +179,7 @@
 			bounce: "vertical",
 			bounceBackground:"#efeff4"
 		});
-		
-		getIndexData();
+
 		
 	});
 	
@@ -197,35 +195,30 @@
 		var mouthvisit = document.getElementById("mouthVisit");
 		var todaycnt = document.getElementById("todaycnt");
 					
-			jQuery.ajax({
-			    url: "http://124.117.230.75/platform/index/",
-			    type: "GET",
-			    xhrFields: { withCredentials: true },
-     			crossDomain: true,
-			    data: {
-			        "fromapp": "1",
-			    },
-			})
-			.done(function(data, textStatus, jqXHR) {
-				
-				changzhu.textContent = data.data[0].changzhu;
-				chuzu.textContent = data.data[0].chuzu;
-				liudong.textContent = data.data[0].liudong;
-				minzu.textContent = data.data[0].minzu;
-				zhongdian.textContent = data.data[0].zhongdian;
-				zhuhu.textContent = data.data[0].zhuhu;
-				yearvisit.textContent = data.data[0].yearplan + '/'+data.data[0].yearvisited;
-				mouthvisit.textContent = data.data[0].monthplan + '/'+data.data[0].monthvisited;
-				todaycnt.textContent = data.data[0].todaycnt;	
-			})
-			.fail(function(jqXHR, textStatus, errorThrown) {
-			    console.log("HTTP Request Failed");
-			})
-			.always(function() {
-			    /* ... */
-			});
-		
-		
+					
+					mui.ajax('http://124.117.230.75/platform/index/',{
+						data:{
+							   "fromapp": "1",
+						},
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；
+						success:function(data){
+							changzhu.textContent = data.data[0].changzhu;
+							chuzu.textContent = data.data[0].chuzu;
+							liudong.textContent = data.data[0].liudong;
+							minzu.textContent = data.data[0].minzu;
+							zhongdian.textContent = data.data[0].zhongdian;
+							zhuhu.textContent = data.data[0].zhuhu;
+							yearvisit.textContent = data.data[0].yearplan + '/'+data.data[0].yearvisited;
+							mouthvisit.textContent = data.data[0].monthplan + '/'+data.data[0].monthvisited;
+							todaycnt.textContent = data.data[0].todaycnt;	
+						},
+						error:function(xhr,type,errorThrown){
+							
+						}
+					});
+					
 	}
 	
 	</script>

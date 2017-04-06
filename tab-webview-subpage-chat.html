@@ -39,7 +39,8 @@
 						<form class="mui-input-group"  >
 							<div class="mui-input-row" >
 								<label style="width: 30%;" >社区</label>
-								<select   style="width: 70%;" id="shequID" class="mui-btn-block" onchange="getXiaoquInfo()" >
+								<select    style="width: 70%;" id="shequID" class="mui-btn-block" onchange="getXiaoquInfo()" >
+								
 								</select>
 							</div>
 							<div class="mui-input-row">
@@ -168,7 +169,6 @@
 			searchPeoInfo();
 		});
 		
-		var peosondata = new Object;
 		function searchPeoInfo(){
 			
 				var selected_val = document.getElementById('FangHaoID').value;
@@ -188,7 +188,6 @@
 							document.getElementById("personList").innerHTML = '';
 							return;
 						}
-					peosondata = data.data;
 				for (i=0;i<data.data.length;i++) {
 					
 					//判断数据是否为空,如果为空,设置默认值;
@@ -317,19 +316,22 @@
 			
 		//跳转到修改人员资料的界面,
 		function changePersonInfo(peroid){
-				var name =  document.getElementById(peroid+'name').textContent;		
+			
+				var fanghaoID = document.getElementById("FangHaoID").value;
+				var name =  document.getElementById(peroid+'name').textContent;
 				var sex =  document.getElementById(peroid+'sex').textContent;
 				var nation =  document.getElementById(peroid+'nation').textContent;
-				var relation =  document.getElementById(peroid+'relation').textContent;
+				var relation = document.getElementById(peroid+'relation').textContent;
 				var idcard =  document.getElementById(peroid+'idcard').textContent;
-				var jg =  document.getElementById(peroid+'jg').textContent;
+				var jg =  	document.getElementById(peroid+'jg').textContent;
 				var phone =  document.getElementById(peroid+'phone').textContent;
 				var birth =  document.getElementById(peroid+'birth').textContent;
-			
+				
 					mui.openWindow({
 					    url: 'changePersonInfo.html', 
 					    id:'changePersonInfo',
 					    extras:{
+					    		fanghaoid:fanghaoID,
 					    		personid:peroid,
 							name:name,
 							sex:sex,
@@ -339,7 +341,6 @@
 							jg:jg,
 							phone:phone,
 							birth:birth,
-							data:peosondata
 							
 					    },
 				     });

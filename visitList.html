@@ -87,7 +87,7 @@
 				var fanghaoid = document.getElementById("FangHaoID").value;
 				var memoinfo = document.getElementById("memoinfo").value;
 				
-				mui.ajax('http://117.146.77.26:8080/app?cmd=addvisitrecord',{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=addvisitrecord',{
 					data:{
 						"VisitDate":visitdate,
 						"PEO_SQ_ID":shequid,
@@ -122,7 +122,7 @@
 		function getXiaoquInfo(){
 			var selected_val = document.getElementById('shequID').value;
 			
-				mui.ajax('http://117.146.77.26:8080/app?cmd=getvillagebycommunityid&communityid='+selected_val,{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=getvillagebycommunityid&communityid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -146,7 +146,7 @@
 		//发送请求加载楼栋数据
 		 function getBuildingInfo(){
 				var selected_val = document.getElementById('communityInfo').value;
-				mui.ajax('http://117.146.77.26:8080/app?cmd=getbuildingbyvillageid&villageid='+selected_val,{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=getbuildingbyvillageid&villageid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){

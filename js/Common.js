@@ -1,4 +1,5 @@
 var common = {
+	
 login: function loginActive(account, psw) {
 		//判断密码&用户名
 		if(account == 'admins' & psw == '123456') {
@@ -6,7 +7,6 @@ login: function loginActive(account, psw) {
 				url: 'tab-webview-main.html',
 				id: 'index'
 			});
-
 		} else {
 			mui.alert(' ', '账号或密码错误!', function() {});
 		}
@@ -32,7 +32,7 @@ login: function loginActive(account, psw) {
 	
 	
 	//获取type信息;
-	getType: function getType(cmd,actionid) {
+	getType: function getType(cmd,actionid,params) {
 		var areaStr = '';
 		//获取宗教信仰列表
 			  mui.ajax('http://124.117.230.75:8080/app?cmd=getdictbytype&dictype='+cmd,{
@@ -40,15 +40,11 @@ login: function loginActive(account, psw) {
 				type:'get',
 				success:function(data){
 				area_name = '<option value="">请选择</option>';
-				
-				for (i=0;i<data.data.length;i++) {					
-							area_name +=
-							'<option value="'+
-							data.data[i].ids
-							+'">'+ data.data[i].val+'</option>';
+				for (i=0;i<data.data.length;i++) {		
+					
+					area_name +='<option value="'+data.data[i].ids+'" >'+ data.data[i].val+'</option>';
 							
 				}
-				console.log(area_name);
 				areaStr = area_name;
 				document.getElementById(actionid).innerHTML = area_name;
 				},
@@ -58,7 +54,6 @@ login: function loginActive(account, psw) {
 				
 				return areaStr;
 	},
-	
 	//获取房间信息
 	getRoomInfo: function getRoomInfo() {
 		return "getRoomInfo";
