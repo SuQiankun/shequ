@@ -10,8 +10,8 @@
 		<script src="js/mui.min.js"></script>
 		<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
-    	<link href="css/mui.min.css" rel="stylesheet"/>
-    	<link rel="stylesheet" type="text/css" href="font_icon/iconfont.css">
+   	 	<link href="css/mui.min.css" rel="stylesheet"/>
+    		<link rel="stylesheet" type="text/css" href="font_icon/iconfont.css">
 		<style>
 			html,body {
 				background-color: #efeff4;
@@ -19,18 +19,60 @@
 			.iconfont { display: block; font-size: 1.8em; color: #007ADA; margin-top: 10px; margin-bottom: 10px; }
 		</style>
 	</head>
-
-	
 	<body class="mui-ios mui-ios-9 mui-ios-9-1">
-				<div class="mui-content">
-					<div class="mui-table-view mui-grid-view mui-grid-9" style="background: #fff;">
-						<div class="mui-card-content-inner">
-							<h4 class="yl_color">欢迎您: <label id="loginName"></label></h4>
-							<div style="height: 2px;"></div>
-							<h5>今天是<label id="year"></label>年<label id="mouth"></label>月<label id="day"></label>日 <label  id="xingqi"></label></h5>
-						</div>
-					</div>
-					
+	<div class="mui-content">
+		
+	</div>
+
+		<div id="slider" class="mui-slider"  style="height: 150px;">
+			<div class="mui-slider-group mui-slider-loop" >
+				<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#">
+						<img src="../images/yuantiao.jpg">
+					</a>
+				</div>
+				<!-- 第一张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="images/shuijiao.jpg">
+					</a>
+				</div>
+				<!-- 第二张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="images/muwu.jpg">
+					</a>
+				</div>
+				<!-- 第三张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="images/cbd.jpg">
+					</a>
+				</div>
+				<!-- 第四张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="images/yuantiao.jpg">
+					</a>
+				</div>
+				<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#">
+						<img src="images/yuantiao.jpg">
+					</a>
+				</div>
+			</div>
+			<div class="mui-slider-indicator">
+				<div class="mui-indicator mui-active"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>
+			</div>
+		</div>
+
+
+				<div class="mui-content">	
 					<div class="mui-content">
 				        <ul class="mui-table-view mui-grid-view mui-grid-9" style="background: #fff;pointer-events: none; position:;" >
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
@@ -124,51 +166,21 @@
 		//刷新首页的数据
 		document.addEventListener('getindex', function() {
 				getIndexData();
-				
 			
 			});
-		
-	mui.plusReady(function(){
-				//设置首页显示条
-				var resultStr =  plus.navigator.getCookie('http://117.146.77.26/');
-	    			var resultArr = resultStr.split(';');
-	    			
-			    for (i = 0; i< resultArr.length;i++) {
-					var keyStr = resultArr[i].split('=');
-					if ( strcmp(keyStr[0],"userNick") == 0 ) {
-							document.getElementById("loginName").innerText = decodeURI((keyStr[1]));
-						}
-			    }
-			    
-			function strcmp(a, b) {
-			    a = a.toString().trim(), b = b.toString();
-			    for (var i=0,n=Math.max(a.length, b.length); i<n && a.charAt(i) === b.charAt(i); ++i);
-			    if (i === n) return 0;
-			    return a.charAt(i) > b.charAt(i) ? -1 : 1;
-			}
 
-		//设置时间
-		var y = new Date();
-		document.getElementById("year").innerText = y.getFullYear();
-		document.getElementById("mouth").innerText =  y.getMonth()+1;
-		document.getElementById("day").innerText = y.getDate();
-		var week;
-			switch (y.getDay()){
-			case 1: week="星期一"; break;
-			case 2: week="星期二"; break;
-			case 3: week="星期三"; break;
-			case 4: week="星期四"; break;
-			case 5: week="星期五"; break;
-			case 6: week="星期六"; break;
-			default: week="星期天";
-			};
-		document.getElementById('xingqi').innerHTML = week;	
+	mui.plusReady(function(){
+		var slider = mui("#slider");
+			slider.slider({
+						interval: 5000
+					});				
 	//开启回弹
 		_self = plus.webview.currentWebview();
 		_self.setStyle({
 			bounce: "vertical",
 			bounceBackground:"#efeff4"
 		});
+		
 		getIndexData();
 		
 	});
@@ -186,7 +198,7 @@
 		var todaycnt = document.getElementById("todaycnt");
 					
 			jQuery.ajax({
-			    url: "http://117.146.77.26/platform/index/",
+			    url: "http://124.117.230.75/platform/index/",
 			    type: "GET",
 			    xhrFields: { withCredentials: true },
      			crossDomain: true,
@@ -218,14 +230,11 @@
 	
 	</script>
 	
-	
-	
-	<script>
-		mui.init({
-			swipeBack:true //启用右滑关闭功能
-		});
-	</script>
-	
+		<script type="text/javascript" charset="utf-8">
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+		</script>
 </body>
 
 </html>
