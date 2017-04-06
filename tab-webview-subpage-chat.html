@@ -202,11 +202,11 @@
 					 var username = common.changestr(data.data[i].bhr_username);
 					 var names =   common.changestr(data.data[i].bhr_names);
 					var att = common.changestr(data.data[i].peo_attr_id);
-					
-					var resultstr = checkPersonInfo(data.data[i].peo_attr_id,data.data[i].peoid,att); 
+					var resultstr = checkPersonInfo(data.data[i].peo_attr_id,data.data[i].peoid,att);
+					var titleStr =  creattitleStr(data.data[i].peo_attr_id);
 				area_name
 					+=
-					'<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span>当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">'
+					titleStr
 					+'<label style="width: 35%;">姓名</label><p class="yl_txt" id="'
 					+data.data[i].peo_id+'name'
 					+'">'
@@ -239,8 +239,7 @@
 					+data.data[i].peo_id+'birth'
 					+'">'
 					+birth
-					+ resultstr
-		
+//					+ resultstr
 					+'</p></div><div class="mui-input-row"><label style="width: 35%;">包户人</label><p class="yl_txt">'
 					+username+':'+ names
 					+'</p></div></form></div><div class="mui-card-footer"><div class="mui-button-row" style="margin: 0 auto;">'
@@ -250,7 +249,6 @@
 					;
 					
 				}
-					console.log(area_name);
 				//插入数据内容;
 				document.getElementById("personList").innerHTML = area_name;
 				},
@@ -260,6 +258,7 @@
 			});	
 		}
 		
+		//更新字符串 --> 重点人员字符串处理
 		function checkPersonInfo(data,peoid,att){
 			var result = '';
 			if (data == "" || data == undefined || data == null) {
@@ -274,8 +273,22 @@
 			return result;
 		}
 
-			//跳转到新增人员的界面;
-			function addPersion(){
+			function creattitleStr(att){
+				var titleStr = '';
+				if (att == "" || att == undefined || att == null) {
+				titleStr = '<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span>当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">';
+				
+			} else{
+				
+				titleStr = '<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span style="color:#FF0000 ;" >当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">';  
+			}
+			return titleStr;
+				
+			}
+
+
+		//跳转到新增人员的界面;
+		function addPersion(){
 				
 				var shequ = document.getElementById('shequID').value;
 				var xiaoqu = document.getElementById('communityInfo').value;
@@ -300,8 +313,8 @@
 					
 			}
 			
-			//跳转到修改人员资料的界面,
-			function changePersonInfo(peroid){
+		//跳转到修改人员资料的界面,
+		function changePersonInfo(peroid){
 				var name =  document.getElementById(peroid+'name').textContent;		
 				var sex =  document.getElementById(peroid+'sex').textContent;
 				var nation =  document.getElementById(peroid+'nation').textContent;
@@ -329,18 +342,11 @@
 				     });
 	
 			}
-		
-		
-		
+
 		</script>	
 
 	<script>
-		
-		window.onload = function(){
-			console.log('this id 1111111= '+plus.webview.currentWebview().id);	
-			
-		};
-		
+	
 		mui.plusReady(function(){
 	
 			//开启回弹

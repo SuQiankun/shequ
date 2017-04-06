@@ -135,10 +135,10 @@
 			var psw = document.getElementById('password').value;
 		
 			if ( account.length < 1  ) {
-				mui.confirm('请输出账号');
+				mui.alert('请输入账号');
 				return;
 			} else if (psw.length < 1){
-				mui.confirm('请输出密码');
+				mui.alert('请输入账号');
 				return;
 			} 
 							
@@ -155,9 +155,8 @@
 			   
 			})
 			.done(function(data, textStatus, jqXHR) {
+			
 				if(data.data == 'success'){
-//						 mui.closepopup();
-//						mui.confirm('登录成功');
 
 						mui.openWindow({
 							url: 'tab-webview-main.html',
@@ -166,7 +165,7 @@
 					}
 			})
 			.fail(function(jqXHR, textStatus, errorThrown) {
-			    mui.confirm('登录失败,请检查网络设置');
+			    mui.alert('登录失败,请检查网络设置');
 			})
 			.always(function() {
 			    /* ... */

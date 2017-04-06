@@ -36,7 +36,9 @@
 		<script type="text/javascript">
 			
 			mui.plusReady(function () {
-				mui.ajax('http://117.146.77.26/sw/warning/index',{
+			
+			
+			mui.ajax('http://117.146.77.26/sw/warning/index',{
 					data:{
 						idx:'0',
 						fromapp:'1'
@@ -46,7 +48,7 @@
 					timeout:10000,//超时时间设置为10秒；
 					success:function(data){
 						if (data.data.length<1) {
-							mui.confirm('暂无数据');
+							mui.alert('暂无数据');
 						} 
 						for (i = 0; i<data.data.length;i++) {
 							
@@ -85,7 +87,9 @@
 				var index = screeningStr.selectedIndex;
 				var textstr  = screeningStr.options[index].text;
 				if(textstr == '请选择'){
+					
 						mui.toast('请选择查询条件');
+						
 						return;
 				}
 				

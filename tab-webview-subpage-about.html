@@ -20,7 +20,6 @@
 		</style>
 	</head>
 	<body class="mui-ios mui-ios-9 mui-ios-9-1">
-		
 				<div class="mui-content">
 					<div class="mui-table-view mui-grid-view mui-grid-9" style="background: #fff;">
 						<div class="mui-card-content-inner">
@@ -104,7 +103,6 @@
 				
 			<div style="height: 10px;" ></div>
 			<div style="height: 10px;" ></div>	
-</body>
 	
 	<script>
 		//添加点击预警信息界面
@@ -195,6 +193,7 @@
 			    },
 			})
 			.done(function(data, textStatus, jqXHR) {
+				
 				changzhu.textContent = data.data[0].changzhu;
 				chuzu.textContent = data.data[0].chuzu;
 				liudong.textContent = data.data[0].liudong;
@@ -222,6 +221,7 @@
 			swipeBack:true //启用右滑关闭功能
 		});
 	</script>
-ody>
+	
+</body>
 
 </html>

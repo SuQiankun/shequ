@@ -166,7 +166,6 @@
 	<script type="text/javascript">
 		
 		function addNewPersonInfo(){
-			console.log('123');
 			//获取参数列表
 			var shequID = document.getElementById("shequID").value;
 			var xiaoquID = document.getElementById("communityInfo").value;
@@ -208,7 +207,7 @@
 					"peo_birthday":birth,
 					"peo_yz_relation":relation,
 				};
-			//
+				
 				var params = $.toJSON(data);
 				mui.ajax('http://117.146.77.26:8080/app?cmd=newlive',{
 					data:params,
@@ -261,7 +260,6 @@
 				}
 			});
 		}
-		
 		//发送请求加载楼栋数据
 		 function getBuildingInfo(){
 				var selected_val = document.getElementById('communityInfo').value;
@@ -281,8 +279,6 @@
 				error: function(xhr,type,errorThrown){
 				}
 			});
-		 
-		 
 		 }
 		 //获取房间信息
 		 function getRoomInfo(){
@@ -312,11 +308,9 @@
 	</script>
 	<!--页面初始化页面-->
 	<script>
+		
 			//页面加载后触发的函数
 			mui.plusReady(function(){
-				
-				console.log(plus.webview.currentWebview().id);
-				
 				//获取社区列表
 				mui.ajax('http://117.146.77.26:8080/app?cmd=getcommunitylist',{
 				dataType:'json',
@@ -333,6 +327,7 @@
 				document.getElementById("shequID").innerHTML = area_name;				
 				},
 				error: function(xhr,type,errorThrown){
+					
 				}
 			});
 			
@@ -355,7 +350,7 @@
 					}
 				});
 			
-							//获取业主关系列表
+				//获取业主关系列表
 				mui.ajax('http://117.146.77.26:8080/app?cmd=getyzrelationlist',{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
