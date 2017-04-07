@@ -88,7 +88,7 @@
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">工作单位</label>
-								<input style="width: 70%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input id="danweidizhi" style="width: 70%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row">
@@ -148,6 +148,12 @@
 									<option value="">请选择</option>
 								</select>
 							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">是否在家居住</label>
+								<select id="yesOrNot" name="">
+									<option value="">请选择</option>
+								</select>
+							</div>
 							
 						</form>
 						
@@ -174,10 +180,12 @@
 				}
 			});
 			
+			//获取地址
 			function getAdress(){
 				var reID =  document.getElementById("RELIGION").value;
 				var numberStr = '';
 				switch (reID){
+					
 					case 'e4923f8a70564780876e6f63a5b8a6a0':
 						numberStr = 'yisilanjiao';
 						break;
@@ -191,10 +199,10 @@
 					numberStr = '12345';
 						break;
 					default:
-						break;
+						break; 
 				}
 			
-			mui.ajax('http://124.117.230.75:8080/app?cmd=getdictbytype&dictype='+numberStr,{
+			mui.ajax('http://117.146.77.26:8080/app?cmd=getdictbytype&dictype='+numberStr,{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
 					success:function(data){
@@ -210,6 +218,7 @@
 			});				
 			}
 			
+			
 			document.getElementById("changePersonInfo").addEventListener('tap',function(){
 				
 				var self = plus.webview.currentWebview();
@@ -223,7 +232,7 @@
 				var birthStr = document.getElementById('pickDateBtn').textContent;
 				var jgStr = document.getElementById('jgStr').value;
 				
-				mui.ajax('http://124.117.230.75:8080/app?',{
+				mui.ajax('http://117.146.77.26:8080/app?',{
 					data:{
 						cmd:'modifylivepeople',
 						peo_id:peoid,
@@ -239,15 +248,11 @@
 					type:'post',//HTTP请求类型
 					success:function(data){
 						mui.confirm('提交成功');
-										
 					},
 					error:function(xhr,type,errorThrown){
 						mui.confirm('失败');
 					}
 				});			
-					
-				
-				
 			});
 			
 	
@@ -255,9 +260,26 @@
 		</script>
 		
 		<script type="text/javascript">
-//		var web = plus.webview.currentWebview();
-			mui.plusReady(function () {
 		
+		//定义全局变量, 用来设置初始值;
+		var bingyi ='';       // 兵役
+		var daogao = '';    	 // 祷告地址
+		var attrid = '';    	//人员属性
+		var zhiye ='';	     // 职业
+		var hkxz = '';       // 户口类型
+		var inHome = '';     // 是否在家居住
+		var workunit = '';   // 工作单位
+		var religion = '';   //宗教信仰
+		var hyzk = '';     	//婚姻状况
+		var zzmm = '';   	//政治面貌
+		var xueli = '';		//学历
+		var jingji = '';		//经济状况
+		var xuexing = '';	//血型
+		var jiankang = '';   //健康状况
+		var inhome = ''; 	//是否在家居住
+			
+			mui.plusReady(function () {
+				
 			var web = plus.webview.currentWebview();
 				//获取传递参数
 			  document.getElementById('nameStr').value = web.name;
@@ -276,14 +298,13 @@
 				}
 
 			  //获取民族列表
-			  mui.ajax('http://124.117.230.75:8080/app?cmd=getnationlist',{
+			  mui.ajax('http://117.146.77.26:8080/app?cmd=getnationlist',{
 				dataType:'json',
 				type:'get',
 				success:function(data){
 				var area_name = '<option value="">请选择</option>';
 				
 				for (i=0;i<data.data.length;i++) {
-					
 						//判断是否加载初始值;
 						if( data.data[i].val == web.nation){
 							area_name +=
@@ -295,51 +316,63 @@
 							'<option value="'+
 							data.data[i].ids
 							+'">'+ data.data[i].val+'</option>';
-						}
-				}
-				
+						}}
 				document.getElementById("nationID").innerHTML = area_name;
 				},
-				error: function(xhr,type,errorThrown){
-						
-				}
-				});
+				error: function(xhr,type,errorThrown){}});
 			
-				
-				mui.ajax('http://124.117.230.75:8080/app?cmd=getlivepeoplebyhouseid&houseid='+web.fanghaoid,{
+	mui.ajax('http://117.146.77.26:8080/app?cmd=getlivepeoplebyhouseid&houseid='+web.fanghaoid,{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
 					timeout:10000,//超时时间设置为10秒；
 					success:function(data){
+							//循环遍历,如果是当前人员 取出数据
 						for (i=0;i<data.data.length;i++) {
-							if (data.data[i].peo_id == web.personid) {
-								//添加数据
-								console.log(data.data[i].peo_name);
-									//获取宗教
-								common.getType('RELIGION','RELIGION',data.data[i].peo_religion_id);
-								//获取血型
-								common.getType('bloodType','bloodType',data.data[i].peo_blood_id);
-								//获取职业
-								common.getType('career','career',data.data[i].peo_zy_id);
-								//获取户口类型
-								common.getType('popuInfo','popuInfo',data.data[i].peo_hk_xz_id);
-								//获取政治面貌
-								common.getType('polit','polit',data.data[i].peo_zzmm_id);
-								//获取婚姻状况
-								common.getType('marry','marry',data.data[i].peo_hyzk);
-								//获取经济状况
-								common.getType('income','income',data.data[i].peo_eco_id);
-								//获取文化程度
-								common.getType('degree','degree',data.data[i].peo_edu_deg_id);
-								//获取兵役情况
-								common.getType('military','military',data.data[i].peo_by_id);
-								//健康状况
-								common.getType('jiankangzhuangkuang','jiankangzhuangkuang',data.data[i].peo_is_able);
 							
+							if (data.data[i].peo_id == web.personid) {
+								
+								bingyi = data.data[i].peo_by_id;
+								common.getBingyi('military','military',bingyi);
+								
+								daogao = data.data[i].peo_dao_gao_id;
+								 
+								attrid = data.data[i].peo_attr_id;
+							
+							
+								zhiye = data.data[i].peo_zy_id;
+								common.getReligion('career','career',zhiye);
+								
+								hkxz = data.data[i].peo_hk_xz_id;
+								common.getReligion('popuInfo','popuInfo',hkxz);
+								
+								
+								workunit = data.data[i].peo_work_unit;
+								document.getElementById("danweidizhi").value = common.changestr(workunit);
+							
+								religion =data.data[i].peo_religion_id;
+								common.getReligion('RELIGION','RELIGION',religion);
+								
+								hyzk = data.data[i].peo_hyzk;
+								common.getReligion('marry','marry',hyzk);
+								
+								zzmm = data.data[i].peo_zzmm_id;
+								common.getReligion('polit','polit',zzmm);
+								
+								xueli = data.data[i].peo_edu_deg_id;
+								common.getReligion('degree','degree',xueli);
+								
+								jingji = data.data[i].peo_eco_id;
+								common.getReligion('income','income',jingji);
+								
+								xuexing = data.data[i].peo_blood_id;
+								common.getReligion('bloodType','bloodType',xuexing);
+								
+								jiankang =  data.data[i].peo_is_able;
+								common.getReligion('jiankangzhuangkuang','jiankangzhuangkuang',jiankang);
+								
 							}else{
 								return ;
 							}
-							
 						}
 					},
 					error:function(xhr,type,errorThrown){

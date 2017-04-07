@@ -8,6 +8,7 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<script src="js/mui.min.js"></script>
+		<script src="js/Common.js" type="text/javascript" charset="utf-8"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 			<style type="text/css">
 				.yl_txt { font-size: 17px; line-height: 37px; color: #222; }
@@ -88,9 +89,10 @@
 			
 		//发送请求加载小区数据;
 		function getXiaoquInfo(){
+			console.log('12212222222222222222222');
 				var selected_val = document.getElementById('shequID').value;
 			
-				mui.ajax('http://124.117.230.75:8080/app?cmd=getvillagebycommunityid&communityid='+selected_val,{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=getvillagebycommunityid&communityid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -114,23 +116,22 @@
 		//发送请求加载楼栋数据
 		 function getBuildingInfo(){
 				var selected_val = document.getElementById('communityInfo').value;
-				mui.ajax('http://124.117.230.75:8080/app?cmd=getbuildingbyvillageid&villageid='+selected_val,{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=getbuildingbyvillageid&villageid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
 				var area_name = '<option  >请选择</option>';
 				for (i=0;i<data.data.length;i++) {
-					area_name += 
-					'<option value="'+
-					data.data[i].area_id
-					+'">'+ data.data[i].area_name+'</option>';
+						area_name +=
+						'<option value="'+
+						data.data[i].area_id
+						+'" selected = selected>'+ data.data[i].area_name+'</option>';
 				}
 				document.getElementById("LouDongID").innerHTML = area_name;				
 				},
 				error: function(xhr,type,errorThrown){
 				}
 			});
-		 
 		 
 		 }
 		 //获取房间信息
@@ -140,7 +141,7 @@
 		 	if (selected_val == null || selected_val ==undefined || selected_val == '') {
 					mui.toast('请选择楼栋');
 				}
-				mui.ajax('http://124.117.230.75:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -177,7 +178,7 @@
 					mui.toast('请选择房间号');
 					return;
 				}
-				mui.ajax('http://124.117.230.75:8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
 						dataType:'json',
 						type:'get',
 						success:function(data){
@@ -203,7 +204,6 @@
 					 var names =   common.changestr(data.data[i].bhr_names);
 					 
 					 var att = common.changestr(data.data[i].peo_attr_id);
-					
 					//重点人员标记
 					var resultstr = checkPersonInfo(data.data[i].peo_attr_id,data.data[i].peoid,att);
 					var titleStr =  creattitleStr(data.data[i].peo_attr_id);
@@ -341,7 +341,6 @@
 							jg:jg,
 							phone:phone,
 							birth:birth,
-							
 					    },
 				     });
 	
@@ -352,36 +351,18 @@
 	<script>
 	
 		mui.plusReady(function(){
-	
 			//开启回弹
 			var placeholderText = '<option value="">请选择</option>';
 			document.getElementById('shequID').innerHTML =placeholderText ;
 			document.getElementById('communityInfo').innerHTML =placeholderText ;
 			document.getElementById('LouDongID').innerHTML =placeholderText ;
 			document.getElementById('FangHaoID').innerHTML =placeholderText ;
-			
 			//获取社区列表
-			mui.ajax('http://124.117.230.75:8080/app?cmd=getcommunitylist',{
-				dataType:'json',
-				type:'get',
-				success:function(data){
-				var area_name ='<option value="">请选择</option>';
-				
-				for (i=0;i<data.data.length;i++) {
-					
-					area_name +=
-					'<option value="'+
-					data.data[i].area_id
-					+'">'+ data.data[i].area_name+'</option>';
-					
-				}
-				
-				document.getElementById("shequID").innerHTML = area_name;				
-				},
-				error: function(xhr,type,errorThrown){
-					
-				}
+			common.getSheQu(function(result){
+				document.getElementById("shequID").innerHTML = result;
+				getXiaoquInfo();
 			});
+			
 	});
 	</script>
 	</body>

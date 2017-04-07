@@ -24,37 +24,26 @@
 				<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
 				<div class="mui-slider-item mui-slider-item-duplicate">
 					<a href="#">
-						<img src="../images/yuantiao.jpg">
+						<img src="images/fhj.jpeg">
 					</a>
 				</div>
 				<!-- 第一张 -->
 				<div class="mui-slider-item">
 					<a href="#">
-						<img src="images/shuijiao.jpg">
+						<img src="images/fhj.jpeg">
 					</a>
 				</div>
 				<!-- 第二张 -->
 				<div class="mui-slider-item">
 					<a href="#">
-						<img src="images/muwu.jpg">
+						<img src="images/timg.jpg">
 					</a>
 				</div>
-				<!-- 第三张 -->
-				<div class="mui-slider-item">
-					<a href="#">
-						<img src="images/cbd.jpg">
-					</a>
-				</div>
-				<!-- 第四张 -->
-				<div class="mui-slider-item">
-					<a href="#">
-						<img src="images/yuantiao.jpg">
-					</a>
-				</div>
+			
 				<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
 				<div class="mui-slider-item mui-slider-item-duplicate">
 					<a href="#">
-						<img src="images/yuantiao.jpg">
+						<img src="images/timg.jpg">
 					</a>
 				</div>
 			</div>
@@ -180,6 +169,7 @@
 			bounceBackground:"#efeff4"
 		});
 
+ 
 		
 	});
 	
@@ -195,8 +185,7 @@
 		var mouthvisit = document.getElementById("mouthVisit");
 		var todaycnt = document.getElementById("todaycnt");
 					
-					
-					mui.ajax('http://124.117.230.75/platform/index/',{
+					mui.ajax('http://117.146.77.26/platform/index/',{
 						data:{
 							   "fromapp": "1",
 						},
@@ -223,8 +212,13 @@
 	
 	</script>
 	
+	
 		<script type="text/javascript" charset="utf-8">
 			mui.init({
+				keyEventBind: {
+						backbutton: false,  //Boolean(默认true)关闭back按键监听
+						menubutton: false   //Boolean(默认true)关闭menu按键监听
+				},
 				swipeBack:true //启用右滑关闭功能
 			});
 		</script>

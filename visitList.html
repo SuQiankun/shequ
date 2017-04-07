@@ -6,6 +6,7 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/Common.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
 	<body>
@@ -87,7 +88,7 @@
 				var fanghaoid = document.getElementById("FangHaoID").value;
 				var memoinfo = document.getElementById("memoinfo").value;
 				
-				mui.ajax('http://124.117.230.75:8080/app?cmd=addvisitrecord',{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=addvisitrecord',{
 					data:{
 						"VisitDate":visitdate,
 						"PEO_SQ_ID":shequid,
@@ -122,7 +123,7 @@
 		function getXiaoquInfo(){
 			var selected_val = document.getElementById('shequID').value;
 			
-				mui.ajax('http://124.117.230.75:8080/app?cmd=getvillagebycommunityid&communityid='+selected_val,{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=getvillagebycommunityid&communityid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -146,7 +147,7 @@
 		//发送请求加载楼栋数据
 		 function getBuildingInfo(){
 				var selected_val = document.getElementById('communityInfo').value;
-				mui.ajax('http://124.117.230.75:8080/app?cmd=getbuildingbyvillageid&villageid='+selected_val,{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=getbuildingbyvillageid&villageid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -185,10 +186,8 @@
 					area_name +=
 					'<option style="color: #2AC845;" value="'+
 					data.data[i].house_num_id
-					+'">'+ data.data[i].house_num+'已走访</option>';
+					+'">'+ data.data[i].house_num+'   已走访</option>';
 					}
-					
-					
 					
 					area_name +=
 					'<option value="'+
@@ -207,30 +206,9 @@
 		
 		</script>
 		<!--加载社区信息-->
-		<script type="text/javascript">
+		<script type="text/javascript" >
 			mui.plusReady(function () {
-   
-			   mui.ajax('http://117.146.77.26:8080/app?cmd=getcommunitylist',{
-				dataType:'json',
-				type:'get',
-				success:function(data){
-				var area_name ='<option value="">请选择</option>';
-				
-				for (i=0;i<data.data.length;i++) {
-					area_name += 
-					'<option value="'+
-					data.data[i].area_id
-					+'">'+ data.data[i].area_name+'</option>';
-				}
-				
-				document.getElementById("shequID").innerHTML = area_name;				
-				},
-				error: function(xhr,type,errorThrown){
-					
-				}
-			});
-		   
-		   
+   			common.getSheQu();
 		});
 		
 		</script>

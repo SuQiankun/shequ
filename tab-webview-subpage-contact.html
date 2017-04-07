@@ -9,6 +9,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<script src="js/Common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/mui.min.js"></script>
 		<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/json.js" type="text/javascript" charset="utf-8"></script>
@@ -311,24 +312,11 @@
 		
 			//页面加载后触发的函数
 			mui.plusReady(function(){
-				//获取社区列表
-				mui.ajax('http://117.146.77.26:8080/app?cmd=getcommunitylist',{
-				dataType:'json',
-				type:'get',
-				success:function(data){
-				var area_name ='<option value="">请选择</option>';
-				
-				for (i=0;i<data.data.length;i++) {
-					area_name += 
-					'<option value="'+
-					data.data[i].area_id
-					+'">'+ data.data[i].area_name+'</option>';
-				}
-				document.getElementById("shequID").innerHTML = area_name;				
-				},
-				error: function(xhr,type,errorThrown){
-					
-				}
+		
+			//获取社区列表
+			common.getSheQu(function(result){
+				document.getElementById("shequID").innerHTML = result;
+				getXiaoquInfo();
 			});
 			
 				//获取民族列表
