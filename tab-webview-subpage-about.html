@@ -19,6 +19,7 @@
 		</style>
 	</head>
 	<body class="mui-ios mui-ios-9 mui-ios-9-1">
+		
 		<div id="slider" class="mui-slider"  style="height: 150px;">
 			<div class="mui-slider-group mui-slider-loop" >
 				<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
@@ -39,7 +40,6 @@
 						<img src="images/timg.jpg">
 					</a>
 				</div>
-			
 				<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
 				<div class="mui-slider-item mui-slider-item-duplicate">
 					<a href="#">
@@ -54,10 +54,6 @@
 				<div class="mui-indicator"></div>
 			</div>
 		</div>
-
-
-		
-		
 				<div class="mui-content">	
 					<div class="mui-content">
 				        <ul class="mui-table-view mui-grid-view mui-grid-9" style="background: #fff;pointer-events: none; position:;" >
@@ -69,12 +65,12 @@
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-jianyuede" style="color: #F37B53;" ></i>
 			                   	<h4 id="chuzu">*</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >租房数</div> 
+			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >户数/人数</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-geren" style="color: #9D4A9C;" ></i>
 			                   	<h4 id="changzhu">*</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >常住人口</div> 
+			                    <div class="mui-media-body" style="color: #888; font-size: 12px;" >常住/流动人口</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 								<i class="iconfont icon-feiji" style="color: #74B749;" ></i>
@@ -84,7 +80,7 @@
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-shoucang" style="color: #DE577B;" ></i>
 			                   	<h4 id="zhongdian">*</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >重点人员</div> 
+			                    <div class="mui-media-body" style="color: #888; font-size: 12px;" >重点人员/重点户</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-xiangqu1" style="color: #FFB400;" ></i>
@@ -135,6 +131,7 @@
 			<div style="height: 10px;" ></div>	
 	
 	<script>
+		
 		//添加点击预警信息界面
 		document.getElementById('showMessage').addEventListener('tap',function(){
 					mui.openWindow({
@@ -147,7 +144,7 @@
 			mui.openWindow({
 					    url: 'visitList.html', 
 					    id:'visitID',
-				     });
+			});
 		});
 		//刷新首页的数据
 		document.addEventListener('getindex', function() {
@@ -185,7 +182,7 @@
 		var mouthvisit = document.getElementById("mouthVisit");
 		var todaycnt = document.getElementById("todaycnt");
 					
-					mui.ajax('http://117.146.77.26/platform/index/',{
+					mui.ajax('http://124.117.230.75/platform/index/',{
 						data:{
 							   "fromapp": "1",
 						},
