@@ -1,5 +1,5 @@
 var common = {
-getSheQu: function getSheQu( callback) {
+getSheQu: function getSheQu(callback) {
 //获取社区列表
 			var resultStr = ''; 
 			mui.ajax('http://117.146.77.26:8080/app?cmd=getcommunitylist',{
@@ -30,6 +30,84 @@ getSheQu: function getSheQu( callback) {
 			});
 	},
 	
+getXiaoqu: function getXiaoqqu(params,callback){
+				mui.ajax('http://117.146.77.26:8080/app?cmd=getvillagebycommunityid&communityid='+params,{
+				dataType:'json',
+				type:'get',
+				success:function(data){
+				var area_name = '<option >请选择</option>';
+				
+				for (i=0;i<data.data.length;i++) {
+					if (data.data.length  > 1) {
+						area_name +=
+						'<option value="'+
+						data.data[i].area_id	
+						+'">'+ data.data[i].area_name+'</option>';
+					} else{
+						area_name +=
+						'<option value="'+
+						data.data[i].area_id
+						+'" selected = selected>'+ data.data[i].area_name+'</option>';
+					}
+				}
+				callback(area_name);
+				},
+				error: function(xhr,type,errorThrown){}});
+},
+getLoudong: function getloudong(params,callback){
+		mui.ajax('http://117.146.77.26:8080/app?cmd=getbuildingbyvillageid&villageid='+params,{
+				dataType:'json',
+				type:'get',
+				success:function(data){
+				var area_name = '<option  >请选择</option>';
+				for (i=0;i<data.data.length;i++) {
+					if (data.data.length  > 1) {
+						area_name +=
+						'<option value="'+
+						data.data[i].area_id	
+						+'">'+ data.data[i].area_name+'</option>';
+					} else{
+						area_name +=
+						'<option value="'+
+						data.data[i].area_id
+						+'" selected = selected>'+ data.data[i].area_name+'</option>';
+					}
+				}
+				callback(area_name);
+				},
+				error: function(xhr,type,errorThrown){
+				}
+			});
+
+},
+getRoomList: function getRoomList(params,callback){
+			if (params == null || params ==undefined || params == '') {
+					mui.toast('请选择楼栋');
+			}
+				mui.ajax('http://117.146.77.26:8080/app?cmd=gethousebybuildingid&buildingid='+params,{
+				dataType:'json',
+				type:'get',
+				success:function(data){
+				var area_name = '<option >请选择</option>';
+				for (i=0;i<data.data.length;i++) {
+					if (data.data.length  > 1) {
+							area_name += 
+							'<option value="'+
+							data.data[i].house_num_id
+							+'">'+ data.data[i].house_num+'</option>';
+					} else{
+						area_name += 
+							'<option value="'+
+							data.data[i].house_num_id
+							+'" selected = selected>'+ data.data[i].house_num+'</option>';
+					}
+				}
+				callback(area_name);			
+				},
+				error: function(xhr,type,errorThrown){
+				}
+			});	
+},
 	getAjax: function getAjax(action){
 		var userdata;
 		mui.ajax('http://117.146.77.26:8080/app?'+action,{
@@ -135,10 +213,7 @@ getSheQu: function getSheQu( callback) {
 				});
 				
 	},
-	//获取房间信息
-	getRoomInfo: function getRoomInfo() {
-		return "getRoomInfo";
-	},
+
 	changestr: function changeString(data){
 				var result =(data == "" || data == undefined || data == null) ? "暂无" : data;
 				return result;

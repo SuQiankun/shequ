@@ -89,75 +89,26 @@
 			
 		//发送请求加载小区数据;
 		function getXiaoquInfo(){
-			console.log('12212222222222222222222');
 				var selected_val = document.getElementById('shequID').value;
-			
-				mui.ajax('http://117.146.77.26:8080/app?cmd=getvillagebycommunityid&communityid='+selected_val,{
-				dataType:'json',
-				type:'get',
-				success:function(data){
-				var area_name = '<option >请选择</option>';
-				
-				for (i=0;i<data.data.length;i++) {
-					area_name += 
-					'<option value="'+
-					data.data[i].area_id
-					+'">'+ data.data[i].area_name+'</option>';
-				}
-				document.getElementById("communityInfo").innerHTML = area_name;
-				
-				},
-				error: function(xhr,type,errorThrown){
-						
-				}
-			});
+				common.getXiaoqu(selected_val,function(result){
+					document.getElementById("communityInfo").innerHTML = result;
+					getBuildingInfo()
+				});
 		}
-		
 		//发送请求加载楼栋数据
 		 function getBuildingInfo(){
 				var selected_val = document.getElementById('communityInfo').value;
-				mui.ajax('http://117.146.77.26:8080/app?cmd=getbuildingbyvillageid&villageid='+selected_val,{
-				dataType:'json',
-				type:'get',
-				success:function(data){
-				var area_name = '<option  >请选择</option>';
-				for (i=0;i<data.data.length;i++) {
-						area_name +=
-						'<option value="'+
-						data.data[i].area_id
-						+'" selected = selected>'+ data.data[i].area_name+'</option>';
-				}
-				document.getElementById("LouDongID").innerHTML = area_name;				
-				},
-				error: function(xhr,type,errorThrown){
-				}
-			});
-		 
+				common.getLoudong(selected_val,function(result){
+					document.getElementById("LouDongID").innerHTML = result;
+					getRoomInfo();
+				});
 		 }
 		 //获取房间信息
 		 function getRoomInfo(){
-		 	
 		 	var selected_val = document.getElementById('LouDongID').value;
-		 	if (selected_val == null || selected_val ==undefined || selected_val == '') {
-					mui.toast('请选择楼栋');
-				}
-				mui.ajax('http://117.146.77.26:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
-				dataType:'json',
-				type:'get',
-				success:function(data){
-				var area_name = '<option >请选择</option>';
-				for (i=0;i<data.data.length;i++) {
-					area_name += 
-					'<option value="'+
-					data.data[i].house_num_id
-					+'">'+ data.data[i].house_num+'</option>';
-				}
-				document.getElementById("FangHaoID").innerHTML = area_name;				
-				},
-				error: function(xhr,type,errorThrown){
-						
-				}
-			});
+		 	common.getRoomList(selected_val,function(result){
+					document.getElementById("FangHaoID").innerHTML = result;
+				});
 		 }
 		
 		//二级页面返回后更新数据
