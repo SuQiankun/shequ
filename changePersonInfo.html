@@ -112,7 +112,8 @@
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">入党时间</label>
-								<input id="rudangshijian" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<label  id="rudangshijian" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择入党时间" data-input-clear="5">点击选择入党日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<!--<input id="rudangshijian" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>-->
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">党内职务</label>
@@ -243,7 +244,7 @@
 				var canbaoInfo = document.getElementById("yiliaoqingkuang").value;
 				var hkxzInfo = document.getElementById("popuInfo").value;
 				var zzmmInfo = document.getElementById("polit").value;
-				var rudangshijianInfo = document.getElementById("rudangshijian").value;
+				var rudangshijianInfo = common.jointime(document.getElementById("rudangshijian").textContent);
 				var dangneizhiwuInfo = document.getElementById("dangneizhiwu").value;
 				var hunyinInfo = document.getElementById("marry").value;
 				var jingjiInfo = document.getElementById("income").value;
@@ -254,8 +255,8 @@
 				var scnumInfo = document.getElementById("singlechild").value;
 				var bingyiInfo = document.getElementById("military").value;
 				var zaijiajuzhuInfo = document.getElementById("yesOrNot").value;
-//				console.log(canjizhengInfo);
-					var data = {
+				console.log("$23131"+rudangshijianInfo)
+				var data = {
 					"peo_hs_num":self.fanghaoid,
 					"peo_id":self.personid,
 					"peo_yz_relation":self.relation,
@@ -295,9 +296,9 @@
 					success:function(data){
 						
 						if (data.data == '修改人员资料成功!') {
-							mui.confirm('新增人员成功!');
+							mui.confirm('修改成功!');
 						} else{
-							mui.confirm('新增人员失败!');
+							mui.confirm('修改失败!');
 						}
 					},
 					error:function(xhr,type,errorThrown){
@@ -456,7 +457,10 @@
 								
 								//入党时间
 								partydate = data.data[i].peo_join_party_date;
-								document.getElementById("rudangshijian").value = common.changestr(partydate);
+								console.log(data.data[i].peo_join_party_date);
+								document.getElementById("rudangshijian").textContent= common.changestr(partydate);
+								
+									
 								//党内职务
 								partyzw = data.data[i].peo_party_zw;
 								document.getElementById("dangneizhiwu").value = common.changestr(partyzw);
@@ -490,14 +494,37 @@
 		
 <!--时间选择器-->	
 <script>
-			var info = document.getElementById("pickDateBtn");
-				var self = plus.webview.currentWebview();
-				document.getElementById("pickDateBtn").addEventListener('tap', function() {
+				var rdsj = document.getElementById("rudangshijian");
+//				var self = plus.webview.currentWebview();
+				document.getElementById("rudangshijian").addEventListener('tap', function() {
 				var dDate = new Date();
 				dDate.setFullYear(2016, 7, 16);
 				var minDate = new Date();
 				minDate.setFullYear(1800, 0, 1);
 				minDate.setFullYear(2010, 0, 1);
+				var maxDate = new Date();
+				maxDate.setFullYear(2050, 01, 01);
+				plus.nativeUI.pickDate(function(e) {
+					var d = e.date;
+					rdsj.textContent = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+				}, function(e) {
+//					info.innerText = self.birth;
+				}, {
+					title: "请选择日期",
+					date: dDate,
+					minDate: minDate,
+					maxDate: maxDate
+				});
+			})
+		</script>
+	<!--时间选择器-->	
+	<script>
+				var info = document.getElementById("pickDateBtn");
+				document.getElementById("pickDateBtn").addEventListener('tap', function() {
+				var dDate = new Date();
+				dDate.setFullYear(2016, 7, 16);
+				var minDate = new Date();
+				minDate.setFullYear(1800, 0, 1);
 				var maxDate = new Date();
 				maxDate.setFullYear(2050, 01, 01);
 				plus.nativeUI.pickDate(function(e) {
@@ -513,7 +540,6 @@
 				});
 			})
 		</script>
-
 		
 	</body>
 

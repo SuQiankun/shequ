@@ -243,6 +243,10 @@ getDaogaoList: function getDaogaoList(cmd,actionid,params,callback) {
 	changestr: function changeString(data){
 				var result =(data == "" || data == undefined || data == null) ? "暂无" : data;
 				return result;
-			}
+		},
+	jointime: function jointime(data){
+		var result =(data == "" || data == undefined || data == null || data == '暂无') ? null : data;
+		return result;
+	}
 
 }
