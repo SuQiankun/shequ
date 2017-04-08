@@ -155,12 +155,15 @@
 					area_name +=
 					'<option style="color: #2AC845;" value="'+
 					data.data[i].house_num_id
-					+'">'+ data.data[i].house_num+'已走访</option>';
-					}
-					area_name +=
+					+'">'+ data.data[i].house_num+'&nbsp&nbsp本月已走访</option>';
+					}else{
+						area_name +=
 					'<option value="'+
 					data.data[i].house_num_id
 					+'"> '+ data.data[i].house_num+'</option>';
+					}
+					
+					
 					
 				}
 				document.getElementById("FangHaoID").innerHTML = area_name;				

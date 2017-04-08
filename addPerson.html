@@ -119,9 +119,7 @@
 					"peo_birthday":birth,
 					"peo_yz_relation":relation,
 				};
-			//
 				var params = $.toJSON(data);
-				
 				mui.ajax('http://124.117.230.75:8080/app?cmd=newlive',{
 					data:params,
 					headers:{'Content-Type':'application/json'},	
@@ -202,7 +200,7 @@
 				var dDate = new Date();
 				dDate.setFullYear(2016, 7, 16);
 				var minDate = new Date();
-				minDate.setFullYear(2010, 0, 1);
+				minDate.setFullYear(1800, 0, 1);
 				var maxDate = new Date();
 				maxDate.setFullYear(2050, 01, 01);
 				plus.nativeUI.pickDate(function(e) {

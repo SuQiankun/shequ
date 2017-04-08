@@ -268,7 +268,11 @@
 		//跳转到修改人员资料的界面,
 		function changePersonInfo(peroid){
 			
-				var fanghaoID = document.getElementById("FangHaoID").value;
+				var shequ = document.getElementById('shequID').value;
+				var xiaoqu = document.getElementById('communityInfo').value;
+				var loudongid =document.getElementById("LouDongID").value;
+				var fanghaoid =document.getElementById("FangHaoID").value;
+			
 				var name =  document.getElementById(peroid+'name').textContent;
 				var sex =  document.getElementById(peroid+'sex').textContent;
 				var nation =  document.getElementById(peroid+'nation').textContent;
@@ -282,7 +286,10 @@
 					    url: 'changePersonInfo.html', 
 					    id:'changePersonInfo',
 					    extras:{
-					    		fanghaoid:fanghaoID,
+					    		shequid:shequ,
+							xiaoquid:xiaoqu,
+							loudongid:loudongid,
+							fanghaoid:fanghaoid,
 					    		personid:peroid,
 							name:name,
 							sex:sex,
