@@ -374,11 +374,31 @@
 
 								//宗教信仰
 								religion =data.data[i].peo_religion_id;
+								daogao = data.data[i].peo_dao_gao_id;
+								console.log('daogaoid---'+data.data[i].peo_dao_gao_id);
 								common.getdaogaoAdress('RELIGION','RELIGION',religion,function(result){
-									document.getElementById("RELIGION").innerHTML = result;
-//									var reID =  document.getElementById("RELIGION").value;
-									getAdress();
-									
+								document.getElementById("RELIGION").innerHTML = result;
+												var reID =  document.getElementById("RELIGION").value;
+												var numberStr = '';
+												switch (reID){
+													
+													case 'e4923f8a70564780876e6f63a5b8a6a0':
+														numberStr = 'yisilanjiao';
+														break;
+													case 'f125a8ddcb9b4e7bb00c7408b1230893':
+													numberStr = 'fojiao';
+														break;
+													case '61d2dea8ac1948dd836a404837e50aef':
+													numberStr = 'jidujiao';
+														break;
+													case '695f4ceabd674839b8847b447daded8d':
+													numberStr = '12345';
+														break;
+													default:
+														break; 
+												}
+												console.log(reID+numberStr+daogao);
+								common.getReligion(numberStr,'daogaoAdress',daogao);
 								});
 								
 								//婚姻情况
