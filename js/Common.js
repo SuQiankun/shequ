@@ -108,23 +108,9 @@ getRoomList: function getRoomList(params,callback){
 				}
 			});	
 },
-	getAjax: function getAjax(action){
-		var userdata;
-		mui.ajax('http://124.117.230.75:8080/app?'+action,{
-				dataType:'json',
-				type:'get',
-				success:function(data){
-				 data = data;			
-				},
-				error: function(xhr,type,errorThrown){
-					
-				}
-			});
-			return userdata;
-	},
+	
 	//获取type信息;
-	getType: function getType(cmd,actionid,params) {
-		
+getType: function getType(cmd,actionid,params) {
 		var areaStr = '';
 		//获取宗教信仰列表
 			  mui.ajax('http://1124.117.230.75:8080/app?cmd=getdictbytype&dictype='+cmd,{
@@ -132,17 +118,13 @@ getRoomList: function getRoomList(params,callback){
 				type:'get',
 				success:function(data){
 				area_name = '<option value="">请选择</option>';
-			
 				for (i=0;i<data.data.length;i++) {
 					area_name +='<option value="'+data.data[i].ids+'" >'+ data.data[i].val+'</option>';
 				}
 				areaStr = area_name;
 				document.getElementById(actionid).innerHTML = area_name;
 				},
-				error: function(xhr,type,errorThrown){
-				}
-				});
-				
+				error: function(xhr,type,errorThrown){}});
 				return areaStr;
 	},
 	//获取兵役设置初始化信息;
@@ -153,31 +135,75 @@ getRoomList: function getRoomList(params,callback){
 				type:'get',
 				success:function(data){
 				area_name = '<option value="">请选择</option>';
-			
 				for (i=0;i<data.data.length;i++) {
 						if(params == data.data[i].val || params == data.data[i].ids  ) {
-						
 						if(params == data.data[i].val   ) {
 							area_name +='<option value="'+data.data[i].ids+'" selected = selected>'+ data.data[i].val+'</option>';
 						}
-					
 						if(params == data.data[i].ids ) {
 							area_name +='<option value="'+data.data[i].ids+'" selected = selected>'+ data.data[i].val+'</option>';
 						}
-						
 					}else{
 						area_name +='<option value="'+data.data[i].ids+'">'+ data.data[i].val+'</option>';
 					}					
 				}
 				document.getElementById(actionid).innerHTML = area_name;
 				},
-				error: function(xhr,type,errorThrown){
-					
-				}
-				});
+				error: function(xhr,type,errorThrown){}});
 				
 	},
-	//获初始化信息;
+		//获取兵役设置初始化信息;
+getdaogaoAdress: function getdaogaoAdress(cmd,actionid,params,callback) {
+		//获取兵役状况
+			  mui.ajax('http://124.117.230.75:8080/app?cmd=getdictbytype&dictype='+cmd,{
+				dataType:'json',
+				type:'get',
+				success:function(data){
+				area_name = '<option value="">请选择</option>';
+				for (i=0;i<data.data.length;i++) {
+						if(params == data.data[i].val || params == data.data[i].ids  ) {
+						if(params == data.data[i].val   ) {
+							area_name +='<option value="'+data.data[i].ids+'" selected = selected>'+ data.data[i].val+'</option>';
+						}
+						if(params == data.data[i].ids ) {
+							area_name +='<option value="'+data.data[i].ids+'" selected = selected>'+ data.data[i].val+'</option>';
+						}
+					}else{
+						area_name +='<option value="'+data.data[i].ids+'">'+ data.data[i].val+'</option>';
+					}					
+				}
+				callback(area_name);
+				},
+				error: function(xhr,type,errorThrown){}});
+				
+	},
+			//获取兵役设置初始化信息;
+getDaogaoList: function getDaogaoList(cmd,actionid,params,callback) {
+			  //获取兵役状况
+			  mui.ajax('http://124.117.230.75:8080/app?cmd=getdictbytype&dictype='+cmd,{
+				dataType:'json',
+				type:'get',
+				success:function(data){
+				area_name = '<option value="">请选择</option>';
+				for (i=0;i<data.data.length;i++) {
+						if(params == data.data[i].val || params == data.data[i].ids  ) {
+						if(params == data.data[i].val   ) {
+							area_name +='<option value="'+data.data[i].ids+'" selected = selected>'+ data.data[i].val+'</option>';
+						}
+						if(params == data.data[i].ids ) {
+							area_name +='<option value="'+data.data[i].ids+'" selected = selected>'+ data.data[i].val+'</option>';
+						}
+						
+					}else{
+						area_name +='<option value="'+data.data[i].ids+'">'+ data.data[i].val+'</option>';
+					}
+				}
+				callback(area_name);
+				},
+				error: function(xhr,type,errorThrown){}});
+				
+	},
+		//获初始化信息;
 	getReligion: function getReligion(cmd,actionid,params) {
 		
 			  mui.ajax('http://124.117.230.75:8080/app?cmd=getdictbytype&dictype='+cmd,{

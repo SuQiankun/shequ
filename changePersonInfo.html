@@ -249,6 +249,9 @@
 				var sexStr = document.getElementById('sexID').value;
 				var birthStr = document.getElementById('pickDateBtn').textContent;
 				var jgStr = document.getElementById('jgStr').value;
+				// 
+				var zongjiao
+				
 				
 				mui.ajax('http://124.117.230.75:8080/app?',{
 					data:{
@@ -301,8 +304,8 @@
 		var yiliao = ''; 	//医疗情况
 		var scid = '';		//独生子证件号
 		var hkdz = '';		//户口地址
-		
-			mui.plusReady(function () {
+
+	mui.plusReady(function () {
 				
 			var web = plus.webview.currentWebview();
 				//获取传递参数
@@ -355,12 +358,12 @@
 						for (i=0;i<data.data.length;i++) {
 							
 							if (data.data[i].peo_id == web.personid) {
-								console.log('已经获取到相同 id');
+
 								bingyi = data.data[i].peo_by_id;
 								common.getBingyi('military','military',bingyi);
 								
 								daogao = data.data[i].peo_dao_gao_id;
-
+								common.getBingyi('military','military',bingyi);
 //								attrid = data.data[i].peo_attr_id;
 
 								zhiye = data.data[i].peo_zy_id;
@@ -368,12 +371,15 @@
 								
 								hkxz = data.data[i].peo_hk_xz_id;
 								common.getReligion('popuInfo','popuInfo',hkxz);
-								
-								
-						
-							
+
+								//宗教信仰
 								religion =data.data[i].peo_religion_id;
-								common.getReligion('RELIGION','RELIGION',religion);
+								common.getdaogaoAdress('RELIGION','RELIGION',religion,function(result){
+									document.getElementById("RELIGION").innerHTML = result;
+//									var reID =  document.getElementById("RELIGION").value;
+									getAdress();
+									
+								});
 								
 								//婚姻情况
 								hyzk = data.data[i].peo_hyzk;
@@ -415,9 +421,7 @@
 								document.getElementById("canjizheng").value = common.changestr(discard);
 							
 								scid = data.data[i].sc_id;
-								console.log(data.data[i].sc_card_number);
 								document.getElementById("singlechild").value = common.changestr(scid);
-								
 								
 								
 							}else{

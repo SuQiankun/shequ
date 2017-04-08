@@ -40,6 +40,19 @@
 						<img src="images/timg.jpg">
 					</a>
 				</div>
+					<!-- 第一张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="images/fhj.jpeg">
+					</a>
+				</div>
+				<!-- 第二张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="images/timg.jpg">
+					</a>
+				</div>
+				
 				<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
 				<div class="mui-slider-item mui-slider-item-duplicate">
 					<a href="#">
@@ -60,46 +73,47 @@
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				             	<i class="iconfont icon-zhusu" style="color: #0DAED3;" ></i>
 			                    <h4 id="zhuhu">*</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >住户数</div> 
+			                    <div class="mui-media-body" style="color: #888; font-size: 14px;">人数/户数</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-jianyuede" style="color: #F37B53;" ></i>
 			                   	<h4 id="chuzu">*</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >户数/人数</div> 
+			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >流出人口</div> 
+				            </li>
+				             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
+				            	<i class="iconfont icon-xiangqu1" style="color: #FFB400;" ></i>
+			                   	<h4 id="minzu">0</h4>
+			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >民族</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-geren" style="color: #9D4A9C;" ></i>
-			                   	<h4 id="changzhu">*</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 12px;" >常住/流动人口</div> 
+			                   	<h4 id="changzhu">0</h4>
+			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >流动人口/流动户</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 								<i class="iconfont icon-feiji" style="color: #74B749;" ></i>
-			                   	<h4 id="liudong">*</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >流动人口</div> 
+			                   	<h4 id="liudong">0</h4>
+			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >低保/贫困人口</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-shoucang" style="color: #DE577B;" ></i>
-			                   	<h4 id="zhongdian">*</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 12px;" >重点人员/重点户</div> 
+			                   	<h4 id="zhongdian">0</h4>
+			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >重点人口/重点户</div> 
 				            </li>
-				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
-				            	<i class="iconfont icon-xiangqu1" style="color: #FFB400;" ></i>
-			                   	<h4 id="minzu">*</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >民族</div> 
-				            </li>
+				           
 				             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				             	<i class="iconfont icon-zonghe" style="color: #DE577B;" ></i>
-			                    <h4 id="yearvisit">*/*</h4>
+			                    <h4 id="yearvisit">0/0</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >年计划/实际</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
 				            	<i class="iconfont icon-listview" style="color: #FFB400;" ></i>
-			                   	<h4 id="mouthVisit">*/*</h4>
+			                   	<h4 id="mouthVisit">0/0</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >月计划/实际</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
 				            	<i class="iconfont icon-24xiaoshiqiantai" style="color: #74B749;" ></i>
-			                   	<h4 id="todaycnt">*</h4>
+			                   	<h4 id="todaycnt">0</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >日累计</div> 
 				            </li>
 				        </ul> 
@@ -190,12 +204,12 @@
 						type:'post',//HTTP请求类型
 						timeout:10000,//超时时间设置为10秒；
 						success:function(data){
-							changzhu.textContent = data.data[0].changzhu;
+							zhuhu.textContent = data.data[0].zhuhu + '/' + data.data[0].hushu;
 							chuzu.textContent = data.data[0].chuzu;
 							liudong.textContent = data.data[0].liudong;
 							minzu.textContent = data.data[0].minzu;
 							zhongdian.textContent = data.data[0].zhongdian;
-							zhuhu.textContent = data.data[0].zhuhu;
+//							zhuhu.textContent = data.data[0].zhuhu;
 							yearvisit.textContent = data.data[0].yearplan + '/'+data.data[0].yearvisited;
 							mouthvisit.textContent = data.data[0].monthplan + '/'+data.data[0].monthvisited;
 							todaycnt.textContent = data.data[0].todaycnt;	
