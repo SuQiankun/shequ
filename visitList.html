@@ -138,11 +138,10 @@
 		 //获取房间信息
 		 function getRoomInfo(){
 		 	var selected_val = document.getElementById('LouDongID').value;
-		 	var selected_val = document.getElementById('LouDongID').value;
 		 	if (selected_val == null || selected_val ==undefined || selected_val == '') {
 					mui.toast('请选择楼栋');
 				}
-				mui.ajax('http://117.146.77.26:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -152,15 +151,15 @@
 					
 					//加入是否走访的标记
 					if (data.data[i].visited.length > 1){
-					area_name +=
-					'<option style="color: #2AC845;" value="'+
-					data.data[i].house_num_id
-					+'">'+ data.data[i].house_num+'&nbsp&nbsp本月已走访</option>';
-					}else{
 						area_name +=
-					'<option value="'+
-					data.data[i].house_num_id
-					+'"> '+ data.data[i].house_num+'</option>';
+						'<option style="color: #2AC845;" value="'+
+						data.data[i].house_num_id
+						+'">'+ data.data[i].house_num+'&nbsp&nbsp本月已走访</option>';
+					}else{
+							area_name +=
+						'<option value="'+
+						data.data[i].house_num_id
+						+'"> '+ data.data[i].house_num+'</option>';
 					}
 					
 					

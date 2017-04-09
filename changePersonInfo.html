@@ -23,6 +23,7 @@
 					<div class="mui-card-content">
 						<form class="mui-input-group">
 							<p id="personID" style="display: none;"></p>
+							
 							<div class="mui-input-row">
 								<label style="width: 30%;">姓名</label>
 								<input style="width: 65%;" id="nameStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
@@ -43,6 +44,48 @@
 								<select id="sexID" style="width: 65%;" class="mui-btn-block">
 								</select>
 							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">矫正人员</label>
+								<select id="peo_is_jzry" style="width: 65%;" class="mui-btn-block">
+									<option value=null>请选择</option>
+									<option value="084500e2b1384e809d49b2db44923fd0">是</option>
+									<option value="43420be04461467d963b8936d23a591a">否</option>
+									<option value="6e942eb47c67469db061c86fa65d0025">其他</option>
+								</select>
+							</div>
+							
+								<div class="mui-input-row">
+								<label style="width: 30%;">流出人口</label>
+								<select id="peo_is_lcrk" style="width: 65%;" class="mui-btn-block">
+									<option value=null>请选择</option>
+									<option value="084500e2b1384e809d49b2db44923fd0">是</option>
+									<option value="43420be04461467d963b8936d23a591a">否</option>
+									<option value="6e942eb47c67469db061c86fa65d0025">其他</option>
+								</select>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">人员属性</label>
+								<select id="peo_attr_id" style="width: 65%;" class="mui-btn-block">
+									<option value="">请选择</option>
+									<option value="22f9fd80b30f4f11991d5d0df9ab95c0">基本户</option>
+									<option value="28a7a1d48537487d99ebb7a67d369216">流动户</option>
+									<option value="b42a34d54f7747b491b265d005ba0b46">放心户</option>
+									<option value="ba77736b73374a44811d76d3d496d30a">重点户</option>								</select>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">房户类型</label>
+								<select id="peo_housetype_id" style="width: 65%;" class="mui-btn-block">
+									<option value="">请选择</option>
+									<option value="3e8c6383eff548f99f7d79fa9e7089ad">流动户</option>
+									<option value="4dc937ab3822453984e0f3daa23f1609">重点户</option>
+									<option value="af6ed92fe96a46df90964ffd21299733">基本户</option>
+									<option value="de7284ead8354c3885210a383de91e54">放心户</option>
+								</select>
+							</div>
+							
 							
 								<div class="mui-input-row">
 									<label style="width: 30%;">族别</label>
@@ -133,6 +176,20 @@
 								</select>
 							</div>
 							
+							<div class="mui-input-row">
+								<label  style="width: 30%;">贫困原因</label>
+								<select id="pinkunyuanyin" name="">
+									<option value="">请选择</option>
+									<option value="">没有劳动力</option>
+									<option value="">没有经济收入</option>
+									<option value="">因病致贫</option>
+								</select>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 35%;">低保证号</label>
+								<input style="width: 65%;" id="dibaozheng" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
 							<div class="mui-input-row">
 								<label  style="width: 30%;">健康状况</label>
 								<select id="jiankangzhuangkuang" name="">
@@ -296,13 +353,13 @@
 					success:function(data){
 						
 						if (data.data == '修改人员资料成功!') {
-							mui.confirm('修改成功!');
+							mui.alert('修改成功!');
 						} else{
-							mui.confirm('修改失败!');
+							mui.alert('修改失败!');
 						}
 					},
 					error:function(xhr,type,errorThrown){
-					mui.confirm('连接失败,请检查网络设置!')
+					mui.alert('连接失败,请检查网络设置!')
 					}
 				});
 
@@ -388,8 +445,8 @@
 							//循环遍历,如果是当前人员 取出数据
 						for (i=0;i<data.data.length;i++) {
 							
-							if (data.data[i].peo_id == web.personid) {
-								
+						if (data.data[i].peo_id == web.personid) {
+								console.log('进入循环')
 								//兵役状况
 								bingyi = data.data[i].peo_by_id;
 								common.getBingyi('military','military',bingyi);
@@ -408,12 +465,13 @@
 								religion =data.data[i].peo_religion_id;
 								daogao = data.data[i].peo_dao_gao_id;
 								
+								console.log('宗教信仰'+religion);
+								
 								common.getdaogaoAdress('RELIGION','RELIGION',religion,function(result){
 									document.getElementById("RELIGION").innerHTML = result;
 												var reID =  document.getElementById("RELIGION").value;
 												var numberStr = '';
 												switch (reID){
-													
 													case 'e4923f8a70564780876e6f63a5b8a6a0':
 														numberStr = 'yisilanjiao';
 														break;
@@ -482,10 +540,9 @@
 								scid = data.data[i].sc_id;
 								document.getElementById("singlechild").value = common.changestr(scid);
 								
-								
-							}else{
-								return ;
 							}
+						//if 判断结束
+						
 						}
 					},
 					error:function(xhr,type,errorThrown){}});});

@@ -119,7 +119,6 @@
 							<div class="mui-input-row">
 								<label style="width: 30%;">出生日期</label>
 								<label  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择出生时间" data-input-clear="5">点击选择出生日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
-								
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">籍贯</label>
@@ -217,7 +216,11 @@
 					type:'post',//HTTP请求类型
 					success:function(data){
 						if (data.data == '新增人员成功!') {
-							mui.confirm('新增人员成功!')
+							mui.confirm('新增人员成功!');
+					//获得列表界面的webview
+					var list = plus.webview.getWebviewById('tab-webview-subpage-about.html');
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+					mui.fire(list,'getindex');
 						} else{
 							mui.confirm('新增人员失败!')
 						}
