@@ -102,9 +102,10 @@
 					timeout:10000,//超时时间设置为10秒；
 					success:function(data){
 						if (data.data == '写入成功') {
-
 							mui.alert('添加走访记录成功');
+							setTimeout('mui.back()',1000);	
 							
+
 						} else{
 							
 						}

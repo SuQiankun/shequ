@@ -76,6 +76,7 @@
 			</div>
 		</div>
 		<script src="js/jquery-3.2.0.min.js"></script>
+		<script src="js/Common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/json.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			
@@ -93,15 +94,15 @@
 				var jg = document.getElementById("jgStr").value;
 				var relation = document.getElementById("relationList").value;
 				
-				if(nationStr == '' || nationStr == null){
+				if(nation == '' || nation == null){
 					mui.alert('请选择民族');
 					return;
 				}
-				if(nameStr == '' || nameStr == null){
+				if(name == '' || name == null){
 					mui.alert('请输入姓名');
 					return;
 				}
-				if(sexStr == '' || sexStr == null){
+				if(sex == '' || sex == null){
 					mui.alert('请选择性别');
 					return;
 				}
@@ -141,8 +142,12 @@
 					dataType:'json',//服务器返回json格式数据
 					type:'post',//HTTP请求类型
 					success:function(data){
-							if (data.data == '新增人员成功!') {
+						if (data.data == '新增人员成功!') {
 							mui.confirm('新增人员成功!')
+							mui.back();
+							//获得页面
+//							var webid = plus.webview.getWebviewById('tab-web-main.html');
+							
 						} else{
 							mui.confirm('新增人员失败!')
 						}
@@ -203,7 +208,11 @@
 		
 		<script>
 			mui.init({
-				swipeBack: true //启用右滑关闭功能
+				beforeback: function(){
+					var list = plus.webview.getWebviewById('tab-webview-subpage-chat.html');
+					mui.fire(list,'updateInfo');
+					return true;
+				}
 			});
 		</script>
 	
