@@ -372,7 +372,7 @@
 					"PEO_IS_DISABLE":iscanji,
 				};
 				var params = $.toJSON(data);
-				mui.ajax('http://124.117.230.75:8080/app?cmd=modifylivepeople',{
+				mui.ajax('http://117.146.77.26:8080/app?cmd=modifylivepeople',{
 					data:params,
 					headers:{'Content-Type':'application/json'},	
 					dataType:'json',//服务器返回json格式数据
@@ -450,7 +450,7 @@
 				}
 
 			  //获取民族列表
-			  mui.ajax('http://124.117.230.75:8080/app?cmd=getnationlist',{
+			  mui.ajax('http://117.146.77.26:8080/app?cmd=getnationlist',{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -473,7 +473,7 @@
 				},
 				error: function(xhr,type,errorThrown){}});
 			
-	mui.ajax('http://124.117.230.75:8080/app?cmd=getlivepeoplebyhouseid&houseid='+web.fanghaoid,{
+	mui.ajax('http://117.146.77.26:8080/app?cmd=getlivepeoplebyhouseid&houseid='+web.fanghaoid,{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
 					timeout:10000,//超时时间设置为10秒；
