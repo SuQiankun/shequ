@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style>
+			html,body {
+				background-color: #efeff4;
+			}
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+	<header class="mui-bar mui-bar-nav" style="background: #fff;" >
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">关于</h1>
+		</header>
+	<div class="mui-content">
+			<div class="title">
+				<h4 align="center">社区管理系统</h4>
+
+
+
+<p>
+	 2015年3月5日十二届全国人大三次会议上，李克强总理在政府工作报告中首次提出“互联网+”行动计划，标志着我国开始向“互联网+”时代迈进。推动云计算、物联网、大数据信息共享，助力社会经济发展是通信行业的重要使命。
+中国移动昌吉州公司“访惠聚”工作队进驻田园社区后，带来名为“e惠社区”的电子化信息管理产品。
+</p>
+
+<ul>
+	<li>功能一：惠及基层社区。大幅提升社区工作效率，将有限的人员、精力解放出来，投入到其它更多的工作中去；</li>
+	<li>功能二：惠及居民。及时、准确、快速地针对性将普惠政策惠及到千家万户；</li>
+	<li>功能三：惠及决策管理。为“底数清、情况明”打下牢固基础。</li>
+</ul>
+
+
+
+
+
+			</div>
+			
+		</div>
+	
+		<script>
+			mui.plusReady(function(){
+			//开启回弹
+				_self = plus.webview.currentWebview();
+				_self.setStyle({
+					bounce: "vertical",
+					bounceBackground:"#efeff4"
+				});
+			});
+		</script>
+		
+		<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		mui('.mui-input-group').on('change', 'input', function() {
+			var value = this.checked?"true":"false";
+			this.previousElementSibling.innerText = "checked："+value;
+		});
+	</script>
+	
+		
+
+	</body>
+
+</html>
