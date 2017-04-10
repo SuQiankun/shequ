@@ -38,7 +38,7 @@
 			mui.plusReady(function () {
 			
 			
-			mui.ajax('http://192.168.1.792.168.1.7/sw/warning/index',{
+			mui.ajax('http://124.117.230.75/sw/warning/index',{
 					data:{
 						idx:'0',
 						fromapp:'1'
@@ -48,7 +48,7 @@
 					timeout:10000,//超时时间设置为10秒；
 					success:function(data){
 						if (data.data.length<1) {
-						mui.alert('暂无数据');
+							mui.alert('暂无数据');
 							
 						} 
 						for (i = 0; i<data.data.length;i++) {
