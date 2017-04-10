@@ -70,19 +70,19 @@
 							<div class="mui-input-row">
 								<label style="width: 30%;">小区</label>
 								<select style="width: 65%;" class="mui-btn-block" id='communityInfo' onchange="getBuildingInfo()">
-									<option value="">请选择</option>
+										<option >请选择</option>
 								</select>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">楼栋</label>
 								<select style="width: 65%;" class="mui-btn-block" id="LouDongID"  onchange="getRoomInfo()">
-									<option value="item-1">请选择</option>
+										<option >请选择</option>										
 								</select>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">房号</label>
 							<select style="width: 65%;" class="mui-btn-block" id="FangHaoID">
-									<option value="item-1">请选择</option>
+									<option value="">请选择</option>
 								</select>
 							</div>
 							<div class="mui-input-row">
@@ -170,7 +170,22 @@
 			var xiaoquID = document.getElementById("communityInfo").value;
 			var loudongID = document.getElementById("LouDongID").value;
 			var fanghaoID = document.getElementById("FangHaoID").value;
-		
+			if(shequID == '' || shequID == null || shequID == undefined || shequID == '请选择'){
+					mui.alert('请选择社区');
+					return;
+				}
+			if(xiaoquID == '' || xiaoquID == null || xiaoquID == undefined ||  xiaoquID == '请选择'){
+					mui.alert('请选择小区');
+					return;
+				}
+			if(loudongID == '' || loudongID == null || loudongID == undefined  || loudongID == '请选择'){
+					mui.alert('请选择楼栋');
+					return;
+				}
+			if(fanghaoID == '' || fanghaoID == null || fanghaoID == undefined || fanghaoID == '请选择'){
+					mui.alert('请选择房间号');
+					return;
+				}
 			//
 				var name = document.getElementById("nameStr").value;
 				var sex = document.getElementById("sexStr").value;
@@ -181,15 +196,15 @@
 				var jg = document.getElementById("jgStr").value;
 				var relation = document.getElementById("relationList").value;
 					
-				if(nationStr == '' || nationStr == null){
+				if(nation == '' || nation == null){
 					mui.alert('请选择民族');
 					return;
 				}
-				if(nameStr == '' || nameStr == null){
+				if(name == '' || name == null){
 					mui.alert('请输入姓名');
 					return;
 				}
-				if(sexStr == '' || sexStr == null){
+				if(sex == '' || sex == null){
 					mui.alert('请选择性别');
 					return;
 				}

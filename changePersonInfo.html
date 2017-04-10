@@ -325,6 +325,14 @@
 				var dibaoInfo = document.getElementById("dibaozheng").value;
 				var pinkunyuanyinInfo = document.getElementById("pinkunyuanyin").value;
 				
+				var canji = document.getElementById("canjizheng").value;
+				var iscanji = '';
+				if(canji.length > 1 ){
+					iscanji = '084500e2b1384e809d49b2db44923fd0';		
+				}else{
+					iscnaji = null;
+				}
+		
 				var data = {
 					"peo_hs_num":self.fanghaoid,
 					"peo_id":self.personid,
@@ -361,6 +369,7 @@
 					"peo_housetype_id":housetypeInfo,
 					"socialmumber":dibaoInfo,
 					"peo_ecoyy_id":pinkunyuanyinInfo,
+					"PEO_IS_DISABLE":iscanji,
 				};
 				var params = $.toJSON(data);
 				mui.ajax('http://124.117.230.75:8080/app?cmd=modifylivepeople',{
