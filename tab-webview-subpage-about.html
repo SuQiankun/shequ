@@ -87,17 +87,17 @@
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-geren" style="color: #9D4A9C;" ></i>
-			                   	<h4 id="changzhu">0</h4>
+			                   	<h4 id="changzhu">0/0</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >流动人口/流动户</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 								<i class="iconfont icon-feiji" style="color: #74B749;" ></i>
-			                   	<h4 id="liudong">0</h4>
+			                   	<h4 id="liudong">0/0</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >低保/贫困人口</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-shoucang" style="color: #DE577B;" ></i>
-			                   	<h4 id="zhongdian">0</h4>
+			                   	<h4 id="zhongdian">0/0</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >重点人口/重点户</div> 
 				            </li>
 				           
@@ -122,6 +122,12 @@
 					<div class="mui-content">
 				        <ul class="mui-table-view mui-grid-view mui-grid-9" style="background: #fff;" >
 				           
+				           <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<i class="iconfont icon-mudedi" style="color: #74B749;" ></i>
+			                   	<h4 style="font-size: 16px;" id="weizoufang">0</h4>
+			                   <div class="mui-media-body" style="color: #888; font-size: 14px;"  >未走访户</div></a>
+				            </li>
+				            
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id="showMessage"><a href="#">
 				            	<i class="iconfont icon-tixing" style=" display: block; font-size: 2em; margin-bottom: 14px; color:red ; " ></i>
 			                    <div class="mui-media-body" style="font-size: 14px;" >信息预警</div></a>
@@ -129,12 +135,7 @@
 				            
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id="visitID"><a href="#">
 				            	<i class="iconfont icon-bianji" style=" display: block; font-size: 2em; margin-bottom: 14px; " ></i>
-			                    <div class="mui-media-body" style="font-size: 14px;" >入户走访</div></a>
-				            </li>
-				            
-				           <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id="showMessage"><a href="">
-				            	<i class="iconfont icon-mudedi" style=" display: block; font-size: 2em; margin-bottom: 14px; color:green ; " ></i>
-			                    <div class="mui-media-body" style="font-size: 14px;" >未走访户</div></a>
+			                  <div class="mui-media-body" style="font-size: 14px;" >入户走访</div></a>
 				            </li>
 				            
 				        </ul> 
@@ -202,8 +203,9 @@
 		var yearvisit = document.getElementById("yearvisit");
 		var mouthvisit = document.getElementById("mouthVisit");
 		var todaycnt = document.getElementById("todaycnt");
-					
-					mui.ajax('http://124.117.230.75/platform/index/',{
+		var weizoufang = document.getElementById("weizoufang");
+		
+					mui.ajax('http://192.168.1.7/platform/index/',{
 						data:{
 							   "fromapp": "1",
 						},
@@ -211,11 +213,22 @@
 						type:'post',//HTTP请求类型
 						timeout:10000,//超时时间设置为10秒；
 						success:function(data){
-							zhuhu.textContent = data.data[0].zhuhu + '/' + data.data[0].hushu;
-							chuzu.textContent = data.data[0].chuzu;
-							liudong.textContent = data.data[0].liudong;
+							
+							zhuhu.textContent =  (data.data[0].zhuhu - data.data[0].lcrk) + '/' + data.data[0].hushu;
+							//流出人口
+							chuzu.textContent = data.data[0].lcrk;
+							//chuzu.textContent = data.data[0].chuzu;
+							//流动人口.流动户
+							changzhu.textContent = data.data[0].liudong + '/'+ data.data[0].liudonghu;
+							//低保/贫困
+							liudong.textContent = data.data[0].dibao + '/'+ data.data[0].pinkun;
+							//重点人口 重点户
+							zhongdian.textContent = data.data[0].zhongdian + '/'+ data.data[0].zhongdianhu;
 							minzu.textContent = data.data[0].minzu;
-							zhongdian.textContent = data.data[0].zhongdian;
+							//未走访
+							weizoufang.textContent = data.data[0].unvisited;
+						
+						
 //							zhuhu.textContent = data.data[0].zhuhu;
 							yearvisit.textContent = data.data[0].yearplan + '/'+data.data[0].yearvisited;
 							mouthvisit.textContent = data.data[0].monthplan + '/'+data.data[0].monthvisited;

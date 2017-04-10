@@ -129,7 +129,7 @@
 					mui.toast('请选择房间号');
 					return;
 				}
-				mui.ajax('http://124.117.230.75:8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
+				mui.ajax('http://192.168.1.7:8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
 						dataType:'json',
 						type:'get',
 						success:function(data){
@@ -157,6 +157,7 @@
 					 var att = common.changestr(data.data[i].peo_attr_id);
 					//重点人员标记
 					var resultstr = checkPersonInfo(data.data[i].peo_attr_id,data.data[i].peoid,att);
+				
 					var titleStr =  creattitleStr(data.data[i].peo_attr_id);
 				area_name
 					+=
@@ -227,12 +228,13 @@
 		//更新字符串 --> 重点人员字符串处理
 		function creattitleStr(att){
 				var titleStr = '';
-				if (att == "" || att == undefined || att == null) {
-				titleStr = '<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span>当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">';
+				//if (att == "" || att == undefined || att == null) {
+			if (att == "重点户") {
+				titleStr = '<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span style="color:#FF0000 ;" >当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">';
 				
 			} else{
-				
-				titleStr = '<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span style="color:#FF0000 ;" >当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">';  
+				titleStr = '<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span>当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">';		
+				  
 			}
 			return titleStr;
 				

@@ -2,7 +2,7 @@ var common = {
 getSheQu: function getSheQu(callback) {
 //获取社区列表
 			var resultStr = ''; 
-			mui.ajax('http://124.117.230.75:8080/app?cmd=getcommunitylist',{
+			mui.ajax('http://192.168.1.7:8080/app?cmd=getcommunitylist',{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -31,7 +31,7 @@ getSheQu: function getSheQu(callback) {
 	},
 	
 getXiaoqu: function getXiaoqqu(params,callback){
-				mui.ajax('http://124.117.230.75:8080/app?cmd=getvillagebycommunityid&communityid='+params,{
+				mui.ajax('http://192.168.1.7:8080/app?cmd=getvillagebycommunityid&communityid='+params,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -55,7 +55,7 @@ getXiaoqu: function getXiaoqqu(params,callback){
 				error: function(xhr,type,errorThrown){}});
 },
 getLoudong: function getloudong(params,callback){
-		mui.ajax('http://124.117.230.75:8080/app?cmd=getbuildingbyvillageid&villageid='+params,{
+		mui.ajax('http://192.168.1.7:8080/app?cmd=getbuildingbyvillageid&villageid='+params,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -84,7 +84,7 @@ getRoomList: function getRoomList(params,callback){
 			if (params == null || params ==undefined || params == '') {
 					mui.toast('请选择楼栋');
 			}
-				mui.ajax('http://124.117.230.75:8080/app?cmd=gethousebybuildingid&buildingid='+params,{
+				mui.ajax('http://192.168.1.7:8080/app?cmd=gethousebybuildingid&buildingid='+params,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -113,7 +113,7 @@ getRoomList: function getRoomList(params,callback){
 getType: function getType(cmd,actionid,params) {
 		var areaStr = '';
 		//获取宗教信仰列表
-			  mui.ajax('http://1124.117.230.75:8080/app?cmd=getdictbytype&dictype='+cmd,{
+			  mui.ajax('http://1192.168.1.7:8080/app?cmd=getdictbytype&dictype='+cmd,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -130,7 +130,7 @@ getType: function getType(cmd,actionid,params) {
 	//获取兵役设置初始化信息;
 	getBingyi: function getBingyi(cmd,actionid,params) {
 		//获取兵役状况
-			  mui.ajax('http://124.117.230.75:8080/app?cmd=getdictbytype&dictype='+cmd,{
+			  mui.ajax('http://192.168.1.7:8080/app?cmd=getdictbytype&dictype='+cmd,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -155,7 +155,7 @@ getType: function getType(cmd,actionid,params) {
 		//获取兵役设置初始化信息;
 getdaogaoAdress: function getdaogaoAdress(cmd,actionid,params,callback) {
 		//获取兵役状况
-			  mui.ajax('http://124.117.230.75:8080/app?cmd=getdictbytype&dictype='+cmd,{
+			  mui.ajax('http://192.168.1.7:8080/app?cmd=getdictbytype&dictype='+cmd,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -180,7 +180,7 @@ getdaogaoAdress: function getdaogaoAdress(cmd,actionid,params,callback) {
 			//获取兵役设置初始化信息;
 getDaogaoList: function getDaogaoList(cmd,actionid,params,callback) {
 			  //获取兵役状况
-			  mui.ajax('http://124.117.230.75:8080/app?cmd=getdictbytype&dictype='+cmd,{
+			  mui.ajax('http://192.168.1.7:8080/app?cmd=getdictbytype&dictype='+cmd,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -206,7 +206,7 @@ getDaogaoList: function getDaogaoList(cmd,actionid,params,callback) {
 		//获初始化信息;
 	getReligion: function getReligion(cmd,actionid,params) {
 		
-			  mui.ajax('http://124.117.230.75:8080/app?cmd=getdictbytype&dictype='+cmd,{
+			  mui.ajax('http://192.168.1.7:8080/app?cmd=getdictbytype&dictype='+cmd,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -244,9 +244,96 @@ getDaogaoList: function getDaogaoList(cmd,actionid,params,callback) {
 				var result =(data == "" || data == undefined || data == null) ? "暂无" : data;
 				return result;
 		},
+		//设置入党时间,如果为空,设置为 null
 	jointime: function jointime(data){
 		var result =(data == "" || data == undefined || data == null || data == '暂无') ? null : data;
 		return result;
+	},
+	jzryInfo: function jzryInfo(params,callback){
+		var area_name = '';							
+		
+			switch (params){
+					case '是':
+					area_name = '<option value=null>请选择</option><option selected="selected" value="084500e2b1384e809d49b2db44923fd0">是</option><option value="43420be04461467d963b8936d23a591a">否</option><option value="6e942eb47c67469db061c86fa65d0025">其他</option>'
+						break;
+					case '否':
+					area_name = '<option value=null>请选择</option><option value="084500e2b1384e809d49b2db44923fd0">是</option><option selected="selected" value="43420be04461467d963b8936d23a591a">否</option><option value="6e942eb47c67469db061c86fa65d0025">其他</option>'
+						break;
+					case '其他':
+					area_name = '<option value=null>请选择</option><option value="084500e2b1384e809d49b2db44923fd0">是</option><option value="43420be04461467d963b8936d23a591a">否</option><option  selected="selected" value="6e942eb47c67469db061c86fa65d0025">其他</option>'
+						break;
+					default:
+					 area_name = '<option value=null selected="selected">请选择</option><option  value="084500e2b1384e809d49b2db44923fd0">是</option><option value="43420be04461467d963b8936d23a591a">否</option><option value="6e942eb47c67469db061c86fa65d0025">其他</option>'
+						break;
+			}
+			callback(area_name);
+	},
+	peoattid: function peoattid(params,callback){
+			var area_name = '';							
+			switch (params){
+					case '基本户':
+						area_name = '<option value="">请选择</option><option value="22f9fd80b30f4f11991d5d0df9ab95c0" selected = selected>基本户</option><option value="28a7a1d48537487d99ebb7a67d369216">流动户</option><option value="b42a34d54f7747b491b265d005ba0b46">放心户</option><option value="ba77736b73374a44811d76d3d496d30a">重点户</option>'
+						break;
+					case '流动户':
+						area_name = '<option value="">请选择</option><option value="22f9fd80b30f4f11991d5d0df9ab95c0" >基本户</option><option value="28a7a1d48537487d99ebb7a67d369216" selected="selected" >流动户</option><option value="b42a34d54f7747b491b265d005ba0b46">放心户</option><option value="ba77736b73374a44811d76d3d496d30a">重点户</option>'
+						break;
+					case '放心户':
+						area_name ='<option value="">请选择</option><option value="22f9fd80b30f4f11991d5d0df9ab95c0" >基本户</option><option value="28a7a1d48537487d99ebb7a67d369216" >流动户</option><option value="b42a34d54f7747b491b265d005ba0b46" selected="selected"  >放心户</option><option value="ba77736b73374a44811d76d3d496d30a">重点户</option>'
+						break;
+					case '重点户':
+					area_name = '<option value="">请选择</option><option value="22f9fd80b30f4f11991d5d0df9ab95c0" >基本户</option><option value="28a7a1d48537487d99ebb7a67d369216" >流动户</option><option  value="b42a34d54f7747b491b265d005ba0b46" >放心户</option><option selected="selected" value="ba77736b73374a44811d76d3d496d30a"  >重点户</option>'
+						break;
+					default:
+					 area_name = '<option selected="selected" value="">请选择</option><option value="22f9fd80b30f4f11991d5d0df9ab95c0" >基本户</option><option value="28a7a1d48537487d99ebb7a67d369216" >流动户</option><option value="b42a34d54f7747b491b265d005ba0b46"   >放心户</option><option value="ba77736b73374a44811d76d3d496d30a">重点户</option>'
+						break;
+			}
+			callback(area_name);						
+	},
+	housetype: function housetype(params,callback){
+			var area_name = '';	
+			switch (params){
+					case '基本户':
+						area_name = '<option value=""  >请选择</option><option selected="selected" value="af6ed92fe96a46df90964ffd21299733">基本户</option><option  value="3e8c6383eff548f99f7d79fa9e7089ad">流动户</option><option value="de7284ead8354c3885210a383de91e54">放心户</option><option  value="4dc937ab3822453984e0f3daa23f1609">重点户</option>' 
+						break;
+					case '流动户':
+						area_name = '<option value=""  >请选择</option><option  value="af6ed92fe96a46df90964ffd21299733">基本户</option><option selected="selected" value="3e8c6383eff548f99f7d79fa9e7089ad">流动户</option><option value="de7284ead8354c3885210a383de91e54">放心户</option><option  value="4dc937ab3822453984e0f3daa23f1609">重点户</option>'
+						break;
+					case '放心户':
+						area_name = '<option value=""  >请选择</option><option value="af6ed92fe96a46df90964ffd21299733">基本户</option><option value="3e8c6383eff548f99f7d79fa9e7089ad">流动户</option><option selected="selected"  value="de7284ead8354c3885210a383de91e54">放心户</option><option  value="4dc937ab3822453984e0f3daa23f1609">重点户</option>' 
+						break;
+					case '重点户':
+						area_name = '<option value=""  >请选择</option><option value="af6ed92fe96a46df90964ffd21299733">基本户</option><option value="3e8c6383eff548f99f7d79fa9e7089ad">流动户</option><option value="de7284ead8354c3885210a383de91e54">放心户</option><option selected="selected"  value="4dc937ab3822453984e0f3daa23f1609">重点户</option>'
+						break;
+					default:
+						 area_name = '<option selected="selected"  value=""  >请选择</option><option value="af6ed92fe96a46df90964ffd21299733">基本户</option><option value="3e8c6383eff548f99f7d79fa9e7089ad">流动户</option><option value="de7284ead8354c3885210a383de91e54">放心户</option><option  value="4dc937ab3822453984e0f3daa23f1609">重点户</option>'
+						break;
+			}
+			callback(area_name);						
+	},
+	pinkunyuanyin: function pinkunyuanyin(params,callback){
+			var area_name = '';	
+			switch (params){
+					case '没有劳动力收入':
+						area_name = '<option  value="">请选择</option><option selected="selected" value="06c2a66cb5cd481c915df93fa14998bb">没有劳动力收入</option><option  value="5dfbe45a6861442e8a58dfde0a5c549a">没有收入</option><option  value="e401303df0be4e44831f235f678ad70f">因病致贫</option>' 
+						break;
+					case '没有收入':
+						area_name = '<option  value="">请选择</option><option value="06c2a66cb5cd481c915df93fa14998bb">没有劳动力收入</option><option selected="selected" value="5dfbe45a6861442e8a58dfde0a5c549a">没有收入</option><option  value="e401303df0be4e44831f235f678ad70f">因病致贫</option>' 
+						break;
+					case '因病致贫':
+						area_name ='<option  value="">请选择</option><option value="06c2a66cb5cd481c915df93fa14998bb">没有劳动力收入</option><option value="5dfbe45a6861442e8a58dfde0a5c549a">没有收入</option><option selected="selected" value="e401303df0be4e44831f235f678ad70f">因病致贫</option>' 
+						break;
+					default:
+						 area_name ='<option selected="selected"  value="">请选择</option><option value="06c2a66cb5cd481c915df93fa14998bb">没有劳动力收入</option><option value="5dfbe45a6861442e8a58dfde0a5c549a">没有收入</option><option value="e401303df0be4e44831f235f678ad70f">因病致贫</option>' 
+						 break;
+			}
+			callback(area_name);	
+		
+	},
+	showTip: function showTip(params,description){
+		
+		if (params == '' || params == null || params == undefined) {
+				mui.alert(description);
+				return;
+		}		
 	}
-
 }

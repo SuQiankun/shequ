@@ -177,11 +177,28 @@
 				var idcard = document.getElementById("idcardStr").value;
 				var phone = document.getElementById("phoneStr").value;
 				var nation = document.getElementById("nationID").value;
-				var birth = document.getElementById("pickDateBtn").textContent;
+				var birth = common.jointime(document.getElementById("pickDateBtn").textContent);
 				var jg = document.getElementById("jgStr").value;
 				var relation = document.getElementById("relationList").value;
+					
+				if(nationStr == '' || nationStr == null){
+					mui.alert('请选择民族');
+					return;
+				}
+				if(nameStr == '' || nameStr == null){
+					mui.alert('请输入姓名');
+					return;
+				}
+				if(sexStr == '' || sexStr == null){
+					mui.alert('请选择性别');
+					return;
+				}
+				if(relation == '' || relation == null){
+					mui.alert('请选择与业主关系');
+					return;
+				}
+				
 			//发送请求 
-		
 				if (idcard.length != 18) {
 					mui.toast('请检查身份证号是否正确');
 					return;
@@ -209,7 +226,7 @@
 				
 				var params = $.toJSON(data);
 				
-				mui.ajax('http://124.117.230.75:8080/app?cmd=newlive',{
+				mui.ajax('http://192.168.1.7:8080/app?cmd=newlive',{
 					data:params,
 					headers:{'Content-Type':'application/json'},	
 					dataType:'json',//服务器返回json格式数据
@@ -273,7 +290,7 @@
 			});
 			
 				//获取民族列表
-				mui.ajax('http://124.117.230.75:8080/app?cmd=getnationlist',{
+				mui.ajax('http://192.168.1.7:8080/app?cmd=getnationlist',{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
 					success:function(data){
@@ -292,7 +309,7 @@
 				});
 			
 				//获取业主关系列表
-				mui.ajax('http://124.117.230.75:8080/app?cmd=getyzrelationlist',{
+				mui.ajax('http://192.168.1.7:8080/app?cmd=getyzrelationlist',{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
 					success:function(data){
