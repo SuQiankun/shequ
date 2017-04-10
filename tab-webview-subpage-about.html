@@ -75,15 +75,16 @@
 			                    <h4 id="zhuhu">*</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 14px;">人数/户数</div> 
 				            </li>
-				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
-				            	<i class="iconfont icon-jianyuede" style="color: #F37B53;" ></i>
-			                   	<h4 id="chuzu">*</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >流出人口</div> 
-				            </li>
+				           
 				             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-xiangqu1" style="color: #FFB400;" ></i>
 			                   	<h4 id="minzu">0</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >民族</div> 
+				            </li>
+				             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
+				            	<i class="iconfont icon-jianyuede" style="color: #F37B53;" ></i>
+			                   	<h4 id="chuzu">*</h4>
+			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >流出人口/空房屋</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-geren" style="color: #9D4A9C;" ></i>
@@ -216,7 +217,7 @@
 							
 							zhuhu.textContent =  (data.data[0].zhuhu - data.data[0].lcrk) + '/' + data.data[0].hushu;
 							//流出人口
-							chuzu.textContent = data.data[0].lcrk;
+							chuzu.textContent = data.data[0].lcrk +'/'+data.data[0].emptyhouse;
 							//chuzu.textContent = data.data[0].chuzu;
 							//流动人口.流动户
 							changzhu.textContent = data.data[0].liudong + '/'+ data.data[0].liudonghu;
