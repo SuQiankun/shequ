@@ -88,7 +88,7 @@
 				var fanghaoid = document.getElementById("FangHaoID").value;
 				var memoinfo = document.getElementById("memoinfo").value;
 				
-				mui.ajax('http://117.146.77.26:8080/app?cmd=addvisitrecord',{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=addvisitrecord',{
 					data:{
 						"VisitDate":visitdate,
 						"PEO_SQ_ID":shequid,
@@ -142,7 +142,7 @@
 		 	if (selected_val == null || selected_val ==undefined || selected_val == '') {
 					mui.toast('请选择楼栋');
 				}
-				mui.ajax('http://117.146.77.26:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){

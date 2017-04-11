@@ -44,7 +44,11 @@
 								<select id="sexID" style="width: 65%;" class="mui-btn-block">
 								</select>
 							</div>
-							
+							<div class="mui-input-row">
+								<label style="width: 35%;">与业主关系</label>
+								<select id="ownRealt" style="width: 65%;" class="mui-btn-block">
+								</select>
+							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">矫正人员</label>
 								<select id="peo_is_jzry" style="width: 65%;" class="mui-btn-block">
@@ -283,7 +287,11 @@
 				var sexStr = document.getElementById('sexID').value;
 				var birthStr = common.jointime(document.getElementById('pickDateBtn').textContent);
 				var jgStr = document.getElementById('jgStr').value;
-			
+				var relation = document.getElementById("ownRealt").value;
+				if(nationStr == '' || nationStr == null){
+					mui.alert('请选择与业主关系');
+					return;
+				}
 				if(nationStr == '' || nationStr == null){
 					mui.alert('请选择民族');
 					return;
@@ -325,7 +333,6 @@
 				if(document.getElementById("dibaozheng").value =='暂无'){
 					var dibaoInfo = null;	
 				}
-				
 				
 				var pinkunyuanyinInfo = document.getElementById("pinkunyuanyin").value;
 				
@@ -375,18 +382,19 @@
 					"socialmumber":dibaoInfo,
 					"peo_ecoyy_id":pinkunyuanyinInfo,
 					"PEO_IS_DISABLE":iscanji,
+					"peo_yz_relation":relation,
 				};
 				var params = $.toJSON(data);
-				mui.ajax('http://117.146.77.26:8080/app?cmd=modifylivepeople',{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=modifylivepeople',{
 					data:params,
 					headers:{'Content-Type':'application/json'},	
 					dataType:'json',//服务器返回json格式数据
 					type:'post',//HTTP请求类型
 					success:function(data){
-						if (data.data == '修改人员资料成功!') {
+
+					if (data.data == '修改人员资料成功!') {
 							mui.alert('修改成功!');
 							setTimeout('mui.back()',1000);	
-
 						} else{
 							mui.alert('修改失败!');
 						}
@@ -395,12 +403,10 @@
 					mui.alert('连接失败,请检查网络设置!')
 					}
 				});
-
 			});
 		</script>
 		
 		<script type="text/javascript">
-		
 		//定义全局变量, 用来设置初始值;
 		var bingyi ='';       // 兵役
 		var daogao = '';    	 // 祷告地址
@@ -453,7 +459,7 @@
 				}
 
 			  //获取民族列表
-			  mui.ajax('http://117.146.77.26:8080/app?cmd=getnationlist',{
+			  mui.ajax('http://124.117.230.75:8080/app?cmd=getnationlist',{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -476,7 +482,7 @@
 				},
 				error: function(xhr,type,errorThrown){}});
 			
-	mui.ajax('http://117.146.77.26:8080/app?cmd=getlivepeoplebyhouseid&houseid='+web.fanghaoid,{
+	mui.ajax('http://124.117.230.75:8080/app?cmd=getlivepeoplebyhouseid&houseid='+web.fanghaoid,{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
 					timeout:10000,//超时时间设置为10秒；
@@ -488,6 +494,11 @@
 								//兵役状况
 								bingyi = data.data[i].peo_by_id;
 								common.getBingyi('military','military',bingyi);
+								
+								//与业主关系
+								
+								var relation = data.data[i].peo_yz_relation;
+								common.getReligion('ownRealt','ownRealt',relation);
 								
 								//职业
 								zhiye = data.data[i].peo_zy_id;
@@ -525,6 +536,7 @@
 								
 								//矫正人员 
 								jzry = data.data[i].peo_is_jzry;
+//								 console.log('-----矫正'+data.data[i].peo_is_jzry)
 								common.jzryInfo(jzry,function(result){
 									document.getElementById("peo_is_jzry").innerHTML = result;
 								});
@@ -561,6 +573,7 @@
 								//政治面貌
 								zzmm = data.data[i].peo_zzmm_id;
 								common.getReligion('polit','polit',zzmm);
+								
 								//学历信息
 								xueli = data.data[i].peo_edu_deg_id;
 								common.getReligion('degree','degree',xueli);

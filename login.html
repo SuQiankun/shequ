@@ -114,8 +114,19 @@
 					<label>密码</label>
 					<input id='password' type="password" class="mui-input-clear mui-input" placeholder="请输入密码">
 				</div>
+							
 			</form>
-
+			<!--<form class="mui-input-group">
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell">
+						记住密码
+						<div id="autoLogin" class="mui-switch">
+							<div class="mui-switch-handle"></div>
+						</div>
+					</li>
+				</ul>
+			</form>-->
+				
 			<div class="mui-content-padded">
 				<button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
 			</div>
@@ -126,10 +137,16 @@
 		<script src="js/Common.js"></script>
 		<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script>
-	
+			
 			//登录功能实现区域
 			document.getElementById('login').addEventListener('tap', function() {
-			
+//			var isActive = document.getElementById("autoLogin").classList.contains("mui-active");
+//				if(isActive){
+//				  console.log("打开状态");
+//				}else{
+//				  console.log("关闭状态");  
+//				}
+//				mui("#autoLogin").switch().toggle();
 			//获取用户名和密码
 			var account = document.getElementById('account').value;
 			var psw = document.getElementById('password').value;
@@ -143,7 +160,7 @@
 			} 
 							
 			jQuery.ajax({
-			    url: "http://117.146.77.26/platform/login/vali",
+			    url: "http://124.117.230.75/platform/login/vali",
 			    type: "post",
 			    xhrFields: { withCredentials: true },
      			crossDomain: true,
