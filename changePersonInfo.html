@@ -322,12 +322,17 @@
 				var lcrkInfo = document.getElementById("peo_is_lcrk").value;
 				var attidInfo = document.getElementById("peo_attr_id").value;
 				var housetypeInfo = document.getElementById("peo_housetype_id").value;
-				var dibaoInfo = document.getElementById("dibaozheng").value;
+				if(document.getElementById("dibaozheng").value =='暂无'){
+					var dibaoInfo = null;	
+				}
+				
+				
 				var pinkunyuanyinInfo = document.getElementById("pinkunyuanyin").value;
 				
 				var canji = document.getElementById("canjizheng").value;
 				var iscanji = '';
-				if(canji.length > 1 ){
+				
+				if(canji.length > 2 ){
 					iscanji = '084500e2b1384e809d49b2db44923fd0';		
 				}else{
 					iscnaji = null;
@@ -378,7 +383,6 @@
 					dataType:'json',//服务器返回json格式数据
 					type:'post',//HTTP请求类型
 					success:function(data){
-						
 						if (data.data == '修改人员资料成功!') {
 							mui.alert('修改成功!');
 							setTimeout('mui.back()',1000);	
@@ -430,8 +434,7 @@
 		
 		
 	mui.plusReady(function () {
-				
-			var web = plus.webview.currentWebview();
+				var web = plus.webview.currentWebview();
 				//获取传递参数
 			  document.getElementById('nameStr').value = web.name;
 			  document.getElementById('idcardStr').value = web.idcard;

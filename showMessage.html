@@ -49,10 +49,9 @@
 					success:function(data){
 						if (data.data.length<1) {
 							mui.alert('暂无数据');
-							
+							setTimeout('mui.back()',1000);
 						} 
 						for (i = 0; i<data.data.length;i++) {
-							
 				var str =
 				'<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span>'
 				+data.data[i].xq_name

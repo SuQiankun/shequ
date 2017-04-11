@@ -250,7 +250,9 @@
 					"font_icon/iconfont.woff",
 					"js/jquery-3.2.0.min.js",
 					"js/mui.min.js",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"images/fhj.jpeg",
+					"images/timg.jpg"
 				],
 				"refer": [
 					"showMessage.html",
@@ -284,14 +286,19 @@
 				"resources": [
 					"js/mui.min.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/jquery-3.2.0.min.js",
+					"js/json.js",
+					"js/Common.js"
 				],
 				"refer": [],
 				"priority": 0
 			},
 			"showMessage.html": {
 				"resources": [
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"js/mui.min.js",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -303,8 +310,18 @@
 					"css/mui.min.css"
 				],
 				"refer": [
-					"login.html"
+					"login.html",
+					"about.html"
 				],
+				"priority": 0
+			},
+			"about.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},
