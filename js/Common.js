@@ -2,7 +2,7 @@ var common = {
 getSheQu: function getSheQu(callback) {
 //获取社区列表
 			var resultStr = ''; 
-			mui.ajax('http://117.146.77.26:8080/app?cmd=getcommunitylist',{
+			mui.ajax('http://124.117.230.75:8080/app?cmd=getcommunitylist',{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -31,11 +31,11 @@ getSheQu: function getSheQu(callback) {
 	},
 	
 getXiaoqu: function getXiaoqqu(params,callback){
-				mui.ajax('http://117.146.77.26:8080/app?cmd=getvillagebycommunityid&communityid='+params,{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=getvillagebycommunityid&communityid='+params,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
-				var area_name = '<option >请选择</option>';
+				var area_name = '<option value="">请选择</option>';
 				
 				for (i=0;i<data.data.length;i++) {
 					if (data.data.length  > 1) {
@@ -55,11 +55,12 @@ getXiaoqu: function getXiaoqqu(params,callback){
 				error: function(xhr,type,errorThrown){}});
 },
 getLoudong: function getloudong(params,callback){
-		mui.ajax('http://117.146.77.26:8080/app?cmd=getbuildingbyvillageid&villageid='+params,{
+		mui.ajax('http://124.117.230.75:8080/app?cmd=getbuildingbyvillageid&villageid='+params,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
-				var area_name = '<option  >请选择</option>';
+				var area_name = '<option value="" >请选择</option>';
+				
 				for (i=0;i<data.data.length;i++) {
 					if (data.data.length  > 1) {
 						area_name +=
@@ -72,8 +73,9 @@ getLoudong: function getloudong(params,callback){
 						data.data[i].area_id
 						+'" selected = selected>'+ data.data[i].area_name+'</option>';
 					}
-				}
-				callback(area_name);
+				}				
+				var tipStr = data.data[0]; 
+				callback(area_name,tipStr);
 				},
 				error: function(xhr,type,errorThrown){
 				}
@@ -81,14 +83,11 @@ getLoudong: function getloudong(params,callback){
 
 },
 getRoomList: function getRoomList(params,callback){
-			if (params == null || params ==undefined || params == '') {
-					mui.toast('请选择楼栋');
-			}
-				mui.ajax('http://117.146.77.26:8080/app?cmd=gethousebybuildingid&buildingid='+params,{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=gethousebybuildingid&buildingid='+params,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
-				var area_name = '<option >请选择</option>';
+				var area_name = '<option value ="">请选择</option>';
 				for (i=0;i<data.data.length;i++) {
 					if (data.data.length  > 1) {
 							area_name += 
@@ -113,7 +112,7 @@ getRoomList: function getRoomList(params,callback){
 getType: function getType(cmd,actionid,params) {
 		var areaStr = '';
 		//获取宗教信仰列表
-			  mui.ajax('http://117.146.77.26:8080/app?cmd=getdictbytype&dictype='+cmd,{
+			  mui.ajax('http://124.117.230.75:8080/app?cmd=getdictbytype&dictype='+cmd,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -121,6 +120,7 @@ getType: function getType(cmd,actionid,params) {
 				for (i=0;i<data.data.length;i++) {
 					area_name +='<option value="'+data.data[i].ids+'" >'+ data.data[i].val+'</option>';
 				}
+				
 				areaStr = area_name;
 				document.getElementById(actionid).innerHTML = area_name;
 				},
@@ -130,7 +130,7 @@ getType: function getType(cmd,actionid,params) {
 	//获取兵役设置初始化信息;
 	getBingyi: function getBingyi(cmd,actionid,params) {
 		//获取兵役状况
-			  mui.ajax('http://117.146.77.26:8080/app?cmd=getdictbytype&dictype='+cmd,{
+			  mui.ajax('http://124.117.230.75:8080/app?cmd=getdictbytype&dictype='+cmd,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -155,7 +155,7 @@ getType: function getType(cmd,actionid,params) {
 		//获取兵役设置初始化信息;
 getdaogaoAdress: function getdaogaoAdress(cmd,actionid,params,callback) {
 		//获取兵役状况
-			  mui.ajax('http://117.146.77.26:8080/app?cmd=getdictbytype&dictype='+cmd,{
+			  mui.ajax('http://124.117.230.75:8080/app?cmd=getdictbytype&dictype='+cmd,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -180,7 +180,7 @@ getdaogaoAdress: function getdaogaoAdress(cmd,actionid,params,callback) {
 			//获取兵役设置初始化信息;
 getDaogaoList: function getDaogaoList(cmd,actionid,params,callback) {
 			  //获取兵役状况
-			  mui.ajax('http://117.146.77.26:8080/app?cmd=getdictbytype&dictype='+cmd,{
+			  mui.ajax('http://124.117.230.75:8080/app?cmd=getdictbytype&dictype='+cmd,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -206,7 +206,7 @@ getDaogaoList: function getDaogaoList(cmd,actionid,params,callback) {
 		//获初始化信息;
 	getReligion: function getReligion(cmd,actionid,params) {
 		
-			  mui.ajax('http://117.146.77.26:8080/app?cmd=getdictbytype&dictype='+cmd,{
+			  mui.ajax('http://124.117.230.75:8080/app?cmd=getdictbytype&dictype='+cmd,{
 				dataType:'json',
 				type:'get',
 				success:function(data){

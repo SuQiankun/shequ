@@ -18,12 +18,14 @@
 	<div class="mui-content" >
 			<div class="mui-content" >
 				<div class="mui-card" >
+					
 					<div class="mui-card-header">
 						<h4 style="font-weight: normal;">
 							<span style="font-size: 20px;" class="mui-icon mui-icon-search"></span>
 							<span>搜索</span>
 						</h4>
 					</div>
+					
 					<div class="mui-card-content">
 						<form class="mui-input-group" >
 							<div class="mui-input-row" >
@@ -61,8 +63,6 @@
 					</div>
 				</div>
 		
-		
-		
 		<script src="js/mui.min.js"></script>
 		
 		<script type="text/javascript">
@@ -79,16 +79,40 @@
 				}
 			});
 			
+			//提交更新记录
 			document.getElementById("commitVisitInfo").addEventListener('tap',function(){
-			
+
 				var visitdate = new Date().valueOf();
+
 				var shequid = document.getElementById("shequID").value;
 				var xiaoquid = document.getElementById("communityInfo").value;
 				var loudongid = document.getElementById("LouDongID").value;
 				var fanghaoid = document.getElementById("FangHaoID").value;
 				var memoinfo = document.getElementById("memoinfo").value;
+				if (shequid.length < 4) {
+					mui.alert('请选择社区');
+					return false;
+				}
+				if (xiaoquid.length < 4) {
+					mui.alert('请选择小区');
+					return false;
+				}
+				if (loudongid.length < 4) {
+					mui.alert('请选择楼栋');
+					return false;
+				}
+				if (fanghaoid.length < 4) {
+					mui.alert('请选择房间号');
+					return false;
+				}
+				if (memoinfo.length < 1) {
+					mui.alert('请输入备注信息');
+					return false;
+				}
+
 				
-				mui.ajax('http://117.146.77.26:8080/app?cmd=addvisitrecord',{
+				
+				mui.ajax('http://124.117.230.75:8080/app?cmd=addvisitrecord',{
 					data:{
 						"VisitDate":visitdate,
 						"PEO_SQ_ID":shequid,
@@ -101,20 +125,17 @@
 					type:'post',//HTTP请求类型
 					timeout:10000,//超时时间设置为10秒；
 					success:function(data){
-						if (data.data == '写入成功') {
+						if (data.data == '写入成功') {							
 							mui.alert('添加走访记录成功');
 							setTimeout('mui.back()',1000);	
-							
-
 						} else{
-							
+							mui.alert('当前楼栋不在您的管辖!');
 						}
 					},
 					error:function(xhr,type,errorThrown){
-						
+						mui.alert('添加失败');
 					}
 				});		
-				
 			});
 				
 		</script>
@@ -139,17 +160,13 @@
 		 //获取房间信息
 		 function getRoomInfo(){
 		 	var selected_val = document.getElementById('LouDongID').value;
-		 	if (selected_val == null || selected_val ==undefined || selected_val == '') {
-					mui.toast('请选择楼栋');
-				}
-				mui.ajax('http://117.146.77.26:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
+				
+				mui.ajax('http://124.117.230.75:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
 				var area_name = '<option value="">请选择</option>';
-				
 				for (i=0;i<data.data.length;i++) {
-					
 					//加入是否走访的标记
 					if (data.data[i].visited.length > 1){
 						area_name +=

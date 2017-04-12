@@ -56,7 +56,7 @@
 							</div>
 							<div class="mui-input-row">
 							<label style="width: 30%;">房号</label>
-							<select   style="width: 70%;" id="FangHaoID" class="mui-btn-block">
+							<select  style="width: 70%;" id="FangHaoID" class="mui-btn-block">
 							</select>
 							</div>
 						</form>
@@ -98,7 +98,8 @@
 		//发送请求加载楼栋数据
 		 function getBuildingInfo(){
 				var selected_val = document.getElementById('communityInfo').value;
-				common.getLoudong(selected_val,function(result){
+				common.getLoudong(selected_val,function(result,tipStr){
+
 					document.getElementById("LouDongID").innerHTML = result;
 					getRoomInfo();
 				});
@@ -129,7 +130,7 @@
 					mui.toast('请选择房间号');
 					return;
 				}
-				mui.ajax('http://117.146.77.26:8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
 						dataType:'json',
 						type:'get',
 						success:function(data){
@@ -250,8 +251,8 @@
 				var fanghaoid =document.getElementById("FangHaoID").value;
 
 				if (fanghaoid == '' || fanghaoid == null || fanghaoid == undefined) {
-					mui.toast('请选择房间进行新增人员');
-					return;
+					mui.alert('请选择房间进行新增人员');
+					return false;
 				} else{
 					mui.openWindow({
 					    url: 'addPerson.html', 

@@ -92,7 +92,12 @@
 				var birth = common.jointime(document.getElementById("pickDateBtn").textContent);
 				var jg = document.getElementById("jgStr").value;
 				var relation = document.getElementById("relationList").value;
-			
+
+				if (birth.length == 16 || birth == '' || birth == null || birth == undefined) {
+						mui.alert('请选择出生日期');
+						return false;
+				}
+				
 				if(nation == '' || nation == null){
 					mui.alert('请选择民族');
 					return;
@@ -137,7 +142,7 @@
 					"peo_yz_relation":relation,
 				};
 				var params = $.toJSON(data);
-				mui.ajax('http://117.146.77.26:8080/app?cmd=newlive',{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=newlive',{
 					data:params,
 					headers:{'Content-Type':'application/json'},	
 					dataType:'json',//服务器返回json格式数据
@@ -150,8 +155,8 @@
 //							var webid = plus.webview.getWebviewById('tab-web-main.html');
 							
 						} else{
-									mui.alert('请选择出生日期');
-//							mui.confirm('新增人员失败!')
+					
+							mui.confirm('新增人员失败!')
 						}
 					},
 					error:function(xhr,type,errorThrown){
@@ -163,7 +168,7 @@
 			mui.plusReady(function(){
 
 						//获取业主关系列表
-				mui.ajax('http://117.146.77.26:8080/app?cmd=getyzrelationlist',{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=getyzrelationlist',{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
 					success:function(data){
@@ -187,7 +192,7 @@
 					bounceBackground:"#efeff4"
 				});
 				//获取民族列表
-				mui.ajax('http://117.146.77.26:8080/app?cmd=getnationlist',{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=getnationlist',{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
 					success:function(data){

@@ -290,7 +290,7 @@
 				var relation = document.getElementById("ownRealt").value;
 			
 				if(birthStr == '' || birthStr == null){
-					mui.alert('请选择与出生日期');
+					mui.alert('请选择出生日期');
 					return;
 				}
 				if(nationStr == '' || nationStr == null){
@@ -335,8 +335,8 @@
 				var lcrkInfo = document.getElementById("peo_is_lcrk").value;
 				var attidInfo = document.getElementById("peo_attr_id").value;
 				var housetypeInfo = document.getElementById("peo_housetype_id").value;
-				
-				if (document.getElementById("polit").value == '26c0381f2de54fd8887ab42d99da1481' && rudangshijianInfo.length < 3) {
+
+				if (document.getElementById("polit").value == '26c0381f2de54fd8887ab42d99da1481' && rudangshijianInfo == null) {
 					mui.alert('请选择入党时间');
 					return false;
 				}
@@ -400,7 +400,7 @@
 					"peo_yz_relation":relation,
 				};
 				var params = $.toJSON(data);
-				mui.ajax('http://117.146.77.26:8080/app?cmd=modifylivepeople',{
+				mui.ajax('http://124.117.230.75:8080/app?cmd=modifylivepeople',{
 					data:params,
 					headers:{'Content-Type':'application/json'},	
 					dataType:'json',//服务器返回json格式数据
@@ -474,7 +474,7 @@
 				}
 
 			  //获取民族列表
-			  mui.ajax('http://117.146.77.26:8080/app?cmd=getnationlist',{
+			  mui.ajax('http://124.117.230.75:8080/app?cmd=getnationlist',{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -497,7 +497,7 @@
 				},
 				error: function(xhr,type,errorThrown){}});
 			
-	mui.ajax('http://117.146.77.26:8080/app?cmd=getlivepeoplebyhouseid&houseid='+web.fanghaoid,{
+	mui.ajax('http://124.117.230.75:8080/app?cmd=getlivepeoplebyhouseid&houseid='+web.fanghaoid,{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
 					timeout:10000,//超时时间设置为10秒；
