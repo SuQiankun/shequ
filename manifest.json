@@ -222,7 +222,8 @@
 			"tab-webview-subpage-contact.html": {
 				"resources": [
 					"css/mui.picker.min.css",
-					"js/json.js"
+					"js/json.js",
+					"js/jquery-3.2.0.min.js"
 				],
 				"refer": [],
 				"priority": 0

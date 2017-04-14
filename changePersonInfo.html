@@ -71,7 +71,7 @@
 								</select>
 							</div>
 							
-							<div class="mui-input-row">
+							<div class="mui-input-row" id="demo">
 								<label style="width: 30%;">房户类型</label>
 								<select id="peo_housetype_id" style="width: 65%;" class="mui-btn-block">
 								</select>
@@ -400,7 +400,7 @@
 					"peo_yz_relation":relation,
 				};
 				var params = $.toJSON(data);
-				mui.ajax('http://124.117.230.75:8080/app?cmd=modifylivepeople',{
+				mui.ajax(urlforapp+':8080/app?cmd=modifylivepeople',{
 					data:params,
 					headers:{'Content-Type':'application/json'},	
 					dataType:'json',//服务器返回json格式数据
@@ -474,7 +474,7 @@
 				}
 
 			  //获取民族列表
-			  mui.ajax('http://124.117.230.75:8080/app?cmd=getnationlist',{
+			  mui.ajax(urlforapp+':8080/app?cmd=getnationlist',{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -497,7 +497,7 @@
 				},
 				error: function(xhr,type,errorThrown){}});
 			
-	mui.ajax('http://124.117.230.75:8080/app?cmd=getlivepeoplebyhouseid&houseid='+web.fanghaoid,{
+	mui.ajax(urlforapp+':8080/app?cmd=getlivepeoplebyhouseid&houseid='+web.fanghaoid,{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
 					timeout:10000,//超时时间设置为10秒；
@@ -514,7 +514,6 @@
 								
 								var relation = data.data[i].peo_yz_relation;
 								common.getReligion('ownRealt','ownRealt',relation);
-								
 								//职业
 								zhiye = data.data[i].peo_zy_id;
 								common.getReligion('career','career',zhiye);
@@ -561,11 +560,16 @@
 									document.getElementById("peo_is_lcrk").innerHTML = result;
 								});
 								
-								//房屋类型
+								if (relation == '本人') {
+										//房屋类型
 								housetype  = data.data[i].peo_housetype_id;
-								common.housetype(housetype,function(result){
-									document.getElementById("peo_housetype_id").innerHTML = result;
-								});
+									common.housetype(housetype,function(result){
+										document.getElementById("peo_housetype_id").innerHTML = result;
+									});
+								}else{
+									document.getElementById("peo_housetype_id").innerHTML = '<option>不必选择</option>';
+								}
+							
 								//人员属性
 								attrid = data.data[i].peo_attr_id;
 								common.peoattid(attrid,function(result){

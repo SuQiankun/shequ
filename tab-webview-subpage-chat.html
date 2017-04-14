@@ -98,7 +98,7 @@
 		//发送请求加载楼栋数据
 		 function getBuildingInfo(){
 				var selected_val = document.getElementById('communityInfo').value;
-				common.getLoudong(selected_val,function(result,tipStr){
+				common.getLoudong(selected_val,function(result){
 
 					document.getElementById("LouDongID").innerHTML = result;
 					getRoomInfo();
@@ -123,24 +123,26 @@
 		});
 		
 		function searchPeoInfo(){
-			
 				var selected_val = document.getElementById('FangHaoID').value;
-			
+				
 				if (selected_val == null || selected_val ==undefined || selected_val == '') {
 					mui.toast('请选择房间号');
 					return;
 				}
-				mui.ajax('http://124.117.230.75:8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
+				
+				mui.ajax(urlforapp+':8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
 						dataType:'json',
 						type:'get',
 						success:function(data){
 						var area_name='' ;
-					if(data.data.length<1){
+					
+						if(data.data.length<1){
 							mui.toast('暂无人员');
 							//如果没有列表,插入空内容
 							document.getElementById("personList").innerHTML = '';
 							return;
 						}
+				console.log(data.data.length)
 				for (i=0;i<data.data.length;i++) {
 					
 					//判断数据是否为空,如果为空,设置默认值;
@@ -160,7 +162,7 @@
 					var resultstr = checkPersonInfo(data.data[i].peo_attr_id,data.data[i].peoid,att);
 				
 					var titleStr =  creattitleStr(data.data[i].peo_attr_id);
-				area_name
+					area_name
 					+=
 					titleStr
 					+'<label style="width: 35%;">姓名</label><p class="yl_txt" id="'
@@ -205,6 +207,7 @@
 					;
 					
 				}
+		
 				//插入数据内容;
 				document.getElementById("personList").innerHTML = area_name;
 				},
@@ -232,16 +235,11 @@
 				//if (att == "" || att == undefined || att == null) {
 			if (att == "重点户") {
 				titleStr = '<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span style="color:#FF0000 ;" >&nbsp&nbsp当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">';
-				
 			} else{
 				titleStr = '<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span>&nbsp&nbsp当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">';		
-				  
 			}
 			return titleStr;
-				
 			}
-
-
 		//跳转到新增人员的界面;
 		function addPersion(){
 				
@@ -265,7 +263,6 @@
 					    },
 				     });
 				}
-					
 			}
 			
 		//跳转到修改人员资料的界面,

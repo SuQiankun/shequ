@@ -112,7 +112,7 @@
 
 				
 				
-				mui.ajax('http://124.117.230.75:8080/app?cmd=addvisitrecord',{
+				mui.ajax(urlforapp+':8080/app?cmd=addvisitrecord',{
 					data:{
 						"VisitDate":visitdate,
 						"PEO_SQ_ID":shequid,
@@ -161,7 +161,7 @@
 		 function getRoomInfo(){
 		 	var selected_val = document.getElementById('LouDongID').value;
 				
-				mui.ajax('http://124.117.230.75:8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
+				mui.ajax(urlforapp+':8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
