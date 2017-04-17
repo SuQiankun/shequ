@@ -92,7 +92,6 @@ getLoudong: function getloudong(params,callback){
 				error: function(xhr,type,errorThrown){
 				}
 			});
-
 },
 getRoomList: function getRoomList(params,callback){
 		if (params == 'null' || params == undefined || params == '') {
