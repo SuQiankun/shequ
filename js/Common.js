@@ -1,5 +1,5 @@
 
-var urlforapp =  'http://117.146.77.26';
+var urlforapp =  'http://192.168.1.7';
 
 var common = {
 
@@ -12,7 +12,6 @@ getSheQu: function getSheQu(callback) {
 				success:function(data){
 				var area_name ='<option >请选择</option>';
 				for (i=0;i<data.data.length;i++) {
-
 					if (data.data.length  > 1) {
 						area_name +=
 						'<option value="'+
@@ -36,7 +35,7 @@ getSheQu: function getSheQu(callback) {
 getXiaoqu: function getXiaoqqu(params,callback){
 			
 			
-			if (params == 'null' || params == undefined) {
+			if (params == 'null' || params == undefined || params == '') {
 				return false;
 			}
 			mui.ajax(urlforapp+':8080/app?cmd=getvillagebycommunityid&communityid='+params,{
@@ -96,6 +95,9 @@ getLoudong: function getloudong(params,callback){
 
 },
 getRoomList: function getRoomList(params,callback){
+		if (params == 'null' || params == undefined || params == '') {
+				return false;
+			}
 				mui.ajax(urlforapp+':8080/app?cmd=gethousebybuildingid&buildingid='+params,{
 				dataType:'json',
 				type:'get',

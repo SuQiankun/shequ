@@ -91,7 +91,7 @@
 							</div>
 						
 							<div class="mui-input-row">
-								<label style="width: 30%;">祷告地址</label>
+								<label style="width: 30%;">礼拜地址</label>
 								<select style="width: 65%; font-size: 14px;" id="daogaoAdress" name="">
 									<option value="">请选择</option>
 								</select>
@@ -102,7 +102,7 @@
 								<div id="result" style="line-height: 40px; display: inline-block; " class="ui-alert"></div>
 								<label  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择出生时间" data-input-clear="5">点击选择出生日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
-							
+
 							<div class="mui-input-row">
 								<label style="width: 30%;">籍贯</label>
 								<input style="width: 65%;" id="jgStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
@@ -240,6 +240,7 @@
 		<script src="js/mui.min.js"></script>
 		
 		<script>
+			
 			mui.init({
 				beforeback: function(){
 					var list = plus.webview.getWebviewById('tab-webview-subpage-chat.html');
@@ -248,12 +249,12 @@
 					var list = plus.webview.getWebviewById('tab-webview-subpage-about.html');
 					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
 					mui.fire(list,'getindex');
-					
 					return true;
 				}
 			});
 			
 			function getAdress(){
+				
 				var reID =  document.getElementById("RELIGION").value;
 												var numberStr = '';
 												switch (reID){
