@@ -253,7 +253,9 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"images/fhj.jpeg",
-					"images/timg.jpg"
+					"images/timg.jpg",
+					"upload.html",
+					"js/Common.js"
 				],
 				"refer": [
 					"showMessage.html",
@@ -322,6 +324,15 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"upload.html": {
+				"resources": [
+					"js/jquery-3.2.0.min.js",
+					"css/mui.min.css",
+					"css/mui.picker.min.css"
 				],
 				"refer": [],
 				"priority": 0

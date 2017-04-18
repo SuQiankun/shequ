@@ -123,20 +123,20 @@
 					<div class="mui-content">
 				        <ul class="mui-table-view mui-grid-view mui-grid-9" style="background: #fff;" >
 				           
-				           <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				           <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id="uploadimg"><a >
 				            	<i class="iconfont icon-mudedi" style="color: #74B749;" ></i>
 			                   	<h4 style="font-size: 16px;" id="weizoufang">0</h4>
-			                   <div class="mui-media-body" style="color: #888; font-size: 14px;"  >未走访户</div></a>
+			                   <div class="mui-media-body" style="color: #888; font-size: 14px;"  >未走访户</div><br /></a>
 				            </li>
 				            
-				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id="showMessage"><a href="#">
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id="showMessage"><a ><br />
 				            	<i class="iconfont icon-tixing" style=" display: block; font-size: 2em; margin-bottom: 14px; color:red ; " ></i>
-			                    <div class="mui-media-body" style="font-size: 14px;" >信息预警</div></a>
+			                    <div class="mui-media-body" style="font-size: 14px;" >信息预警</div><br /></a>
 				            </li>
 				            
-				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id="visitID"><a href="#">
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id="visitID"><a><br />
 				            	<i class="iconfont icon-bianji" style=" display: block; font-size: 2em; margin-bottom: 14px; " ></i>
-			                  <div class="mui-media-body" style="font-size: 14px;" >入户走访</div></a>
+			                  <div class="mui-media-body" style="font-size: 14px;" >入户走访</div><br /></a>
 				            </li>
 				            
 				        </ul> 
@@ -156,6 +156,13 @@
 	<script src="js/Common.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		
+		//添加跳转上传图片
+		document.getElementById('uploadimg').addEventListener('tap',function(){
+					mui.openWindow({
+					    url: 'upload.html', 
+					    id:'upload',
+				     });
+		});		
 		//添加点击预警信息界面
 		document.getElementById('showMessage').addEventListener('tap',function(){
 					mui.openWindow({
