@@ -32,17 +32,44 @@ getSheQu: function getSheQu(callback) {
 			});
 	},
 	
+getWangge: function getWangge(params,callback){
+	if (params == 'null' || params == undefined || params == '') {return false;}
+	//URL未定义 
+	mui.ajax(urlforapp+':8080/app?cmd=getgridlistbycommunityid&communityid='+params,{
+		dataType:'json',//服务器返回json格式数据
+		type:'get',//HTTP请求类型
+		timeout:10000,//超时时间设置为10秒；
+		success:function(data){
+			var area_name = '<option value="" >请选择</option>';
+				for (i=0;i<data.data.length;i++) {
+					if (data.data.length  > 1) {
+						area_name +=
+						'<option value="'+
+						data.data[i].area_id	
+						+'">'+ data.data[i].area_name+'</option>';
+					} else{
+						area_name +=
+						'<option value="'+
+						data.data[i].area_id
+						+'" selected = selected>'+ data.data[i].area_name+'</option>';
+					}
+				}				
+				callback(area_name);
+		},
+		error:function(xhr,type,errorThrown){
+		}
+	});
+},
+	
 getXiaoqu: function getXiaoqqu(params,callback){
-			
-			
 			if (params == 'null' || params == undefined || params == '') {
 				return false;
 			}
-			mui.ajax(urlforapp+':8080/app?cmd=getvillagebycommunityid&communityid='+params,{
+			mui.ajax(urlforapp+':8080/app?cmd=getvillagebygridid&gridid='+params,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
-				var area_name = '<option value="">请选择</option>';
+				var area_name = '<option >请选择</option>';
 				
 				for (i=0;i<data.data.length;i++) {
 					if (data.data.length  > 1) {
@@ -85,9 +112,8 @@ getLoudong: function getloudong(params,callback){
 						data.data[i].area_id
 						+'" selected = selected>'+ data.data[i].area_name+'</option>';
 					}
-				}				
-//				var tipStr = data.data[0]; 
-				callback(area_name);
+				}
+					callback(area_name);
 				},
 				error: function(xhr,type,errorThrown){
 				}

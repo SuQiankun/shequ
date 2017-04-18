@@ -28,33 +28,46 @@
 					
 					<div class="mui-card-content">
 						<form class="mui-input-group" >
+							
 							<div class="mui-input-row" >
 								<label style="width: 30%;" >社区</label>
-								<select  style="width: 70%;" id="shequID" class="mui-btn-block" onchange="getXiaoquInfo()" >
+								<select  style="width: 70%;" id="shequID" class="mui-btn-block" onchange="getWangge()" >
 								</select>
 							</div>
+							
+							<div class="mui-input-row" >
+								<label style="width: 30%;">网格</label>
+								<select style="width: 70%;" id="wangge" class="mui-btn-block" onchange="getXiaoquInfo()" >
+									<option>请选择</option>
+								</select>
+							</div>
+							
 							<div class="mui-input-row">
 								<label style="width: 30%;">小区</label>
 								<select   style="width: 70%;" class="mui-btn-block" id="communityInfo" onchange="getBuildingInfo()">
 								</select>
 							</div>
+							
 							<div class="mui-input-row">
 								<label style="width: 30%;">楼栋</label>
 								<select  style="width: 70%;" id="LouDongID" class="mui-btn-block" onchange="getRoomInfo()">
 								</select>
 							</div>
+							
 							<div  class="mui-input-row">
-							<label style="width: 30%;">房号</label>
-							<select style="width: 70%;" id="FangHaoID" class="mui-btn-block">
-							</select>
+								<label style="width: 30%;">房号</label>
+									<select style="width: 70%;" id="FangHaoID" class="mui-btn-block">
+									</select>
 							</div>
+				
 							<div id="mui-input-row">
-							<div class="mui-input-row" style="margin: 10px 5px; height: 100%; ">
-								<textarea id="memoinfo" rows="6" placeholder="请输入备注信息,或者住户反映的情况"></textarea>
-							</div>
+								<div class="mui-input-row" style="margin: 10px 5px; height: 100%; ">
+									<textarea id="memoinfo" rows="6" placeholder="请输入备注信息,或者住户反映的情况"></textarea>
+								</div>
 							</div>
 							
 						</form>
+						
 					</div>
 					<div class="mui-card-footer">
 						<div class="mui-button-row" style="margin: 0 auto;">
@@ -141,9 +154,20 @@
 		</script>
 		<!--加载小区 楼栋 房间号信息-->
 		<script type="text/javascript">
+			
+		//获取网格列表
+			function getWangge(){
+				var selected_val = document.getElementById('shequID').value;
+				common.getWangge(selected_val,function(result){
+					document.getElementById("wangge").innerHTML = result;
+					getXiaoquInfo()
+				});
+				
+			}
+			
 	//发送请求加载小区数据;
 		function getXiaoquInfo(){
-				var selected_val = document.getElementById('shequID').value;
+				var selected_val = document.getElementById('wangge').value;
 				common.getXiaoqu(selected_val,function(result){
 					document.getElementById("communityInfo").innerHTML = result;
 					getBuildingInfo()
@@ -157,6 +181,7 @@
 					getRoomInfo();
 				});
 		 }
+		 
 		 //获取房间信息
 		 function getRoomInfo(){
 		 	var selected_val = document.getElementById('LouDongID').value;
@@ -179,9 +204,6 @@
 						data.data[i].house_num_id
 						+'"> '+ data.data[i].house_num+'</option>';
 					}
-					
-					
-					
 				}
 				document.getElementById("FangHaoID").innerHTML = area_name;				
 				},
@@ -197,7 +219,7 @@
 			mui.plusReady(function () {
    				common.getSheQu(function(result){
 				document.getElementById("shequID").innerHTML = result;
-				getXiaoquInfo();
+//				getXiaoquInfo();
 			});
 		});
 		

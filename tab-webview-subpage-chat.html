@@ -40,19 +40,18 @@
 						<form class="mui-input-group"  >
 							<div class="mui-input-row" >
 								<label style="width: 30%;" >社区</label>
-								<select    style="width: 70%;" id="shequID" class="mui-btn-block" onchange="getXiaoquInfo()" >
-								
+								<select    style="width: 70%;" id="shequID" class="mui-btn-block" onchange="getWangge()" >
 								</select>
 							</div>
 							<div class="mui-input-row" >
 								<label style="width: 30%;" >网格</label>
 								<select    style="width: 70%;" id="wangge" class="mui-btn-block" onchange="getXiaoquInfo()" >
-										<option value="">请选择</option>
+										<option>请选择</option>
 								</select>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">小区</label>
-								<select    style="width: 70%;" class="mui-btn-block" id="communityInfo" onchange="getBuildingInfo()">
+								<select  style="width: 70%;" class="mui-btn-block" id="communityInfo" onchange="getBuildingInfo()">
 								</select>
 							</div>
 							<div class="mui-input-row">
@@ -92,10 +91,17 @@
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript" src="js/Common.js"></script>	
 		<script type="text/javascript" charset="utf-8">
-			
+			//获取网格列表
+			function getWangge(){
+				var selected_val = document.getElementById('shequID').value;
+				common.getWangge(selected_val,function(result){
+					document.getElementById("wangge").innerHTML = result;
+					getXiaoquInfo()
+				});
+			}
 		//发送请求加载小区数据;
 		function getXiaoquInfo(){
-				var selected_val = document.getElementById('shequID').value;
+				var selected_val = document.getElementById('wangge').value;
 				common.getXiaoqu(selected_val,function(result){
 					document.getElementById("communityInfo").innerHTML = result;
 					getBuildingInfo()
@@ -105,7 +111,6 @@
 		 function getBuildingInfo(){
 				var selected_val = document.getElementById('communityInfo').value;
 				common.getLoudong(selected_val,function(result){
-
 					document.getElementById("LouDongID").innerHTML = result;
 					getRoomInfo();
 				});
@@ -250,10 +255,11 @@
 		function addPersion(){
 				
 				var shequ = document.getElementById('shequID').value;
+				var wangge = document.getElementById("wangge").value;
 				var xiaoqu = document.getElementById('communityInfo').value;
 				var loudongid =document.getElementById("LouDongID").value;
 				var fanghaoid =document.getElementById("FangHaoID").value;
-
+				
 				if (fanghaoid == '' || fanghaoid == null || fanghaoid == undefined) {
 					mui.alert('请选择房间进行新增人员');
 					return false;
@@ -263,6 +269,7 @@
 					    id:'addPerson',
 					     extras:{
 							shequid:shequ,
+							wanggeid:wangge,
 							xiaoquid:xiaoqu,
 							loudongid:loudongid,
 							fanghaoid:fanghaoid
@@ -306,14 +313,11 @@
 							phone:phone,
 							birth:birth,
 					    },
-				     });
-	
-			}
-
+				    });
+		}
 		</script>	
 
 	<script>
-	
 		mui.plusReady(function(){
 			//开启回弹
 			var placeholderText = '<option value="">请选择</option>';
@@ -325,9 +329,8 @@
 			//获取社区列表
 			common.getSheQu(function(result){
 				document.getElementById("shequID").innerHTML = result;
-				getXiaoquInfo();
+//				getWangge();
 			});
-			
 	});
 	</script>
 	</body>

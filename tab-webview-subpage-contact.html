@@ -62,8 +62,15 @@
 						
 						<div class="mui-input-row">
 								<label style="width: 30%;">社区</label>
-								<select style="width: 65%;" id="shequID" class="mui-btn-block" onchange="getXiaoquInfo()">
+								<select style="width: 65%;" id="shequID" class="mui-btn-block" onchange="getWangge()">
 									<option >请选择</option>
+								</select>
+							</div>
+							
+							<div class="mui-input-row" >
+								<label style="width: 30%;" >网格</label>
+								<select  style="width: 65%;" id="wangge" class="mui-btn-block" onchange="getXiaoquInfo()" >
+										<option>请选择</option>
 								</select>
 							</div>
 							
@@ -90,7 +97,7 @@
 								<input id="nameStr" style="width: 65%;" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
-								<div class="mui-input-row">
+							<div class="mui-input-row">
 								<label style="width: 30%;">性别</label>
 								<select   id="sexStr" style="width: 65%;" class="mui-btn-block">
 									<option value="">请选择</option>
@@ -167,6 +174,7 @@
 		function addNewPersonInfo(){
 			//获取参数列表
 			var shequID = document.getElementById("shequID").value;
+			var wanggeID = document.getElementById("wangge").value;
 			var xiaoquID = document.getElementById("communityInfo").value;
 			var loudongID = document.getElementById("LouDongID").value;
 			var fanghaoID = document.getElementById("FangHaoID").value;
@@ -174,7 +182,10 @@
 					mui.alert('请选择社区');
 					return false;
 				}
-			
+			if(wanggeID == '' || wanggeID == null || wanggeID == undefined || wanggeID == '请选择'){
+					mui.alert('请选择网格');
+					return false;
+				}
 			if(xiaoquID == '' || xiaoquID == null || xiaoquID == undefined ||  xiaoquID == '请选择'){
 					mui.alert('请选择小区');
 					return false;
@@ -236,6 +247,7 @@
 				var data = {
 					"peo_hs_num":fanghaoID,
 					"peo_sq_id":shequID,
+					"peo_wg_id":wanggeID,
 					"peo_xq_id":xiaoquID,
 					"peo_ld_id":loudongID,
 					"peo_name":name,
@@ -262,7 +274,6 @@
 						var list = plus.webview.getWebviewById('tab-webview-subpage-about.html');
 						//触发列表界面的自定义事件（refresh）,从而进行数据刷新
 						mui.fire(list,'getindex');
-					
 						} else{
 							mui.alert('新增人员失败!')
 						}
@@ -278,9 +289,19 @@
 	</script>	
 	<!--获取动态小区 楼栋 房间信息-->
 	<script type="text/javascript">
+		
+		//获取网格列表
+			function getWangge(){
+				var selected_val = document.getElementById('shequID').value;
+				common.getWangge(selected_val,function(result){
+					document.getElementById("wangge").innerHTML = result;
+					getXiaoquInfo()
+				});
+				
+			}
 		//发送请求加载小区数据;
 		function getXiaoquInfo(){
-				var selected_val = document.getElementById('shequID').value;
+				var selected_val = document.getElementById('wangge').value;
 				common.getXiaoqu(selected_val,function(result){
 					document.getElementById("communityInfo").innerHTML = result;
 					getBuildingInfo()
@@ -307,11 +328,11 @@
 		
 			//页面加载后触发的函数
 			mui.plusReady(function(){
-		
+				
 			//获取社区列表
 			common.getSheQu(function(result){
 				document.getElementById("shequID").innerHTML = result;
-				getXiaoquInfo();
+//				getXiaoquInfo();
 			});
 			
 				//获取民族列表
