@@ -10,7 +10,7 @@ getSheQu: function getSheQu(callback) {
 				dataType:'json',
 				type:'get',
 				success:function(data){
-				var area_name ='<option >请选择</option>';
+				var area_name ='<option value="">请选择</option>';
 				for (i=0;i<data.data.length;i++) {
 					if (data.data.length  > 1) {
 						area_name +=

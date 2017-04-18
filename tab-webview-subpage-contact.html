@@ -59,31 +59,33 @@
 					<div class="mui-card-header">新增业主</div>
 					<div class="mui-card-content">
 						<form class="mui-input-group">
-						
-						<div class="mui-input-row">
-								<label style="width: 30%;">社区</label>
-								<select style="width: 65%;" id="shequID" class="mui-btn-block" onchange="getWangge()">
-									<option >请选择</option>
-								</select>
-							</div>
 							
+						<div class="mui-input-row">
+							
+							<label style="width: 30%;">社区</label>
+								
+								<select style="width: 65%;" id="shequID" class="mui-btn-block" onchange="getWangge()">
+									<option value="">请选择</option>
+								</select>
+								
+							</div>
 							<div class="mui-input-row" >
 								<label style="width: 30%;" >网格</label>
 								<select  style="width: 65%;" id="wangge" class="mui-btn-block" onchange="getXiaoquInfo()" >
-										<option>请选择</option>
+									<option value="">请选择</option>
 								</select>
 							</div>
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">小区</label>
 								<select style="width: 65%;" class="mui-btn-block" id='communityInfo' onchange="getBuildingInfo()">
-										<option >请选择</option>
+										<option value="">请选择</option>
 								</select>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">楼栋</label>
 								<select style="width: 65%;" class="mui-btn-block" id="LouDongID"  onchange="getRoomInfo()">
-										<option >请选择</option>										
+										<option value="">请选择</option>										
 								</select>
 							</div>
 							<div class="mui-input-row">

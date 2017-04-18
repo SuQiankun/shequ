@@ -113,8 +113,40 @@
 												<option value="">住宅</option>
 											</select>
 									</div>
-									
-									
+									<div class="mui-input-row"><label style="width: 35%;">建筑结构</label>
+												<select name="">
+												<option value="">请选择</option>
+												<option value="">土木</option>
+												<option value="">砖混</option>
+												<option value="">框架</option>
+											</select>
+									</div>
+									<div class="mui-input-row"><label style="width: 35%;">房屋类型</label>
+												<select name="">
+												<option value="">请选择</option>
+												<option value="">高层</option>
+												<option value="">多层</option>
+												<option value="">平房</option>
+												<option value="">住宅改商铺</option>
+												<option value="">商铺改住宅</option>
+											</select>
+									</div>
+									<div class="mui-input-row"><label style="width: 35%;">住宅类别</label>
+												<select name="">
+												<option value="">请选择</option>
+												<option value="">普通住宅</option>
+												<option value="">别墅</option>
+											</select>
+									</div>
+										<div class="mui-input-row"><label style="width: 35%;">住房来源</label>
+												<select name="">
+												<option value="">请选择</option>
+												<option value="">购买商品房</option>
+												<option value="">租赁私租房</option>
+												<option value="">租赁廉租房</option>
+												<option value="">自建房</option>
+											</select>
+									</div>
 									
 								</form>
 							</div>
@@ -379,7 +411,7 @@
 			//获取社区列表
 			common.getSheQu(function(result){
 				document.getElementById("shequID").innerHTML = result;
-//				getWangge();
+				getWangge();
 			});
 	});
 	</script>
