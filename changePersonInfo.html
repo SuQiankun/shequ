@@ -32,8 +32,14 @@
 							<div class="mui-input-row">
 								<label style="width: 30%;">身份证号</label>
 								<input style="width: 65%;" id="idcardStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								
 							</div>
-							
+							<div id="mui-input-row" style="text-align: center;">
+								<br />
+									<img id="imageid" style="height: 100px;width:200px; margin: 0 auto;" src="images/cbd.jpg"/>
+									<br /><button class="mui-button">点击上传身份证</button>
+									<br />
+							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">手机号码</label>
 								<input style="width: 65%;" id="phoneStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
@@ -255,6 +261,7 @@
 			
 			function getAdress(){
 				
+				
 				var reID =  document.getElementById("RELIGION").value;
 												var numberStr = '';
 												switch (reID){
@@ -389,7 +396,6 @@
 					"peo_join_party_date":rudangshijianInfo,
 					"peo_party_zw":dangneizhiwuInfo,
 					"peo_inhome_id":zaijiajuzhuInfo,
-					"peo_single_child_id":scnumInfo,
 					"peo_dis_card_num":canjizhengInfo,
 					"peo_is_jzry":jzryInfo,
 					"peo_is_lcrk":lcrkInfo,
@@ -454,9 +460,10 @@
 		var pinkunyuanyin = ''; //贫困原因;
 		
 		
-		
 	mui.plusReady(function () {
-				var web = plus.webview.currentWebview();
+		
+		
+			var web = plus.webview.currentWebview();
 				//获取传递参数
 			  document.getElementById('nameStr').value = web.name;
 			  document.getElementById('idcardStr').value = web.idcard;
