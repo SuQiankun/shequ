@@ -70,14 +70,14 @@
 					<div class="mui-card-footer">
 						<div class="mui-button-row" style="margin: 0 auto;">
 							<button type="submit" class="mui-btn mui-btn-primary" id="searchPersionList" >搜索人员</button>&nbsp;&nbsp;
-							<button type="submit" class="mui-btn mui-btn-primary" id="searchPersionList" >搜索房产</button>&nbsp;&nbsp;
+							<button type="submit" class="mui-btn mui-btn-primary" onclick="showhouseinfo()" >搜索房产</button>&nbsp;&nbsp;
 							<!--<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>-->
 						</div>
 					</div>
 				</div>
 			
 				<!--TODO  房产信息-->
-				<div id="houselist" class="mui-content" >
+				<div id="houselist" class="mui-content"  style="display: none;">
 						<div class="mui-card">
 							<div class="mui-card-header">
 								<h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span> &nbsp;&nbsp房产信息</span></h4></div>
@@ -102,11 +102,11 @@
 										<p class="yl_txt">5</p>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">房屋属性</label>
-											<select name="">
-												<option value="">请选择</option>
-												<option value="">自有</option>
-												<option value="">借住</option>
-												<option value="">租赁</option>
+											<select id="houseatt" name="">
+												<option value="0">请选择</option>
+												<option value="1">自有</option>
+												<option value="2">借住</option>
+												<option value="3">租赁</option>
 											</select>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">房屋用途</label>
@@ -174,8 +174,8 @@
 		</div>
 		
 		<script src="js/mui.min.js">
-			
 		</script>
+		<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="js/Common.js"></script>	
 		<script type="text/javascript" charset="utf-8">		
 			//获取网格列表
@@ -219,8 +219,20 @@
 		document.getElementById("searchPersionList").addEventListener('tap',function(){	
 			searchPeoInfo();
 		});
-		
+		// TODO jquery 快速设置selected 选中状态
+	function	 showhouseinfo(){
+			$("#houselist").show();
+			var test = '2';
+			$("#houseatt option").each(function (){  
+    				if ($(this).val() == test) {
+    					console.log('找到了对的人');
+ 					$("#houseatt").val("2");    					
+    				} 
+    			});
+	}
+	
 		function searchPeoInfo(){
+	
 				var selected_val = document.getElementById('FangHaoID').value;
 				if (selected_val == null || selected_val ==undefined || selected_val == '') {
 					mui.toast('请选择房间号');
@@ -334,6 +346,25 @@
 			}
 			return titleStr;
 			}
+		
+		function getHouseInfo(){
+			mui.ajax('',{
+				data:{
+					
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:10000,//超时时间设置为10秒；
+				success:function(data){
+					
+				},
+				error:function(xhr,type,errorThrown){
+					
+				}
+			});
+			
+		}
+		//获取
 		
 		//跳转到新增人员的界面;
 		function addPersion(){
