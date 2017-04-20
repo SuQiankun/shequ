@@ -460,9 +460,7 @@
 		var pinkunyuanyin = ''; //贫困原因;
 		
 		
-	mui.plusReady(function () {
-		
-		
+mui.plusReady(function () {
 			var web = plus.webview.currentWebview();
 				//获取传递参数
 			  document.getElementById('nameStr').value = web.name;
@@ -471,7 +469,7 @@
 			  document.getElementById('pickDateBtn').value = web.birth;
 			  document.getElementById('jgStr').value = web.jg;
 			  document.getElementById("pickDateBtn").textContent = web.birth;
-			  document.getElementById("personID").innerText = web.personid;
+			  document.getElementById("personID").innerText = web.personid;	  
 				//判断是否加载初始值;
 				if (web.sex == '男') {
 					var area_name = '<option selected="selected" value="c1670767bf2840a1aab00f364f781cdb">男</option><option  value="c14b60b63693440089304675e6dbcfc8">女</option>';
@@ -482,7 +480,7 @@
 				}
 
 			  //获取民族列表
-			  mui.ajax(urlforapp+':8080/app?cmd=getnationlist',{
+			  	mui.ajax(urlforapp+':8080/app?cmd=getnationlist',{
 				dataType:'json',
 				type:'get',
 				success:function(data){
@@ -504,32 +502,29 @@
 				document.getElementById("nationID").innerHTML = area_name;
 				},
 				error: function(xhr,type,errorThrown){}});
-			
-	mui.ajax(urlforapp+':8080/app?cmd=getlivepeoplebyhouseid&houseid='+web.fanghaoid,{
-					dataType:'json',//服务器返回json格式数据
-					type:'get',//HTTP请求类型
-					timeout:10000,//超时时间设置为10秒；
-					success:function(data){
-							//循环遍历,如果是当前人员 取出数据
-						for (i=0;i<data.data.length;i++) {
-							
-						if (data.data[i].peo_id == web.personid) {
+				//设置初始数据
+				setInitData(web.peoList,web.personid);
+	
+	});
+		</script>
+<!--设置资料初始值-->
+<script >
+	function setInitData(data,peoid){
+						//循环遍历,如果是当前人员 取出数据
+					for (i=0;i<data.data.length;i++) {
+						if (data.data[i].peo_id == peoid) {
 								//兵役状况
 								bingyi = data.data[i].peo_by_id;
 								common.getBingyi('military','military',bingyi);
-								
 								//与业主关系
-								
 								var relation = data.data[i].peo_yz_relation;
 								common.getReligion('ownRealt','ownRealt',relation);
 								//职业
 								zhiye = data.data[i].peo_zy_id;
 								common.getReligion('career','career',zhiye);
-								
 								//户口性质
 								hkxz = data.data[i].peo_hk_xz_id;
 								common.getReligion('popuInfo','popuInfo',hkxz);
-
 								//宗教信仰
 								religion =data.data[i].peo_religion_id;
 								daogao = data.data[i].peo_dao_gao_id;								
@@ -647,13 +642,12 @@
 								
 							}
 						//if 判断结束
-						
-						}
-					},
-					error:function(xhr,type,errorThrown){}});});
-			
-		</script>
+						}			
+			//数据初始化完成
+
 		
+	}
+</script>
 <!--时间选择器-->	
 <script>
 				var rdsj = document.getElementById("rudangshijian");
@@ -679,8 +673,8 @@
 				});
 			})
 		</script>
-	<!--时间选择器-->	
-	<script>
+<!--时间选择器-->	
+<script>
 				var info = document.getElementById("pickDateBtn");
 				document.getElementById("pickDateBtn").addEventListener('tap', function() {
 				var dDate = new Date();

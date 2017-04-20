@@ -63,17 +63,20 @@
 							<label style="width: 30%;">房号</label>
 							<select  style="width: 70%;" id="FangHaoID" class="mui-btn-block">
 							</select>
-							</div>
+								</div>
+							
 						</form>
 					</div>
 					<div class="mui-card-footer">
 						<div class="mui-button-row" style="margin: 0 auto;">
-							<button type="submit" class="mui-btn mui-btn-primary" id="searchPersionList" >搜索</button>&nbsp;&nbsp;
-							<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
+							<button type="submit" class="mui-btn mui-btn-primary" id="searchPersionList" >搜索人员</button>&nbsp;&nbsp;
+							<button type="submit" class="mui-btn mui-btn-primary" id="searchPersionList" >搜索房产</button>&nbsp;&nbsp;
+							<!--<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>-->
 						</div>
 					</div>
 				</div>
-				<!--TODO-->
+			
+				<!--TODO  房产信息-->
 				<div id="houselist" class="mui-content" >
 						<div class="mui-card">
 							<div class="mui-card-header">
@@ -151,7 +154,7 @@
 								</form>
 							</div>
 							<div class="mui-card-footer">
-								<div class="mui-button-row" style="margin: 0 auto;"><button type="button" class="mui-btn  mui-badge-red" onclick="return false;">忽略</button>&nbsp;&nbsp;<button type="button" class="mui-btn  mui-btn-primary mui-btn-outlined " onclick="return false;">查看</button>&nbsp;&nbsp;</div>
+								<div class="mui-button-row" style="margin: 0 auto;"><button type="button" class="mui-btn  mui-btn-primary mui-btn-outlined " onclick="return false;">修改</button>&nbsp;&nbsp;</div>
 							</div>
 						</div>
 				</div>
@@ -170,9 +173,11 @@
 			</div>
 		</div>
 		
-		<script src="js/mui.min.js"></script>
+		<script src="js/mui.min.js">
+			
+		</script>
 		<script type="text/javascript" src="js/Common.js"></script>	
-		<script type="text/javascript" charset="utf-8">
+		<script type="text/javascript" charset="utf-8">		
 			//获取网格列表
 			function getWangge(){
 				var selected_val = document.getElementById('shequID').value;
@@ -217,27 +222,25 @@
 		
 		function searchPeoInfo(){
 				var selected_val = document.getElementById('FangHaoID').value;
-				
 				if (selected_val == null || selected_val ==undefined || selected_val == '') {
 					mui.toast('请选择房间号');
-					return;
+					return false;
 				}
 				
 				mui.ajax(urlforapp+':8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
 						dataType:'json',
 						type:'get',
 						success:function(data){
+						peoListData = data;
 						var area_name='' ;
-					
 						if(data.data.length<1){
 							mui.toast('暂无人员');
 							//如果没有列表,插入空内容
 							document.getElementById("personList").innerHTML = '';
 							return;
 						}
-				console.log(data.data.length)
-				for (i=0;i<data.data.length;i++) {
-					
+					// 拼接插入的 html
+					for (i=0;i<data.data.length;i++) {
 					//判断数据是否为空,如果为空,设置默认值;
 					 var name = common.changestr(data.data[i].peo_name);
 					 var sex = common.changestr(data.data[i].peo_sex);
@@ -253,7 +256,6 @@
 					 var att = common.changestr(data.data[i].peo_attr_id);
 					//重点人员标记
 					var resultstr = checkPersonInfo(data.data[i].peo_attr_id,data.data[i].peoid,att);
-				
 					var titleStr =  creattitleStr(data.data[i].peo_attr_id);
 					area_name
 					+=
@@ -298,7 +300,6 @@
 					+data.data[i].peo_id
 					+'" onclick="changePersonInfo(this.id)">修改</button>&nbsp;&nbsp;</div></div></div>'
 					;
-					
 				}
 		
 				//插入数据内容;
@@ -333,6 +334,7 @@
 			}
 			return titleStr;
 			}
+		
 		//跳转到新增人员的界面;
 		function addPersion(){
 				
@@ -376,11 +378,12 @@
 				var jg =  	document.getElementById(peroid+'jg').textContent;
 				var phone =  document.getElementById(peroid+'phone').textContent;
 				var birth =  document.getElementById(peroid+'birth').textContent;
-				
+				//TODO 将获取到的 data 作为一个参数传递到另外一个页面;减少代码量
 					mui.openWindow({
 					    url: 'changePersonInfo.html', 
 					    id:'changePersonInfo',
 					    extras:{
+					    		peoList:peoListData,
 					    		shequid:shequ,
 							xiaoquid:xiaoqu,
 							loudongid:loudongid,
@@ -400,6 +403,8 @@
 		</script>	
 
 	<script>
+		
+		
 		mui.plusReady(function(){
 			//开启回弹
 			var placeholderText = '<option value="">请选择</option>';
@@ -414,6 +419,7 @@
 				getWangge();
 			});
 	});
+
 	</script>
 	</body>
 </html>
