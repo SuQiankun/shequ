@@ -136,16 +136,18 @@
 		<script src="js/Common.js"></script>
 		<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script>
-			
+			mui.plusReady(function () {
+				//(b == false) ? a="true" : a="false";
+				if (plus.storage.getItem('username') == null) {
+					document.getElementById("account").placeholder = '请输入账号';
+				} else{
+					
+					document.getElementById("account").value = plus.storage.getItem('username');
+				}
+			});
 			//登录功能实现区域
 			document.getElementById('login').addEventListener('tap', function() {
-//			var isActive = document.getElementById("autoLogin").classList.contains("mui-active");
-//				if(isActive){
-//				  console.log("打开状态");
-//				}else{
-//				  console.log("关闭状态");  
-//				}
-//				mui("#autoLogin").switch().toggle();
+				console.log('yonghuming'+plus.storage.getItem('username'));
 			//获取用户名和密码
 			var account = document.getElementById('account').value;
 			var psw = document.getElementById('password').value;
@@ -172,6 +174,7 @@
 			})
 			.done(function(data, textStatus, jqXHR) {
 				if(data.data == 'success'){
+					plus.storage.setItem('username', account);
 						mui.openWindow({
 							url: 'tab-webview-main.html',
 							id: 'main', 
