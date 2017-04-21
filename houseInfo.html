@@ -6,97 +6,189 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/Common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+			<script src="js/json.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
 	<body>
-		
-		
-		<div id="houselist" class="mui-content" >
-						<div class="mui-card">
-							<div class="mui-card-header">
-								<h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span> &nbsp;&nbsp房产信息</span></h4></div>
-							<div class="mui-card-content">
-								<form class="mui-input-group">
-									<div class="mui-input-row"><label style="width: 35%;">房主姓名</label>
-										<p class="yl_txt">梁红玉</p>
-									</div>
-									<div class="mui-input-row"><label style="width: 35%;">联系电话</label>
-										<p class="yl_txt">15509008888</p>
-									</div>
-									<div class="mui-input-row"><label style="width: 35%;">编号</label>
-										<p class="yl_txt">211321312321312</p>
-									</div>
-									<div class="mui-input-row"><label style="width: 35%;">登记地址</label>
-										<p class="yl_txt">昌吉市北京北路</p>
-									</div>
-									<div class="mui-input-row"><label style="width: 35%;">房屋面积</label>
-										<p class="yl_txt">88平方米</p>
-									</div>
-									<div class="mui-input-row"><label style="width: 35%;">房间数量</label>
-										<p class="yl_txt">5</p>
-									</div>
-									<div class="mui-input-row"><label style="width: 35%;">房屋属性</label>
-											<select name="">
-												<option value="">请选择</option>
-												<option value="">自有</option>
-												<option value="">借住</option>
-												<option value="">租赁</option>
-											</select>
-									</div>
-									<div class="mui-input-row"><label style="width: 35%;">房屋用途</label>
-												<select name="">
-												<option value="">请选择</option>
-												<option value="">商用</option>
-												<option value="">住宅</option>
-											</select>
-									</div>
-									<div class="mui-input-row"><label style="width: 35%;">建筑结构</label>
-												<select name="">
-												<option value="">请选择</option>
-												<option value="">土木</option>
-												<option value="">砖混</option>
-												<option value="">框架</option>
-											</select>
-									</div>
-									<div class="mui-input-row"><label style="width: 35%;">房屋类型</label>
-												<select name="">
-												<option value="">请选择</option>
-												<option value="">高层</option>
-												<option value="">多层</option>
-												<option value="">平房</option>
-												<option value="">住宅改商铺</option>
-												<option value="">商铺改住宅</option>
-											</select>
-									</div>
-									<div class="mui-input-row"><label style="width: 35%;">住宅类别</label>
-												<select name="">
-												<option value="">请选择</option>
-												<option value="">普通住宅</option>
-												<option value="">别墅</option>
-											</select>
-									</div>
-										<div class="mui-input-row"><label style="width: 35%;">住房来源</label>
-												<select name="">
-												<option value="">请选择</option>
-												<option value="">购买商品房</option>
-												<option value="">租赁私租房</option>
-												<option value="">租赁廉租房</option>
-												<option value="">自建房</option>
-											</select>
-									</div>
-								</form>
-							</div>
-							<div class="mui-card-footer">
-								<div class="mui-button-row" style="margin: 0 auto;"><button type="button" class="mui-btn  mui-badge-red" onclick="return false;">提交修改</button>
-							</div>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">修改房产资料</h1>
+		</header>
+
+		<div id="houselist" class="mui-content">
+			<div class="mui-card">
+				<div class="mui-card-header">
+					<h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span> &nbsp;&nbsp房产信息</span></h4></div>
+				<div class="mui-card-content">
+					<form class="mui-input-group">
+						<input style="display: none;" id="fc_id"></input>
+						<div class="mui-input-row"><label style="width: 35%;">房主姓名</label>
+							<!--<p id="yz_name" class="yl_txt"></p>-->
+							<input  type="text" name="yz_name" id="yz_name" />
 						</div>
+						<div class="mui-input-row"><label style="width: 35%;">联系电话</label>
+							<!--<p id="yz_phone" class="yl_txt"></p>-->
+							<input type="text" id="yz_phone" />
+						</div>
+						<div class="mui-input-row"><label style="width: 35%;">身份证号</label>
+							<input type="text" id="yz_carnum" />
+						</div>
+						<div class="mui-input-row"><label style="width: 35%;">房产证编号</label>
+							<!--<p id="yz_fcznum" class="yl_txt"></p>-->
+							<input type="text" name="yz_fcznum" id="yz_fcznum" />
+						</div>
+						<div class="mui-input-row"><label style="width: 35%;">登记地址</label>
+							<input type="text" name="yz_add" id="yz_add" />
+						</div>
+						<div class="mui-input-row"><label style="width: 35%;">当前住址</label>
+							<input type="text" name="currentadd" id="currentadd" />
+						</div>
+						<div class="mui-input-row"><label style="width: 35%;">房屋面积</label>
+							<!--<p id="yz_area" class="yl_txt"></p>-->
+							<input type="text" name="yz_area" id="yz_area" />
+						</div>
+						<div class="mui-input-row"><label style="width: 35%;">房间数量</label>
+							<!--<p id="yz_housecount" class="yl_txt"></p>-->
+							<input type="text" name="yz_housecount" id="yz_housecount" />
+						</div>
+						<div class="mui-input-row"><label style="width: 35%;">房屋属性</label>
+							<select id="houseatt" name="">
+								<option value="0">请选择</option>
+							</select>
+						</div>
+						<div class="mui-input-row"><label style="width: 35%;">房屋用途</label>
+							<select id="houseuse" name="">
+								<option value="">请选择</option>
+							</select>
+						</div>
+						<div class="mui-input-row"><label style="width: 35%;">建筑结构</label>
+							<select id="housestruct" name="">
+								<option value="">请选择</option>
+							</select>
+						</div>
+						<div class="mui-input-row"><label style="width: 35%;">房屋类型</label>
+							<select id="housetype" name="">
+								<option value="">请选择</option>
+							</select>
+						</div>
+						<div class="mui-input-row"><label style="width: 35%;">住宅类别</label>
+							<select id="housecategory" name="">
+								<option value="">请选择</option>
+							</select>
+						</div>
+						<div class="mui-input-row"><label style="width: 35%;">住房来源</label>
+							<select id="housesurce">
+								<option value="">请选择</option>
+							</select>
+						</div>
+
+					</form>
 				</div>
-		
-		
-		<script src="js/mui.min.js"></script>
-		<script type="text/javascript">
-			mui.init()
-		</script>
+				<div class="mui-card-footer">
+					<div class="mui-button-row" style="margin: 0 auto;"><button type="button" class="mui-btn  mui-badge-red" onclick="commitHouseInfo()">提交修改</button>
+					</div>
+				</div>
+			</div>
+
+			<script src="js/mui.min.js">	
+			</script>
+			<script type="text/javascript">
+				function commitHouseInfo(){
+					var self = plus.webview.currentWebview();
+					
+				
+					var data = {
+				      "yz_name": document.getElementById("yz_name").value,
+				      "fc_house_room_num": document.getElementById("yz_housecount").value,
+				      "fc_id": document.getElementById("fc_id").value,
+				      "cardid": document.getElementById("yz_carnum").value,
+				      "tel": document.getElementById("yz_phone").value,
+				      "fc_house_structure_id": document.getElementById("housestruct").value,
+				      "fc_house_type_id": document.getElementById("housetype").value,
+				      "fc_addr": document.getElementById("yz_add").value,
+				      "fc_house_category_id": document.getElementById("housecategory").value,
+				      "fc_house_attr_id": document.getElementById("houseatt").value,
+				      "fc_house_area": document.getElementById("yz_area").value,
+				      "fc_house_source_id": document.getElementById("housesurce").value,
+				      "fc_house_use_id": document.getElementById("houseuse").value,
+				      "curadd": document.getElementById("currentadd").value,
+				      "fc_fcz_num": document.getElementById("yz_fcznum").value,
+				};
+				var params = $.toJSON(data);
+			
+					mui.ajax(urlforapp+':8080/app?cmd=modifyfcinfobyfcid',{
+						data:params,
+						headers:{'Content-Type':'application/json'},	
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；
+						success:function(data){
+							
+							if (data.code == '200') {
+								mui.alert('修改成功!')
+								mui.back();
+							} else{
+								mui.alert('修改失败!')
+							}
+							
+						},
+						error:function(xhr,type,errorThrown){
+							console.log('fail');
+						}
+					});
+				}
+			</script>
+			<script type="text/javascript">
+				var self = plus.webview.currentWebview();
+				var data = self.housedata;
+					document.getElementById("fc_id").value = data.data[0].fc_id;
+					document.getElementById("yz_name").value = common.changestr(data.data[0].yz_name);
+					document.getElementById("yz_phone").value = common.changestr(data.data[0].tel);
+					document.getElementById("yz_fcznum").value = common.changestr(data.data[0].fc_fcz_num); 
+					document.getElementById("yz_add").value=common.changestr(data.data[0].fc_addr);
+					document.getElementById("yz_area").value=common.changestr(data.data[0].fc_house_area);
+					document.getElementById("yz_housecount").value=common.changestr(data.data[0].fc_house_room_num);
+					document.getElementById("currentadd").value=common.changestr(data.data[0].curadd);
+					document.getElementById("yz_carnum").value=common.changestr(data.data[0].cardid);
+				
+					common.getDictTypeInfo(plus.storage.getItem('houseAttr'),data.data[0].fc_house_attr_id,function(result){
+						document.getElementById("houseatt").innerHTML = result;
+					});
+					
+					common.getDictTypeInfo(plus.storage.getItem('houseFun'),data.data[0].fc_house_use_id,function(result){
+						document.getElementById("houseuse").innerHTML = result;
+					});
+					
+					common.getDictTypeInfo(plus.storage.getItem('houseArch'),data.data[0].fc_house_structure_id,function(result){
+						document.getElementById("housestruct").innerHTML = result;
+					});
+				
+					common.getDictTypeInfo(plus.storage.getItem('houseType'),data.data[0].fc_house_type_id,function(result){
+						document.getElementById("housetype").innerHTML = result;
+					});
+					common.getDictTypeInfo(plus.storage.getItem('houseCateg'),data.data[0].fc_house_category_id,function(result){
+						document.getElementById("housecategory").innerHTML = result;
+					});
+					common.getDictTypeInfo(plus.storage.getItem('houseSou'),data.data[0].fc_house_source_id,function(result){
+						document.getElementById("housesurce").innerHTML = result;
+					});
+
+				mui.init({
+				beforeback: function(){
+					var list = plus.webview.getWebviewById('tab-webview-subpage-chat.html');
+					mui.fire(list,'updateInfo');
+					
+						//获得列表界面的webview
+					var list = plus.webview.getWebviewById('tab-webview-subpage-about.html');
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+					mui.fire(list,'getindex');
+					
+					return true;
+				}
+			});
+			</script>
 	</body>
 
 </html>

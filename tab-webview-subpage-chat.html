@@ -84,70 +84,58 @@
 							<div class="mui-card-content">
 								<form class="mui-input-group">
 									<div class="mui-input-row"><label style="width: 35%;">房主姓名</label>
-										<p class="yl_txt">梁红玉</p>
+										<p id="yz_name" class="yl_txt"></p>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">联系电话</label>
-										<p class="yl_txt">15509008888</p>
+										<p id="yz_phone" class="yl_txt"></p>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">编号</label>
-										<p class="yl_txt">211321312321312</p>
+										<p id="yz_fcznum" class="yl_txt"></p>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">登记地址</label>
-										<p class="yl_txt">昌吉市北京北路</p>
+										<p id="yz_add" class="yl_txt"></p>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">房屋面积</label>
-										<p class="yl_txt">88平方米</p>
+										<p id="yz_area" class="yl_txt"></p>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">房间数量</label>
-										<p class="yl_txt">5</p>
+										<p id="yz_housecount" class="yl_txt"></p>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">房屋属性</label>
 											<select id="houseatt" name="">
 												<option value="0">请选择</option>
-											
 											</select>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">房屋用途</label>
-												<select name="">
+												<select id="houseuse" name="">
 												<option value="">请选择</option>
-												<option value="">商用</option>
-												<option value="">住宅</option>
 											</select>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">建筑结构</label>
-												<select name="">
+												<select id="housestruct" name="">
 												<option value="">请选择</option>
-												<option value="">土木</option>
-												<option value="">砖混</option>
-												<option value="">框架</option>
 											</select>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">房屋类型</label>
-												<select name="">
+												<select id="housetype" name="">
 												<option value="">请选择</option>
 											</select>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">住宅类别</label>
-												<select name="">
+												<select id="housecategory" name="">
 												<option value="">请选择</option>
-												<option value="">普通住宅</option>
-												<option value="">别墅</option>
 											</select>
 									</div>
 										<div class="mui-input-row"><label style="width: 35%;">住房来源</label>
-												<select name="">
+												<select id="housesurce">
 												<option value="">请选择</option>
-												<option value="">购买商品房</option>
-												<option value="">租赁私租房</option>
-												<option value="">租赁廉租房</option>
-												<option value="">自建房</option>
 											</select>
 									</div>
 									
 								</form>
 							</div>
 							<div class="mui-card-footer">
-								<div class="mui-button-row" style="margin: 0 auto;"><button type="button" class="mui-btn  mui-btn-primary mui-btn-outlined " onclick="return false;">修改</button>&nbsp;&nbsp;</div>
+								<div class="mui-button-row" style="margin: 0 auto;"><button type="button" class="mui-btn  mui-btn-primary mui-btn-outlined " onclick="changeHouseInfo()">修改</button>&nbsp;&nbsp;</div>
 							</div>
 						</div>
 				</div>
@@ -214,7 +202,8 @@
 		});
 		// TODO jquery 快速设置selected 选中状态
 	function	 showhouseinfo(){
-			$("#houselist").show();
+		
+		$("#houselist").show();
 			var test = '2';
 			var str = '<option value="0">请选择</option><option value="1">自有</option><option value="2">借住</option><option value="3">租赁</option>';	
 			document.getElementById("houseatt").innerHTML = str;
@@ -233,6 +222,8 @@
 					mui.toast('请选择房间号');
 					return false;
 				}
+				getHouseInfo(selected_val);
+				
 				
 				mui.ajax(urlforapp+':8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
 						dataType:'json',
@@ -341,16 +332,44 @@
 			}
 			return titleStr;
 			}
-		
-		function getHouseInfo(){
-			mui.ajax('',{
-				data:{
-					
-				},
+		//TODO  获取房间
+		function getHouseInfo(params){
+			$('#houselist').show()
+			console.log('房子 id'+params);
+			mui.ajax(urlforapp+':8080/app?cmd=getfcinfobyhouseid&houseid='+params,{
 				dataType:'json',//服务器返回json格式数据
-				type:'post',//HTTP请求类型
+				type:'get',//HTTP请求类型
 				timeout:10000,//超时时间设置为10秒；
 				success:function(data){
+					houseData = data;
+					document.getElementById("yz_name").innerText = common.changestr(data.data[0].yz_name);
+					document.getElementById("yz_phone").innerText = common.changestr(data.data[0].tel);
+					document.getElementById("yz_fcznum").innerText = common.changestr(data.data[0].fc_fcz_num); 
+					document.getElementById("yz_add").innerText=common.changestr(data.data[0].fc_addr);
+					document.getElementById("yz_area").innerText=common.changestr(data.data[0].fc_house_area);
+					document.getElementById("yz_housecount").innerText=common.changestr(data.data[0].fc_house_room_num);
+					
+					common.getDictTypeInfo(plus.storage.getItem('houseAttr'),data.data[0].fc_house_attr_id,function(result){
+						document.getElementById("houseatt").innerHTML = result;
+					});
+					
+					common.getDictTypeInfo(plus.storage.getItem('houseFun'),data.data[0].fc_house_use_id,function(result){
+						document.getElementById("houseuse").innerHTML = result;
+					});
+					
+					common.getDictTypeInfo(plus.storage.getItem('houseArch'),data.data[0].fc_house_structure_id,function(result){
+						document.getElementById("housestruct").innerHTML = result;
+					});
+				
+					common.getDictTypeInfo(plus.storage.getItem('houseType'),data.data[0].fc_house_type_id,function(result){
+						document.getElementById("housetype").innerHTML = result;
+					});
+					common.getDictTypeInfo(plus.storage.getItem('houseCateg'),data.data[0].fc_house_category_id,function(result){
+						document.getElementById("housecategory").innerHTML = result;
+					});
+					common.getDictTypeInfo(plus.storage.getItem('houseSou'),data.data[0].fc_house_source_id,function(result){
+						document.getElementById("housesurce").innerHTML = result;
+					});
 					
 				},
 				error:function(xhr,type,errorThrown){
@@ -426,7 +445,20 @@
 					    },
 				    });
 		}
-		</script>	
+	
+		//跳转到修改房产信息的列表
+		
+		function changeHouseInfo(){
+			mui.openWindow({
+		   		url: 'houseInfo.html', 
+			    id:'changehouseinfo',
+				extras:{
+					housedata:houseData,
+				},
+			});
+		}
+	
+	</script>	
 
 	<script>
 		

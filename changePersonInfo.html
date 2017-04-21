@@ -130,7 +130,10 @@
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">参保情况</label>
-								<input id="yiliaoqingkuang" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<select  id="yiliaoqingkuang" >
+									<option value="">请选择</option>
+								</select>
+								<!--<input id="yiliaoqingkuang" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>-->
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">户口性质</label>
@@ -249,19 +252,7 @@
 		<script src="js/mui.min.js"></script>
 		
 		<script>
-			
-			mui.init({
-				beforeback: function(){
-					var list = plus.webview.getWebviewById('tab-webview-subpage-chat.html');
-					mui.fire(list,'updateInfo');
-						//获得列表界面的webview
-					var list = plus.webview.getWebviewById('tab-webview-subpage-about.html');
-					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
-					mui.fire(list,'getindex');
-					return true;
-				}
-			});
-			
+
 			function getAdress(){
 				
 				
@@ -335,6 +326,7 @@
 				var hunyinInfo = document.getElementById("marry").value;
 				var jingjiInfo = document.getElementById("income").value;
 				var jiankangInfo = document.getElementById("jiankangzhuangkuang").value;
+				var jibingtypeInfo = document.getElementById("jibingleixingid").value;
 				var wenhuaInfo = document.getElementById("degree").value;
 				var hukousuozaidiInfo = document.getElementById("hkdz").value;
 				var canjizhengInfo = document.getElementById("canjizheng").value;
@@ -393,7 +385,7 @@
 					"peo_work_unit":danweidizhiInfo,
 					"peo_hk_xz_id":hkxzInfo,
 					"peo_hk_addr":hukousuozaidiInfo,
-					"peo_social_security_status":canbaoInfo,
+					"peo_social_id":canbaoInfo,
 					"peo_is_able":jiankangInfo,
 					"peo_zzmm_id":zzmmInfo,
 					"peo_join_party_date":rudangshijianInfo,
@@ -403,7 +395,7 @@
 					"peo_is_jzry":jzryInfo,
 					"peo_is_lcrk":lcrkInfo,
 					"peo_attr_id":attidInfo,
-//					"peo_housetype_id":housetypeInfo,
+					"peo_jbqk_id":jibingtypeInfo,
 					"socialmumber":dibaoInfo,
 					"peo_ecoyy_id":pinkunyuanyinInfo,
 					"PEO_IS_DISABLE":iscanji,
@@ -528,7 +520,7 @@ mui.plusReady(function () {
 								//户口性质
 								hkxz = data.data[i].peo_hk_xz_id;
 								common.getReligion('popuInfo','popuInfo',hkxz);
-								//宗教信仰
+								//宗教信仰 联动祷告地址
 								religion =data.data[i].peo_religion_id;
 								daogao = data.data[i].peo_dao_gao_id;								
 								common.getdaogaoAdress('RELIGION','RELIGION',religion,function(result){
@@ -565,17 +557,6 @@ mui.plusReady(function () {
 								common.jzryInfo(lcrk,function(result){
 									document.getElementById("peo_is_lcrk").innerHTML = result;
 								});
-								
-								//房户类型 取消了
-//								if (relation == '本人') {
-//										//房屋类型
-//								housetype  = data.data[i].peo_housetype_id;
-//									common.housetype(housetype,function(result){
-//										document.getElementById("peo_housetype_id").innerHTML = result;
-//									});
-//								}else{
-//									document.getElementById("peo_housetype_id").innerHTML = '<option>不必选择</option>';
-//								}
 							
 								//人员属性
 								attrid = data.data[i].peo_attr_id;
@@ -637,8 +618,10 @@ mui.plusReady(function () {
 								document.getElementById("danweidizhi").value = common.changestr(workunit);
 								
 								//参保情况
-								yiliao = data.data[i].peo_social_security_status;
-								document.getElementById("yiliaoqingkuang").value = common.changestr(yiliao);								
+								yiliao = data.data[i].peo_social_id;
+								common.getDictTypeInfo(plus.storage.getItem('参保情况'),yiliao,function(result){
+									document.getElementById("yiliaoqingkuang").innerHTML = result;									
+								});
 								
 								//户口地址
 								hkdz = data.data[i].peo_hk_addr;
@@ -673,12 +656,24 @@ mui.plusReady(function () {
 	}
 	function getJibingType(){
 		var params = plus.storage.getItem('疾病类型');
-		console.log()
 		common.getDictTypeInfo(params,jblx,function(result){
 			document.getElementById("jibingleixingid").innerHTML = result;
 		});
 	}
 	
+//设置返回的刷新事件
+	mui.init({
+				beforeback: function(){
+					var list = plus.webview.getWebviewById('tab-webview-subpage-chat.html');
+					mui.fire(list,'updateInfo');
+						//获得列表界面的webview
+					var list = plus.webview.getWebviewById('tab-webview-subpage-about.html');
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+					mui.fire(list,'getindex');
+					return true;
+				}
+			});
+			
 </script>
 <!--时间选择器-->	
 <script>

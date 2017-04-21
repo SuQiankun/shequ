@@ -2,6 +2,7 @@
 //var urlforapp =  'http://124.117.230.75';
 var urlforapp =  'http://192.168.1.7';
 var peoListData;
+var houseData;
 var common = {
 
 getSheQu: function getSheQu(callback) {

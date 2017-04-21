@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="ui-page-login">
-
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
@@ -96,9 +95,7 @@
 				background-color: #ddd;
 			}
 		</style>
-
 	</head>
-
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<h1 class="mui-title">登录</h1>
@@ -159,7 +156,20 @@
 						
 					}
 				});
-				
+				//存储房产信息的 key
+			mui.ajax(urlforapp+':8080/app?cmd=getdictbytype&dictype=houseInfo',{
+					dataType:'json',//服务器返回json格式数据
+					type:'get',//HTTP请求类型
+					timeout:10000,//超时时间设置为10秒；
+					success:function(data){
+							for (var i = 0; i<data.data.length;i++) {
+								plus.storage.setItem(data.data[i].numbers,data.data[i].ids);
+							}
+					},
+					error:function(xhr,type,errorThrown){
+						
+					}
+				});
 				
 				
 				
