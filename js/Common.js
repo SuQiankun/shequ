@@ -1,5 +1,6 @@
 
-var urlforapp =  'http://124.117.230.75';
+//var urlforapp =  'http://124.117.230.75';
+var urlforapp =  'http://192.168.1.7';
 var peoListData;
 var common = {
 
@@ -31,7 +32,6 @@ getSheQu: function getSheQu(callback) {
 				}
 			});
 	},
-	
 getWangge: function getWangge(params,callback){
 	if (params == 'null' || params == undefined || params == '') {return false;}
 	//URL未定义 
@@ -60,7 +60,6 @@ getWangge: function getWangge(params,callback){
 		}
 	});
 },
-	
 getXiaoqu: function getXiaoqqu(params,callback){
 			if (params == 'null' || params == undefined || params == '') {
 				return false;
@@ -147,7 +146,33 @@ getRoomList: function getRoomList(params,callback){
 				}
 			});	
 },
-	
+
+getDictTypeInfo: function getDictTypeInfo(params,type,callback){
+	mui.ajax(urlforapp+':8080/app?cmd=getdictbytype&dictype='+params,{
+			dataType:'json',//服务器返回json格式数据
+			type:'get',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			success:function(data){
+				var htmlStr = '<option value="">请选择</option>';
+				for (var i=0;i<data.data.length;i++) {
+				if(type == data.data[i].val || type == data.data[i].ids  ) {
+						if(type == data.data[i].val   ) {
+							htmlStr +='<option value="'+data.data[i].ids+'" selected = selected>'+ data.data[i].val+'</option>';
+						}
+						if(type == data.data[i].ids ) {
+							htmlStr +='<option value="'+data.data[i].ids+'" selected = selected>'+ data.data[i].val+'</option>';
+						}
+					}else{
+						htmlStr +='<option value="'+data.data[i].ids+'">'+ data.data[i].val+'</option>';
+					}					
+						
+				}
+				callback(htmlStr);
+			},
+			error:function(xhr,type,errorThrown){
+			}
+		});
+},
 	//获取type信息;
 getType: function getType(cmd,actionid,params) {
 		var areaStr = '';
@@ -176,7 +201,7 @@ getType: function getType(cmd,actionid,params) {
 				success:function(data){
 				area_name = '<option value="">请选择</option>';
 				for (i=0;i<data.data.length;i++) {
-						if(params == data.data[i].val || params == data.data[i].ids  ) {
+					if(params == data.data[i].val || params == data.data[i].ids  ) {
 						if(params == data.data[i].val   ) {
 							area_name +='<option value="'+data.data[i].ids+'" selected = selected>'+ data.data[i].val+'</option>';
 						}

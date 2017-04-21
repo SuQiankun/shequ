@@ -116,6 +116,7 @@
 				</div>
 							
 			</form>
+			<!-- PLAN  FUTURE-->
 			<!--<form class="mui-input-group">
 				<ul class="mui-table-view mui-table-view-chevron">
 					<li class="mui-table-view-cell">
@@ -137,13 +138,31 @@
 		<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			mui.plusReady(function () {
-				//(b == false) ? a="true" : a="false";
+				//获取保存的数据
 				if (plus.storage.getItem('username') == null) {
 					document.getElementById("account").placeholder = '请输入账号';
 				} else{
-					
 					document.getElementById("account").value = plus.storage.getItem('username');
 				}
+				
+				mui.ajax(urlforapp+':8080/app?cmd=getdictbytype&dictype=73d96446b8464d11ab42b14c3faa3a11',{
+					dataType:'json',//服务器返回json格式数据
+					type:'get',//HTTP请求类型
+					timeout:10000,//超时时间设置为10秒；
+					success:function(data){
+							for (var i = 0; i<data.data.length;i++) {
+								plus.storage.setItem(data.data[i].val,data.data[i].ids);
+							
+							}
+					},
+					error:function(xhr,type,errorThrown){
+						
+					}
+				});
+				
+				
+				
+				
 			});
 			//登录功能实现区域
 			document.getElementById('login').addEventListener('tap', function() {

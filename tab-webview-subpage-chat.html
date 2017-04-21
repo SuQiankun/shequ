@@ -104,9 +104,7 @@
 									<div class="mui-input-row"><label style="width: 35%;">房屋属性</label>
 											<select id="houseatt" name="">
 												<option value="0">请选择</option>
-												<option value="1">自有</option>
-												<option value="2">借住</option>
-												<option value="3">租赁</option>
+											
 											</select>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">房屋用途</label>
@@ -127,11 +125,6 @@
 									<div class="mui-input-row"><label style="width: 35%;">房屋类型</label>
 												<select name="">
 												<option value="">请选择</option>
-												<option value="">高层</option>
-												<option value="">多层</option>
-												<option value="">平房</option>
-												<option value="">住宅改商铺</option>
-												<option value="">商铺改住宅</option>
 											</select>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">住宅类别</label>
@@ -223,10 +216,12 @@
 	function	 showhouseinfo(){
 			$("#houselist").show();
 			var test = '2';
-			$("#houseatt option").each(function (){  
+			var str = '<option value="0">请选择</option><option value="1">自有</option><option value="2">借住</option><option value="3">租赁</option>';	
+			document.getElementById("houseatt").innerHTML = str;
+			$("#houseatt option").each(function (){
     				if ($(this).val() == test) {
-    					console.log('找到了对的人');
- 					$("#houseatt").val("2");    					
+    					console.log('找到了对的人');  
+    					 $("#houseatt").val(test);
     				} 
     			});
 	}
@@ -249,8 +244,8 @@
 							mui.toast('暂无人员');
 							//如果没有列表,插入空内容
 							document.getElementById("personList").innerHTML = '';
-							return;
-						}
+							return;}
+						console.log(data.data[0].peo_name);
 					// 拼接插入的 html
 					for (i=0;i<data.data.length;i++) {
 					//判断数据是否为空,如果为空,设置默认值;

@@ -6,6 +6,7 @@
 		<title></title>
 		<script src="js/Common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/Common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/json.js" type="text/javascript" charset="utf-8"></script>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
@@ -34,12 +35,14 @@
 								<input style="width: 65%;" id="idcardStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 								
 							</div>
-							<div id="mui-input-row" style="text-align: center;">
+							<!--TODO 身份证照片-->
+							<!--<div id="mui-input-row" style="text-align: center;">
 								<br />
 									<img id="imageid" style="height: 100px;width:200px; margin: 0 auto;" src="images/cbd.jpg"/>
 									<br /><button class="mui-button">点击上传身份证</button>
 									<br />
-							</div>
+							</div>-->
+							<!--TODO 身份证照片-->
 							<div class="mui-input-row">
 								<label style="width: 30%;">手机号码</label>
 								<input style="width: 65%;" id="phoneStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
@@ -76,14 +79,7 @@
 								<select id="peo_attr_id" style="width: 65%;" class="mui-btn-block">
 								</select>
 							</div>
-							
-							<div class="mui-input-row" id="demo">
-								<label style="width: 30%;">房户类型</label>
-								<select id="peo_housetype_id" style="width: 65%;" class="mui-btn-block">
-								</select>
-							</div>
-							
-							
+
 								<div class="mui-input-row">
 									<label style="width: 30%;">族别</label>
 									<select id="nationID" style="width: 65%;" class="mui-btn-block">
@@ -189,11 +185,18 @@
 							</div>
 							<div class="mui-input-row">
 								<label  style="width: 30%;">健康状况</label>
-								<select id="jiankangzhuangkuang" name="">
+								<select id="jiankangzhuangkuang" name="" onchange="showJibingleixing()">
+									<option value="">请选择</option>
+									<option value="">疾病</option>
+									<option value="">健康</option>
+								</select>
+							</div>
+							<div id="jibingdivid" class="mui-input-row" style="display: none;">
+								<label  style="width: 30%;">疾病类型</label>
+								<select id="jibingleixingid"  >
 									<option value="">请选择</option>
 								</select>
 							</div>
-
 							<div class="mui-input-row">
 								<label style="width: 30%;">文化程度</label>
 								<select id="degree" name="">
@@ -342,7 +345,7 @@
 				var jzryInfo = document.getElementById("peo_is_jzry").value;
 				var lcrkInfo = document.getElementById("peo_is_lcrk").value;
 				var attidInfo = document.getElementById("peo_attr_id").value;
-				var housetypeInfo = document.getElementById("peo_housetype_id").value;
+//				var housetypeInfo = document.getElementById("peo_housetype_id").value;
 
 				if (document.getElementById("polit").value == '26c0381f2de54fd8887ab42d99da1481' && rudangshijianInfo == null) {
 					mui.alert('请选择入党时间');
@@ -400,7 +403,7 @@
 					"peo_is_jzry":jzryInfo,
 					"peo_is_lcrk":lcrkInfo,
 					"peo_attr_id":attidInfo,
-					"peo_housetype_id":housetypeInfo,
+//					"peo_housetype_id":housetypeInfo,
 					"socialmumber":dibaoInfo,
 					"peo_ecoyy_id":pinkunyuanyinInfo,
 					"PEO_IS_DISABLE":iscanji,
@@ -458,9 +461,10 @@
 		var housetype = ''; 	//房户类型;
 		var socialmumber =''; //低保证号
 		var pinkunyuanyin = ''; //贫困原因;
-		
+		var jblx;
 		
 mui.plusReady(function () {
+			
 			var web = plus.webview.currentWebview();
 				//获取传递参数
 			  document.getElementById('nameStr').value = web.name;
@@ -562,15 +566,16 @@ mui.plusReady(function () {
 									document.getElementById("peo_is_lcrk").innerHTML = result;
 								});
 								
-								if (relation == '本人') {
-										//房屋类型
-								housetype  = data.data[i].peo_housetype_id;
-									common.housetype(housetype,function(result){
-										document.getElementById("peo_housetype_id").innerHTML = result;
-									});
-								}else{
-									document.getElementById("peo_housetype_id").innerHTML = '<option>不必选择</option>';
-								}
+								//房户类型 取消了
+//								if (relation == '本人') {
+//										//房屋类型
+//								housetype  = data.data[i].peo_housetype_id;
+//									common.housetype(housetype,function(result){
+//										document.getElementById("peo_housetype_id").innerHTML = result;
+//									});
+//								}else{
+//									document.getElementById("peo_housetype_id").innerHTML = '<option>不必选择</option>';
+//								}
 							
 								//人员属性
 								attrid = data.data[i].peo_attr_id;
@@ -605,22 +610,28 @@ mui.plusReady(function () {
 								xuexing = data.data[i].peo_blood_id;
 								common.getReligion('bloodType','bloodType',xuexing);
 								//健康状况
+								//记录疾病类型的
+								jblx =  data.data[i].peo_jbqk_id;
 								jiankang =  data.data[i].peo_is_able;
-								common.getReligion('jiankangzhuangkuang','jiankangzhuangkuang',jiankang);
+								if (jiankang != '健康') {
+									$('#jibingdivid').show();
+									getJibingType();
+								}
+								//plus.storage.getItem('健康状况')
+								common.getReligion(plus.storage.getItem('健康状况'),'jiankangzhuangkuang',jiankang);
 								
 								//是否在家居住
 								inhome = data.data[i].peo_inhome_id;
 								common .getReligion('YesOrNot','yesOrNot',inhome);
-								
 								//入党时间
 								partydate = data.data[i].peo_join_party_date;
-								console.log(data.data[i].peo_join_party_date);
 								document.getElementById("rudangshijian").textContent= common.changestr(partydate);
 								
 									
 								//党内职务
 								partyzw = data.data[i].peo_party_zw;
 								document.getElementById("dangneizhiwu").value = common.changestr(partyzw);
+								
 								//工作单位
 								workunit = data.data[i].peo_work_unit;
 								document.getElementById("danweidizhi").value = common.changestr(workunit);
@@ -646,6 +657,28 @@ mui.plusReady(function () {
 
 		
 	}
+</script>
+<script>
+	
+	function showJibingleixing(){
+		var str = $("#jiankangzhuangkuang").find("option:selected").text();
+		if (str !== '健康') {
+			$('#jibingdivid').show();
+			getJibingType();
+		}else if(str == '健康'){
+			$('#jibingdivid').hide();
+			// 设置 selectd 为空
+			$("#jibingdivid ").val(""); 
+		}
+	}
+	function getJibingType(){
+		var params = plus.storage.getItem('疾病类型');
+		console.log()
+		common.getDictTypeInfo(params,jblx,function(result){
+			document.getElementById("jibingleixingid").innerHTML = result;
+		});
+	}
+	
 </script>
 <!--时间选择器-->	
 <script>
