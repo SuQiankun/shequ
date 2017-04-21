@@ -70,8 +70,8 @@
 					<div class="mui-card-footer">
 						<div class="mui-button-row" style="margin: 0 auto;">
 							<button type="submit" class="mui-btn mui-btn-primary" id="searchPersionList" >搜索人员</button>&nbsp;&nbsp;
-							<button type="submit" class="mui-btn mui-btn-primary" onclick="showhouseinfo()" >搜索房产</button>&nbsp;&nbsp;
-							<!--<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>-->
+							<!--<button type="submit" class="mui-btn mui-btn-primary" onclick="showhouseinfo()" >搜索房产</button>&nbsp;&nbsp;-->
+							<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
 						</div>
 					</div>
 				</div>
@@ -102,34 +102,22 @@
 										<p id="yz_housecount" class="yl_txt"></p>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">房屋属性</label>
-											<select id="houseatt" name="">
-												<option value="0">请选择</option>
-											</select>
+												<p id="houseatt" class="yl_txt"></p>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">房屋用途</label>
-												<select id="houseuse" name="">
-												<option value="">请选择</option>
-											</select>
+												<p id="houseuse" class="yl_txt"></p>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">建筑结构</label>
-												<select id="housestruct" name="">
-												<option value="">请选择</option>
-											</select>
+												<p id="housestruct" class="yl_txt"></p>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">房屋类型</label>
-												<select id="housetype" name="">
-												<option value="">请选择</option>
-											</select>
+										<p id="housetype" class="yl_txt"></p>
 									</div>
 									<div class="mui-input-row"><label style="width: 35%;">住宅类别</label>
-												<select id="housecategory" name="">
-												<option value="">请选择</option>
-											</select>
+										<p id="housecategory" class="yl_txt"></p>
 									</div>
 										<div class="mui-input-row"><label style="width: 35%;">住房来源</label>
-												<select id="housesurce">
-												<option value="">请选择</option>
-											</select>
+											<p id="housesurce" class="yl_txt"></p>
 									</div>
 									
 								</form>
@@ -200,21 +188,8 @@
 		document.getElementById("searchPersionList").addEventListener('tap',function(){	
 			searchPeoInfo();
 		});
-		// TODO jquery 快速设置selected 选中状态
-	function	 showhouseinfo(){
-		
-		$("#houselist").show();
-			var test = '2';
-			var str = '<option value="0">请选择</option><option value="1">自有</option><option value="2">借住</option><option value="3">租赁</option>';	
-			document.getElementById("houseatt").innerHTML = str;
-			$("#houseatt option").each(function (){
-    				if ($(this).val() == test) {
-    					console.log('找到了对的人');  
-    					 $("#houseatt").val(test);
-    				} 
-    			});
-	}
-	
+
+
 		function searchPeoInfo(){
 	
 				var selected_val = document.getElementById('FangHaoID').value;
@@ -223,7 +198,6 @@
 					return false;
 				}
 				getHouseInfo(selected_val);
-				
 				
 				mui.ajax(urlforapp+':8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
 						dataType:'json',
@@ -332,7 +306,7 @@
 			}
 			return titleStr;
 			}
-		//TODO  获取房间
+		//  获取房间
 		function getHouseInfo(params){
 			$('#houselist').show()
 			console.log('房子 id'+params);
@@ -349,36 +323,18 @@
 					document.getElementById("yz_area").innerText=common.changestr(data.data[0].fc_house_area);
 					document.getElementById("yz_housecount").innerText=common.changestr(data.data[0].fc_house_room_num);
 					
-					common.getDictTypeInfo(plus.storage.getItem('houseAttr'),data.data[0].fc_house_attr_id,function(result){
-						document.getElementById("houseatt").innerHTML = result;
-					});
-					
-					common.getDictTypeInfo(plus.storage.getItem('houseFun'),data.data[0].fc_house_use_id,function(result){
-						document.getElementById("houseuse").innerHTML = result;
-					});
-					
-					common.getDictTypeInfo(plus.storage.getItem('houseArch'),data.data[0].fc_house_structure_id,function(result){
-						document.getElementById("housestruct").innerHTML = result;
-					});
-				
-					common.getDictTypeInfo(plus.storage.getItem('houseType'),data.data[0].fc_house_type_id,function(result){
-						document.getElementById("housetype").innerHTML = result;
-					});
-					common.getDictTypeInfo(plus.storage.getItem('houseCateg'),data.data[0].fc_house_category_id,function(result){
-						document.getElementById("housecategory").innerHTML = result;
-					});
-					common.getDictTypeInfo(plus.storage.getItem('houseSou'),data.data[0].fc_house_source_id,function(result){
-						document.getElementById("housesurce").innerHTML = result;
-					});
-					
+					document.getElementById("houseatt").innerText = common.changestr(data.data[0].fc_house_attr_id);
+					document.getElementById("houseuse").innerText = common.changestr(data.data[0].fc_house_use_id);
+					document.getElementById("housestruct").innerText = common.changestr(data.data[0].fc_house_structure_id);
+					document.getElementById("housetype").innerText = common.changestr(data.data[0].fc_house_type_id);
+					document.getElementById("housecategory").innerText = common.changestr(data.data[0].fc_house_category_id);
+					document.getElementById("housesurce").innerText = common.changestr(data.data[0].fc_house_source_id);
 				},
 				error:function(xhr,type,errorThrown){
-					
 				}
 			});
 			
 		}
-		//获取
 		
 		//跳转到新增人员的界面;
 		function addPersion(){
