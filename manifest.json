@@ -183,9 +183,9 @@
 				"android": {
 					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
 					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "/Applications/MAMP/htdocs/shequ_wap/unpackage/res/icons/启动画面.png", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "/Applications/MAMP/htdocs/shequ_wap/unpackage/res/icons/启动画面-2.png", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": "/Applications/MAMP/htdocs/shequ_wap/unpackage/res/icons/启动画面-3.png"
+					"hdpi": "unpackage/res/icons/启动画面-1.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "unpackage/res/icons/启动画面-2.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "unpackage/res/icons/启动画面-3.png"
 				}
 			}
 		}

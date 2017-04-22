@@ -31,25 +31,25 @@
 				<!-- 第一张 -->
 				<div class="mui-slider-item">
 					<a href="#">
-						<img src="images/fhj.jpeg">
+						<img src="images/IMG_2934.JPG">
 					</a>
 				</div>
 				<!-- 第二张 -->
 				<div class="mui-slider-item">
 					<a href="#">
-						<img src="images/timg.jpg">
+						<img src="images/IMG_2935.JPG">
 					</a>
 				</div>
 					<!-- 第一张 -->
 				<div class="mui-slider-item">
 					<a href="#">
-						<img src="images/fhj.jpeg">
+						<img src="images/IMG_2936.JPG">
 					</a>
 				</div>
 				<!-- 第二张 -->
 				<div class="mui-slider-item">
 					<a href="#">
-						<img src="images/timg.jpg">
+						<img src="images/IMG_2934.JPG">
 					</a>
 				</div>
 				
@@ -79,12 +79,12 @@
 				             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-xiangqu1" style="color: #FFB400;" ></i>
 			                   	<h4 id="minzu">0</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >重点民语数/户</div> 
+			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >重点民语系人/户</div> 
 				            </li>
 				             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-jianyuede" style="color: #F37B53;" ></i>
 			                   	<h4 id="chuzu">*</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >流出人口/空房屋</div> 
+			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >重点地州民语/户</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-geren" style="color: #9D4A9C;" ></i>
@@ -201,6 +201,7 @@
 			
 			
 		getIndexData();	
+		
 		var slider = mui("#slider");
 			slider.slider({
 						interval: 5000
@@ -221,7 +222,7 @@
 		var changzhu = document.getElementById("changzhu");
 		var liudong = document.getElementById("liudong");
 		var zhongdian = document.getElementById("zhongdian");
-		var minzu = document.getElementById("minzu");
+//		var minzu = document.getElementById("minzu");
 		var yearvisit = document.getElementById("yearvisit");
 		var mouthvisit = document.getElementById("mouthVisit");
 		var todaycnt = document.getElementById("todaycnt");
@@ -236,7 +237,7 @@
 						success:function(data){
 							zhuhu.textContent =  data.data[0].zhuhu  + '/' + data.data[0].hushu;
 							//流出人口
-							chuzu.textContent = data.data[0].lcrk +'/'+data.data[0].emptyhouse;
+						//	chuzu.textContent = data.data[0].lcrk +'/'+data.data[0].emptyhouse;
 							//chuzu.textContent = data.data[0].chuzu;
 							//流动人口.流动户
 //							changzhu.textContent = data.data[0].liudong + '/'+ data.data[0].liudonghu;
@@ -244,7 +245,7 @@
 //							liudong.textContent = data.data[0].dibao + '/'+ data.data[0].pinkun;
 							//重点人口 重点户
 							zhongdian.textContent = data.data[0].zhongdian + '/'+ data.data[0].zhongdianhu;
-							minzu.textContent = data.data[0].minzu;
+						//	minzu.textContent = data.data[0].minzu;
 							//未走访
 							weizoufang.textContent = data.data[0].unvisited;
 //							zhuhu.textContent = data.data[0].zhuhu;
@@ -264,6 +265,7 @@
 		var changzhu = document.getElementById("changzhu");
 			var liudong = document.getElementById("liudong");
 			var minzu = document.getElementById("minzu");
+				var chuzu = document.getElementById("chuzu");
 		mui.ajax(urlforapp+'/platform/index/getsumdata?myid='+userid,{
 			dataType:'json',//服务器返回json格式数据
 			type:'get',//HTTP请求类型
@@ -274,8 +276,10 @@
 				changzhu.textContent = data.ldrs + '/'+ data.ldhs;
 				//出租房屋/人数
 				liudong.textContent = data.czrs + '/'+ data.czhs;
-				
+				//重点民语系
 				minzu.textContent = data.zdmyxrs + '/'+ data.zdmyxhs;
+				//重点地州
+					chuzu.textContent = data.zdsdzrs +'/'+data.zdsdzhs;
 				
 			},
 			error:function(xhr,type,errorThrown){
