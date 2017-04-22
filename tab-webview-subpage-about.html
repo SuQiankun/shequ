@@ -183,6 +183,23 @@
 			});
 
 	mui.plusReady(function(){
+			var resultStr =  plus.navigator.getCookie(urlforapp+'/');
+	    			var resultArr = resultStr.split(';');
+	    			
+			    for (i = 0; i< resultArr.length;i++) {
+						var keyStr = resultArr[i].split('=');
+						if ( strcmp(keyStr[0],"userName") == 0 ) {
+							plus.storage.setItem('username',decodeURI((keyStr[1])));
+						}
+			    }
+			    
+			function strcmp(a, b) {
+			    a = a.toString().trim(), b = b.toString();
+			    for (var i=0,n=Math.max(a.length, b.length); i<n && a.charAt(i) === b.charAt(i); ++i);
+			    if (i === n) return 0;
+			    return a.charAt(i) > b.charAt(i) ? -1 : 1;
+			}
+			
 			
 		getIndexData();	
 		var slider = mui("#slider");

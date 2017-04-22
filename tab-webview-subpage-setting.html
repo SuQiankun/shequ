@@ -29,6 +29,11 @@
 						关于
 					</a>
 				</li>
+					<li class="mui-table-view-cell">
+					<a id="changpsw" class="mui-navigate-right">
+						修改密码
+					</a>
+				</li>
 			</ul>
 			<ul class="mui-table-view" style="margin-top: 25px;">
 				<li class="mui-table-view-cell" >
@@ -44,6 +49,10 @@
 	<script>
 		mui.init({
 			swipeBack:true //启用右滑关闭功能
+		});
+		//修改密码 TODO 修改密码
+		document.getElementById("changpsw").addEventListener('tap',function(){
+			mui.openWindow('changePSW.html','changePSW',{});
 		});
 		
 		document.getElementById('exit').addEventListener('tap', function() {

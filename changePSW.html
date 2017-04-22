@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/Common.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style type="text/css">
+				.yl_txt { font-size: 15px; line-height: 37px; color: #222; }
+			</style>
+	<body>
+		
+		
+		
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">修改密码</h1>
+		</header>
+		<br />
+		
+		<div class="mui-content">
+					<div class="mui-input-group">
+							<div class="mui-input-row">
+								<label class="yl_txt" style="width: 35%;">原密码</label>
+								<input id="oldpsw" type="text" placeholder="请输入原密码">
+							</div>
+							<div class="mui-input-row">
+								<label class="yl_txt" style="width: 35%">新密码</label>
+								<input id="newpsw" type="text" placeholder="请输入新密码">
+							</div>
+							<div class="mui-input-row">
+								<label class="yl_txt" style="width: 35%">确认新密码</label>
+								<input id="newpswagain" type="text" placeholder="请确认新密码">
+							</div>
+								<div class="mui-button-row" style="margin: 0 auto;">
+								<button type="submit" class="mui-btn mui-btn-primary" onclick="changepassword()">确认</button>&nbsp;&nbsp;
+							</div>
+				</div>
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+		   					  
+
+			function changepassword(){
+					var oldpsw =  document.getElementById("oldpsw").value;
+					var newpws =  document.getElementById("newpsw").value;
+					var newpswagain =  document.getElementById("newpswagain").value
+					var username = plus.storage.getItem('username'); 
+					if (oldpsw.length<1) {
+						mui.alert('请输入您的原密码!');
+//						return false;
+					}
+					if (newpswagain != newpws) {
+						mui.alert('您两次输入的密码不一致!');
+//						return false;;
+					}
+					
+					console.log(urlforapp);
+					mui.ajax(urlforapp+'/sw/app/changepassword',{
+						data:{
+							"username":username,
+							"oldpass":oldpsw,
+							"newpass":newpws,
+						},
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；
+						success:function(data){
+							if (data.code == '200' && data.data == '修改密码成功') {
+									mui.alert('修改成功!');
+									setTimeout('mui.back()',1000);	
+							}
+							
+						},
+						error:function(xhr,type,errorThrown){
+							
+						}
+					});
+					
+					
+			}
+		</script>
+	</body>
+</html>

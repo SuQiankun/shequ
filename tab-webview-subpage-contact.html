@@ -272,9 +272,12 @@
 					success:function(data){
 						if (data.data == '新增人员成功!') {
 							mui.alert('新增人员成功!');
+							//新增人员成功后清除数据
+							clearData();
+							//
 						//获得列表界面的webview
 						var list = plus.webview.getWebviewById('tab-webview-subpage-about.html');
-						//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+						//触发列表界面的自定义事件（getindex）,从而进行数据刷新
 						mui.fire(list,'getindex');
 						} else{
 							mui.alert('新增人员失败!')
@@ -291,6 +294,19 @@
 	</script>	
 	<!--获取动态小区 楼栋 房间信息-->
 	<script type="text/javascript">
+		//提交成功以后,清除数据
+		function clearData(){
+				getWangge();
+			 document.getElementById("nameStr").value = '';
+			 document.getElementById("sexStr").value = '';
+			 document.getElementById("idcardStr").value = '';
+			 document.getElementById("phoneStr").value = '';
+			 document.getElementById("nationID").value = '';
+			 document.getElementById("pickDateBtn").textContent = '';
+			 document.getElementById("jgStr").value = '';
+			 document.getElementById("relationList").value = '';
+		}
+		
 		
 		//获取网格列表
 			function getWangge(){

@@ -212,7 +212,6 @@
 							//如果没有列表,插入空内容
 							document.getElementById("personList").innerHTML = '';
 							return;}
-						console.log(data.data[0].peo_name);
 					// 拼接插入的 html
 					for (i=0;i<data.data.length;i++) {
 					//判断数据是否为空,如果为空,设置默认值;
@@ -312,7 +311,6 @@
 		//  获取房间
 		function getHouseInfo(params){
 			$('#houselist').show()
-			console.log('房子 id'+params);
 			mui.ajax(urlforapp+':8080/app?cmd=getfcinfobyhouseid&houseid='+params,{
 				dataType:'json',//服务器返回json格式数据
 				type:'get',//HTTP请求类型
