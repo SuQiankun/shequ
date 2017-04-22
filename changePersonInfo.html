@@ -18,6 +18,7 @@
 		    <h1 class="mui-title">修改资料</h1>
 		</header>
 		
+		
 			<div class="mui-content">
 			<div class="mui-card">
 					<div class="mui-card-header">修改人员资料</div>
@@ -63,6 +64,11 @@
 								<select id="peo_is_jzry" style="width: 65%;" class="mui-btn-block">
 								</select>
 							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">重点地州</label>
+								<select id="peo_zdry_id" style="width: 65%;" class="mui-btn-block">
+								</select>
+							</div>				
 							
 								<div class="mui-input-row">
 								<label style="width: 30%;">流出人口</label>
@@ -333,7 +339,7 @@
 				var scnumInfo = document.getElementById("singlechild").value;
 				var bingyiInfo = document.getElementById("military").value;
 				var zaijiajuzhuInfo = document.getElementById("yesOrNot").value;
-				
+				var zdryInfo = document.getElementById("peo_zdry_id").value;//重点地州
 				var jzryInfo = document.getElementById("peo_is_jzry").value;
 				var lcrkInfo = document.getElementById("peo_is_lcrk").value;
 				var attidInfo = document.getElementById("peo_attr_id").value;
@@ -400,6 +406,7 @@
 					"peo_ecoyy_id":pinkunyuanyinInfo,
 					"PEO_IS_DISABLE":iscanji,
 					"peo_yz_relation":relation,
+					"peo_zdry_id":zdryInfo,
 				};
 				var params = $.toJSON(data);
 				mui.ajax(urlforapp+':8080/app?cmd=modifylivepeople',{
@@ -453,7 +460,8 @@
 		var housetype = ''; 	//房户类型;
 		var socialmumber =''; //低保证号
 		var pinkunyuanyin = ''; //贫困原因;
-		var jblx;
+		var jblx; //疾病类型
+		var zdry; //重点四地州
 		
 mui.plusReady(function () {
 			
@@ -563,6 +571,12 @@ mui.plusReady(function () {
 								common.peoattid(attrid,function(result){
 									document.getElementById("peo_attr_id").innerHTML = result;
 								});
+								//重点四地州
+								zdry = data.data[i].peo_zdry_id;
+								common.getDictTypeInfo(plus.storage.getItem('重点地州'),data.data[0].peo_zdry_id,function(result){
+									document.getElementById("peo_zdry_id").innerHTML = result;
+								});
+								
 								
 								//低保证号
 								socialmumber = data.data[i].socialmumber;

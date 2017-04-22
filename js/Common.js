@@ -1,6 +1,6 @@
 
-//var urlforapp =  'http://124.117.230.75';
-var urlforapp =  'http://192.168.1.7';
+var urlforapp =  'http://124.117.230.75';
+//var urlforapp =  'http://192.168.1.7';
 var peoListData;
 var houseData;
 var common = {
@@ -26,6 +26,7 @@ getSheQu: function getSheQu(callback) {
 						+'" selected = selected>'+ data.data[i].area_name+'</option>';
 					}
 				}
+				
 				resultStr = area_name;
 				callback(resultStr);		
 				},

@@ -69,14 +69,14 @@
 					</div>
 					<div class="mui-card-footer">
 						<div class="mui-button-row" style="margin: 0 auto;">
-							<button type="submit" class="mui-btn mui-btn-primary" id="searchPersionList" >搜索人员</button>&nbsp;&nbsp;
+							<button type="submit" class="mui-btn mui-btn-primary" id="searchPersionList" >搜索</button>&nbsp;&nbsp;
 							<!--<button type="submit" class="mui-btn mui-btn-primary" onclick="showhouseinfo()" >搜索房产</button>&nbsp;&nbsp;-->
 							<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
 						</div>
 					</div>
 				</div>
 			
-				<!--TODO  房产信息-->
+				<!--  房产信息-->
 				<div id="houselist" class="mui-content"  style="display: none;">
 						<div class="mui-card">
 							<div class="mui-card-header">
@@ -127,7 +127,8 @@
 							</div>
 						</div>
 				</div>
-				<!--TODO -->
+				<!--房产信息 end -->
+				
 				
 				<div id="personList" class="mui-content" >
 				</div>
@@ -197,6 +198,7 @@
 					mui.toast('请选择房间号');
 					return false;
 				}
+				
 				getHouseInfo(selected_val);
 				
 				mui.ajax(urlforapp+':8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
@@ -265,8 +267,9 @@
 					+'">'
 					+birth
 //					+ resultstr
-					+'</p></div><div class="mui-input-row"><label style="width: 35%;">包户人</label><p class="yl_txt">'
-					+username+':'+ names
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">网格员</label><p class="yl_txt">'
+//					+username+':'
+					+ names
 					+'</p></div></form></div><div class="mui-card-footer"><div class="mui-button-row" style="margin: 0 auto;">'
 					+'<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined"  id="'
 					+data.data[i].peo_id
