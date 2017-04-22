@@ -232,13 +232,11 @@
 								<input style="width: 65%;" id="singlechildnum" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							<div class="mui-input-row">
-								<label style="width: 35%;">光荣证享受情况</label>
-								<select id="singlechildenjoy">
+								<label style="width: 45%;" >光荣证享受情况</label>
+								<select id="singlechildenjoy" style="width: 55%;">
 									<option value="">请选择</option>
 								</select>
 							</div>
-							
-						
 							<div class="mui-input-row">
 								<label style="width: 30%;">兵役</label>
 								<select id="military" name="">
@@ -259,8 +257,11 @@
 					<div class="mui-card-footer">
 						<div class="mui-button-row" style="margin: 0 auto;">
 							<button type="button" class="mui-btn mui-btn-primary" id="changePersonInfo">提交修改</button>&nbsp;&nbsp;
-							<!--<button type="button" class="mui-btn mui-btn-danger" onclick="tip()">取消</button>-->
 						</div>
+						
+						<!--<div class="mui-button-row">
+							<button type="button" class="mui-btn mui-btn-primary" id="jumpImageView">查看图像资料</button>&nbsp;&nbsp;
+						</div>-->
 					</div>
 				</div>
 				
@@ -269,9 +270,19 @@
 		<script src="js/mui.min.js"></script>
 		
 		<script>
+			
+			document.getElementById("jumpImageView").addEventListener('tap',function(){
+				//跳转图片页面
+				mui.openWindow({
+					    url: 'imageView.html', 
+					    id:'image',
+						extras:{
+							imageList:peoListData,
+					    },
+				});
+			});
 
 			function getAdress(){
-				
 				var reID =  document.getElementById("RELIGION").value;
 												var numberStr = '';
 												switch (reID){
