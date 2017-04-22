@@ -43,8 +43,6 @@
 		
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript">
-		   					  
-
 			function changepassword(){
 					var oldpsw =  document.getElementById("oldpsw").value;
 					var newpws =  document.getElementById("newpsw").value;
@@ -59,7 +57,6 @@
 //						return false;;
 					}
 					
-					console.log(urlforapp);
 					mui.ajax(urlforapp+'/sw/app/changepassword',{
 						data:{
 							"username":username,

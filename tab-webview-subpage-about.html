@@ -79,7 +79,7 @@
 				             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-xiangqu1" style="color: #FFB400;" ></i>
 			                   	<h4 id="minzu">0</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >民族</div> 
+			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >重点民语数/户</div> 
 				            </li>
 				             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-jianyuede" style="color: #F37B53;" ></i>
@@ -94,7 +94,7 @@
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 								<i class="iconfont icon-feiji" style="color: #74B749;" ></i>
 			                   	<h4 id="liudong">0/0</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >低保/贫困人口</div> 
+			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >出租人数/出租户</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-shoucang" style="color: #DE577B;" ></i>
@@ -183,16 +183,15 @@
 			});
 
 	mui.plusReady(function(){
+	
 			var resultStr =  plus.navigator.getCookie(urlforapp+'/');
 	    			var resultArr = resultStr.split(';');
-	    			
 			    for (i = 0; i< resultArr.length;i++) {
 						var keyStr = resultArr[i].split('=');
 						if ( strcmp(keyStr[0],"userName") == 0 ) {
 							plus.storage.setItem('username',decodeURI((keyStr[1])));
 						}
 			    }
-			    
 			function strcmp(a, b) {
 			    a = a.toString().trim(), b = b.toString();
 			    for (var i=0,n=Math.max(a.length, b.length); i<n && a.charAt(i) === b.charAt(i); ++i);
@@ -216,6 +215,7 @@
 	
 	//获取首页数据
 	function getIndexData(){
+		getHomeData();
 		var zhuhu = document.getElementById("zhuhu");
 		var chuzu = document.getElementById("chuzu");
 		var changzhu = document.getElementById("changzhu");
@@ -226,7 +226,6 @@
 		var mouthvisit = document.getElementById("mouthVisit");
 		var todaycnt = document.getElementById("todaycnt");
 		var weizoufang = document.getElementById("weizoufang");
-		
 					mui.ajax(urlforapp+'/platform/index/',{
 						data:{
 							   "fromapp": "1",
@@ -235,22 +234,19 @@
 						type:'post',//HTTP请求类型
 						timeout:10000,//超时时间设置为10秒；
 						success:function(data){
-							
-							zhuhu.textContent =  (data.data[0].zhuhu - data.data[0].lcrk) + '/' + data.data[0].hushu;
+							zhuhu.textContent =  data.data[0].zhuhu  + '/' + data.data[0].hushu;
 							//流出人口
 							chuzu.textContent = data.data[0].lcrk +'/'+data.data[0].emptyhouse;
 							//chuzu.textContent = data.data[0].chuzu;
 							//流动人口.流动户
-							changzhu.textContent = data.data[0].liudong + '/'+ data.data[0].liudonghu;
+//							changzhu.textContent = data.data[0].liudong + '/'+ data.data[0].liudonghu;
 							//低保/贫困
-							liudong.textContent = data.data[0].dibao + '/'+ data.data[0].pinkun;
+//							liudong.textContent = data.data[0].dibao + '/'+ data.data[0].pinkun;
 							//重点人口 重点户
 							zhongdian.textContent = data.data[0].zhongdian + '/'+ data.data[0].zhongdianhu;
 							minzu.textContent = data.data[0].minzu;
 							//未走访
 							weizoufang.textContent = data.data[0].unvisited;
-						
-						
 //							zhuhu.textContent = data.data[0].zhuhu;
 							yearvisit.textContent = data.data[0].yearplan + '/'+data.data[0].yearvisited;
 							mouthvisit.textContent = data.data[0].monthplan + '/'+data.data[0].monthvisited;
@@ -261,6 +257,30 @@
 						}
 					});
 					
+	}
+	
+	function getHomeData(){
+		var userid = 'wgy%23'+plus.storage.getItem('userId');
+		var changzhu = document.getElementById("changzhu");
+			var liudong = document.getElementById("liudong");
+			var minzu = document.getElementById("minzu");
+		mui.ajax(urlforapp+'/platform/index/getsumdata?myid='+userid,{
+			dataType:'json',//服务器返回json格式数据
+			type:'get',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			success:function(data){
+				console.log(data.czhs);
+				//流动人口
+				changzhu.textContent = data.ldrs + '/'+ data.ldhs;
+				//出租房屋/人数
+				liudong.textContent = data.czrs + '/'+ data.czhs;
+				
+				minzu.textContent = data.zdmyxrs + '/'+ data.zdmyxhs;
+				
+			},
+			error:function(xhr,type,errorThrown){
+			}
+		});
 	}
 	
 	</script>

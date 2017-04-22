@@ -174,7 +174,7 @@
 				} else{
 					document.getElementById("account").value = plus.storage.getItem('username');
 				}
-				
+				//获取参数list
 				mui.ajax(urlforapp+':8080/app?cmd=getdictbytype&dictype=73d96446b8464d11ab42b14c3faa3a11',{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
@@ -235,11 +235,15 @@
 			})
 			.done(function(data, textStatus, jqXHR) {
 				if(data.data == 'success'){
+					
 					plus.storage.setItem('username', account);
+						getUSEID();
 						mui.openWindow({
 							url: 'tab-webview-main.html',
 							id: 'main', 
 						});
+						
+						
 				}else{
 						mui.toast("请检查账号密码!");
 					}
@@ -253,7 +257,24 @@
 			
 			});
 			
-		
+		function getUSEID(){
+			var resultStr =  plus.navigator.getCookie(urlforapp+'/');
+	    			var resultArr = resultStr.split(';');
+	    			
+			    for (i = 0; i< resultArr.length;i++) {
+						var keyStr = resultArr[i].split('=');
+						if ( strcmp(keyStr[0],"userId") == 0 ) {
+							plus.storage.setItem('userId',decodeURI((keyStr[1])));
+						}
+			    }
+			    
+			function strcmp(a, b) {
+			    a = a.toString().trim(), b = b.toString();
+			    for (var i=0,n=Math.max(a.length, b.length); i<n && a.charAt(i) === b.charAt(i); ++i);
+			    if (i === n) return 0;
+			    return a.charAt(i) > b.charAt(i) ? -1 : 1;
+			}
+		}
 	
 		</script>
 	</body>
