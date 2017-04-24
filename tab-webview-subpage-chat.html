@@ -80,7 +80,7 @@
 				<div id="houselist" class="mui-content"  style="display: none;">
 						<div class="mui-card">
 							<div class="mui-card-header">
-								<h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span> &nbsp;&nbsp房产信息</span></h4></div>
+								<h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span id="titleString"> &nbsp;&nbsp房产信息</span></h4></div>
 							<div class="mui-card-content">
 								<form class="mui-input-group">
 									<div class="mui-input-row"><label style="width: 35%;">房主姓名</label>
@@ -330,6 +330,13 @@
 					document.getElementById("housetype").innerText = common.changestr(data.data[0].fc_house_type_id);
 					document.getElementById("housecategory").innerText = common.changestr(data.data[0].fc_house_category_id);
 					document.getElementById("housesurce").innerText = common.changestr(data.data[0].fc_house_source_id);
+					
+					var str = data.data[0].fc_house_source_id;
+					if (str.indexOf('租')>=0) {
+						$("#titleString").css("color","dodgerblue");
+					}else{
+						$("#titleString").css("color","black");
+					}
 				},
 				error:function(xhr,type,errorThrown){
 				}
