@@ -623,7 +623,6 @@ mui.plusReady(function () {
 						//循环遍历,如果是当前人员 取出数据
 					for (i=0;i<data.data.length;i++) {
 						if (data.data[i].peo_id == peoid) {
-							
 								//兵役状况
 								bingyi = data.data[i].peo_by_id;
 								common.getBingyi('military','military',bingyi);
@@ -810,7 +809,7 @@ mui.plusReady(function () {
 		
 	}
 </script>
-<!--疾病信息-->
+<!--家在疾病信息-->
 <script>
 	
 	function showJibingleixing(){
@@ -845,7 +844,8 @@ mui.plusReady(function () {
 			});
 			
 </script>
-		<script>
+		
+<script>
 			document.getElementById("rudangshijian").addEventListener('tap',function(){
 				creatTimeLime("rudangshijian");
 			});
