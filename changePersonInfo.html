@@ -135,11 +135,38 @@
 								<input id="danweidizhi" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							<div class="mui-input-row">
-								<label style="width: 30%;">参保情况</label>
+								<label style="width: 30%;">退休时间</label>
+								<label  id="peo_retire_date" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择退休时间" data-input-clear="5">点击选择退休日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">毕业院校 </label>
+								<input id="peo_byyx" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">身高(cm)</label>
+								<input id="peo_height" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">体重(kg)</label>
+								<input id="peo_weight" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">爱好特长</label>
+								<input id="peo_hobby" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">医疗参保</label>
 								<select  id="yiliaoqingkuang" >
 									<option value="">请选择</option>
 								</select>
-								<!--<input id="yiliaoqingkuang" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>-->
+							</div>
+								<div class="mui-input-row">
+								<label style="width: 30%;">养老参保</label>
+								<select  id="peo_ylqk" >
+									<option value="">请选择</option>
+								</select>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">户口性质</label>
@@ -158,19 +185,22 @@
 							<div class="mui-input-row">
 								<label style="width: 30%;">入党时间</label>
 								<label  id="rudangshijian" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择入党时间" data-input-clear="5">点击选择入党日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
-								<!--<input id="rudangshijian" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>-->
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">党内职务</label>
 								<input id="dangneizhiwu" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
+							
 							<div class="mui-input-row">
 								<label style="width: 30%;">婚姻状况</label>
 								<select id="marry">
 									<option value="">请选择</option>
 								</select>
 							</div>
-							
+							<div class="mui-input-row">
+								<label style="width: 30%;">结婚时间</label>
+									<label  id="peo_marry_date" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择结婚时间" data-input-clear="5">点击选择结婚时间<span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
 							<div class="mui-input-row">
 								<label  style="width: 30%;">经济状况</label>
 								<select id="income" name="">
@@ -243,6 +273,21 @@
 									<option value="">请选择</option>
 								</select>
 							</div>
+							<div class="mui-input-row" id="div_by_org">
+								<label style="width: 30%;">服役部队</label>
+								<input style="width: 65%;" id="peo_by_org" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
+							<div class="mui-input-row" id="div_by_indate">
+								<label style="width: 30%;">服役时间</label>
+								<label  id="peo_by_indate" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择服役时间" data-input-clear="5">点击选择服役日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
+							<div class="mui-input-row" id="div_by_outdate">
+								<label style="width: 30%;">退役时间</label>
+								<label  id="peo_by_outdate" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择退役时间" data-input-clear="5">点击选择退役日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
 							<div class="mui-input-row">
 								<label style="width: 30%;">在家居住</label>
 								<select id="yesOrNot" name="">
@@ -367,7 +412,26 @@
 				var sctypeInfo = document.getElementById("singlechild").value;
 				var scnumInfo = document.getElementById("singlechildnum").value;
 				var scenjoyInfo = document.getElementById("singlechildenjoy").value;
-
+				//爱好特长
+				var hobbyinfo = document.getElementById("peo_hobby").value;
+				//毕业院校
+				var byyxInfo = document.getElementById("peo_byyx").value;
+				//结婚时间
+				var marryDateInfo= common.jointime(document.getElementById("peo_marry_date").textContent);
+				//服役部队
+				var byorgInfo = document.getElementById("peo_by_org").value;
+				//服役时间
+				var byinDateInfo = common.jointime(document.getElementById("peo_by_indate").textContent);
+				//退役时间
+				var byoutDateInfo = common.jointime(document.getElementById("peo_by_outdate").textContent);
+				//养老情况
+				var yanglaoInfo =  document.getElementById("peo_ylqk").value;
+				//退休时间
+				var retireinfo= common.jointime(document.getElementById("peo_retire_date").textContent);
+				//身高体重
+				var heightinfo = document.getElementById("peo_height").value;
+				var weightinfo = document.getElementById("peo_weight").value;
+				
 				if (document.getElementById("polit").value == '26c0381f2de54fd8887ab42d99da1481' && rudangshijianInfo == null) {
 					mui.alert('请选择入党时间');
 					return false;
@@ -433,6 +497,15 @@
 					"peo_single_child_card":sctypeInfo,
 					"peo_single_child_num":scnumInfo,
 					"peo_xsqk_id":scenjoyInfo,
+					"peo_hobby":hobbyinfo,
+					"peo_byyx":byyxInfo,
+					"peo_marry_date":marryDateInfo,
+					"peo_by_org":byorgInfo,
+					"peo_by_indate":byinDateInfo,
+					"peo_by_outdate":byoutDateInfo,
+					"peo_retire_date":retireinfo,
+					"peo_weight":heightinfo,
+					"peo_stature":weightinfo,
 				};
 				var params = $.toJSON(data);
 				mui.ajax(urlforapp+':8080/app?cmd=modifylivepeople',{
@@ -544,9 +617,17 @@ mui.plusReady(function () {
 						//循环遍历,如果是当前人员 取出数据
 					for (i=0;i<data.data.length;i++) {
 						if (data.data[i].peo_id == peoid) {
+							
 								//兵役状况
 								bingyi = data.data[i].peo_by_id;
 								common.getBingyi('military','military',bingyi);
+								//部队名称
+								document.getElementById("peo_by_org").value = data.data[i].peo_by_org;
+								//入伍时间
+								document.getElementById("peo_by_indate").textContent = common.changestr(data.data[i].peo_by_indate);
+								//退伍时间
+								document.getElementById("peo_by_outdate").textContent = common.changestr(data.data[i].peo_by_outdate);
+								
 								//与业主关系
 								var relation = data.data[i].peo_yz_relation;
 								common.getReligion('ownRealt','ownRealt',relation);
@@ -619,6 +700,12 @@ mui.plusReady(function () {
 								//婚姻情况
 								hyzk = data.data[i].peo_hyzk;
 								common.getReligion('marry','marry',hyzk);
+								
+								//结婚时间
+								var marryDate = data.data[i].peo_marry_date;
+								document.getElementById("peo_marry_date").textContent= common.changestr(marryDate);
+								
+								
 								//政治面貌
 								zzmm = data.data[i].peo_zzmm_id;
 								common.getReligion('polit','polit',zzmm);
@@ -626,6 +713,7 @@ mui.plusReady(function () {
 								//学历信息
 								xueli = data.data[i].peo_edu_deg_id;
 								common.getReligion('degree','degree',xueli);
+								
 								//经济情况
 								jingji = data.data[i].peo_eco_id;
 								common.getReligion('income','income',jingji);
@@ -658,12 +746,31 @@ mui.plusReady(function () {
 								//工作单位
 								workunit = data.data[i].peo_work_unit;
 								document.getElementById("danweidizhi").value = common.changestr(workunit);
+								//退休时间
+								var retiretime = data.data[i].peo_retire_date;
+								document.getElementById("peo_retire_date").textContent= common.changestr(retiretime);
+								//毕业院校
+								var school = data.data[i].peo_byyx;
+								document.getElementById("peo_byyx").value = common.changestr(school);
+								//身高体重
+								document.getElementById("peo_height").value =data.data[i].peo_stature;
+								document.getElementById("peo_weight").value =data.data[i].peo_weight;
+							
+								//爱好 特长
+								var hobby = data.data[i].peo_hobby;
+								document.getElementById("peo_hobby").value = common.changestr(hobby);
 								
 								//参保情况
 								yiliao = data.data[i].peo_social_id;
 								common.getDictTypeInfo(plus.storage.getItem('参保情况'),yiliao,function(result){
 									document.getElementById("yiliaoqingkuang").innerHTML = result;									
 								});
+								//养老情况
+								var peo_ylqk = data.data[i].peo_ylqk;
+								common.getDictTypeInfo(plus.storage.getItem('养老参保情况'),peo_ylqk,function(result){
+									document.getElementById("peo_ylqk").innerHTML = result;									
+								});
+								
 								
 								//户口地址
 								hkdz = data.data[i].peo_hk_addr;
@@ -773,6 +880,53 @@ mui.plusReady(function () {
 					maxDate: maxDate
 				});
 			})
+		</script>
+		
+		<script>
+			
+			document.getElementById("peo_marry_date").addEventListener('tap',function(){
+				creatTimeLime("peo_marry_date")
+			});
+			document.getElementById("peo_by_indate").addEventListener('tap',function(){
+				creatTimeLime("peo_by_indate")
+			});
+			document.getElementById("peo_by_outdate").addEventListener('tap',function(){
+				creatTimeLime("peo_by_outdate")
+			});
+		
+			document.getElementById("peo_by_org").addEventListener('tap',function(){
+				creatTimeLime("peo_by_org")
+			});
+			document.getElementById("peo_retire_date").addEventListener('tap',function(){
+				creatTimeLime("peo_retire_date")
+			});
+			
+			function creatTimeLime(element){
+				
+				var info = document.getElementById(element);
+				document.getElementById(element).addEventListener('tap', function() {
+				var dDate = new Date();
+				dDate.setFullYear(2016, 7, 16);
+				var minDate = new Date();
+				minDate.setFullYear(1800, 0, 1);
+				var maxDate = new Date();
+				maxDate.setFullYear(2050, 01, 01);
+				plus.nativeUI.pickDate(function(e) {
+					var d = e.date;
+					info.textContent = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+				}, function(e) {
+//					info.innerText = self.birth;
+				}, {
+					title: "请选择日期",
+					date: dDate,
+					minDate: minDate,
+					maxDate: maxDate
+				});
+			})
+				
+				
+			}
+			
 		</script>
 		
 	</body>
