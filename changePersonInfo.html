@@ -294,7 +294,12 @@
 									<option value="">请选择</option>
 								</select>
 							</div>
-							
+							<div class="mui-input-row">
+								<label style="width: 50%;font-size: 13px;">是否参加公益活动</label>
+								<select id="Publicwelfare"style="width: 50%;">
+									<option value="">请选择</option>
+								</select>
+							</div>
 						</form>
 						
 						<div id='result' class="ui-alert"></div>
@@ -304,9 +309,6 @@
 							<button type="button" class="mui-btn mui-btn-primary" id="changePersonInfo">提交修改</button>&nbsp;&nbsp;
 						</div>
 						
-						<!--<div class="mui-button-row">
-							<button type="button" class="mui-btn mui-btn-primary" id="jumpImageView">查看图像资料</button>&nbsp;&nbsp;
-						</div>-->
 					</div>
 				</div>
 				
@@ -431,6 +433,9 @@
 				//身高体重
 				var heightinfo = document.getElementById("peo_height").value;
 				var weightinfo = document.getElementById("peo_weight").value;
+				//公益活动
+				var Publicwelfareinfo = document.getElementById("Publicwelfare").value; 
+				
 				
 				if (document.getElementById("polit").value == '26c0381f2de54fd8887ab42d99da1481' && rudangshijianInfo == null) {
 					mui.alert('请选择入党时间');
@@ -506,6 +511,7 @@
 					"peo_retire_date":retireinfo,
 					"peo_weight":heightinfo,
 					"peo_stature":weightinfo,
+					"peo_cjgy":Publicwelfareinfo,
 				};
 				var params = $.toJSON(data);
 				mui.ajax(urlforapp+':8080/app?cmd=modifylivepeople',{
@@ -790,6 +796,11 @@ mui.plusReady(function () {
 									document.getElementById("singlechildenjoy").innerHTML = result;
 								});
 								
+								var joinPublicwelfare = data.data[i].peo_cjgy;
+								common.getDictTypeInfo(plus.storage.getItem('是否状态'),joinPublicwelfare,function(result){
+									document.getElementById("Publicwelfare").innerHTML = result;
+								});
+								
 								
 							}
 						//if 判断结束
@@ -799,6 +810,7 @@ mui.plusReady(function () {
 		
 	}
 </script>
+<!--疾病信息-->
 <script>
 	
 	function showJibingleixing(){
@@ -833,57 +845,13 @@ mui.plusReady(function () {
 			});
 			
 </script>
-<!--时间选择器-->	
-<script>
-				var rdsj = document.getElementById("rudangshijian");
-//				var self = plus.webview.currentWebview();
-				document.getElementById("rudangshijian").addEventListener('tap', function() {
-				var dDate = new Date();
-				dDate.setFullYear(2016, 7, 16);
-				var minDate = new Date();
-				minDate.setFullYear(1800, 0, 1);
-				minDate.setFullYear(1800, 0, 1);
-				var maxDate = new Date();
-				maxDate.setFullYear(2050, 01, 01);
-				plus.nativeUI.pickDate(function(e) {
-					var d = e.date;
-					rdsj.textContent = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-				}, function(e) {
-//					info.innerText = self.birth;
-				}, {
-					title: "请选择日期",
-					date: dDate,
-					minDate: minDate,
-					maxDate: maxDate
-				});
-			})
-		</script>
-<!--时间选择器-->	
-<script>
-				var info = document.getElementById("pickDateBtn");
-				document.getElementById("pickDateBtn").addEventListener('tap', function() {
-				var dDate = new Date();
-				dDate.setFullYear(2016, 7, 16);
-				var minDate = new Date();
-				minDate.setFullYear(1800, 0, 1);
-				var maxDate = new Date();
-				maxDate.setFullYear(2050, 01, 01);
-				plus.nativeUI.pickDate(function(e) {
-					var d = e.date;
-					info.textContent = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-				}, function(e) {
-					info.innerText = self.birth;
-				}, {
-					title: "请选择日期",
-					date: dDate,
-					minDate: minDate,
-					maxDate: maxDate
-				});
-			})
-		</script>
-		
 		<script>
-			
+			document.getElementById("rudangshijian").addEventListener('tap',function(){
+				creatTimeLime("rudangshijian");
+			});
+			document.getElementById("pickDateBtn").addEventListener('tap',function(){
+					creatTimeLime("pickDateBtn");
+			});
 			document.getElementById("peo_marry_date").addEventListener('tap',function(){
 				creatTimeLime("peo_marry_date")
 			});
@@ -924,9 +892,7 @@ mui.plusReady(function () {
 				});
 			})
 				
-				
 			}
-			
 		</script>
 		
 	</body>
