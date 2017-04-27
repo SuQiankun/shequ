@@ -234,7 +234,6 @@
 											<button type="button" id="uploadIDCARD"  class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
 										</div>
 								</div>
-							<!--TODO 身份证照片-->
 							<div class="mui-input-row">
 								<label style="width: 30%;">手机号码</label>
 								<input style="width: 65%;" id="phoneStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
@@ -423,7 +422,6 @@
 											<button id="uploadSociaPIC" type="button" class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
 										</div>
 								</div>
-							<!--TODO 低保证-->
 							<div class="mui-input-row">
 								<label  style="width: 30%;">健康状况</label>
 								<select id="jiankangzhuangkuang" name="" onchange="showJibingleixing()">
@@ -1178,11 +1176,11 @@ mui.plusReady(function () {
 	document.getElementById("uploadSinglePIC").addEventListener('tap',function(){
 		plus.gallery.pick(function(p){
 			$("#singlechildPIC").attr('src',p);
-			uploadImg('singlPicAdd');
+			uploadImg('singlPicAdd',p);
 		});
 	});
 	
-	function uploadImg(params){
+	function uploadImg(params,p){
 		var server=urlforapp+":8080/app/uploadimg";
 		var wt=plus.nativeUI.showWaiting();
 		var task=plus.uploader.createUpload(server,
