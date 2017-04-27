@@ -272,7 +272,7 @@
 			type:'get',//HTTP请求类型
 			timeout:10000,//超时时间设置为10秒；
 			success:function(data){
-				console.log(data.czhs);
+
 				//流动人口
 				changzhu.textContent = data.ldrs + '/'+ data.ldhs;
 				//出租房屋/人数

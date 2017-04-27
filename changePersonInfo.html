@@ -1,15 +1,53 @@
 <!doctype html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<script src="js/Common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/Common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/json.js" type="text/javascript" charset="utf-8"></script>
+		<link href="css/mui.picker.min.css" rel="stylesheet" type="text/css" />
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
+		<style>
+			html,body {
+				background-color: #efeff4;
+			}
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			 .oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0;
+				vertical-align: middle;
+			}
+			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}
+	
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			.oa-contact-avatar img {
+				border-radius: 50%;
+			}
+			.oa-contact-content {
+				width: 100%;
+			}
+			.oa-contact-name {
+				margin-right: 20px;
+			}
+			.oa-contact-name, oa-contact-position {
+				float: left;
+			}
+		</style>
+
 	</head>
 		<!--App自定义的css-->
 		<style type="text/css">
@@ -165,13 +203,13 @@
 				height: auto;
 			}
 		</style>
+		
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		    <h1 class="mui-title">修改资料</h1>
 		</header>
-		
-		
+	
 			<div class="mui-content">
 			<div class="mui-card">
 					<div class="mui-card-header">修改人员资料</div>
@@ -191,9 +229,9 @@
 							<!--TODO 身份证照片-->
 								<div class="mui-input-row" style="height: 100%;">
 										<label style="width: 35%;"> 身份证照片</label>
-										<img id="idcardPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src="" data-preview-src="" data-preview-group="1"/  >
+										<img id="idcardPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src="" data-preview-src="" data-preview-group="1" /  >
 										<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
-											<button class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
+											<button type="button" id="uploadIDCARD"  class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
 										</div>
 								</div>
 							<!--TODO 身份证照片-->
@@ -419,9 +457,9 @@
 						<!--TODO 残疾证 -->
 							<div class="mui-input-row" style="height: 100%;">
 										<label style="width: 35%;"> 残疾证照片</label>
-										<img id="disablePIC" alt="残疾证照片" style="height: 100px; width: 180px; margin-top: 10px;"  src=""/ >
+										<img id="disablePIC" alt="残疾证照片" style="height: 100px; width: 180px; margin-top: 10px;"  src=""  data-preview-src="" data-preview-group="1"/ >
 										<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
-											<button class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
+											<button   class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
 										</div>
 								</div>
 							<div class="mui-input-row">
@@ -442,9 +480,9 @@
 							<!--TODO -->
 								<div class="mui-input-row" style="height: 100%;">
 										<label style="width: 35%;"> 光荣证证照片</label>
-										<img id="singlechildPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src=""/ >
+										<img id="singlechildPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src=""  data-preview-src="" data-preview-group="1"/ >
 										<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
-											<button class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
+											<button type="button" class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
 										</div>
 								</div>
 							<div class="mui-input-row">
@@ -510,7 +548,6 @@
 //					    },
 //				});
 //			});
-
 			function getAdress(){
 				var reID =  document.getElementById("RELIGION").value;
 												var numberStr = '';
@@ -753,7 +790,6 @@
 		var zdry; //重点四地州
 		
 mui.plusReady(function () {
-			
 			var web = plus.webview.currentWebview();
 				//获取传递参数
 			  document.getElementById('nameStr').value = web.name;
@@ -777,7 +813,6 @@ mui.plusReady(function () {
 				type:'get',
 				success:function(data){
 				var area_name = '<option value="">请选择</option>';
-				
 				for (i=0;i<data.data.length;i++) {
 						//判断是否加载初始值;
 						if( data.data[i].val == web.nation){
@@ -790,15 +825,15 @@ mui.plusReady(function () {
 							'<option value="'+
 							data.data[i].ids
 							+'">'+ data.data[i].val+'</option>';
-						}}
+						}
+					}
 				document.getElementById("nationID").innerHTML = area_name;
 				},
 				error: function(xhr,type,errorThrown){}});
 				//设置初始数据
 				setInitData(web.peoList,web.personid);
-	
-	});
-		</script>
+			});
+</script>
 <!--设置资料初始值-->
 <script >
 	function setInitData(data,peoid){
@@ -828,7 +863,9 @@ mui.plusReady(function () {
 								religion =data.data[i].peo_religion_id;
 								daogao = data.data[i].peo_dao_gao_id;								
 								common.getdaogaoAdress('RELIGION','RELIGION',religion,function(result){
-									document.getElementById("RELIGION").innerHTML = result;
+								
+								document.getElementById("RELIGION").innerHTML = result;
+												
 												var reID =  document.getElementById("RELIGION").value;
 												var numberStr = '';
 												switch (reID){
@@ -976,6 +1013,7 @@ mui.plusReady(function () {
 								common.getDictTypeInfo(plus.storage.getItem('光荣证政策享受情况'),data.data[i].peo_xsqk_id,function(result){
 									document.getElementById("singlechildenjoy").innerHTML = result;
 								});
+
 								//是否参加公益活动
 								var joinPublicwelfare = data.data[i].peo_cjgy;
 								common.getDictTypeInfo(plus.storage.getItem('是否状态'),joinPublicwelfare,function(result){
@@ -987,34 +1025,23 @@ mui.plusReady(function () {
 								setImageAction('sociaPIC','低保证照片暂无',data.data[i].socialpic);
 								setImageAction('singlechildPIC','光荣证照片暂无',data.data[i].peo_single_child_pic);
 								setImageAction('disablePIC','残疾证照片暂无',data.data[i].peo_dis_card_pic);
-								//data.data[i].peo_card_pic 身份证照片
-								//data.data[i].socialpic  低保证照片
-								//data.data[i].peo_single_child_pic 光荣证
-								//data.data[i].peo_dis_card_pic 残疾证
-								
-								
-							}
-						//if 判断结束
-						}			
-			//数据初始化完成
-
-		
-	}
+								}}}
 </script>
-<!--家在疾病信息-->
+
+<!--加载疾病信息-->
 <script>
 /**
  * 设置图片
- * @param {Object} params 图片的 url
- * @tipStr {Object} tipStr 显示的 alt
- * @imgID {Object} imgID img的 id
+ * @param {图片的url} params 
+ * @param {显示的alt} tipStr
+ * @param {img的id} imgID 
  */
 	function setImageAction(imgID,tipStr,params){
-				if (params != '' ) {
+		if (params != '' ) {
 						$("#"+imgID).attr("src",urlforapp+params);
 				}else{
 						$("#"+imgID).attr("alt",tipStr);	
-				}
+			}
 	}
 	
 	
@@ -1037,6 +1064,7 @@ mui.plusReady(function () {
 		});
 	}
 	
+	 
 //设置返回的刷新事件
 	mui.init({
 				beforeback: function(){
@@ -1056,31 +1084,11 @@ mui.plusReady(function () {
 <script src="js/mui.zoom.js" type="text/javascript" charset="utf-8"></script>
 <script>
 		mui.previewImage();
-			document.getElementById("rudangshijian").addEventListener('tap',function(){
-				creatTimeLime("rudangshijian");
-			});
-			document.getElementById("pickDateBtn").addEventListener('tap',function(){
-					creatTimeLime("pickDateBtn");
-			});
-			document.getElementById("peo_marry_date").addEventListener('tap',function(){
-				creatTimeLime("peo_marry_date")
-			});
-			document.getElementById("peo_by_indate").addEventListener('tap',function(){
-				creatTimeLime("peo_by_indate")
-			});
-			document.getElementById("peo_by_outdate").addEventListener('tap',function(){
-				creatTimeLime("peo_by_outdate")
-			});
-		
-			document.getElementById("peo_by_org").addEventListener('tap',function(){
-				creatTimeLime("peo_by_org")
-			});
-			document.getElementById("peo_retire_date").addEventListener('tap',function(){
-				creatTimeLime("peo_retire_date")
-			});
-			
+			/**
+			 * 
+			 * @param {元素的id} element
+			 */
 			function creatTimeLime(element){
-				
 				var info = document.getElementById(element);
 				document.getElementById(element).addEventListener('tap', function() {
 				var dDate = new Date();
@@ -1103,8 +1111,44 @@ mui.plusReady(function () {
 			})
 				
 			}
-		</script>
+			document.getElementById("rudangshijian").addEventListener('tap',function(){
+				creatTimeLime("rudangshijian");
+			});
+			document.getElementById("pickDateBtn").addEventListener('tap',function(){
+					creatTimeLime("pickDateBtn");
+			});
+			document.getElementById("peo_marry_date").addEventListener('tap',function(){
+				creatTimeLime("peo_marry_date")
+			});
+			document.getElementById("peo_by_indate").addEventListener('tap',function(){
+				creatTimeLime("peo_by_indate")
+			});
+			document.getElementById("peo_by_outdate").addEventListener('tap',function(){
+				creatTimeLime("peo_by_outdate")
+			});
 		
-	</body>
+			document.getElementById("peo_by_org").addEventListener('tap',function(){
+				creatTimeLime("peo_by_org")
+			});
+			document.getElementById("peo_retire_date").addEventListener('tap',function(){
+				creatTimeLime("peo_retire_date")
+			});
 
+
+</script>
+
+<!--<script src="js/immersed.js" type="text/javascript" charset="utf-8"></script>-->
+	<script type="text/javascript">
+	document.getElementById("uploadIDCARD").addEventListener('tap',function(){
+		
+		plus.gallery.pick(function(p){
+			console.log('132');
+			console.log(p);
+			$("#idcardPIC").attr('src',p);
+		},function(e){
+			console.log('321');
+		});
+	});
+	</script>
+	</body>
 </html>

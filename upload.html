@@ -6,99 +6,33 @@
 		<meta name="HandheldFriendly" content="true"/>
 		<meta name="MobileOptimized" content="320"/>
 		<title>Hello H5+</title>
-				<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/mui.min.css" rel="stylesheet" />
 		<link href="css/mui.picker.min.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="css/mui.min.css">
-		<style>
-			html,body {
-				background-color: #efeff4;
-			}
-			.title{
-				margin: 20px 15px 10px;
-				color: #6d6d72;
-				font-size: 15px;
-			}
-			 .oa-contact-cell.mui-table .mui-table-cell {
-				padding: 11px 0;
-				vertical-align: middle;
-			}
-			
-			.oa-contact-cell {
-				position: relative;
-				margin: -11px 0;
-			}
-	
-			.oa-contact-avatar {
-				width: 75px;
-			}
-			.oa-contact-avatar img {
-				border-radius: 50%;
-			}
-			.oa-contact-content {
-				width: 100%;
-			}
-			.oa-contact-name {
-				margin-right: 20px;
-			}
-			.oa-contact-name, oa-contact-position {
-				float: left;
-			}
-		</style>
-		<script type="text/javascript">
-var server="http://192.168.1.7:8080/app/uploadimg";
-var files=[];
-// 上传文件
-function upload(){
-	if(files.length<=0){
-		plus.nativeUI.alert("没有添加上传文件！");
-		return;
-	}
-	var wt=plus.nativeUI.showWaiting();
-	var task=plus.uploader.createUpload(server,
-		{method:"POST"},
-		function(t,status){ //上传完成
-			if(status==200){
-				console.log("上传成功："+t.responseText);
-				wt.close();
-			}else{
-				console.log("上传失败："+status);
-				console.log(files[0]);
-				wt.close();
-			}
-		}
-	);
-	task.addFile(files[0],{key:"upimg"});
-	task.start();
-}
-// 从相册添加文件
-function appendByGallery(){
-	plus.gallery.pick(function(p){
-   			 files.push(p);
-   			 upload();
-    });
-}
-		</script>
-		<link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8"/>
-	</head>
+		<script src="js/Common.js" type="text/javascript" charset="utf-8"></script>
+	</head
 	<body>
-		<header class="mui-bar mui-bar-nav">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title">上传图片</h1>
-		</header>
-		<div id="dcontent" class="dcontent">
-			<br/>
-			<p class="heading">上传文件列表：</p>
-			<ul id="files" style="text-align:left;">
-				<p id="empty" style="font-size:12px;color:#C6C6C6;">无上传文件</p>
-			</ul>
-			<table style="width:100%;">
-				<tbody>
-					<tr>
-						<td style="width:40%"><div class="button button-select" onclick="appendByGallery()">相册选取</div></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">上传图片</h1>
+</header>
+
+<div class="mui-content">
+	<button onclick="addImg()"点击选择图片</button>
+	<img id="img" style="height: 180px;width: 120px;"/>
+		
+</div>
+<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+function addImg(){
+ plus.gallery.pick( function(path){
+    	console.log(path);
+    	$("#img").attr('src',path);
+    }, function ( e ) {
+    	console.log( "取消选择图片" );
+    }, {filter:"image"} );		
+}
+</script>
 	</body>
-	<script type="text/javascript" src="../js/immersed.js" ></script>
 </html>

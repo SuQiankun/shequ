@@ -48,7 +48,7 @@
             "description": "访问本地文件系统"
         },
         "Gallery": {
-            "description": "访问系统相册"
+        		"description": "系统相册"
         },
         "Geolocation": {
             "description": "访问位置信息"
@@ -255,7 +255,10 @@
 					"images/fhj.jpeg",
 					"images/timg.jpg",
 					"upload.html",
-					"js/Common.js"
+					"js/Common.js",
+					"images/IMG_2935.JPG",
+					"images/IMG_2934.JPG",
+					"images/IMG_2936.JPG"
 				],
 				"refer": [
 					"showMessage.html",
@@ -293,7 +296,10 @@
 					"css/mui.min.css",
 					"js/jquery-3.2.0.min.js",
 					"js/json.js",
-					"js/Common.js"
+					"js/Common.js",
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"changePersonInfo.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -315,7 +321,8 @@
 				],
 				"refer": [
 					"login.html",
-					"about.html"
+					"about.html",
+					"upload.html"
 				],
 				"priority": 0
 			},
