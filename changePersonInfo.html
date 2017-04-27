@@ -734,6 +734,7 @@
 					"peo_dis_card_pic":disablePicAdd,
 					"peo_single_child_pic":singlPicAdd,
 				};
+				console.log('=========='+singlPicAdd);
 				var params = $.toJSON(data);
 				mui.ajax(urlforapp+':8080/app?cmd=modifylivepeople',{
 					data:params,
@@ -1029,8 +1030,10 @@ mui.plusReady(function () {
 								setImageAction('idcardPIC','身份证照片暂无',data.data[i].peo_card_pic);
 								idcardPicAdd = data.data[i].peo_card_pic;
 								
+								console.log(data.data[i].peo_card_pic);
 								setImageAction('sociaPIC','低保证照片暂无',data.data[i].socialpic);
 								sociaPicAdd = data.data[i].socialpic;
+								console.log(data.data[i].socialpic);
 								
 								setImageAction('singlechildPIC','光荣证照片暂无',data.data[i].peo_single_child_pic);
 								singlPicAdd = data.data[i].peo_single_child_pic;
@@ -1162,21 +1165,69 @@ mui.plusReady(function () {
 	document.getElementById("uploadSociaPIC").addEventListener('tap',function(){
 		plus.gallery.pick(function(p){
 			$("#sociaPIC").attr('src',p);
-			uploadImg('sociaPicAdd');
+			var server=urlforapp+":8080/app/uploadimg";
+		var wt=plus.nativeUI.showWaiting();
+		var task=plus.uploader.createUpload(server,
+			{method:"POST"},
+			function(t,status){ //上传完成
+				if(status==200){
+					var data = JSON.parse(t.responseText)
+					wt.close();
+					sociaPicAdd = data.data;
+				}else{
+					wt.close();
+				}
+			}
+		);
+		task.addFile(p,{key:"upimg"});
+		task.start();
+			
 		});
 	});
 	
 	document.getElementById("uploadDisablePIC").addEventListener('tap',function(){
 		plus.gallery.pick(function(p){
 			$("#disablePIC").attr('src',p);
-			uploadImg('disablePicAdd');
+				var server=urlforapp+":8080/app/uploadimg";
+		var wt=plus.nativeUI.showWaiting();
+		var task=plus.uploader.createUpload(server,
+			{method:"POST"},
+			function(t,status){ //上传完成
+				if(status==200){
+					var data = JSON.parse(t.responseText)
+					wt.close();
+					disablePicAdd = data.data;
+				}else{
+					wt.close();
+				}
+			}
+		);
+		task.addFile(p,{key:"upimg"});
+		task.start();
+			
 		});
 	});
 	
 	document.getElementById("uploadSinglePIC").addEventListener('tap',function(){
 		plus.gallery.pick(function(p){
-			$("#singlechildPIC").attr('src',p);
-			uploadImg('singlPicAdd',p);
+		$("#singlechildPIC").attr('src',p);			
+		var server=urlforapp+":8080/app/uploadimg";
+		var wt=plus.nativeUI.showWaiting();
+		var task=plus.uploader.createUpload(server,
+			{method:"POST"},
+			function(t,status){ //上传完成
+				if(status==200){
+					var data = JSON.parse(t.responseText)
+					wt.close();
+					singlPicAdd = data.data;
+				}else{
+					wt.close();
+				}
+			}
+		);
+		task.addFile(p,{key:"upimg"});
+		task.start();
+			
 		});
 	});
 	
@@ -1190,6 +1241,8 @@ mui.plusReady(function () {
 					var data = JSON.parse(t.responseText)
 					wt.close();
 					params = data.data;
+					console.log('-----'+params);
+					console.log('-----------'+singlPicAdd);
 				}else{
 					wt.close();
 				}
