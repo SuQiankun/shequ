@@ -5,6 +5,11 @@ var urlforapp =  'http://124.117.230.75';
 var peoListData;
 var houseData;
 
+var idcardPicAdd;
+var sociaPicAdd;
+var disablePicAdd
+var singlPicAdd;
+
 var common = {
 
 getSheQu: function getSheQu(callback) {

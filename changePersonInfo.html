@@ -702,7 +702,7 @@
 					"peo_work_unit":danweidizhiInfo,
 					"peo_hk_xz_id":hkxzInfo,
 					"peo_hk_addr":hukousuozaidiInfo,
-					"peo_l_id":canbaoInfo,
+					"peo_social_id":canbaoInfo,
 					"peo_is_able":jiankangInfo,
 					"peo_zzmm_id":zzmmInfo,
 					"peo_join_party_date":rudangshijianInfo,
@@ -731,6 +731,7 @@
 					"peo_weight":heightinfo,
 					"peo_stature":weightinfo,
 					"peo_cjgy":Publicwelfareinfo,
+					"peo_card_pic":idcardPicAdd,
 				};
 				var params = $.toJSON(data);
 				mui.ajax(urlforapp+':8080/app?cmd=modifylivepeople',{
@@ -745,6 +746,7 @@
 							setTimeout('mui.back()',1000);	
 						} else{
 							mui.alert('修改失败!');
+							console.log(data.data);
 						}
 					},
 					error:function(xhr,type,errorThrown){
@@ -790,6 +792,8 @@
 		var zdry; //重点四地州
 		
 mui.plusReady(function () {
+		
+
 			var web = plus.webview.currentWebview();
 				//获取传递参数
 			  document.getElementById('nameStr').value = web.name;
@@ -1022,6 +1026,8 @@ mui.plusReady(function () {
 								
 								//设置图片
 								setImageAction('idcardPIC','身份证照片暂无',data.data[i].peo_card_pic);
+								idcardPicAdd = data.data[i].peo_card_pic;
+								console.log(data.data[i].peo_card_pic);
 								setImageAction('sociaPIC','低保证照片暂无',data.data[i].socialpic);
 								setImageAction('singlechildPIC','光荣证照片暂无',data.data[i].peo_single_child_pic);
 								setImageAction('disablePIC','残疾证照片暂无',data.data[i].peo_dis_card_pic);
@@ -1140,13 +1146,28 @@ mui.plusReady(function () {
 <!--<script src="js/immersed.js" type="text/javascript" charset="utf-8"></script>-->
 	<script type="text/javascript">
 	document.getElementById("uploadIDCARD").addEventListener('tap',function(){
-		
 		plus.gallery.pick(function(p){
-			console.log('132');
-			console.log(p);
 			$("#idcardPIC").attr('src',p);
-		},function(e){
-			console.log('321');
+
+	var server="http://124.117.230.75:8080/app/uploadimg";
+	var wt=plus.nativeUI.showWaiting();
+	var task=plus.uploader.createUpload(server,
+		{method:"POST"},
+		function(t,status){ //上传完成
+			if(status==200){
+				console.log("上传成功："+t.responseText);
+				var data = JSON.parse(t.responseText)
+				wt.close();
+				idcardPicAdd = data.data;
+			}else{
+				console.log("上传失败："+status);
+				console.log(files[0]);
+				wt.close();
+			}
+		}
+	);
+	task.addFile(p,{key:"upimg"});
+	task.start();
 		});
 	});
 	</script>
