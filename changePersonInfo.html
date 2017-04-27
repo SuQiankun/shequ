@@ -732,6 +732,9 @@
 					"peo_stature":weightinfo,
 					"peo_cjgy":Publicwelfareinfo,
 					"peo_card_pic":idcardPicAdd,
+					"socialpic":idcardPicAdd,
+					"peo_dis_card_pic":idcardPicAdd,
+					"peo_single_child_pic":idcardPicAdd,
 				};
 				var params = $.toJSON(data);
 				mui.ajax(urlforapp+':8080/app?cmd=modifylivepeople',{
@@ -1027,7 +1030,6 @@ mui.plusReady(function () {
 								//设置图片
 								setImageAction('idcardPIC','身份证照片暂无',data.data[i].peo_card_pic);
 								idcardPicAdd = data.data[i].peo_card_pic;
-								console.log(data.data[i].peo_card_pic);
 								setImageAction('sociaPIC','低保证照片暂无',data.data[i].socialpic);
 								setImageAction('singlechildPIC','光荣证照片暂无',data.data[i].peo_single_child_pic);
 								setImageAction('disablePIC','残疾证照片暂无',data.data[i].peo_dis_card_pic);
@@ -1143,33 +1145,34 @@ mui.plusReady(function () {
 
 </script>
 
-<!--<script src="js/immersed.js" type="text/javascript" charset="utf-8"></script>-->
-	<script type="text/javascript">
+<script type="text/javascript">
+	
 	document.getElementById("uploadIDCARD").addEventListener('tap',function(){
 		plus.gallery.pick(function(p){
 			$("#idcardPIC").attr('src',p);
-
-	var server="http://124.117.230.75:8080/app/uploadimg";
-	var wt=plus.nativeUI.showWaiting();
-	var task=plus.uploader.createUpload(server,
-		{method:"POST"},
-		function(t,status){ //上传完成
-			if(status==200){
-				console.log("上传成功："+t.responseText);
-				var data = JSON.parse(t.responseText)
-				wt.close();
-				idcardPicAdd = data.data;
-			}else{
-				console.log("上传失败："+status);
-				console.log(files[0]);
-				wt.close();
-			}
-		}
-	);
-	task.addFile(p,{key:"upimg"});
-	task.start();
+			uploadImg('idcardPicAdd');
 		});
 	});
+	
+	function uploadImg(params){
+		var server=urlforapp+":8080/app/uploadimg";
+		var wt=plus.nativeUI.showWaiting();
+		var task=plus.uploader.createUpload(server,
+			{method:"POST"},
+			function(t,status){ //上传完成
+				if(status==200){
+					var data = JSON.parse(t.responseText)
+					wt.close();
+					params = data.data;
+				}else{
+					wt.close();
+				}
+			}
+		);
+		task.addFile(p,{key:"upimg"});
+		task.start();
+	}
+	
 	</script>
 	</body>
 </html>
