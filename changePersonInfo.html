@@ -11,7 +11,160 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
 	</head>
-
+		<!--App自定义的css-->
+		<style type="text/css">
+			.mui-preview-image.mui-fullscreen {
+				position: fixed;
+				z-index: 20;
+				background-color: #000;
+			}
+			.mui-preview-header,
+			.mui-preview-footer {
+				position: absolute;
+				width: 100%;
+				left: 0;
+				z-index: 10;
+			}
+			.mui-preview-header {
+				height: 44px;
+				top: 0;
+			}
+			.mui-preview-footer {
+				height: 50px;
+				bottom: 0px;
+			}
+			.mui-preview-header .mui-preview-indicator {
+				display: block;
+				line-height: 25px;
+				color: #fff;
+				text-align: center;
+				margin: 15px auto 4;
+				width: 70px;
+				background-color: rgba(0, 0, 0, 0.4);
+				border-radius: 12px;
+				font-size: 16px;
+			}
+			.mui-preview-image {
+				display: none;
+				-webkit-animation-duration: 0.5s;
+				animation-duration: 0.5s;
+				-webkit-animation-fill-mode: both;
+				animation-fill-mode: both;
+			}
+			.mui-preview-image.mui-preview-in {
+				-webkit-animation-name: fadeIn;
+				animation-name: fadeIn;
+			}
+			.mui-preview-image.mui-preview-out {
+				background: none;
+				-webkit-animation-name: fadeOut;
+				animation-name: fadeOut;
+			}
+			.mui-preview-image.mui-preview-out .mui-preview-header,
+			.mui-preview-image.mui-preview-out .mui-preview-footer {
+				display: none;
+			}
+			.mui-zoom-scroller {
+				position: absolute;
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-box-align: center;
+				-webkit-align-items: center;
+				align-items: center;
+				-webkit-box-pack: center;
+				-webkit-justify-content: center;
+				justify-content: center;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				-webkit-backface-visibility: hidden;
+			}
+			.mui-zoom {
+				-webkit-transform-style: preserve-3d;
+				transform-style: preserve-3d;
+			}
+			.mui-slider .mui-slider-group .mui-slider-item img {
+				width: auto;
+				height: auto;
+				max-width: 100%;
+				max-height: 100%;
+			}
+			.mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+				width: 100%;
+			}
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+				display: inline-table;
+			}
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+				display: table-cell;
+				vertical-align: middle;
+			}
+			.mui-preview-loading {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				display: none;
+			}
+			.mui-preview-loading.mui-active {
+				display: block;
+			}
+			.mui-preview-loading .mui-spinner-white {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -25px;
+				margin-top: -25px;
+				height: 50px;
+				width: 50px;
+			}
+			.mui-preview-image img.mui-transitioning {
+				-webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+				transition: transform 0.5s ease, opacity 0.5s ease;
+			}
+			@-webkit-keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			@keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			@-webkit-keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			@keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			p img {
+				max-width: 100%;
+				height: auto;
+			}
+		</style>
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
@@ -25,7 +178,6 @@
 					<div class="mui-card-content">
 						<form class="mui-input-group">
 							<p id="personID" style="display: none;"></p>
-							
 							<div class="mui-input-row">
 								<label style="width: 30%;">姓名</label>
 								<input style="width: 65%;" id="nameStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
@@ -37,12 +189,13 @@
 								
 							</div>
 							<!--TODO 身份证照片-->
-							<!--<div id="mui-input-row" style="text-align: center;">
-								<br />
-									<img id="imageid" style="height: 100px;width:200px; margin: 0 auto;" src="images/cbd.jpg"/>
-									<br /><button class="mui-button">点击上传身份证</button>
-									<br />
-							</div>-->
+								<div class="mui-input-row" style="height: 100%;">
+										<label style="width: 35%;"> 身份证照片</label>
+										<img id="idcardPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src="" data-preview-src="" data-preview-group="1"/  >
+										<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
+											<button class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
+										</div>
+								</div>
 							<!--TODO 身份证照片-->
 							<div class="mui-input-row">
 								<label style="width: 30%;">手机号码</label>
@@ -151,6 +304,7 @@
 								<label style="width: 30%;">体重(kg)</label>
 								<input id="peo_weight" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
+							
 							<div class="mui-input-row">
 								<label style="width: 30%;">爱好特长</label>
 								<input id="peo_hobby" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
@@ -162,6 +316,7 @@
 									<option value="">请选择</option>
 								</select>
 							</div>
+							
 								<div class="mui-input-row">
 								<label style="width: 30%;">养老参保</label>
 								<select  id="peo_ylqk" >
@@ -222,6 +377,15 @@
 								<label style="width: 35%;">低保证号</label>
 								<input style="width: 65%;" id="dibaozheng" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
+							<!--TODO 低保证-->
+								<div class="mui-input-row" style="height: 100%;">
+										<label style="width: 35%;"> 低保证照片</label>
+										<img id="sociaPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src="" data-preview-src="" data-preview-group="1"/ >
+										<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
+											<button class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
+										</div>
+								</div>
+							<!--TODO 低保证-->
 							<div class="mui-input-row">
 								<label  style="width: 30%;">健康状况</label>
 								<select id="jiankangzhuangkuang" name="" onchange="showJibingleixing()">
@@ -252,11 +416,19 @@
 								<label style="width: 35%;">残疾证</label>
 								<input style="width: 65%;" id="canjizheng" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
-						
+						<!--TODO 残疾证 -->
+							<div class="mui-input-row" style="height: 100%;">
+										<label style="width: 35%;"> 残疾证照片</label>
+										<img id="disablePIC" alt="残疾证照片" style="height: 100px; width: 180px; margin-top: 10px;"  src=""/ >
+										<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
+											<button class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
+										</div>
+								</div>
 							<div class="mui-input-row">
 								<label style="width: 35%;">光荣证类型</label>
 								<input style="width: 65%;" id="singlechild" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
+							
 							<div class="mui-input-row">
 								<label style="width: 35%;">光荣证编号</label>
 								<input style="width: 65%;" id="singlechildnum" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
@@ -267,6 +439,14 @@
 									<option value="">请选择</option>
 								</select>
 							</div>
+							<!--TODO -->
+								<div class="mui-input-row" style="height: 100%;">
+										<label style="width: 35%;"> 光荣证证照片</label>
+										<img id="singlechildPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src=""/ >
+										<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
+											<button class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
+										</div>
+								</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">兵役</label>
 								<select id="military" name="">
@@ -294,12 +474,14 @@
 									<option value="">请选择</option>
 								</select>
 							</div>
+							
 							<div class="mui-input-row">
 								<label style="width: 50%;font-size: 13px;">是否参加公益活动</label>
 								<select id="Publicwelfare"style="width: 50%;">
 									<option value="">请选择</option>
 								</select>
 							</div>
+							
 						</form>
 						
 						<div id='result' class="ui-alert"></div>
@@ -483,7 +665,7 @@
 					"peo_work_unit":danweidizhiInfo,
 					"peo_hk_xz_id":hkxzInfo,
 					"peo_hk_addr":hukousuozaidiInfo,
-					"peo_social_id":canbaoInfo,
+					"peo_l_id":canbaoInfo,
 					"peo_is_able":jiankangInfo,
 					"peo_zzmm_id":zzmmInfo,
 					"peo_join_party_date":rudangshijianInfo,
@@ -794,11 +976,21 @@ mui.plusReady(function () {
 								common.getDictTypeInfo(plus.storage.getItem('光荣证政策享受情况'),data.data[i].peo_xsqk_id,function(result){
 									document.getElementById("singlechildenjoy").innerHTML = result;
 								});
-								
+								//是否参加公益活动
 								var joinPublicwelfare = data.data[i].peo_cjgy;
 								common.getDictTypeInfo(plus.storage.getItem('是否状态'),joinPublicwelfare,function(result){
 									document.getElementById("Publicwelfare").innerHTML = result;
 								});
+								
+								//设置图片
+								setImageAction('idcardPIC','身份证照片暂无',data.data[i].peo_card_pic);
+								setImageAction('sociaPIC','低保证照片暂无',data.data[i].socialpic);
+								setImageAction('singlechildPIC','光荣证照片暂无',data.data[i].peo_single_child_pic);
+								setImageAction('disablePIC','残疾证照片暂无',data.data[i].peo_dis_card_pic);
+								//data.data[i].peo_card_pic 身份证照片
+								//data.data[i].socialpic  低保证照片
+								//data.data[i].peo_single_child_pic 光荣证
+								//data.data[i].peo_dis_card_pic 残疾证
 								
 								
 							}
@@ -811,6 +1003,21 @@ mui.plusReady(function () {
 </script>
 <!--家在疾病信息-->
 <script>
+/**
+ * 设置图片
+ * @param {Object} params 图片的 url
+ * @tipStr {Object} tipStr 显示的 alt
+ * @imgID {Object} imgID img的 id
+ */
+	function setImageAction(imgID,tipStr,params){
+				if (params != '' ) {
+						$("#"+imgID).attr("src",urlforapp+params);
+				}else{
+						$("#"+imgID).attr("alt",tipStr);	
+				}
+	}
+	
+	
 	
 	function showJibingleixing(){
 		var str = $("#jiankangzhuangkuang").find("option:selected").text();
@@ -844,8 +1051,11 @@ mui.plusReady(function () {
 			});
 			
 </script>
-		
+
+<script src="js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/mui.zoom.js" type="text/javascript" charset="utf-8"></script>
 <script>
+		mui.previewImage();
 			document.getElementById("rudangshijian").addEventListener('tap',function(){
 				creatTimeLime("rudangshijian");
 			});

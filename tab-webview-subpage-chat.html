@@ -228,7 +228,7 @@
 					 
 					 var att = common.changestr(data.data[i].peo_attr_id);
 					//重点人员标记
-					var resultstr = checkPersonInfo(data.data[i].peo_attr_id,data.data[i].peoid,att);
+					var resultstr = checkPersonInfo(data.data[i].peo_attr_id,data.data[i].peoid,att,data.data[i].peo_inhome_id);
 					var titleStr =  creattitleStr(data.data[i].peo_attr_id);
 					area_name
 					+=
@@ -308,6 +308,7 @@
 			}
 			return titleStr;
 			}
+		
 		//  获取房间
 		function getHouseInfo(params){
 			$('#houselist').show()
