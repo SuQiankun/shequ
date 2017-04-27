@@ -420,7 +420,7 @@
 										<label style="width: 35%;"> 低保证照片</label>
 										<img id="sociaPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src="" data-preview-src="" data-preview-group="1"/ >
 										<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
-											<button class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
+											<button id="uploadSociaPIC" type="button" class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
 										</div>
 								</div>
 							<!--TODO 低保证-->
@@ -459,7 +459,7 @@
 										<label style="width: 35%;"> 残疾证照片</label>
 										<img id="disablePIC" alt="残疾证照片" style="height: 100px; width: 180px; margin-top: 10px;"  src=""  data-preview-src="" data-preview-group="1"/ >
 										<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
-											<button   class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
+											<button id="uploadDisablePIC" type="button" class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
 										</div>
 								</div>
 							<div class="mui-input-row">
@@ -482,7 +482,7 @@
 										<label style="width: 35%;"> 光荣证证照片</label>
 										<img id="singlechildPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src=""  data-preview-src="" data-preview-group="1"/ >
 										<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
-											<button type="button" class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
+											<button id="uploadSinglePIC" type="button" class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
 										</div>
 								</div>
 							<div class="mui-input-row">
@@ -732,9 +732,9 @@
 					"peo_stature":weightinfo,
 					"peo_cjgy":Publicwelfareinfo,
 					"peo_card_pic":idcardPicAdd,
-					"socialpic":idcardPicAdd,
-					"peo_dis_card_pic":idcardPicAdd,
-					"peo_single_child_pic":idcardPicAdd,
+					"socialpic":sociaPicAdd,
+					"peo_dis_card_pic":disablePicAdd,
+					"peo_single_child_pic":singlPicAdd,
 				};
 				var params = $.toJSON(data);
 				mui.ajax(urlforapp+':8080/app?cmd=modifylivepeople',{
@@ -1030,9 +1030,16 @@ mui.plusReady(function () {
 								//设置图片
 								setImageAction('idcardPIC','身份证照片暂无',data.data[i].peo_card_pic);
 								idcardPicAdd = data.data[i].peo_card_pic;
+								
 								setImageAction('sociaPIC','低保证照片暂无',data.data[i].socialpic);
+								sociaPicAdd = data.data[i].socialpic;
+								
 								setImageAction('singlechildPIC','光荣证照片暂无',data.data[i].peo_single_child_pic);
+								singlPicAdd = data.data[i].peo_single_child_pic;
+								
 								setImageAction('disablePIC','残疾证照片暂无',data.data[i].peo_dis_card_pic);
+								disablePicAdd = data.data[i].peo_dis_card_pic;
+								
 								}}}
 </script>
 
@@ -1151,6 +1158,27 @@ mui.plusReady(function () {
 		plus.gallery.pick(function(p){
 			$("#idcardPIC").attr('src',p);
 			uploadImg('idcardPicAdd');
+		});
+	});
+	
+	document.getElementById("uploadSociaPIC").addEventListener('tap',function(){
+		plus.gallery.pick(function(p){
+			$("#sociaPIC").attr('src',p);
+			uploadImg('sociaPicAdd');
+		});
+	});
+	
+	document.getElementById("uploadDisablePIC").addEventListener('tap',function(){
+		plus.gallery.pick(function(p){
+			$("#disablePIC").attr('src',p);
+			uploadImg('disablePicAdd');
+		});
+	});
+	
+	document.getElementById("uploadSinglePIC").addEventListener('tap',function(){
+		plus.gallery.pick(function(p){
+			$("#singlechildPIC").attr('src',p);
+			uploadImg('singlPicAdd');
 		});
 	});
 	
