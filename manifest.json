@@ -197,7 +197,8 @@
 					"js/Common.js",
 					"js/mui.min.js",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/jquery-3.2.0.min.js"
 				],
 				"refer": [
 					"addPerson.html",
@@ -299,7 +300,8 @@
 					"js/Common.js",
 					"js/mui.zoom.js",
 					"js/mui.previewimage.js",
-					"changePersonInfo.html"
+					"changePersonInfo.html",
+					"css/mui.picker.min.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -308,7 +310,8 @@
 				"resources": [
 					"fonts/mui.ttf",
 					"js/mui.min.js",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/Common.js"
 				],
 				"refer": [],
 				"priority": 0

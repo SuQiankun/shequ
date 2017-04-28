@@ -175,9 +175,34 @@
 		 //获取房间信息
 		 function getRoomInfo(){
 		 	var selected_val = document.getElementById('LouDongID').value;
-		 	common.getRoomList(selected_val,function(result){
-					document.getElementById("FangHaoID").innerHTML = result;
-				});
+//		 	 	var selected_val = document.getElementById('LouDongID').value; 
+				
+				mui.ajax(urlforapp+':8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
+				dataType:'json',
+				type:'get',
+				success:function(data){
+				var area_name = '<option value="">请选择</option>';
+				for (i=0;i<data.data.length;i++) {
+					//加入是否走访的标记
+					if (data.data[i].visited.length > 1){
+						area_name +=
+						'<option style="color: #2AC845;" value="'+
+						data.data[i].house_num_id
+						+'">'+ data.data[i].house_num+'&nbsp&nbsp本月已走访</option>';
+					}else{
+							area_name +=
+						'<option value="'+
+						data.data[i].house_num_id
+						+'"> '+ data.data[i].house_num+'</option>';
+					}
+					
+				}
+				document.getElementById("FangHaoID").innerHTML = area_name;				
+				},
+				error: function(xhr,type,errorThrown){
+						
+				}
+			});
 		 }
 		
 		//二级页面返回后更新数据
