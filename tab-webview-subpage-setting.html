@@ -34,11 +34,7 @@
 						修改密码
 					</a>
 				</li>
-				<li class="mui-table-view-cell">
-					<a id="addimg" class="mui-navigate-right">
-						新增图片
-					</a>
-				</li>
+			
 			</ul>
 			<ul class="mui-table-view" style="margin-top: 25px;">
 				<li class="mui-table-view-cell" >
@@ -59,10 +55,7 @@
 		document.getElementById("changpsw").addEventListener('tap',function(){
 			mui.openWindow('changePSW.html','changePSW',{});
 		});
-		document.getElementById("addimg").addEventListener('tap',function(){
-			mui.openWindow('upload.html','addimg',{});
-		});
-		
+
 		document.getElementById('exit').addEventListener('tap', function() {
 			if (mui.os.ios) {
 //				app.setState({});

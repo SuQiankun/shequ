@@ -517,7 +517,18 @@
 									<option value="">请选择</option>
 								</select>
 							</div>
-							
+
+							<div class="mui-input-row">
+								<label style="width: 50%;font-size: 13px;">是否为流动人口</label>
+								<select id="peoisflow"style="width: 50%;">
+									<option value="">请选择</option>
+									<option value="084500e2b1384e809d49b2db44923fd0">是</option>
+									<option value="43420be04461467d963b8936d23a591a">否</option>
+									<option value="6e942eb47c67469db061c86fa65d0025">其他</option>									
+								</select>
+							</div>
+
+
 						</form>
 						
 						<div id='result' class="ui-alert"></div>
@@ -614,20 +625,35 @@
 				var zzmmInfo = document.getElementById("polit").value;
 				var rudangshijianInfo = common.jointime(document.getElementById("rudangshijian").textContent);
 				var dangneizhiwuInfo = document.getElementById("dangneizhiwu").value;
+				//婚姻状况
 				var hunyinInfo = document.getElementById("marry").value;
+				//经济状况
 				var jingjiInfo = document.getElementById("income").value;
+				//健康
 				var jiankangInfo = document.getElementById("jiankangzhuangkuang").value;
+				//疾病类型
 				var jibingtypeInfo = document.getElementById("jibingleixingid").value;
+				//文化程度
 				var wenhuaInfo = document.getElementById("degree").value;
+				//户口所在地
 				var hukousuozaidiInfo = document.getElementById("hkdz").value;
+				//残疾证
 				var canjizhengInfo = document.getElementById("canjizheng").value;
+				//独生子女
 				var scnumInfo = document.getElementById("singlechild").value;
+				//兵役信息
 				var bingyiInfo = document.getElementById("military").value;
+				//在家居住
 				var zaijiajuzhuInfo = document.getElementById("yesOrNot").value;
+				//
 				var zdryInfo = document.getElementById("peo_zdry_id").value;//重点地州
+				//
 				var jzryInfo = document.getElementById("peo_is_jzry").value;
+				//流动人口
 				var lcrkInfo = document.getElementById("peo_is_lcrk").value;
+				//人员属性
 				var attidInfo = document.getElementById("peo_attr_id").value;
+				//
 				var sctypeInfo = document.getElementById("singlechild").value;
 				var scnumInfo = document.getElementById("singlechildnum").value;
 				var scenjoyInfo = document.getElementById("singlechildenjoy").value;
@@ -652,6 +678,8 @@
 				var weightinfo = common.jointime(document.getElementById("peo_weight").value);
 				//公益活动
 				var Publicwelfareinfo = document.getElementById("Publicwelfare").value; 
+				//是否为流动人口
+				var peoisflowInfo = document.getElementById("peoisflow").value;
 				
 				
 				if (document.getElementById("polit").value == '26c0381f2de54fd8887ab42d99da1481' && rudangshijianInfo == null) {
@@ -733,8 +761,10 @@
 					"socialpic":sociaPicAdd,
 					"peo_dis_card_pic":disablePicAdd,
 					"peo_single_child_pic":singlPicAdd,
+					"peo_is_flow":peoisflowInfo,
 				};
-				console.log('=========='+singlPicAdd);
+				
+				
 				var params = $.toJSON(data);
 				mui.ajax(urlforapp+':8080/app?cmd=modifylivepeople',{
 					data:params,
@@ -748,11 +778,10 @@
 							setTimeout('mui.back()',1000);	
 						} else{
 							mui.alert('修改失败!');
-							console.log(data.data);
 						}
 					},
 					error:function(xhr,type,errorThrown){
-					mui.alert('连接失败,请检查网络设置!')
+						mui.alert('连接失败,请检查网络设置!')
 					}
 				});
 			});
@@ -840,6 +869,7 @@ mui.plusReady(function () {
 				setInitData(web.peoList,web.personid);
 			});
 </script>
+
 <!--设置资料初始值-->
 <script >
 	function setInitData(data,peoid){
@@ -850,7 +880,7 @@ mui.plusReady(function () {
 								bingyi = data.data[i].peo_by_id;
 								common.getBingyi('military','military',bingyi);
 								//部队名称
-								document.getElementById("peo_by_org").value = data.data[i].peo_by_org;
+								document.getElementById("peo_by_org").value = common.changestr(data.data[i].peo_by_org);
 								//入伍时间
 								document.getElementById("peo_by_indate").textContent = common.changestr(data.data[i].peo_by_indate);
 								//退伍时间
@@ -865,13 +895,15 @@ mui.plusReady(function () {
 								//户口性质
 								hkxz = data.data[i].peo_hk_xz_id;
 								common.getReligion('popuInfo','popuInfo',hkxz);
+//								var peotype = data.data[i].
+								
+								
 								//宗教信仰 联动祷告地址
 								religion =data.data[i].peo_religion_id;
 								daogao = data.data[i].peo_dao_gao_id;								
 								common.getdaogaoAdress('RELIGION','RELIGION',religion,function(result){
 								
 								document.getElementById("RELIGION").innerHTML = result;
-												
 												var reID =  document.getElementById("RELIGION").value;
 												var numberStr = '';
 												switch (reID){
@@ -907,9 +939,10 @@ mui.plusReady(function () {
 							
 								//人员属性
 								attrid = data.data[i].peo_attr_id;
-								common.peoattid(attrid,function(result){
+								common.getDictTypeInfo(plus.storage.getItem('人员属性'),data.data[0].peo_attr_id,function(result){
 									document.getElementById("peo_attr_id").innerHTML = result;
 								});
+								
 								//重点四地州
 								zdry = data.data[i].peo_zdry_id;
 								common.getDictTypeInfo(plus.storage.getItem('重点地州'),data.data[0].peo_zdry_id,function(result){
@@ -983,8 +1016,8 @@ mui.plusReady(function () {
 								var school = data.data[i].peo_byyx;
 								document.getElementById("peo_byyx").value = common.changestr(school);
 								//身高体重
-								document.getElementById("peo_height").value =data.data[i].peo_stature;
-								document.getElementById("peo_weight").value =data.data[i].peo_weight;
+								document.getElementById("peo_height").value =common.changestr(data.data[i].peo_stature);
+								document.getElementById("peo_weight").value =common.changestr(data.data[i].peo_weight);
 							
 								//爱好 特长
 								var hobby = data.data[i].peo_hobby;
@@ -1026,14 +1059,19 @@ mui.plusReady(function () {
 									document.getElementById("Publicwelfare").innerHTML = result;
 								});
 								
+								//是否为流动人口
+								var isflow = data.data[i].peo_is_flow;
+								common.getDictTypeInfo(plus.storage.getItem('是否状态'),isflow,function(result){
+									document.getElementById("peoisflow").innerHTML = result;
+								});
+								
+								
 								//设置图片
 								setImageAction('idcardPIC','身份证照片暂无',data.data[i].peo_card_pic);
 								idcardPicAdd = data.data[i].peo_card_pic;
 								
-								console.log(data.data[i].peo_card_pic);
 								setImageAction('sociaPIC','低保证照片暂无',data.data[i].socialpic);
 								sociaPicAdd = data.data[i].socialpic;
-								console.log(data.data[i].socialpic);
 								
 								setImageAction('singlechildPIC','光荣证照片暂无',data.data[i].peo_single_child_pic);
 								singlPicAdd = data.data[i].peo_single_child_pic;
@@ -1152,14 +1190,30 @@ mui.plusReady(function () {
 
 
 </script>
-
+<!--上传图片的操作-->
 <script type="text/javascript">
 	
 	document.getElementById("uploadIDCARD").addEventListener('tap',function(){
 		plus.gallery.pick(function(p){
-			$("#idcardPIC").attr('src',p);
-			uploadImg('idcardPicAdd');
+		$("#idcardPIC").attr('src',p);
+		var server=urlforapp+":8080/app/uploadimg";
+		var wt=plus.nativeUI.showWaiting();
+		var task=plus.uploader.createUpload(server,
+			{method:"POST"},
+			function(t,status){ //上传完成
+				if(status==200){
+					var data = JSON.parse(t.responseText)
+					wt.close();
+					idcardPicAdd = data.data;
+				}else{
+					wt.close();
+				}
+			}
+		);
+		task.addFile(p,{key:"upimg"});
+		task.start();
 		});
+
 	});
 	
 	document.getElementById("uploadSociaPIC").addEventListener('tap',function(){
@@ -1181,7 +1235,6 @@ mui.plusReady(function () {
 		);
 		task.addFile(p,{key:"upimg"});
 		task.start();
-			
 		});
 	});
 	
@@ -1241,8 +1294,6 @@ mui.plusReady(function () {
 					var data = JSON.parse(t.responseText)
 					wt.close();
 					params = data.data;
-					console.log('-----'+params);
-					console.log('-----------'+singlPicAdd);
 				}else{
 					wt.close();
 				}
