@@ -226,7 +226,6 @@
 								<input style="width: 65%;" id="idcardStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 								
 							</div>
-							<!--TODO 身份证照片-->
 								<div class="mui-input-row" style="height: 100%;">
 										<label style="width: 35%;"> 身份证照片</label>
 										<img id="idcardPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src="" data-preview-src="" data-preview-group="1" /  >
@@ -305,14 +304,7 @@
 								<label style="width: 30%;">籍贯</label>
 								<input style="width: 65%;" id="jgStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">血型</label>
-								<select id="bloodType" name="">
-									<option value="">请选择</option>
-								</select>
-							</div>
-
+		
 							<div class="mui-input-row">
 								<label style="width: 30%;">职业</label>
 								<select id="career" name="">
@@ -333,6 +325,14 @@
 								<label style="width: 30%;">毕业院校 </label>
 								<input id="peo_byyx" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
+												
+							<div class="mui-input-row">
+								<label style="width: 30%;">血型</label>
+								<select id="bloodType" name="">
+									<option value="">请选择</option>
+								</select>
+							</div>
+
 							<div class="mui-input-row">
 								<label style="width: 30%;">身高(cm)</label>
 								<input id="peo_height" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
@@ -613,17 +613,25 @@
 					mui.alert('请选择性别');
 					return;
 				}
-					
-				//
+				//祷告地址
 				var daogaoAdInfo = document.getElementById("daogaoAdress").value;
+				//宗教信仰
 				var zongjiaoInfo = document.getElementById("RELIGION").value;
+				//学业信息
 				var xuexingInfo = document.getElementById("bloodType").value;
+				//职业信息
 				var zhiyeInfo = document.getElementById("career").value;
+				//单位地址
 				var danweidizhiInfo =document.getElementById("danweidizhi").value;
+				//参保信息
 				var canbaoInfo = document.getElementById("yiliaoqingkuang").value;
+				//户口性质
 				var hkxzInfo = document.getElementById("popuInfo").value;
+				//政治面貌
 				var zzmmInfo = document.getElementById("polit").value;
+				//入党时间
 				var rudangshijianInfo = common.jointime(document.getElementById("rudangshijian").textContent);
+				//党内职务
 				var dangneizhiwuInfo = document.getElementById("dangneizhiwu").value;
 				//婚姻状况
 				var hunyinInfo = document.getElementById("marry").value;
@@ -645,8 +653,8 @@
 				var bingyiInfo = document.getElementById("military").value;
 				//在家居住
 				var zaijiajuzhuInfo = document.getElementById("yesOrNot").value;
-				//
-				var zdryInfo = document.getElementById("peo_zdry_id").value;//重点地州
+				//重点地州
+				var zdryInfo = document.getElementById("peo_zdry_id").value;
 				//
 				var jzryInfo = document.getElementById("peo_is_jzry").value;
 				//流动人口
@@ -655,7 +663,9 @@
 				var attidInfo = document.getElementById("peo_attr_id").value;
 				//
 				var sctypeInfo = document.getElementById("singlechild").value;
+				
 				var scnumInfo = document.getElementById("singlechildnum").value;
+				
 				var scenjoyInfo = document.getElementById("singlechildenjoy").value;
 				//爱好特长
 				var hobbyinfo = document.getElementById("peo_hobby").value;
