@@ -99,7 +99,7 @@
 					var self = plus.webview.currentWebview();
 					
 				
-					var data = {
+				var data = {
 				      "yz_name": document.getElementById("yz_name").value,
 				      "fc_house_room_num": document.getElementById("yz_housecount").value,
 				      "fc_id": document.getElementById("fc_id").value,
@@ -117,7 +117,6 @@
 				      "fc_fcz_num": document.getElementById("yz_fcznum").value,
 				};
 				var params = $.toJSON(data);
-			
 					mui.ajax(urlforapp+':8080/app?cmd=modifyfcinfobyfcid',{
 						data:params,
 						headers:{'Content-Type':'application/json'},	
@@ -144,29 +143,66 @@
 mui.plusReady(function () {
    				var self = plus.webview.currentWebview();
 				var data = self.housedata;
-				//console.log(data.data[0].yz_name);
-					document.getElementById("fc_id").value = data.data[0].fc_id;
-					document.getElementById("yz_name").value = common.changestr(data.data[0].yz_name);
-					document.getElementById("yz_phone").value = common.changestr(data.data[0].tel);
-					document.getElementById("yz_fcznum").value = common.changestr(data.data[0].fc_fcz_num); 
-					document.getElementById("yz_add").value=common.changestr(data.data[0].fc_addr);
-					document.getElementById("yz_area").value=common.changestr(data.data[0].fc_house_area);
-					document.getElementById("yz_housecount").value=common.changestr(data.data[0].fc_house_room_num);
-					document.getElementById("currentadd").value=common.changestr(data.data[0].curadd);
-					document.getElementById("yz_carnum").value=common.changestr(data.data[0].cardid);
+
+				if (data.data[0] == null || data.data[0] == 'undefined' || data.data[0] == '') {
+						common.getDictTypeInfo(plus.storage.getItem('houseAttr'),null,function(result){
+							document.getElementById("houseatt").innerHTML = result;
+						});
+						common.getDictTypeInfo(plus.storage.getItem('houseFun'),null,function(result){
+							document.getElementById("houseuse").innerHTML = result;
+						});
+						common.getDictTypeInfo(plus.storage.getItem('houseArch'),null,function(result){
+							document.getElementById("housestruct").innerHTML = result;
+						});
+						common.getDictTypeInfo(plus.storage.getItem('houseType'),null,function(result){
+							document.getElementById("housetype").innerHTML = result;
+						});
+						common.getDictTypeInfo(plus.storage.getItem('houseCateg'),null,function(result){
+							document.getElementById("housecategory").innerHTML = result;
+						});
+						common.getDictTypeInfo(plus.storage.getItem('houseSou'),null,function(result){
+							document.getElementById("housesurce").innerHTML = result;
+						}); 
+					} else{
+						document.getElementById("fc_id").value = data.data[0].fc_id;
+						document.getElementById("yz_name").value = common.changestr(data.data[0].yz_name);
+						document.getElementById("yz_phone").value = common.changestr(data.data[0].tel);
+						document.getElementById("yz_fcznum").value = common.changestr(data.data[0].fc_fcz_num); 
+						document.getElementById("yz_add").value=common.changestr(data.data[0].fc_addr);
+						document.getElementById("yz_area").value=common.changestr(data.data[0].fc_house_area);
+						document.getElementById("yz_housecount").value=common.changestr(data.data[0].fc_house_room_num);
+						document.getElementById("currentadd").value=common.changestr(data.data[0].curadd);
+						document.getElementById("yz_carnum").value=common.changestr(data.data[0].cardid);
+						changeParams();
+					}
 				
+					
+});
+
+			mui.init({
+				beforeback: function(){
+					var list = plus.webview.getWebviewById('tab-webview-subpage-chat.html');
+					mui.fire(list,'updateInfo');
+					//获得列表界面的webview
+					var list = plus.webview.getWebviewById('tab-webview-subpage-about.html');
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+					mui.fire(list,'getindex');
+					return true;
+				}
+			});
+			
+			</script>
+<script type="text/javascript">
+	 	function changeParams(params){
 					common.getDictTypeInfo(plus.storage.getItem('houseAttr'),data.data[0].fc_house_attr_id,function(result){
 						document.getElementById("houseatt").innerHTML = result;
 					});
-					
 					common.getDictTypeInfo(plus.storage.getItem('houseFun'),data.data[0].fc_house_use_id,function(result){
 						document.getElementById("houseuse").innerHTML = result;
 					});
-					
 					common.getDictTypeInfo(plus.storage.getItem('houseArch'),data.data[0].fc_house_structure_id,function(result){
 						document.getElementById("housestruct").innerHTML = result;
 					});
-				
 					common.getDictTypeInfo(plus.storage.getItem('houseType'),data.data[0].fc_house_type_id,function(result){
 						document.getElementById("housetype").innerHTML = result;
 					});
@@ -176,23 +212,11 @@ mui.plusReady(function () {
 					common.getDictTypeInfo(plus.storage.getItem('houseSou'),data.data[0].fc_house_source_id,function(result){
 						document.getElementById("housesurce").innerHTML = result;
 					}); 
-});
-
-				mui.init({
-					
-				beforeback: function(){
-					var list = plus.webview.getWebviewById('tab-webview-subpage-chat.html');
-					mui.fire(list,'updateInfo');
-					
-					//获得列表界面的webview
-					var list = plus.webview.getWebviewById('tab-webview-subpage-about.html');
-					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
-					mui.fire(list,'getindex');
-					
-					return true;
-				}
-			});
-			</script>
+	 	}
+	 	
+</script>
+			
+			
 	</body>
 
 </html>

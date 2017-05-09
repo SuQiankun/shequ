@@ -29,14 +29,22 @@
 	<body >
 		<div class="mui-content"  >
 			<div class="mui-content"  >
-				<div class="mui-card"  >
+			<!--顶部选项卡-->
+			<div style="padding: 10px 10px;">
+				<div id="segmentedControl" class="mui-segmented-control">
+					<a class="mui-control-item mui-active" href="#item1">条件搜索</a>
+					<a class="mui-control-item" href="#item2">模糊查询</a>
+				</div>
+			</div>
+			<!--条件筛选的 div-->
+				<div class="mui-card mui-control-content" id="item1" >
 					<div class="mui-card-header">
 						<h4 style="font-weight: normal;">
 							<span style="font-size: 20px;" class="mui-icon mui-icon-search"></span>
 							<span>搜索</span>
 						</h4>
 					</div>
-					<div class="mui-card-content" >
+					<div class="mui-card-content"  >
 						<form class="mui-input-group"  >
 							<div class="mui-input-row" >
 								<label style="width: 30%;" >社区</label>
@@ -75,6 +83,11 @@
 						</div>
 					</div>
 				</div>
+			
+			<div class="mui-card mui-control-content" id='#item2'>
+				<h1> 23e1</h1>
+			</div>
+			
 			
 				<!--  房产信息-->
 				<div id="houselist" class="mui-content"  style="display: none;">
@@ -128,7 +141,6 @@
 						</div>
 				</div>
 				<!--房产信息 end -->
-				
 				
 				<div id="personList" class="mui-content" >
 				</div>
@@ -350,26 +362,33 @@
 				timeout:10000,//超时时间设置为10秒；
 				success:function(data){
 					houseData = data;
-					document.getElementById("yz_name").innerText = common.changestr(data.data[0].yz_name);
-					document.getElementById("yz_phone").innerText = common.changestr(data.data[0].tel);
-					document.getElementById("yz_fcznum").innerText = common.changestr(data.data[0].fc_fcz_num); 
-					document.getElementById("yz_add").innerText=common.changestr(data.data[0].fc_addr);
-					document.getElementById("yz_area").innerText=common.changestr(data.data[0].fc_house_area);
-					document.getElementById("yz_housecount").innerText=common.changestr(data.data[0].fc_house_room_num);
+					console.log('typedefine'+data.data[0]);
+					if (data.data[0] == null || data.data[0] == 'undefined' || data.data[0] == '') {
+						
+					} else{
+						document.getElementById("yz_name").innerText = common.changestr(data.data[0].yz_name);
+						document.getElementById("yz_phone").innerText = common.changestr(data.data[0].tel);
+						document.getElementById("yz_fcznum").innerText = common.changestr(data.data[0].fc_fcz_num); 
+						document.getElementById("yz_add").innerText=common.changestr(data.data[0].fc_addr);
+						document.getElementById("yz_area").innerText=common.changestr(data.data[0].fc_house_area);
+						document.getElementById("yz_housecount").innerText=common.changestr(data.data[0].fc_house_room_num);
+						
+						document.getElementById("houseatt").innerText = common.changestr(data.data[0].fc_house_attr_id);
+						document.getElementById("houseuse").innerText = common.changestr(data.data[0].fc_house_use_id);
+						document.getElementById("housestruct").innerText = common.changestr(data.data[0].fc_house_structure_id);
+						document.getElementById("housetype").innerText = common.changestr(data.data[0].fc_house_type_id);
+						document.getElementById("housecategory").innerText = common.changestr(data.data[0].fc_house_category_id);
+						document.getElementById("housesurce").innerText = common.changestr(data.data[0].fc_house_source_id);
 					
-					document.getElementById("houseatt").innerText = common.changestr(data.data[0].fc_house_attr_id);
-					document.getElementById("houseuse").innerText = common.changestr(data.data[0].fc_house_use_id);
-					document.getElementById("housestruct").innerText = common.changestr(data.data[0].fc_house_structure_id);
-					document.getElementById("housetype").innerText = common.changestr(data.data[0].fc_house_type_id);
-					document.getElementById("housecategory").innerText = common.changestr(data.data[0].fc_house_category_id);
-					document.getElementById("housesurce").innerText = common.changestr(data.data[0].fc_house_source_id);
+						var str = data.data[0].fc_house_source_id;
+						if (str.indexOf('租')>=0) {
+							$("#titleString").css("color","dodgerblue");
+						}else{
+							$("#titleString").css("color","black");
+						}
 					
-					var str = data.data[0].fc_house_source_id;
-					if (str.indexOf('租')>=0) {
-						$("#titleString").css("color","dodgerblue");
-					}else{
-						$("#titleString").css("color","black");
 					}
+				
 				},
 				error:function(xhr,type,errorThrown){
 				}
@@ -420,7 +439,7 @@
 				var jg =  	document.getElementById(peroid+'jg').textContent;
 				var phone =  document.getElementById(peroid+'phone').textContent;
 				var birth =  document.getElementById(peroid+'birth').textContent;
-				//TODO 将获取到的 data 作为一个参数传递到另外一个页面;减少代码量
+				// 将获取到的 data 作为一个参数传递到另外一个页面;减少代码量
 					mui.openWindow({
 					    url: 'changePersonInfo.html', 
 					    id:'changePersonInfo',
@@ -461,14 +480,12 @@
 	
 			
 		mui.plusReady(function(){
-
 			//开启回弹
 			var placeholderText = '<option value="">请选择</option>';
 			document.getElementById('shequID').innerHTML =placeholderText ;
 			document.getElementById('communityInfo').innerHTML =placeholderText ;
 			document.getElementById('LouDongID').innerHTML =placeholderText ;
 			document.getElementById('FangHaoID').innerHTML =placeholderText ;
-			
 			//获取社区列表
 			common.getSheQu(function(result){
 				document.getElementById("shequID").innerHTML = result;

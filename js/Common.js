@@ -1,7 +1,7 @@
 
-var urlforapp =  'http://124.117.230.75';
+//var urlforapp =  'http://124.117.230.75';
 //var urlforapp =  'http://192.168.1.7';
-//var urlforapp =  'http://117.146.77.26';
+var urlforapp =  'http://117.146.77.26';
 var peoListData;
 var houseData;
 
@@ -311,6 +311,7 @@ getDaogaoList: function getDaogaoList(cmd,actionid,params,callback) {
 				});
 				
 	},
+
 
 	changestr: function changeString(data){
 				var result =(data == "" || data == undefined || data == null) ? "暂无" : data;

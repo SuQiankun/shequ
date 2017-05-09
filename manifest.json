@@ -204,7 +204,8 @@
 				"refer": [
 					"addPerson.html",
 					"changePersonInfo.html",
-					"tab-webview-main.html"
+					"tab-webview-main.html",
+					"houseInfo.html"
 				],
 				"priority": 0
 			},
@@ -348,6 +349,18 @@
 					"js/jquery-3.2.0.min.js",
 					"css/mui.min.css",
 					"css/mui.picker.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"houseInfo.html": {
+				"resources": [
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/json.js",
+					"js/Common.js"
 				],
 				"refer": [],
 				"priority": 0
