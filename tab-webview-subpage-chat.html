@@ -30,14 +30,14 @@
 		<div class="mui-content"  >
 			<div class="mui-content"  >
 			<!--顶部选项卡-->
-			<div style="padding: 10px 10px;">
+			<!--<div style="padding: 5px 5px;">
 				<div id="segmentedControl" class="mui-segmented-control">
-					<a class="mui-control-item mui-active" href="#item1">条件搜索</a>
+					<a class="mui-control-item mui-active" href="#item1" style="height: 8px;" >条件搜索</a>
 					<a class="mui-control-item" href="#item2">模糊查询</a>
 				</div>
-			</div>
+			</div>-->
 			<!--条件筛选的 div-->
-				<div class="mui-card mui-control-content" id="item1" >
+				<div class="mui-card mui-control-content mui-active" id="item1" >
 					<div class="mui-card-header">
 						<h4 style="font-weight: normal;">
 							<span style="font-size: 20px;" class="mui-icon mui-icon-search"></span>
@@ -78,15 +78,13 @@
 					<div class="mui-card-footer">
 						<div class="mui-button-row" style="margin: 0 auto;">
 							<button type="submit" class="mui-btn mui-btn-primary" id="searchPersionList" >搜索</button>&nbsp;&nbsp;
-							<!--<button type="submit" class="mui-btn mui-btn-primary" onclick="showhouseinfo()" >搜索房产</button>&nbsp;&nbsp;-->
 							<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
 						</div>
 					</div>
 				</div>
 			
-			<div class="mui-card mui-control-content" id='#item2'>
-				<h1> 23e1</h1>
-			</div>
+			<!--<div class="mui-card mui-control-content" id='item2'>
+			</div>-->
 			
 			
 				<!--  房产信息-->
@@ -236,6 +234,7 @@
 
 		function searchPeoInfo(){
 				var selected_val = document.getElementById('FangHaoID').value;
+				console.log('fanghao'+selected_val);
 				if (selected_val == null || selected_val ==undefined || selected_val == '') {
 					mui.toast('请选择房间号');
 					return false;
@@ -362,7 +361,7 @@
 				timeout:10000,//超时时间设置为10秒；
 				success:function(data){
 					houseData = data;
-					console.log('typedefine'+data.data[0]);
+					
 					if (data.data[0] == null || data.data[0] == 'undefined' || data.data[0] == '') {
 						
 					} else{

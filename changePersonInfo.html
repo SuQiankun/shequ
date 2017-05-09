@@ -291,7 +291,8 @@
 								<select id="peo_is_jzry" style="width: 65%;" class="mui-btn-block">
 								</select>
 							</div>
-								<div class="mui-input-row">
+							
+							<div class="mui-input-row">
 								<label style="width: 50%;font-size: 13px;">是否为流动人口</label>
 								<select id="peoisflow"style="width: 50%;">
 									<option value="">请选择</option>
@@ -300,6 +301,22 @@
 									<option value="6e942eb47c67469db061c86fa65d0025">其他</option>									
 								</select>
 							</div>
+							<div class="mui-input-row">
+								<label style="width: 35%;">结亲人姓名</label>
+								<input style="width: 65%;" id="kinsman_name" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 35%;">结亲人电话</label>
+								<input style="width: 65%;" id="kinsman_phone" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 35%;">结亲人单位</label>
+								<input style="width: 65%;" id="kinsman_unit" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>							
+							
+							
+							
+							
 							<!--内容 part 3-->
 							<div class="mui-input-row">
 								<label style="width: 30%;">医疗参保</label>
@@ -702,6 +719,13 @@
 				var Publicwelfareinfo = document.getElementById("Publicwelfare").value; 
 				//是否为流动人口
 				var peoisflowInfo = document.getElementById("peoisflow").value;
+				//结亲对象
+				var kinsmannameInfo = document.getElementById("kinsman_name").value;
+				//结亲人电话
+				var kinsmanphoneInfo = document.getElementById("kinsman_phone").value;
+				//结亲人单位
+				var kinsmannuitInfo = document.getElementById("kinsman_unit").value;
+				
 				
 				
 				if (document.getElementById("polit").value == '26c0381f2de54fd8887ab42d99da1481' && rudangshijianInfo == null) {
@@ -784,6 +808,9 @@
 					"peo_dis_card_pic":disablePicAdd,
 					"peo_single_child_pic":singlPicAdd,
 					"peo_is_flow":peoisflowInfo,
+					"kinsman_name":kinsmannameInfo,
+					"kinsman_phone":kinsmanphoneInfo,
+					"kinsman_unit":kinsmannuitInfo,
 				};
 				
 				
@@ -958,7 +985,6 @@ mui.plusReady(function () {
 								
 								//矫正人员 
 								jzry = data.data[i].peo_is_jzry;
-//								 console.log('-----矫正'+data.data[i].peo_is_jzry)
 								common.jzryInfo(jzry,function(result){
 									document.getElementById("peo_is_jzry").innerHTML = result;
 								});
@@ -980,6 +1006,14 @@ mui.plusReady(function () {
 									document.getElementById("peo_zdry_id").innerHTML = result;
 								});
 								
+								var kinsmanName = data.data[i].kinsman_name;
+								document.getElementById("kinsman_name").value = common.changestr(kinsmanName);
+								
+								var kinsmanPhone = data.data[i].kinsman_phone;
+								document.getElementById("kinsman_phone").value = common.changestr(kinsmanPhone);
+								
+								var kinsmanUnit = data.data[i].kinsman_unit;
+								document.getElementById("kinsman_unit").value = common.changestr(kinsmanUnit);
 								
 								//低保证号
 								socialmumber = data.data[i].socialmumber;
