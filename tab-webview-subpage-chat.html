@@ -166,23 +166,28 @@
 		}
 		//发送请求加载楼栋数据
 		 function getBuildingInfo(){
+		 	
 				var selected_val = document.getElementById('communityInfo').value;
+				
 				common.getLoudong(selected_val,function(result){
-					document.getElementById("LouDongID").innerHTML = result;
+					setTimeout(function(){
+						document.getElementById("LouDongID").innerHTML = result;
+					},2000);
 					getRoomInfo();
 				});
 		 }
+		 
 		 //获取房间信息
 		 function getRoomInfo(){
-		 	var selected_val = document.getElementById('LouDongID').value;
-//		 	 	var selected_val = document.getElementById('LouDongID').value; 
-				
+			 	var selected_val = document.getElementById('LouDongID').value;
 				mui.ajax(urlforapp+':8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
 				var area_name = '<option value="">请选择</option>';
+				
 				for (i=0;i<data.data.length;i++) {
+				
 					//加入是否走访的标记
 					if (data.data[i].visited.length > 1){
 						area_name +=
@@ -197,7 +202,8 @@
 					}
 					
 				}
-				document.getElementById("FangHaoID").innerHTML = area_name;				
+				document.getElementById("FangHaoID").innerHTML = area_name;
+								
 				},
 				error: function(xhr,type,errorThrown){
 						
@@ -336,6 +342,8 @@
 		//  获取房间
 		function getHouseInfo(params){
 			$('#houselist').show()
+			
+			
 			mui.ajax(urlforapp+':8080/app?cmd=getfcinfobyhouseid&houseid='+params,{
 				dataType:'json',//服务器返回json格式数据
 				type:'get',//HTTP请求类型
@@ -466,8 +474,6 @@
 				document.getElementById("shequID").innerHTML = result;
 				getWangge();
 			});
-			
-			
 		
 		
 	});
