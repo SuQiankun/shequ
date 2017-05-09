@@ -216,82 +216,30 @@
 					<div class="mui-card-content">
 						<form class="mui-input-group">
 							<p id="personID" style="display: none;"></p>
+							
 							<div class="mui-input-row">
 								<label style="width: 30%;">姓名</label>
 								<input style="width: 65%;" id="nameStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">身份证号</label>
-								<input style="width: 65%;" id="idcardStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
-								
-							</div>
-								<div class="mui-input-row" style="height: 100%;">
-										<label style="width: 35%;"> 身份证照片</label>
-										<img id="idcardPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src="" data-preview-src="" data-preview-group="1" /  >
-										<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
-											<button type="button" id="uploadIDCARD"  class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
-										</div>
-								</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">手机号码</label>
-								<input style="width: 65%;" id="phoneStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
-							</div>
-						
-							<div class="mui-input-row">
+								<div class="mui-input-row">
 								<label style="width: 30%;">性别</label>
 								<select id="sexID" style="width: 65%;" class="mui-btn-block">
 								</select>
 							</div>
+							<div class="mui-input-row">
+									<label style="width: 30%;">族别</label>
+									<select id="nationID" style="width: 65%;" class="mui-btn-block">
+									</select>
+							</div>
+							
 							<div class="mui-input-row">
 								<label style="width: 35%;">与业主关系</label>
 								<select id="ownRealt" style="width: 65%;" class="mui-btn-block">
 								</select>
 							</div>
 							<div class="mui-input-row">
-								<label style="width: 30%;">矫正人员</label>
-								<select id="peo_is_jzry" style="width: 65%;" class="mui-btn-block">
-								</select>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">重点地州</label>
-								<select id="peo_zdry_id" style="width: 65%;" class="mui-btn-block">
-								</select>
-							</div>				
-							
-								<div class="mui-input-row">
-								<label style="width: 30%;">流出人口</label>
-								<select id="peo_is_lcrk" style="width: 65%;" class="mui-btn-block">
-									<option value=null>请选择</option>
-									<option value="084500e2b1384e809d49b2db44923fd0">是</option>
-									<option value="43420be04461467d963b8936d23a591a">否</option>
-									<option value="6e942eb47c67469db061c86fa65d0025">其他</option>
-								</select>
-							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">人员属性</label>
-								<select id="peo_attr_id" style="width: 65%;" class="mui-btn-block">
-								</select>
-							</div>
-
-								<div class="mui-input-row">
-									<label style="width: 30%;">族别</label>
-									<select id="nationID" style="width: 65%;" class="mui-btn-block">
-									</select>
-								</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">宗教信仰</label>
-								<select id="RELIGION"  onchange="getAdress()" >
-									<option value="">请选择</option>
-								</select>
-							</div>
-						
-							<div class="mui-input-row">
-								<label style="width: 30%;">礼拜地址</label>
-								<select style="width: 65%; font-size: 14px;" id="daogaoAdress" name="">
-									<option value="">请选择</option>
-								</select>
+								<label style="width: 30%;">手机号码</label>
+								<input style="width: 65%;" id="phoneStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row">
@@ -299,54 +247,60 @@
 								<div id="result" style="line-height: 40px; display: inline-block; " class="ui-alert"></div>
 								<label  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择出生时间" data-input-clear="5">点击选择出生日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
-
+							
 							<div class="mui-input-row">
+								<label style="width: 30%;">身份证号</label>
+								<input style="width: 65%;" id="idcardStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
+							<div class="mui-input-row" style="height: 100%;">
+									<label style="width: 35%;"> 身份证照片</label>
+									<img id="idcardPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src="" data-preview-src="" data-preview-group="1" /  >
+									<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
+										<button type="button" id="uploadIDCARD"  class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
+									</div>
+							</div>
+							
+						
+						<!--内容 part 2-->
+						<div class="mui-input-row">
 								<label style="width: 30%;">籍贯</label>
 								<input style="width: 65%;" id="jgStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
-							</div>
-		
+						</div>
 							<div class="mui-input-row">
-								<label style="width: 30%;">职业</label>
-								<select id="career" name="">
+								<label style="width: 30%;">户口性质</label>
+								<select id="popuInfo" name="">
 									<option value="">请选择</option>
 								</select>
 							</div>
+							<div class="mui-input-row">
+								<label style="width: 35%;">户口所在地</label>
+								<input style="width: 65%;" id="hkdz" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>	
+						
 							
 							<div class="mui-input-row">
-								<label style="width: 30%;">工作单位</label>
-								<input id="danweidizhi" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">退休时间</label>
-								<label  id="peo_retire_date" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择退休时间" data-input-clear="5">点击选择退休日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
-							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">毕业院校 </label>
-								<input id="peo_byyx" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
-							</div>
-												
-							<div class="mui-input-row">
-								<label style="width: 30%;">血型</label>
-								<select id="bloodType" name="">
-									<option value="">请选择</option>
+								<label style="width: 30%;">重点地州</label>
+								<select id="peo_zdry_id" style="width: 65%;" class="mui-btn-block">
 								</select>
 							</div>
-
-							<div class="mui-input-row">
-								<label style="width: 30%;">身高(cm)</label>
-								<input id="peo_height" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">体重(kg)</label>
-								<input id="peo_weight" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
-							</div>
+							
 							
 							<div class="mui-input-row">
-								<label style="width: 30%;">爱好特长</label>
-								<input id="peo_hobby" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<label style="width: 30%;">矫正人员</label>
+								<select id="peo_is_jzry" style="width: 65%;" class="mui-btn-block">
+								</select>
 							</div>
-							
+								<div class="mui-input-row">
+								<label style="width: 50%;font-size: 13px;">是否为流动人口</label>
+								<select id="peoisflow"style="width: 50%;">
+									<option value="">请选择</option>
+									<option value="084500e2b1384e809d49b2db44923fd0">是</option>
+									<option value="43420be04461467d963b8936d23a591a">否</option>
+									<option value="6e942eb47c67469db061c86fa65d0025">其他</option>									
+								</select>
+							</div>
+							<!--内容 part 3-->
 							<div class="mui-input-row">
 								<label style="width: 30%;">医疗参保</label>
 								<select  id="yiliaoqingkuang" >
@@ -354,45 +308,35 @@
 								</select>
 							</div>
 							
-								<div class="mui-input-row">
+							<div class="mui-input-row">
 								<label style="width: 30%;">养老参保</label>
 								<select  id="peo_ylqk" >
-									<option value="">请选择</option>
+									<option value='null'>请选择</option>
 								</select>
 							</div>
 							<div class="mui-input-row">
-								<label style="width: 30%;">户口性质</label>
-								<select id="popuInfo" name="">
+								<label  style="width: 30%;">健康状况</label>
+								<select id="jiankangzhuangkuang" name="" onchange="showJibingleixing()">
 									<option value="">请选择</option>
+									<option value="">疾病</option>
+									<option value="">健康</option>
+								</select>
+							</div>
+							<div id="jibingdivid" class="mui-input-row" >
+								<label  style="width: 30%;">疾病类型</label>
+								<select id="jibingleixingid"  >
+									<option value=null>请选择</option>
 								</select>
 							</div>
 							
 							<div class="mui-input-row">
-								<label style="width: 30%;">政治面貌</label>
-								<select id="polit" name="">
-									<option value="">请选择</option>
-								</select>
+								<label style="width: 30%;">退休时间</label>
+								<label  id="peo_retire_date" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择退休时间" data-input-clear="5">点击选择退休日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
-							<div class="mui-input-row">
-								<label style="width: 30%;">入党时间</label>
-								<label  id="rudangshijian" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择入党时间" data-input-clear="5">点击选择入党日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">党内职务</label>
-								<input id="dangneizhiwu" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
-							</div>
+
 							
-							<div class="mui-input-row">
-								<label style="width: 30%;">婚姻状况</label>
-								<select id="marry">
-									<option value="">请选择</option>
-								</select>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">结婚时间</label>
-									<label  id="peo_marry_date" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择结婚时间" data-input-clear="5">点击选择结婚时间<span class="mui-icon mui-icon-clear mui-hidden"></span>
-							</div>
+							
 							<div class="mui-input-row">
 								<label  style="width: 30%;">经济状况</label>
 								<select id="income" name="">
@@ -409,12 +353,123 @@
 									<option value="e401303df0be4e44831f235f678ad70f">因病致贫</option>
 								</select>
 							</div>
+										
+							
+							<div class="mui-input-row">
+							<label style="width: 30%;">流出人口</label>
+							<select id="peo_is_lcrk" style="width: 65%;" class="mui-btn-block">
+								<option value=null>请选择</option>
+								<option value="084500e2b1384e809d49b2db44923fd0">是</option>
+								<option value="43420be04461467d963b8936d23a591a">否</option>
+								<option value="6e942eb47c67469db061c86fa65d0025">其他</option>
+								</select>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">人员属性</label>
+								<select id="peo_attr_id" style="width: 65%;" class="mui-btn-block">
+								</select>
+							</div>
+
+								
+								
+							<div class="mui-input-row">
+								<label style="width: 30%;">宗教信仰</label>
+								<select id="RELIGION"  onchange="getAdress()" >
+									<option value="">请选择</option>
+								</select>
+							</div>
+						
+							<div class="mui-input-row">
+								<label style="width: 30%;">礼拜地址</label>
+								<select style="width: 65%; font-size: 14px;" id="daogaoAdress" name="">
+									<option value="">请选择</option>
+								</select>
+							</div>
+							
+						
+
+							
+		
+							<div class="mui-input-row">
+								<label style="width: 30%;">职业</label>
+								<select id="career" name="">
+									<option value="">请选择</option>
+								</select>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">工作单位</label>
+								<input id="danweidizhi" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+								<div class="mui-input-row">
+								<label style="width: 30%;">文化程度</label>
+								<select id="degree" name="">
+									<option value="">请选择</option>
+								</select>
+							</div>
+							<div class="mui-input-row">
+								<label style="width: 30%;">毕业院校 </label>
+								<input id="peo_byyx" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+												
+							<div class="mui-input-row">
+								<label style="width: 30%;">血型</label>
+								<select id="bloodType" name="">
+									<option value="">请选择</option>
+								</select>
+							</div>
+
+							<div class="mui-input-row">
+								<label style="width: 30%;">身高(cm)</label>
+								<input id="peo_height" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">体重(kg)</label>
+								<input id="peo_weight" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">爱好特长</label>
+								<input id="peo_hobby" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
+							
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">政治面貌</label>
+								<select id="polit" name="" onchange="showPolitInfo()">
+									<option value="">请选择</option>
+								</select>
+							</div>
+							<div id="rudangshijiandiv" class="mui-input-row">
+								<label style="width: 30%;">入党时间</label>
+								<label  id="rudangshijian" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择入党时间" data-input-clear="5">点击选择入党日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							<div id="dangneizhiwudiv" class="mui-input-row">
+								<label style="width: 30%;">党内职务</label>
+								<input id="dangneizhiwu" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">婚姻状况</label>
+								<select id="marry">
+									<option value="">请选择</option>
+								</select>
+							</div>
+							
+							<div class="mui-input-row">
+								<label style="width: 30%;">结婚时间</label>
+								<label  id="peo_marry_date" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择结婚时间" data-input-clear="5">点击选择结婚时间<span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
+							
 							
 							<div class="mui-input-row">
 								<label style="width: 35%;">低保证号</label>
 								<input style="width: 65%;" id="dibaozheng" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
-							<!--TODO 低保证-->
 								<div class="mui-input-row" style="height: 100%;">
 										<label style="width: 35%;"> 低保证照片</label>
 										<img id="sociaPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src="" data-preview-src="" data-preview-group="1"/ >
@@ -422,37 +477,11 @@
 											<button id="uploadSociaPIC" type="button" class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
 										</div>
 								</div>
-							<div class="mui-input-row">
-								<label  style="width: 30%;">健康状况</label>
-								<select id="jiankangzhuangkuang" name="" onchange="showJibingleixing()">
-									<option value="">请选择</option>
-									<option value="">疾病</option>
-									<option value="">健康</option>
-								</select>
-							</div>
-							<div id="jibingdivid" class="mui-input-row" style="display: none;">
-								<label  style="width: 30%;">疾病类型</label>
-								<select id="jibingleixingid"  >
-									<option value="">请选择</option>
-								</select>
-							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">文化程度</label>
-								<select id="degree" name="">
-									<option value="">请选择</option>
-								</select>
-							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 35%;">户口所在地</label>
-								<input style="width: 65%;" id="hkdz" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
-							</div>
 							
 							<div class="mui-input-row">
 								<label style="width: 35%;">残疾证</label>
 								<input style="width: 65%;" id="canjizheng" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
-						<!--TODO 残疾证 -->
 							<div class="mui-input-row" style="height: 100%;">
 										<label style="width: 35%;"> 残疾证照片</label>
 										<img id="disablePIC" alt="残疾证照片" style="height: 100px; width: 180px; margin-top: 10px;"  src=""  data-preview-src="" data-preview-group="1"/ >
@@ -475,7 +504,6 @@
 									<option value="">请选择</option>
 								</select>
 							</div>
-							<!--TODO -->
 								<div class="mui-input-row" style="height: 100%;">
 										<label style="width: 35%;"> 光荣证证照片</label>
 										<img id="singlechildPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src=""  data-preview-src="" data-preview-group="1"/ >
@@ -485,10 +513,11 @@
 								</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">兵役</label>
-								<select id="military" name="">
+								<select id="military" name="" onchange="showBingyi()">
 									<option value="">请选择</option>
 								</select>
 							</div>
+							
 							<div class="mui-input-row" id="div_by_org">
 								<label style="width: 30%;">服役部队</label>
 								<input style="width: 65%;" id="peo_by_org" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
@@ -518,15 +547,7 @@
 								</select>
 							</div>
 
-							<div class="mui-input-row">
-								<label style="width: 50%;font-size: 13px;">是否为流动人口</label>
-								<select id="peoisflow"style="width: 50%;">
-									<option value="">请选择</option>
-									<option value="084500e2b1384e809d49b2db44923fd0">是</option>
-									<option value="43420be04461467d963b8936d23a591a">否</option>
-									<option value="6e942eb47c67469db061c86fa65d0025">其他</option>									
-								</select>
-							</div>
+						
 
 
 						</form>
@@ -546,17 +567,7 @@
 		<script src="js/mui.min.js"></script>
 		
 		<script>
-			//跳转到上传图片的界面
-//			document.getElementById("jumpImageView").addEventListener('tap',function(){
-//				//跳转图片页面
-//				mui.openWindow({
-//					    url: 'imageView.html', 
-//					    id:'image',
-//						extras:{
-//							imageList:peoListData,
-//					    },
-//				});
-//			});
+
 			function getAdress(){
 				var reID =  document.getElementById("RELIGION").value;
 												var numberStr = '';
@@ -641,6 +652,7 @@
 				var jiankangInfo = document.getElementById("jiankangzhuangkuang").value;
 				//疾病类型
 				var jibingtypeInfo = document.getElementById("jibingleixingid").value;
+				console.log('----'+jibingtypeInfo+'-----')
 				//文化程度
 				var wenhuaInfo = document.getElementById("degree").value;
 				//户口所在地
@@ -655,17 +667,17 @@
 				var zaijiajuzhuInfo = document.getElementById("yesOrNot").value;
 				//重点地州
 				var zdryInfo = document.getElementById("peo_zdry_id").value;
-				//
+				//是否为矫正人员
 				var jzryInfo = document.getElementById("peo_is_jzry").value;
 				//流动人口
 				var lcrkInfo = document.getElementById("peo_is_lcrk").value;
 				//人员属性
 				var attidInfo = document.getElementById("peo_attr_id").value;
-				//
+				//光荣证类型
 				var sctypeInfo = document.getElementById("singlechild").value;
-				
+				//光荣证号
 				var scnumInfo = document.getElementById("singlechildnum").value;
-				
+				//光荣证享受情况
 				var scenjoyInfo = document.getElementById("singlechildenjoy").value;
 				//爱好特长
 				var hobbyinfo = document.getElementById("peo_hobby").value;
@@ -764,8 +776,8 @@
 					"peo_by_indate":byinDateInfo,
 					"peo_by_outdate":byoutDateInfo,
 					"peo_retire_date":retireinfo,
-					"peo_weight":heightinfo,
-					"peo_stature":weightinfo,
+					"peo_weight":weightinfo,
+					"peo_stature":heightinfo,
 					"peo_cjgy":Publicwelfareinfo,
 					"peo_card_pic":idcardPicAdd,
 					"socialpic":sociaPicAdd,
@@ -788,6 +800,7 @@
 							setTimeout('mui.back()',1000);	
 						} else{
 							mui.alert('修改失败!');
+							console.log(data.data);
 						}
 					},
 					error:function(xhr,type,errorThrown){
@@ -834,7 +847,6 @@
 		
 mui.plusReady(function () {
 		
-
 			var web = plus.webview.currentWebview();
 				//获取传递参数
 			  document.getElementById('nameStr').value = web.name;
@@ -889,6 +901,15 @@ mui.plusReady(function () {
 								//兵役状况
 								bingyi = data.data[i].peo_by_id;
 								common.getBingyi('military','military',bingyi);
+								if(bingyi != '未服'){
+									$('#div_by_org').hide();
+									$('#div_by_indate').hide();
+									$('#div_by_outdate').hide();
+								}else{
+									$('#div_by_org').show();
+									$('#div_by_indate').show();
+									$('#div_by_outdate').show();
+								}
 								//部队名称
 								document.getElementById("peo_by_org").value = common.changestr(data.data[i].peo_by_org);
 								//入伍时间
@@ -982,6 +1003,21 @@ mui.plusReady(function () {
 								//政治面貌
 								zzmm = data.data[i].peo_zzmm_id;
 								common.getReligion('polit','polit',zzmm);
+								if(zzmm == '党员'){
+										$('#dangneizhiwudiv').show();
+										$('#rudangshijiandiv').show();
+								}else{
+										$('#dangneizhiwudiv').hide();
+										$('#rudangshijiandiv').hide();
+								}
+								//入党时间
+								partydate = data.data[i].peo_join_party_date;
+								document.getElementById("rudangshijian").textContent= common.changestr(partydate);
+								//党内职务
+								partyzw = data.data[i].peo_party_zw;
+								document.getElementById("dangneizhiwu").value = common.changestr(partyzw);
+								
+								
 								
 								//学历信息
 								xueli = data.data[i].peo_edu_deg_id;
@@ -1000,6 +1036,9 @@ mui.plusReady(function () {
 								if (jiankang != '健康') {
 									$('#jibingdivid').show();
 									getJibingType();
+								}else{
+									$('#jibingdivid').hide();
+									getJibingType();
 								}
 								//plus.storage.getItem('健康状况')
 								common.getReligion(plus.storage.getItem('健康状况'),'jiankangzhuangkuang',jiankang);
@@ -1007,15 +1046,7 @@ mui.plusReady(function () {
 								//是否在家居住
 								inhome = data.data[i].peo_inhome_id;
 								common .getReligion('YesOrNot','yesOrNot',inhome);
-								//入党时间
-								partydate = data.data[i].peo_join_party_date;
-								document.getElementById("rudangshijian").textContent= common.changestr(partydate);
-								
-									
-								//党内职务
-								partyzw = data.data[i].peo_party_zw;
-								document.getElementById("dangneizhiwu").value = common.changestr(partyzw);
-								
+						
 								//工作单位
 								workunit = data.data[i].peo_work_unit;
 								document.getElementById("danweidizhi").value = common.changestr(workunit);
@@ -1094,6 +1125,7 @@ mui.plusReady(function () {
 
 <!--加载疾病信息-->
 <script>
+	
 /**
  * 设置图片
  * @param {图片的url} params 
@@ -1108,8 +1140,6 @@ mui.plusReady(function () {
 			}
 	}
 	
-	
-	
 	function showJibingleixing(){
 		var str = $("#jiankangzhuangkuang").find("option:selected").text();
 		if (str !== '健康') {
@@ -1117,15 +1147,38 @@ mui.plusReady(function () {
 			getJibingType();
 		}else if(str == '健康'){
 			$('#jibingdivid').hide();
-			// 设置 selectd 为空
-			$("#jibingdivid ").val(""); 
+//			$("#jibingdivid ").val(""); 
 		}
 	}
+	
 	function getJibingType(){
 		var params = plus.storage.getItem('疾病类型');
 		common.getDictTypeInfo(params,jblx,function(result){
 			document.getElementById("jibingleixingid").innerHTML = result;
 		});
+	}
+	function showBingyi(){
+		var str = $("#military").find("option:selected").text();
+		if(str == '未服' || str == '请选择'){
+				$('#div_by_org').hide();
+				$('#div_by_indate').hide();
+				$('#div_by_outdate').hide();
+		}else{
+				$('#div_by_org').show();	
+				$('#div_by_indate').show();
+				$('#div_by_outdate').show();
+		}
+	}
+	
+	function showPolitInfo(){
+		var str = $('#polit').find('option:selected').text();
+			if(str == '党员'){
+				$('#dangneizhiwudiv').show();
+				$('#rudangshijiandiv').show();
+			}else{
+			 	$('#dangneizhiwudiv').hide();
+				$('#rudangshijiandiv').hide();	
+			}
 	}
 	
 	 
@@ -1141,7 +1194,7 @@ mui.plusReady(function () {
 					return true;
 				}
 			});
-			
+		
 </script>
 
 <script src="js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>

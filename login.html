@@ -138,34 +138,34 @@
 			mui.plusReady(function () {
 				
 	
-				plus.runtime.getProperty(plus.runtime.appid, function(inf) {
-						//获取当前版本号
-						var currentVersionss = inf.version;
-						mui.ajax('http://git.oschina.net/SuQiankun/configcommonproject/raw/master/appVersion',{
-							dataType:'text',//服务器返回json格式数据
-							type:'get',//HTTP请求类型
-							timeout:10000,//超时时间设置为10秒；
-							success:function(data){
-								if(data == currentVersionss){
-									return false;
-								}else{
-									//获取版本号;
-									var btnArray = ['否', '是'];
-									mui.confirm('新版本','是否前去更新',btnArray,function(e){
-										if (e.index == 1) {
-											plus.runtime.openURL('https://www.pgyer.com/NQoU');	
-										} else{
-//											mui.alert('期待您的更新!');
-										}
-									});
-									
-								}
-							},
-							error:function(xhr,type,errorThrown){
-							}
-						});
-						
-						});
+//				plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+//						//获取当前版本号
+//						var currentVersionss = inf.version;
+//						mui.ajax('http://git.oschina.net/SuQiankun/configcommonproject/raw/master/appVersion',{
+//							dataType:'text',//服务器返回json格式数据
+//							type:'get',//HTTP请求类型
+//							timeout:10000,//超时时间设置为10秒；
+//							success:function(data){
+//								if(data == currentVersionss){
+//									return false;
+//								}else{
+//									//获取版本号;
+//									var btnArray = ['否', '是'];
+//									mui.confirm('新版本','是否前去更新',btnArray,function(e){
+//										if (e.index == 1) {
+//											plus.runtime.openURL('https://www.pgyer.com/NQoU');	
+//										} else{
+////											mui.alert('期待您的更新!');
+//										}
+//									});
+//									
+//								}
+//							},
+//							error:function(xhr,type,errorThrown){
+//							}
+//						});
+//						
+//						});
 						
 						
 				//获取保存的数据
