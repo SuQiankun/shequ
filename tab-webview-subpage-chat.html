@@ -85,19 +85,21 @@
 			
 			<div class="mui-card mui-control-content" id='item2'>
 					<div class="mui-card-header" >
-						<h4 style="font-weight: 12px;">
-							<span style="font-size: 12px;" class="mui-icon mui-icon-search"></span>
-							<span>按照人名查询</span>
+						<h4 style="font-weight: normal;">
+							<span style="font-size: 20px;" class="mui-icon mui-icon-search"></span>
+							<span>模糊搜索</span>
 						</h4>
 					</div>
-					<div class="mui-input-row mui-search">
-						<input type="search" class="mui-input-clear" placeholder="">	
+					
+					<div class="mui-input-row mui-search"  style="margin-left:5px ; margin-right: 5px; margin-top:5px; ">
+							<input id="searchName" type="search" style="background-color: #EFEFF4;"  placeholder="qingshuru">	
 					</div>
-					<div class="mui-button-row">
-						<button type="button" class="mui-btn mui-btn-primary" onclick="return false;">确认</button>&nbsp;&nbsp;
+					
+					<div class="mui-card-content-inner mui-button-row">
+						<button type="button" class="mui-btn mui-btn-primary" onclick="searchWithName();">确认</button>&nbsp;&nbsp;
 						<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
 					</div>
-				
+					
 			</div>
 			
 			
@@ -153,10 +155,8 @@
 						</div>
 				</div>
 				<!--房产信息 end -->
-				
 				<div id="personList" class="mui-content" >
 				</div>
-				
 					<div class="mui-content-padded" id="addbuttonDiv" > 
 						<button onclick="addPersion()" style="padding: 10px 0; margin: 16px 0;" type="button" class="mui-btn mui-btn-primary mui-btn-block">
 							新增成员
@@ -400,16 +400,13 @@
 		
 		//跳转到新增人员的界面;
 		function addPersion(){
-				
 				var shequ = document.getElementById('shequID').value;
 				var wangge = document.getElementById("wangge").value;
 				var xiaoqu = document.getElementById('communityInfo').value;
 				var loudongid =document.getElementById("LouDongID").value;
 				var fanghaoid =document.getElementById("FangHaoID").value;
-				
 				if (fanghaoid == '' || fanghaoid == null || fanghaoid == undefined) {
-					mui.alert('请选择房间进行新增人员');
-					return false;
+					mui.alert('请选择房间进行新增人员');		return false;
 				} else{
 					mui.openWindow({
 					    url: 'addPerson.html', 
@@ -469,6 +466,34 @@
 				},
 			});
 		}
+	//模糊搜索
+		
+		function searchWithName(){
+			var waitTip = plus.nativeUI.showWaiting();
+		 	
+		 	var NameStr = document.getElementById("searchName").value;
+		 	
+			mui.ajax(urlforapp+':8080/app?cmd=getlivepeoplebyname&peo_name='+NameStr,{
+				dataType:'json',//服务器返回json格式数据
+				type:'get',
+				timeout:10000,
+				success:function(data){
+
+					if (data.code == '200') {
+					
+						if (data.data.length > 0) {
+								setTimeout('waitTip.close()',3000);		
+						}
+					}
+					
+				},
+				error:function(xhr,type,errorThrown){
+					console.log('请求失败');
+				}
+			});			
+			
+		}
+	
 	
 	</script>	
 
@@ -490,7 +515,6 @@
 		$('#addbuttonDiv').hide();
 		
 	});
-	//取消返回按钮
 			
 			
 	</script>
