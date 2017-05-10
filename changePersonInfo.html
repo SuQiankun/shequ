@@ -619,7 +619,7 @@ function getAdress(){
 				var data = {
 					"peo_hs_num":self.fanghaoid,
 					"peo_id":self.personid,
-					"peo_yz_relation":self.relation,
+					"peo_yz_relation":relation,
 					"peo_name":nameStr,
 					"peo_nation_id":nationStr,
 					"peo_jg_id":jgStr,
@@ -1135,19 +1135,19 @@ mui.plusReady(function () {
 	});
 	document.getElementById("uploadSinglePIC").addEventListener('tap',function(){
 		plus.gallery.pick(function(p){
-		$("#singlechildPIC").attr('src',p);			
-		var server=urlforapp+":8080/app/uploadimg";
-		var wt=plus.nativeUI.showWaiting();
-		var task=plus.uploader.createUpload(server,
-			{method:"POST"},
-			function(t,status){ //上传完成
-				if(status==200){
-					var data = JSON.parse(t.responseText)
-					wt.close();
-					singlPicAdd = data.data;
-				}else{wt.close();}});
-				
-		task.addFile(p,{key:"upimg"});		task.start();
+			$("#singlechildPIC").attr('src',p);			
+			var server=urlforapp+":8080/app/uploadimg";
+			var wt=plus.nativeUI.showWaiting();
+			var task=plus.uploader.createUpload(server,
+				{method:"POST"},
+				function(t,status){ //上传完成
+					if(status==200){
+						var data = JSON.parse(t.responseText)
+						wt.close();
+						singlPicAdd = data.data;
+					}else{wt.close();}});
+					
+			task.addFile(p,{key:"upimg"});		task.start();
 		});
 	});
 	
