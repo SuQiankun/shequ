@@ -83,7 +83,6 @@
 					</div>
 				</div>
 				
-		
 			<div class="mui-card mui-control-content" id='item2'>
 					<div class="mui-card-header" >
 						<h4 style="font-weight: normal;">
@@ -94,16 +93,13 @@
 					<div class="mui-input-row mui-search"  style="margin-left:5px ; margin-right: 5px; margin-top:5px; ">
 						<input id="searchName" type="search" style="background-color: #EFEFF4;"  placeholder="请输入姓名">	
 					</div>
-					<div class="mui-card-content-inner mui-button-row">
+					<div class="mui-card-footer mui-button-row">
 						<button type="button" class="mui-btn mui-btn-primary" onclick="searchWithName();">确认</button>&nbsp;&nbsp;
 						<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
 					</div>
-						
+			</div>
 				<div id="serpersonList" class="mui-content" >
 				</div>
-				
-			</div>
-			
 			
 				<!--  房产信息-->
 				<div id="houselist" class="mui-content"  style="display: none;">
@@ -157,8 +153,10 @@
 						</div>
 				</div>
 				<!--房产信息 end -->
+				
 				<div id="personList" class="mui-content" >
 				</div>
+				
 					<div class="mui-content-padded" id="addbuttonDiv" > 
 						<button onclick="addPersion()" style="padding: 10px 0; margin: 16px 0;" type="button" class="mui-btn mui-btn-primary mui-btn-block">
 							新增成员
@@ -172,6 +170,26 @@
 		<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="js/Common.js"></script>	
 		<script type="text/javascript" charset="utf-8">		
+	
+		//判断是否隐藏 内容区域
+		document.getElementById("segmentedControl").addEventListener('tap',function(){
+			var segmentedControl = document.getElementById("segmentedControl");
+            var links = segmentedControl.getElementsByTagName('a');
+            var segmentID = new Array();
+            for (var i = 0; i < links.length; i++) {
+                if (links[i].getAttribute('class').indexOf('mui-active') > 0) {
+                    var id = links[i].getAttribute('href');
+                   segmentID.push(id);
+                }
+            }
+			if (segmentID[segmentID.length-1] == '#item2') {
+					$('#serpersonList').show()
+					$('#personList').hide()
+			}else{
+					$('#serpersonList').hide()
+					$('#personList').show()
+			}
+		});
 	 	 //获取网格列表
 		function getWangge(){
 				var selected_val = document.getElementById('shequID').value;
@@ -210,7 +228,6 @@
 				var area_name = '<option value="">请选择</option>';
 				
 				for (i=0;i<data.data.length;i++) {
-				
 					//加入是否走访的标记
 					if (data.data[i].visited.length > 1){
 						area_name +=
@@ -351,7 +368,7 @@
 		function creattitleStr(att){
 			var titleStr = '';
 			if (att == "重点户") {
-				titleStr = '</br> <div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span style="color:#FF0000 ;" >&nbsp&nbsp当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">';
+				titleStr = '<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span style="color:#FF0000 ;" >&nbsp&nbsp当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">';
 			} else{
 				titleStr = '<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span>&nbsp&nbsp当前住户</span></h4></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">';		
 			}
@@ -362,9 +379,7 @@
 		function getHouseInfo(params){
 			$('#houselist').show()
 			mui.ajax(urlforapp+':8080/app?cmd=getfcinfobyhouseid&houseid='+params,{
-				dataType:'json',//服务器返回json格式数据
-				type:'get',//HTTP请求类型
-				timeout:10000,//超时时间设置为10秒；
+				dataType:'json',type:'get',timeout:10000,
 				success:function(data){
 					houseData = data;
 					
@@ -424,10 +439,6 @@
 			
 		//跳转到修改人员资料的界面,
 		function changePersonInfo(peroid){
-				var shequ = document.getElementById('shequID').value;
-				var xiaoqu = document.getElementById('communityInfo').value;
-				var loudongid =document.getElementById("LouDongID").value;
-				var fanghaoid =document.getElementById("FangHaoID").value;
 				var name =  document.getElementById(peroid+'name').textContent;
 				var sex =  document.getElementById(peroid+'sex').textContent;
 				var nation =  document.getElementById(peroid+'nation').textContent;
@@ -442,10 +453,6 @@
 					    id:'changePersonInfo',
 					    extras:{
 					    		peoList:peoListData,
-					    		shequid:shequ,
-							xiaoquid:xiaoqu,
-							loudongid:loudongid,
-							fanghaoid:fanghaoid,
 					    		personid:peroid,
 							name:name,
 							sex:sex,
@@ -458,12 +465,8 @@
 					    },
 				    });
 		}
-		//跳转到修改人员资料的界面,
+		//跳转到模糊修改人员资料的界面,
 		function changeResultPersonInfo(peroid){
-				var shequ = document.getElementById('shequID').value;
-				var xiaoqu = document.getElementById('communityInfo').value;
-				var loudongid =document.getElementById("LouDongID").value;
-				var fanghaoid =document.getElementById("FangHaoID").value;
 				var name =  document.getElementById(peroid+'name').textContent;
 				var sex =  document.getElementById(peroid+'sex').textContent;
 				var nation =  document.getElementById(peroid+'nation').textContent;
@@ -478,10 +481,6 @@
 					    id:'changeResultPersonInfo',
 					    extras:{
 					    		peoList:peoListData,
-					    		shequid:shequ,
-							xiaoquid:xiaoqu,
-							loudongid:loudongid,
-							fanghaoid:fanghaoid,
 					    		personid:peroid,
 							name:name,
 							sex:sex,
@@ -537,10 +536,15 @@
 					 var att = common.changestr(data.data[i].peo_attr_id);
 					//重点人员标记
 					var resultstr = checkPersonInfo(data.data[i].peo_attr_id,data.data[i].peoid,att,data.data[i].peo_inhome_id);
-					var titleStr =  creattitleStr(data.data[i].peo_attr_id);
 					area_name
 					+=
-					titleStr
+					'<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span style="font-size: 12px;">&nbsp&nbsp'
+					+data.data[i].peo_xq_id
+					+'</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span><span style="font-size: 12px;">'
+					+data.data[i].peo_ld_id
+					+'</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span><span style="font-size: 12px;">'
+					+data.data[i].peo_hs_num
+					+'</span></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">'
 					+'<label style="width: 35%;">姓名</label><p class="yl_txt" id="'
 					+data.data[i].peo_id+'name'
 					+'">'
@@ -586,10 +590,9 @@
 						//插入数据内容;
 						waitTip.close();
 						document.getElementById("serpersonList").innerHTML = area_name;
-						
 					}else{
 						waitTip.close();
-						document.getElementById("serpersonList").innerHTML = "<p>暂无人员</p>";
+						document.getElementById("serpersonList").innerHTML = '<div class="mui-card-footer">暂无人员</div>';
 					}
 				}//判断状态码结尾
 					
