@@ -458,6 +458,42 @@
 					    },
 				    });
 		}
+		//跳转到修改人员资料的界面,
+		function changeResultPersonInfo(peroid){
+				var shequ = document.getElementById('shequID').value;
+				var xiaoqu = document.getElementById('communityInfo').value;
+				var loudongid =document.getElementById("LouDongID").value;
+				var fanghaoid =document.getElementById("FangHaoID").value;
+				var name =  document.getElementById(peroid+'name').textContent;
+				var sex =  document.getElementById(peroid+'sex').textContent;
+				var nation =  document.getElementById(peroid+'nation').textContent;
+				var relation = document.getElementById(peroid+'relation').textContent;
+				var idcard =  document.getElementById(peroid+'idcard').textContent;
+				var jg =  	document.getElementById(peroid+'jg').textContent;
+				var phone =  document.getElementById(peroid+'phone').textContent;
+				var birth =  document.getElementById(peroid+'birth').textContent;
+				// 将获取到的 data 作为一个参数传递到另外一个页面;减少代码量
+					mui.openWindow({
+					    url: 'PersonListInfo.html', 
+					    id:'changeResultPersonInfo',
+					    extras:{
+					    		peoList:peoListData,
+					    		shequid:shequ,
+							xiaoquid:xiaoqu,
+							loudongid:loudongid,
+							fanghaoid:fanghaoid,
+					    		personid:peroid,
+							name:name,
+							sex:sex,
+							nation:nation,
+							relation:relation,
+							idcard:idcard,
+							jg:jg,
+							phone:phone,
+							birth:birth,
+					    },
+				    });
+		}
 	
 		//跳转到修改房产信息的列表
 		function changeHouseInfo(){
@@ -469,11 +505,9 @@
 				},
 			});
 		}
-	//模糊搜索
-		
+		//模糊搜索
 		function searchWithName(){
 			var waitTip = plus.nativeUI.showWaiting();
-		 	
 		 	var NameStr = document.getElementById("searchName").value;
 		 	
 			mui.ajax(urlforapp+':8080/app?cmd=getlivepeoplebyname&peo_name='+NameStr,{
@@ -546,7 +580,7 @@
 					+'</p></div></form></div><div class="mui-card-footer"><div class="mui-button-row" style="margin: 0 auto;">'
 					+'<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined"  id="'
 					+data.data[i].peo_id
-					+'" onclick="changePersonInfo(this.id)">修改</button>&nbsp;&nbsp;</div></div></div>'
+					+'" onclick="changeResultPersonInfo(this.id)">修改</button>&nbsp;&nbsp;</div></div></div>'
 					;
 				}
 						//插入数据内容;
