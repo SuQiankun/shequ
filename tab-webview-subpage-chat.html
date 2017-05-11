@@ -90,14 +90,21 @@
 							<span>模糊搜索</span>
 						</h4>
 					</div>
-					<div class="mui-input-row mui-search"  style="margin-left:5px ; margin-right: 5px; margin-top:5px; ">
+					<div class="mui-card-content">
+						<div class="mui-input-row mui-search"  style="margin-left:5px ; margin-right: 5px; margin-top:5px; ">
 						<input id="searchName" type="search" style="background-color: #EFEFF4;"  placeholder="请输入姓名">	
 					</div>
-					<div class="mui-card-footer mui-button-row">
-						<button type="button" class="mui-btn mui-btn-primary" onclick="searchWithName();">确认</button>&nbsp;&nbsp;
-						<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
 					</div>
+
+					<div class="mui-card-footer">
+						<div class=" mui-button-row" style="margin: 0 auto;">
+							<button type="button" class="mui-btn mui-btn-primary" onclick="searchWithName();">确认</button>
+							<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
+						</div>
+					</div>
+					
 			</div>
+			
 				<div id="serpersonList" class="mui-content" >
 				</div>
 			
@@ -185,9 +192,10 @@
 			if (segmentID[segmentID.length-1] == '#item2') {
 					$('#serpersonList').show()
 					$('#personList').hide()
+					$("#houselist").hide()
 			}else{
-					$('#serpersonList').hide()
-					$('#personList').show()
+					$('#serpersonList').hide();
+					$('#personList').show();
 			}
 		});
 	 	 //获取网格列表
@@ -618,10 +626,10 @@
 			document.getElementById('LouDongID').innerHTML =placeholderText ;
 			document.getElementById('FangHaoID').innerHTML =placeholderText ;
 			//获取社区列表
-			common.getSheQu(function(result){
-				document.getElementById("shequID").innerHTML = result;
-				getWangge();
-			});
+common.getSheQu(function(result){
+	document.getElementById("shequID").innerHTML = result;
+	getWangge();
+});
 		$('#addbuttonDiv').hide();
 		
 	});

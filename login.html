@@ -5,7 +5,6 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
 		<link href="css/mui.min.css" rel="stylesheet" />
-		<!--<script src="js/update.js" type="text/javascript" charset="utf-8"></script>-->
 		<style>
 			.ui-page-login,
 			body {
@@ -175,14 +174,13 @@
 					document.getElementById("account").value = plus.storage.getItem('username');
 				}
 				//获取参数list
-				mui.ajax(urlforapp+':8080/app?cmd=getdictbytype&dictype=73d96446b8464d11ab42b14c3faa3a11',{
+				mui.ajax('http://git.oschina.net/SuQiankun/configcommonproject/raw/master/configList.json',{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
 					timeout:10000,//超时时间设置为10秒；
 					success:function(data){
 							for (var i = 0; i<data.data.length;i++) {
 								plus.storage.setItem(data.data[i].val,data.data[i].ids);
-							
 							}
 					},
 					error:function(xhr,type,errorThrown){
@@ -242,8 +240,6 @@
 							url: 'tab-webview-main.html',
 							id: 'main', 
 						});
-						
-						
 				}else{
 						mui.toast("请检查账号密码!");
 					}

@@ -435,7 +435,9 @@
 								</div>
 							<div class="mui-input-row">
 								<label style="width: 35%;">光荣证类型</label>
-								<input style="width: 65%;" id="singlechild" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<select id="singlechild">
+									<option value="">请选择</option>
+								</select>
 							</div>
 							
 							<div class="mui-input-row">
@@ -573,10 +575,12 @@ function getAdress(){
 				var attidInfo = document.getElementById("peo_attr_id").value;
 				//光荣证类型
 				var sctypeInfo = document.getElementById("singlechild").value;
+				if (sctypeInfo == '' || sctypeInfo == null ||sctypeInfo == undefined) {mui.alert('请选择光荣证类型');return false;}
 				//光荣证号
 				var scnumInfo = document.getElementById("singlechildnum").value;
 				//光荣证享受情况
 				var scenjoyInfo = document.getElementById("singlechildenjoy").value;
+				if (scenjoyInfo == '' || scenjoyInfo == null ||scenjoyInfo == undefined) {mui.alert('请选择享受情况');return false;}
 				//爱好特长
 				var hobbyinfo = document.getElementById("peo_hobby").value;
 				//毕业院校
@@ -606,6 +610,7 @@ function getAdress(){
 				var kinsmanphoneInfo = document.getElementById("kinsman_phone").value;
 				//结亲人单位
 				var kinsmannuitInfo = document.getElementById("kinsman_unit").value;
+				
 				
 				if (document.getElementById("polit").value == '26c0381f2de54fd8887ab42d99da1481' && rudangshijianInfo == null) {mui.alert('请选择入党时间');return false;}
 				if(document.getElementById("dibaozheng").value =='暂无'){	var dibaoInfo = null;	}
@@ -934,7 +939,9 @@ mui.plusReady(function () {
 								document.getElementById("canjizheng").value = common.changestr(discard);
 								//光荣证类型
 								scid = data.data[i].peo_single_child_card;
-								document.getElementById("singlechild").value = common.changestr(scid);
+								common.getDictTypeInfo(plus.storage.getItem('grzlx'),scid,function(result){
+									document.getElementById("singlechild").innerHTML = result;							
+								});
 								//光荣证编号
 								scnumber = data.data[i].peo_single_child_num;
 								document.getElementById("singlechildnum").value = common.changestr(scnumber);

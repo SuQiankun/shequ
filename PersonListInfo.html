@@ -436,7 +436,9 @@
 								</div>
 							<div class="mui-input-row">
 								<label style="width: 35%;">光荣证类型</label>
-								<input style="width: 65%;" id="singlechild" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<select id="singlechild">
+									<option value="">请选择</option>
+								</select>
 							</div>
 							
 							<div class="mui-input-row">
@@ -937,7 +939,9 @@ mui.plusReady(function () {
 								document.getElementById("canjizheng").value = common.changestr(discard);
 								//光荣证类型
 								scid = data.data[i].peo_single_child_card;
-								document.getElementById("singlechild").value = common.changestr(scid);
+								common.getDictTypeInfo(plus.storage.getItem('grzlx'),scid,function(result){
+									document.getElementById("singlechild").innerHTML = result;							
+								});
 								//光荣证编号
 								scnumber = data.data[i].peo_single_child_num;
 								document.getElementById("singlechildnum").value = common.changestr(scnumber);
