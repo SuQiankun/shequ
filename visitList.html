@@ -14,60 +14,29 @@
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		    <h1 class="mui-title">入户走访</h1>
 		</header>
-		
+
+
 	<div class="mui-content" >
 			<div class="mui-content" >
 
-
-				
-				<div class="mui-card" >
-					
+				<div class="mui-card" >					
 					<div class="mui-card-header">
 						<h4 style="font-weight: normal;">
-							<span style="font-size: 20px;" class="mui-icon mui-icon-search"></span>
-							<span>搜索</span>
-						</h4>
+						<span style="font-size: 20px;" class="mui-icon mui-icon-map"></span>
+						<span style="font-size: 12px;" id="xiaoquname">小区</span >
+						<span class = "mui-icon mui-icon-arrowright" style = "font-size: 20px; color: #888;"></span>
+						<span style="font-size: 12px;" id='loudongname'>楼栋</span>
+						<span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;"></span>
+						<span style="font-size: 12px;" id='fanghaoname'>房间</span>
 					</div>
-					
 					<div class="mui-card-content">
 						<form class="mui-input-group" >
-							
-							<div class="mui-input-row" >
-								<label style="width: 30%;" >社区</label>
-								<select  style="width: 70%;" id="shequID" class="mui-btn-block" onchange="getWangge()" >
-								</select>
-							</div>
-							
-							<div class="mui-input-row" >
-								<label style="width: 30%;">网格</label>
-								<select style="width: 70%;" id="wangge" class="mui-btn-block" onchange="getXiaoquInfo()" >
-									<option>请选择</option>
-								</select>
-							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">小区</label>
-								<select   style="width: 70%;" class="mui-btn-block" id="communityInfo" onchange="getBuildingInfo()">
-								</select>
-							</div>
-							
-							<div class="mui-input-row">
-								<label style="width: 30%;">楼栋</label>
-								<select  style="width: 70%;" id="LouDongID" class="mui-btn-block" onchange="getRoomInfo()">
-								</select>
-							</div>
-							
-							<div  class="mui-input-row">
-								<label style="width: 30%;">房号</label>
-									<select style="width: 70%;" id="FangHaoID" class="mui-btn-block">
-									</select>
-							</div>
-				
 							<div id="mui-input-row">
 								<div class="mui-input-row" style="margin: 10px 5px; height: 100%; ">
-									<textarea id="memoinfo" rows="5" placeholder="提交前请确认是否做到了请输入备注信息,或者住户反映的情况"></textarea>
+									<textarea id="memoinfo" rows="5" placeholder="提交前请确认是否做到了八必问八必讲;请输入备注信息,或者住户反映的情况"></textarea>
 								</div>
 							</div>
+							
 						</form>
 					</div>
 					<div class="mui-card-footer">
@@ -90,11 +59,8 @@
 								要做到讲党的恩情、讲富民惠民政策、讲稳定形势、讲社会发展 变化、讲民族团结、讲宗教事务、讲法律知识、讲村级事务
 							</div>
 						</div>
-					</div>			
-						
-					
-					</div>
-
+				</div>				
+				</div>
 				</div>
 		
 		<script src="js/mui.min.js"></script>
@@ -110,41 +76,23 @@
 					mui.fire(list,'getindex');
 					//返回true，继续页面关闭逻辑
 					return true;
-				}
-			});
-			
+					}
+					}); 
+					
 			//提交更新记录
 			document.getElementById("commitVisitInfo").addEventListener('tap',function(){
 
 				var visitdate = new Date().valueOf();
-
-				var shequid = document.getElementById("shequID").value;
-				var xiaoquid = document.getElementById("communityInfo").value;
-				var loudongid = document.getElementById("LouDongID").value;
-				var fanghaoid = document.getElementById("FangHaoID").value;
 				var memoinfo = document.getElementById("memoinfo").value;
-				if (shequid.length < 4) {
-					mui.alert('请选择社区');
-					return false;
-				}
-				if (xiaoquid.length < 4) {
-					mui.alert('请选择小区');
-					return false;
-				}
-				if (loudongid.length < 4) {
-					mui.alert('请选择楼栋');
-					return false;
-				}
-				if (fanghaoid.length < 4) {
-					mui.alert('请选择房间号');
-					return false;
-				}
 				if (memoinfo.length < 1) {
 					mui.alert('请输入备注信息');
 					return false;
 				}
-
-				
+				var self = plus.webview.currentWebview();
+				var shequid = self.shequID;
+				var xiaoquid = self.xiaoquID;
+				var loudongid = self.loudongID;
+				var fanghaoid = self.fanghaoID;
 				
 				mui.ajax(urlforapp+':8080/app?cmd=addvisitrecord',{
 					data:{
@@ -173,76 +121,16 @@
 			});
 				
 		</script>
-		<!--加载小区 楼栋 房间号信息-->
-		<script type="text/javascript">
-			
-		//获取网格列表
-			function getWangge(){
-				var selected_val = document.getElementById('shequID').value;
-				common.getWangge(selected_val,function(result){
-					document.getElementById("wangge").innerHTML = result;
-					getXiaoquInfo()
-				});
-				
-			}
-			
-	//发送请求加载小区数据;
-		function getXiaoquInfo(){
-				var selected_val = document.getElementById('wangge').value;
-				common.getXiaoqu(selected_val,function(result){
-					document.getElementById("communityInfo").innerHTML = result;
-					getBuildingInfo()
-				});
-		}
-		//发送请求加载楼栋数据
-		 function getBuildingInfo(){
-				var selected_val = document.getElementById('communityInfo').value;
-				common.getLoudong(selected_val,function(result){
-					document.getElementById("LouDongID").innerHTML = result;
-					getRoomInfo();
-				});
-		 }
-		 
-		 //获取房间信息
-		 function getRoomInfo(){
-		 	var selected_val = document.getElementById('LouDongID').value;
-				
-				mui.ajax(urlforapp+':8080/app?cmd=gethousebybuildingid&buildingid='+selected_val,{
-				dataType:'json',
-				type:'get',
-				success:function(data){
-				var area_name = '<option value="">请选择</option>';
-				for (i=0;i<data.data.length;i++) {
-					//加入是否走访的标记
-					if (data.data[i].visited.length > 1){
-						area_name +=
-						'<option style="color: #2AC845;" value="'+
-						data.data[i].house_num_id
-						+'">'+ data.data[i].house_num+'&nbsp&nbsp本月已走访</option>';
-					}else{
-							area_name +=
-						'<option value="'+
-						data.data[i].house_num_id
-						+'"> '+ data.data[i].house_num+'</option>';
-					}
-				}
-				document.getElementById("FangHaoID").innerHTML = area_name;				
-				},
-				error: function(xhr,type,errorThrown){
-						
-				}
-			});
-		 }
-		
-		</script>
-		<!--加载社区信息-->
+<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" >
 			mui.plusReady(function () {
-   				common.getSheQu(function(result){
-				document.getElementById("shequID").innerHTML = result;
-				getWangge()
-   				});
-		});
+				var self = plus.webview.currentWebview();
+				
+				document.getElementById("xiaoquname").textContent = self.xiaoquName;
+				document.getElementById("loudongname").textContent = self.loudongName;
+				document.getElementById("fanghaoname").textContent = self.fanghaoName;
+			
+				});
 		
 		</script>
 		

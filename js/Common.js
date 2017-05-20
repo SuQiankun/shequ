@@ -11,8 +11,8 @@ var sociaPicAdd;
 var disablePicAdd
 var singlPicAdd;
 
-
 var common = {
+	
 getSheQu: function getSheQu(callback) {
 			//获取社区列表
 			var resultStr = ''; 
@@ -407,5 +407,197 @@ getDaogaoList: function getDaogaoList(cmd,actionid,params,callback) {
 				mui.alert(description);
 				return;
 		}		
+	},
+	//模糊搜索
+	searchWithName: function(){
+					var waitTip = plus.nativeUI.showWaiting();
+		 	var NameStr = document.getElementById("searchName").value;
+		 	
+			mui.ajax(urlforapp+':8080/app?cmd=getlivepeoplebyname&peo_name='+NameStr,{
+				dataType:'json',//服务器返回json格式数据
+				type:'get',
+				timeout:10000,
+				success:function(data){
+				peoListData = data;
+				var area_name='' ;
+				//判断状态码
+				if (data.code == '200') {
+					if (data.data.length > 0) {
+					for (i=0;i<data.data.length;i++) {
+						
+					//判断数据是否为空,如果为空,设置默认值;
+					 var name = common.changestr(data.data[i].peo_name);
+					 var sex = common.changestr(data.data[i].peo_sex);
+					 var nation = common.changestr(data.data[i].peo_nation_id);
+					 var relation = common.changestr(data.data[i].peo_yz_relation);
+					 var idcard = common.changestr(data.data[i].peo_card_num);
+					 var jg =common.changestr(data.data[i].peo_jg_id);
+					 var phone =common.changestr(data.data[i].peo_phone);
+					 var birth = common.changestr(data.data[i].peo_birthday);
+					 var username = common.changestr(data.data[i].bhr_username);
+					 var names =   common.changestr(data.data[i].bhr_names);
+					 
+					 var att = common.changestr(data.data[i].peo_attr_id);
+					//重点人员标记
+					var resultstr = checkPersonInfo(data.data[i].peo_attr_id,data.data[i].peoid,att,data.data[i].peo_inhome_id);
+					area_name
+					+=
+					'<div class="mui-card"><div class="mui-card-header"><h4 style="font-weight: normal;"><span style="font-size: 20px;" class="mui-icon mui-icon-map"></span><span style="font-size: 12px;">&nbsp&nbsp'
+					+data.data[i].peo_xq_id
+					+'</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span><span style="font-size: 12px;">'
+					+data.data[i].peo_ld_id
+					+'</span><span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;" ></span><span style="font-size: 12px;">'
+					+data.data[i].peo_hs_num
+					+'</span></div><div class="mui-card-content"><form class="mui-input-group"><div class="mui-input-row">'
+					+'<label style="width: 35%;">姓名</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'name'
+					+'">'
+					+ name
+					+'</p>'+'</div><div class="mui-input-row"><label style="width: 35%;">性别</label>'+'<p class="yl_txt" id="'
+					+data.data[i].peo_id+'sex'
+					+'">'
+					+sex
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">族别</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'nation'
+					+'">'
+					+nation
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">与业主关系</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'relation'
+					+'">'
+					+relation
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">身份证</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'idcard'
+					+'">'
+					+idcard
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">籍贯</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'jg'
+					+'">'
+					+jg
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">电话</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'phone'
+					+'">'
+					+phone
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">出生日期</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'birth'
+					+'">'
+					+birth
+//					+ resultstr
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">网格员</label><p class="yl_txt">'
+//					+username+':'
+					+ names
+					+'</p></div></form></div><div class="mui-card-footer"><div class="mui-button-row" style="margin: 0 auto;">'
+					+'<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined"  id="'
+					+data.data[i].peo_id
+					+'" onclick="changeResultPersonInfo(this.id)">修改</button>&nbsp;&nbsp;</div></div></div>'
+					;
+				}
+						//插入数据内容;
+						waitTip.close();
+						document.getElementById("serpersonList").innerHTML = area_name;
+					}else{
+						waitTip.close();
+						document.getElementById("serpersonList").innerHTML = '<div class="mui-card-footer">暂无人员</div>';
+					}
+				}//判断状态码结尾
+					
+				},
+				error:function(xhr,type,errorThrown){
+					console.log('请求失败');
+				}
+			});		
+	},
+	//根据房间号搜索人员列表
+	searchPersonInfo: function(){
+		var selected_val = document.getElementById('FangHaoID').value;
+				if (selected_val == null || selected_val ==undefined || selected_val == '') {
+					mui.toast('请选择房间号');
+					return false;
+				}
+				getHouseInfo(selected_val);
+				
+				mui.ajax(urlforapp+':8080/app?cmd=getlivepeoplebyhouseid&houseid='+selected_val,{
+						dataType:'json',
+						type:'get',
+						success:function(data){
+						peoListData = data;
+						var area_name='' ;
+						$('#addbuttonDiv').show();
+						
+						if(data.data.length<1){
+							mui.toast('暂无人员');
+							//如果没有列表,插入空内容
+							document.getElementById("personList").innerHTML = '';
+							return;}
+					// 拼接插入的 html
+					for (i=0;i<data.data.length;i++) {
+					//判断数据是否为空,如果为空,设置默认值;
+					 var name = common.changestr(data.data[i].peo_name);
+					 var sex = common.changestr(data.data[i].peo_sex);
+					 var nation = common.changestr(data.data[i].peo_nation_id);
+					 var relation = common.changestr(data.data[i].peo_yz_relation);
+					 var idcard = common.changestr(data.data[i].peo_card_num);
+					 var jg =common.changestr(data.data[i].peo_jg_id);
+					 var phone =common.changestr(data.data[i].peo_phone);
+					 var birth = common.changestr(data.data[i].peo_birthday);
+					 var username = common.changestr(data.data[i].bhr_username);
+					 var names =   common.changestr(data.data[i].bhr_names);
+					 
+					 var att = common.changestr(data.data[i].peo_attr_id);
+					//重点人员标记
+					var resultstr = checkPersonInfo(data.data[i].peo_attr_id,data.data[i].peoid,att,data.data[i].peo_inhome_id);
+					var titleStr =  creattitleStr(data.data[i].peo_attr_id);
+					area_name
+					+=
+					titleStr
+					+'<label style="width: 35%;">姓名</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'name'
+					+'">'
+					+ name
+					+'</p>'+'</div><div class="mui-input-row"><label style="width: 35%;">性别</label>'+'<p class="yl_txt" id="'
+					+data.data[i].peo_id+'sex'
+					+'">'
+					+sex
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">族别</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'nation'
+					+'">'
+					+nation
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">与业主关系</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'relation'
+					+'">'
+					+relation
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">身份证</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'idcard'
+					+'">'
+					+idcard
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">籍贯</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'jg'
+					+'">'
+					+jg
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">电话</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'phone'
+					+'">'
+					+phone
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">出生日期</label><p class="yl_txt" id="'
+					+data.data[i].peo_id+'birth'
+					+'">'
+					+birth
+//					+ resultstr
+					+'</p></div><div class="mui-input-row"><label style="width: 35%;">网格员</label><p class="yl_txt">'
+//					+username+':'
+					+ names
+					+'</p></div></form></div><div class="mui-card-footer"><div class="mui-button-row" style="margin: 0 auto;">'
+					+'<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined"  id="'
+					+data.data[i].peo_id
+					+'" onclick="changePersonInfo(this.id)">修改</button>&nbsp;&nbsp;</div></div></div>'
+					;
+				}
+		
+				//插入数据内容;
+				document.getElementById("personList").innerHTML = area_name;
+				},
+				error: function(xhr,type,errorThrown){
+				}
+			});	
 	}
+	
 }
