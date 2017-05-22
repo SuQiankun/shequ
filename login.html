@@ -207,6 +207,8 @@
 			});
 			//登录功能实现区域
 			document.getElementById('login').addEventListener('tap', function() {
+				var waittip = plus.nativeUI.showWaiting();
+				waittip.setTitle('登录中...')
 			//获取用户名和密码
 			var account = document.getElementById('account').value;
 			var psw = document.getElementById('password').value;
@@ -229,11 +231,11 @@
 					password:psw,
 					returnText:'formapp',
 			    },
-			   
+			    
 			})
 			.done(function(data, textStatus, jqXHR) {
 				if(data.data == 'success'){
-					
+					waittip.close();
 					plus.storage.setItem('username', account);
 						getUSEID();
 						mui.openWindow({
@@ -241,10 +243,12 @@
 							id: 'main', 
 						});
 				}else{
+					waittip.close();
 						mui.toast("请检查账号密码!");
 					}
 			})
 			.fail(function(jqXHR, textStatus, errorThrown) {
+			    waittip.close();
 			    mui.alert('登录失败,请检查网络设置');
 			})
 			.always(function() {
@@ -256,7 +260,7 @@
 		function getUSEID(){
 			var resultStr =  plus.navigator.getCookie(urlforapp+'/');
 	    			var resultArr = resultStr.split(';');
-	    			
+
 			    for (i = 0; i< resultArr.length;i++) {
 						var keyStr = resultArr[i].split('=');
 						if ( strcmp(keyStr[0],"userId") == 0 ) {

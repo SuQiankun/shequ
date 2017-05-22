@@ -39,8 +39,7 @@ var changePeoInfo = {
 								//兵役状况
 								bingyi = data.data[i].peo_by_id;
 								common.getBingyi('military','military',bingyi);
-								console.log(bingyi);
-								if(bingyi.indexOf('未')>=0){
+								if(bingyi == '请选择' || bingyi == '未服' ){
 									$('#div_by_org').hide();
 									$('#div_by_indate').hide();
 									$('#div_by_outdate').hide();
@@ -119,6 +118,7 @@ var changePeoInfo = {
 								//婚姻情况
 								hyzk = data.data[i].peo_hyzk;
 								common.getReligion('marry','marry',hyzk);
+								
 								//结婚时间
 								var marryDate = data.data[i].peo_marry_date;
 								document.getElementById("peo_marry_date").value = common.changestr(marryDate);

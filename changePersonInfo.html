@@ -654,11 +654,12 @@ function getAdress(){
 					"peo_is_flow":peoisflowInfo,
 					"kinsman_name":kinsmannameInfo,
 					"kinsman_phone":kinsmanphoneInfo,
-					"kinsman_unit":kinsmannuitInfo,
+//					"kinsman_unit":kinsmannuitInfo,
 				};
-				var params = $.toJSON(data);
+					data["kinsman_unit"] = kinsmannuitInfo;
+//				var params = $.toJSON(data);
 				mui.ajax(urlforapp+':8080/app?cmd=modifylivepeople',{
-					data:params,
+					data:data,
 					headers:{'Content-Type':'application/json'},	
 					dataType:'json',
 					type:'post',
@@ -744,10 +745,10 @@ mui.plusReady(function () {
 	}
 	function showBingyi(){
 		var str = $("#military").find("option:selected").text();
-		
-		console.log(str);
-		
-		if(str.indexOf('未')>=0){
+		console.log(str.trim());
+		console.log(str.length)
+//		if(str.indexOf('未')>=0 ||str.indexOf('请')>=0 ){
+		if(str == '请选择' || str == '未服' ){
 				$('#div_by_org').hide();
 				$('#div_by_indate').hide();
 				$('#div_by_outdate').hide();
