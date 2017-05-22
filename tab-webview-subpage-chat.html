@@ -158,12 +158,13 @@
 				</div>
 			<!--房产信息 end -->
 			<div id="personList" class="mui-content" ></div>
-				
-				<div id="addbuttonDiv" class="mui-content-padded" style="text-align: center;" > 		
-					<button onclick="addPersion()" style="padding: 10px 5px; margin: 16px 10px;" type="button" class="mui-btn mui-btn-primary ">新增成员</button>
+				 
+				<div id="addbuttonDiv" class="mui-content-padded" style="text-align: center; " > 		
+					<button onclick="addPersion()" style="padding: 10px 15px; margin: 16px 10px;" type="button" class="mui-btn mui-btn-primary ">新增成员</button>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<button onclick="addVisit()"   style="padding: 10px 5px; margin: 16px 10px;" type="button" class="mui-btn mui-btn-primary ">走访记录</button>
+					<button onclick="addVisit()" style="padding: 10px 15px; margin: 16px 10px;" type="button" class="mui-btn mui-btn-primary ">走访记录</button>
 				</div>
+				
 			</div>
 		</div>
 		
@@ -206,12 +207,15 @@
 			var segmentedControl = document.getElementById("segmentedControl");
             var links = segmentedControl.getElementsByTagName('a');
             var segmentID = new Array();
-            for (var i = 0; i < links.length; i++) {
-                if (links[i].getAttribute('class').indexOf('mui-active') > 0) {
-                    var id = links[i].getAttribute('href');
-                   segmentID.push(id);
-                }
-            }
+          
+	          for (var i = 0; i < links.length; i++) {
+	                if (links[i].getAttribute('class').indexOf('mui-active') > 0) {
+	                    var id = links[i].getAttribute('href');
+	                   segmentID.push(id);
+	                }
+	            }
+            
+            
 			if (segmentID[segmentID.length-1] == '#item2') {
 					$('#serpersonList').show()
 					$('#personList').hide()
@@ -264,7 +268,7 @@
 						area_name +=
 						'<option style="color: #2AC845;" value="'+
 						data.data[i].house_num_id
-						+'">'+ data.data[i].house_num+'&nbsp&nbsp本月已走访</option>';
+						+'">'+ data.data[i].house_num+'&nbsp&nbsp √</option>';
 					}else{
 							area_name +=
 						'<option value="'+
@@ -340,11 +344,13 @@
 						document.getElementById("housesurce").innerText = common.changestr(data.data[0].fc_house_source_id);
 					
 						var str = data.data[0].fc_house_source_id;
+						
 						if (str.indexOf('租')>=0) {
 							$("#titleString").css("color","dodgerblue");
 						}else{
 							$("#titleString").css("color","black");
 						}
+						
 					}
 				},
 				error:function(xhr,type,errorThrown){
@@ -355,12 +361,14 @@
 		
 		//跳转到新增人员的界面;
 		function addPersion(){
+			
 				var shequ = document.getElementById('shequID').value;
 				var wangge = document.getElementById("wangge").value;
 				var xiaoqu = document.getElementById('communityInfo').value;
 				var loudongid =document.getElementById("LouDongID").value;
 				var fanghaoid =document.getElementById("FangHaoID").value;
-				if (fanghaoid == '' || fanghaoid == null || fanghaoid == undefined) {
+			
+			   if (fanghaoid == '' || fanghaoid == null || fanghaoid == undefined) {
 					mui.alert('请选择房间进行新增人员');		return false;
 				} else{
 					mui.openWindow({
@@ -384,6 +392,7 @@
 				var jg =  	document.getElementById(peroid+'jg').textContent;
 				var phone =  document.getElementById(peroid+'phone').textContent;
 				var birth =  document.getElementById(peroid+'birth').textContent;
+				
 				// 将获取到的 data 作为一个参数传递到另外一个页面;减少代码量
 					mui.openWindow({
 					    url: 'changePersonInfo.html', 

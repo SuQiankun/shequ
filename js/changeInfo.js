@@ -39,7 +39,8 @@ var changePeoInfo = {
 								//兵役状况
 								bingyi = data.data[i].peo_by_id;
 								common.getBingyi('military','military',bingyi);
-								if(bingyi != '未服'){
+								console.log(bingyi);
+								if(bingyi.indexOf('未')>=0){
 									$('#div_by_org').hide();
 									$('#div_by_indate').hide();
 									$('#div_by_outdate').hide();
@@ -48,12 +49,17 @@ var changePeoInfo = {
 									$('#div_by_indate').show();
 									$('#div_by_outdate').show();
 								}
+								
+				document.getElementById("xiaoquname").textContent = data.data[i].peo_xq_id;
+				document.getElementById("loudongname").textContent = data.data[i].peo_ld_id;
+				document.getElementById("fanghaoname").textContent =  data.data[i].peo_hs_num;
+			
 								//部队名称
 								document.getElementById("peo_by_org").value = common.changestr(data.data[i].peo_by_org);
 								//入伍时间
-								document.getElementById("peo_by_indate").textContent = common.changestr(data.data[i].peo_by_indate);
+								document.getElementById("peo_by_indate").value = common.changestr(data.data[i].peo_by_indate);
 								//退伍时间
-								document.getElementById("peo_by_outdate").textContent = common.changestr(data.data[i].peo_by_outdate);
+								document.getElementById("peo_by_outdate").value = common.changestr(data.data[i].peo_by_outdate);
 								
 								//与业主关系
 								var relation = data.data[i].peo_yz_relation;
@@ -115,7 +121,7 @@ var changePeoInfo = {
 								common.getReligion('marry','marry',hyzk);
 								//结婚时间
 								var marryDate = data.data[i].peo_marry_date;
-								document.getElementById("peo_marry_date").textContent= common.changestr(marryDate);
+								document.getElementById("peo_marry_date").value = common.changestr(marryDate);
 								//政治面貌
 								zzmm = data.data[i].peo_zzmm_id;
 								common.getReligion('polit','polit',zzmm);
@@ -128,7 +134,7 @@ var changePeoInfo = {
 								}
 								//入党时间
 								partydate = data.data[i].peo_join_party_date;
-								document.getElementById("rudangshijian").textContent= common.changestr(partydate);
+								document.getElementById("rudangshijian").value= common.changestr(partydate);
 								//党内职务
 								partyzw = data.data[i].peo_party_zw;
 								document.getElementById("dangneizhiwu").value = common.changestr(partyzw);
@@ -162,7 +168,7 @@ var changePeoInfo = {
 								document.getElementById("danweidizhi").value = common.changestr(workunit);
 								//退休时间
 								var retiretime = data.data[i].peo_retire_date;
-								document.getElementById("peo_retire_date").textContent= common.changestr(retiretime);
+								document.getElementById("peo_retire_date").value= common.changestr(retiretime);
 								//毕业院校
 								var school = data.data[i].peo_byyx;
 								document.getElementById("peo_byyx").value = common.changestr(school);

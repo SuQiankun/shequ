@@ -206,7 +206,16 @@
 		</header>
 			<div class="mui-content">
 			<div class="mui-card">
-					<div class="mui-card-header">修改人员资料</div>
+					<div class="mui-card-header">
+						<h4 style="font-weight: normal;">
+						<span style="font-size: 20px;" class="mui-icon mui-icon-map"></span>
+						<span style="font-size: 12px;" id="xiaoquname">小区</span >
+						<span class = "mui-icon mui-icon-arrowright" style = "font-size: 20px; color: #888;"></span>
+						<span style="font-size: 12px;" id='loudongname'>楼栋</span>
+						<span class="mui-icon mui-icon-arrowright" style="font-size: 20px; color: #888;"></span>
+						<span style="font-size: 12px;" id='fanghaoname'>房间</span>
+					</div>
+					
 					<div class="mui-card-content">
 						<form class="mui-input-group">
 							<p id="personID" style="display: none;"></p>
@@ -312,7 +321,7 @@
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">退休时间</label>
-								<label  id="peo_retire_date" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择退休时间" data-input-clear="5">点击选择退休日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input id="peo_retire_date" style="width: 65%;" type="text" class="mui-input-clear" placeholder="输入格式 1993-03-16" >
 							</div>
 							<div class="mui-input-row">
 								<label  style="width: 30%;">经济状况</label>
@@ -380,7 +389,7 @@
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">爱好特长</label>
-								<input id="peo_hobby" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input id="peo_hobby" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row">
@@ -389,11 +398,12 @@
 							</div>
 							<div id="rudangshijiandiv" class="mui-input-row">
 								<label style="width: 30%;">入党时间</label>
-								<label  id="rudangshijian" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择入党时间" data-input-clear="5">点击选择入党日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input  id="rudangshijian" style="width: 65%;" type="text" class="mui-input-clear" placeholder="输入格式 1993-03-16" >
 							</div>
+							
 							<div id="dangneizhiwudiv" class="mui-input-row">
 								<label style="width: 30%;">党内职务</label>
-								<input id="dangneizhiwu" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input id="dangneizhiwu" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" ><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row">
@@ -403,7 +413,7 @@
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">结婚时间</label>
-								<label  id="peo_marry_date" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择结婚时间" data-input-clear="5">点击选择结婚时间<span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input  id="peo_marry_date" style="width: 65%;" type="text" class="mui-input-clear" placeholder="输入格式 1993-03-16" >
 							</div>
 							
 
@@ -431,31 +441,33 @@
 								</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">兵役</label>
-								<select id="military" name="" onchange="showBingyi()"><option value="">请选择</option></select>
+								<select id="military" onchange="showBingyi()"><option value="">请选择</option></select>
 							</div>
 							
 							<div class="mui-input-row" id="div_by_org">
 								<label style="width: 30%;">服役部队</label>
-								<input style="width: 65%;" id="peo_by_org" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input style="width: 65%;" id="peo_by_org" type="text" class="mui-input-clear" placeholder="请输入" >
 							</div>
 							<div class="mui-input-row" id="div_by_indate">
 								<label style="width: 30%;">服役时间</label>
-								<label  id="peo_by_indate" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择服役时间" data-input-clear="5">点击选择服役日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input  id="peo_by_indate" style="width: 65%;" type="text" class="mui-input-clear" placeholder="输入格式 1993-03-16" >
 							</div>
 							
 							<div class="mui-input-row" id="div_by_outdate">
 								<label style="width: 30%;">退役时间</label>
-								<label  id="peo_by_outdate" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择退役时间" data-input-clear="5">点击选择退役日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input  id="peo_by_outdate" style="width: 65%;" type="text" class="mui-input-clear" placeholder="输入格式 1993-03-16" > 
 							</div>
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">在家居住</label>
 								<select id="yesOrNot" name=""><option value="">请选择</option></select>
 							</div>
+							
 							<div class="mui-input-row">
 								<label style="width: 50%;font-size: 13px;">是否参加公益活动</label>
 								<select id="Publicwelfare"style="width: 50%;"><option value="">请选择</option></select>
 							</div>
+							
 						</form>
 						<div id='result' class="ui-alert"></div>
 					</div>
@@ -517,7 +529,7 @@ function getAdress(){
 				//政治面貌
 				var zzmmInfo = document.getElementById("polit").value;
 				//入党时间
-				var rudangshijianInfo = common.jointime(document.getElementById("rudangshijian").textContent);
+				var rudangshijianInfo = common.jointime(document.getElementById("rudangshijian").value);
 				//党内职务
 				var dangneizhiwuInfo = document.getElementById("dangneizhiwu").value;
 				//婚姻状况
@@ -557,17 +569,17 @@ function getAdress(){
 				//毕业院校
 				var byyxInfo = document.getElementById("peo_byyx").value;
 				//结婚时间
-				var marryDateInfo= common.jointime(document.getElementById("peo_marry_date").textContent);
+				var marryDateInfo= common.jointime(document.getElementById("peo_marry_date").value);
 				//服役部队
 				var byorgInfo = document.getElementById("peo_by_org").value;
 				//服役时间
-				var byinDateInfo = common.jointime(document.getElementById("peo_by_indate").textContent);
+				var byinDateInfo = common.jointime(document.getElementById("peo_by_indate").value);
 				//退役时间
-				var byoutDateInfo = common.jointime(document.getElementById("peo_by_outdate").textContent);
+				var byoutDateInfo = common.jointime(document.getElementById("peo_by_outdate").value);
 				//养老情况
 				var yanglaoInfo =  document.getElementById("peo_ylqk").value;
 				//退休时间
-				var retireinfo= common.jointime(document.getElementById("peo_retire_date").textContent);
+				var retireinfo= common.jointime(document.getElementById("peo_retire_date").value);
 				//身高体重
 				var heightinfo = common.jointime(document.getElementById("peo_height").value);
 				var weightinfo = common.jointime(document.getElementById("peo_weight").value);
@@ -615,7 +627,6 @@ function getAdress(){
 					"peo_join_party_date":rudangshijianInfo,
 					"peo_party_zw":dangneizhiwuInfo,
 					"peo_inhome_id":zaijiajuzhuInfo,
-				
 					"peo_is_lcrk":lcrkInfo,
 					"peo_attr_id":attidInfo,
 					"peo_jbqk_id":jibingtypeInfo,
@@ -666,11 +677,11 @@ function getAdress(){
 mui.plusReady(function () {
 		
 			var web = plus.webview.currentWebview();
-				//获取传递参数
+			  //获取传递参数
 			  document.getElementById('nameStr').value = web.name;
 			  document.getElementById('idcardStr').value = web.idcard;
 			  document.getElementById('phoneStr').value = web.phone;
-			  document.getElementById('pickDateBtn').value = web.birth;
+			  document.getElementById('pickDateBtn').value = splitDate(web.idcard);
 			  document.getElementById('jgStr').value = web.jg;
 			  document.getElementById("pickDateBtn").textContent = web.birth;
 			  document.getElementById("personID").innerText = web.personid;	  
@@ -700,7 +711,8 @@ mui.plusReady(function () {
 				},
 				error: function(xhr,type,errorThrown){}});
 				//设置初始数据
-				changePeoInfo.setInitData(web.peoList,web.personid)
+				changePeoInfo.setInitData(web.peoList,web.personid);
+				
 			});
 </script>
 
@@ -732,7 +744,10 @@ mui.plusReady(function () {
 	}
 	function showBingyi(){
 		var str = $("#military").find("option:selected").text();
-		if(str == '未服' || str == '请选择'){
+		
+		console.log(str);
+		
+		if(str.indexOf('未')>=0){
 				$('#div_by_org').hide();
 				$('#div_by_indate').hide();
 				$('#div_by_outdate').hide();
@@ -770,6 +785,37 @@ mui.plusReady(function () {
 <script src="js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/mui.zoom.js" type="text/javascript" charset="utf-8"></script>
 <script>
+	function splitDate(value){
+		var birth = value.substring(6,14);
+        var arr = birth.split('');  
+        arr.splice(4, 0, "-");       
+        arr.splice(7, 0, "-");
+        var result = arr.join('');
+		return result;
+	}
+	
+	
+	$("#peo_retire_date").bind('input propertychange',function(){
+		common.insertSplit($(this).val(),'peo_retire_date');
+	});
+	
+	$("#rudangshijian").bind('input propertychange',function(){
+		common.insertSplit($(this).val(),'rudangshijian');
+	});
+	
+	$("#peo_by_outdate").bind('input propertychange',function(){
+		common.insertSplit($(this).val(),'peo_by_outdate');
+	});
+	
+	$("#peo_by_indate").bind('input propertychange',function(){
+		common.insertSplit($(this).val(),'peo_by_indate');
+	});
+	
+	$("#peo_marry_date").bind('input propertychange',function(){
+		common.insertSplit($(this).val(),'peo_marry_date');
+	});
+	
+	
 			mui.previewImage();
 			/**
 			 * @param {元素的id} element
@@ -795,30 +841,28 @@ mui.plusReady(function () {
 					maxDate: maxDate
 				});})};
 			
-			document.getElementById("rudangshijian").addEventListener('tap',function(){
-				creatTimeLime("rudangshijian");
-			});
-			document.getElementById("pickDateBtn").addEventListener('tap',function(){
-					creatTimeLime("pickDateBtn");
-			});
-			document.getElementById("peo_marry_date").addEventListener('tap',function(){
-				creatTimeLime("peo_marry_date")
-			});
-			document.getElementById("peo_by_indate").addEventListener('tap',function(){
-				creatTimeLime("peo_by_indate")
-			});
-			document.getElementById("peo_by_outdate").addEventListener('tap',function(){
-				creatTimeLime("peo_by_outdate")
-			});
-			document.getElementById("peo_by_org").addEventListener('tap',function(){
-				creatTimeLime("peo_by_org")
-			});
-			document.getElementById("peo_retire_date").addEventListener('tap',function(){
-				creatTimeLime("peo_retire_date")
-			});
+//			document.getElementById("rudangshijian").addEventListener('tap',function(){
+//				creatTimeLime("rudangshijian");
+//			});
+//			document.getElementById("pickDateBtn").addEventListener('tap',function(){
+//					creatTimeLime("pickDateBtn");
+//			});
+//			document.getElementById("peo_marry_date").addEventListener('tap',function(){
+//				creatTimeLime("peo_marry_date")
+//			});
+//			document.getElementById("peo_by_indate").addEventListener('tap',function(){
+//				creatTimeLime("peo_by_indate")
+//			});
+//			document.getElementById("peo_by_outdate").addEventListener('tap',function(){
+//				creatTimeLime("peo_by_outdate")
+//			});
+//			document.getElementById("peo_retire_date").addEventListener('tap',function(){
+//				creatTimeLime("peo_retire_date")
+//			});
 </script>
 <!--上传图片的操作-->
 <script type="text/javascript">
+	
 	document.getElementById("uploadIDCARD").addEventListener('tap',function(){
 		plus.gallery.pick(function(p){
 		$("#idcardPIC").attr('src',p);
@@ -832,8 +876,7 @@ mui.plusReady(function () {
 					wt.close();
 					idcardPicAdd = data.data;
 				}else{wt.close();}});
-				
-			task.addFile(p,{key:"upimg"});		task.start();
+				task.addFile(p,{key:"upimg"});		task.start();
 		});
 	});
 

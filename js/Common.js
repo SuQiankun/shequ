@@ -598,6 +598,14 @@ getDaogaoList: function getDaogaoList(cmd,actionid,params,callback) {
 				error: function(xhr,type,errorThrown){
 				}
 			});	
-	}
+	},
+	insertSplit: function(value,idStr){
+	    if(value.length == 4){
+	        document.getElementById(idStr).value += '-';
+	    }
+	    if(value.length == 7){
+	        document.getElementById(idStr).value += '-';
+	    }
+	},
 	
 }
