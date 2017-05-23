@@ -166,7 +166,6 @@
 //						
 //						});
 						
-						
 				//获取保存的数据
 				if (plus.storage.getItem('username') == null) {
 					document.getElementById("account").placeholder = '请输入账号';
@@ -187,7 +186,8 @@
 						
 					}
 				});
-				//存储房产信息的 key
+			
+			//存储房产信息的 key
 			mui.ajax(urlforapp+':8080/app?cmd=getdictbytype&dictype=houseInfo',{
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型

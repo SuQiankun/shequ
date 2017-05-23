@@ -510,50 +510,12 @@ function getAdress(){
 				if(nationStr == '' || nationStr == null){mui.alert('请选择民族');return;}
 				if(nameStr == '' || nameStr == null){mui.alert('请输入姓名');return;}
 				if(sexStr == '' || sexStr == null){mui.alert('请选择性别');return;}
-				//祷告地址
-				var daogaoAdInfo = document.getElementById("daogaoAdress").value;
-				//宗教信仰
-				var zongjiaoInfo = document.getElementById("RELIGION").value;
-				//学业信息
-				var xuexingInfo = document.getElementById("bloodType").value;
-				//职业信息
-				var zhiyeInfo = document.getElementById("career").value;
-				//单位地址
-				var danweidizhiInfo =document.getElementById("danweidizhi").value;
-				//参保信息
-				var canbaoInfo = document.getElementById("yiliaoqingkuang").value;
-				//户口性质
-				var hkxzInfo = document.getElementById("popuInfo").value;
-				//政治面貌
-				var zzmmInfo = document.getElementById("polit").value;
+
 				//入党时间
 				var rudangshijianInfo = common.jointime(document.getElementById("rudangshijian").value);
-				//党内职务
-				var dangneizhiwuInfo = document.getElementById("dangneizhiwu").value;
-				//婚姻状况
-				var hunyinInfo = document.getElementById("marry").value;
-				//经济状况
-				var jingjiInfo = document.getElementById("income").value;
-				//健康
-				var jiankangInfo = document.getElementById("jiankangzhuangkuang").value;
-				//疾病类型
-				var jibingtypeInfo = document.getElementById("jibingleixingid").value;
-				//文化程度
-				var wenhuaInfo = document.getElementById("degree").value;
-				//户口所在地
-				var hukousuozaidiInfo = document.getElementById("hkdz").value;
 				//独生子女
 				var scnumInfo = document.getElementById("singlechild").value;
-				//兵役信息
-				var bingyiInfo = document.getElementById("military").value;
-				//在家居住
-				var zaijiajuzhuInfo = document.getElementById("yesOrNot").value;
-				//重点地州
 				var zdryInfo = document.getElementById("peo_zdry_id").value;
-				//流动人口
-				var lcrkInfo = document.getElementById("peo_is_lcrk").value;
-				//人员属性
-				var attidInfo = document.getElementById("peo_attr_id").value;
 				//光荣证类型
 				var sctypeInfo = document.getElementById("singlechild").value;
 				if (sctypeInfo == '' || sctypeInfo == null ||sctypeInfo == undefined) {mui.alert('请选择光荣证类型');return false;}
@@ -562,101 +524,69 @@ function getAdress(){
 				//光荣证享受情况
 				var scenjoyInfo = document.getElementById("singlechildenjoy").value;
 				if (scenjoyInfo == '' || scenjoyInfo == null ||scenjoyInfo == undefined) {mui.alert('请选择享受情况');return false;}
-				//爱好特长
-				var hobbyinfo = document.getElementById("peo_hobby").value;
-				//毕业院校
-				var byyxInfo = document.getElementById("peo_byyx").value;
-				//结婚时间
-				var marryDateInfo= common.jointime(document.getElementById("peo_marry_date").value);
-				//服役部队
-				var byorgInfo = document.getElementById("peo_by_org").value;
-				//服役时间
-				var byinDateInfo = common.jointime(document.getElementById("peo_by_indate").value);
-				//退役时间
-				var byoutDateInfo = common.jointime(document.getElementById("peo_by_outdate").value);
-				//养老情况
-				var yanglaoInfo =  document.getElementById("peo_ylqk").value;
-				//退休时间
-				var retireinfo= common.jointime(document.getElementById("peo_retire_date").value);
-				//身高体重
-				var heightinfo = common.jointime(document.getElementById("peo_height").value);
-				var weightinfo = common.jointime(document.getElementById("peo_weight").value);
-				//公益活动
-				var Publicwelfareinfo = document.getElementById("Publicwelfare").value; 
-				//是否为流动人口
-				var peoisflowInfo = document.getElementById("peoisflow").value;
-				//结亲对象
-				var kinsmannameInfo = document.getElementById("kinsman_name").value;
-				//结亲人电话
-				var kinsmanphoneInfo = document.getElementById("kinsman_phone").value;
-				//结亲人单位
-				var kinsmannuitInfo = document.getElementById("kinsman_unit").value;
-				
-				
+			
+
 				if (document.getElementById("polit").value == '26c0381f2de54fd8887ab42d99da1481' && rudangshijianInfo == null) {mui.alert('请选择入党时间');return false;}
 				//贫困原因
 				var pinkunyuanyinInfo = document.getElementById("pinkunyuanyin").value;
 				if (document.getElementById("income").value == '2bcb7f1428e3463590ee4ddf8833fa8d' && pinkunyuanyinInfo.length < 4) {mui.alert('请选择贫困原因');return false;}
-				
-				var data = {
-					"peo_id":self.personid,
-					"peo_yz_relation":relation,
-					"peo_name":nameStr,
-					"peo_nation_id":nationStr,
-					"peo_jg_id":jgStr,
-					"peo_card_num":idcardStr,
-					"peo_phone":phoneStr,
-					"peo_sex":sexStr,
-					"peo_birthday":birthStr,
-					"peo_blood_id":xuexingInfo,
-					"peo_zy_id":zhiyeInfo,
-					"peo_by_id":bingyiInfo,
-					"peo_edu_deg_id":wenhuaInfo,
-					"peo_hyzk":hunyinInfo,
-					"peo_eco_id":jingjiInfo,
-					"peo_religion_id":zongjiaoInfo,
-					"peo_dao_gao_id":daogaoAdInfo,
-					"peo_work_unit":danweidizhiInfo,
-					"peo_hk_xz_id":hkxzInfo,
-					"peo_hk_addr":hukousuozaidiInfo,
-					"peo_social_id":canbaoInfo,
-					"peo_is_able":jiankangInfo,
-					"peo_zzmm_id":zzmmInfo,
-					"peo_join_party_date":rudangshijianInfo,
-					"peo_party_zw":dangneizhiwuInfo,
-					"peo_inhome_id":zaijiajuzhuInfo,
-					"peo_is_lcrk":lcrkInfo,
-					"peo_attr_id":attidInfo,
-					"peo_jbqk_id":jibingtypeInfo,
-					"peo_ecoyy_id":pinkunyuanyinInfo,
-					"peo_yz_relation":relation,
-					"peo_zdry_id":zdryInfo,
-					"peo_single_child_card":sctypeInfo,
-					"peo_single_child_num":scnumInfo,
-					"peo_xsqk_id":scenjoyInfo,
-					"peo_hobby":hobbyinfo,
-					"peo_byyx":byyxInfo,
-					"peo_marry_date":marryDateInfo,
-					"peo_by_org":byorgInfo,
-					"peo_by_indate":byinDateInfo,
-					"peo_by_outdate":byoutDateInfo,
-					"peo_retire_date":retireinfo,
-					"peo_weight":weightinfo,
-					"peo_stature":heightinfo,
-					"peo_cjgy":Publicwelfareinfo,
-					"peo_card_pic":idcardPicAdd,
-					"peo_ylqk":yanglaoInfo,
-					"socialpic":sociaPicAdd,
-					"peo_dis_card_pic":disablePicAdd,
-					"peo_single_child_pic":singlPicAdd,
-					"peo_is_flow":peoisflowInfo,
-					"kinsman_name":kinsmannameInfo,
-					"kinsman_phone":kinsmanphoneInfo,
-					"kinsman_unit":kinsmannuitInfo,
-				};
-			
-		
-				var params = $.toJSON(data);
+				var params = {};
+					params["peo_id"] = self.personid;
+					params["peo_yz_relation"] =relation; 
+					params["peo_name"]=nameStr;
+					params["peo_nation_id"]=nationStr;
+					params["peo_jg_id"]=jgStr;
+					params["peo_card_num"]=idcardStr;
+					params["peo_phone"]=phoneStr;
+					params["peo_sex"]=sexStr;
+					params["peo_birthday"]=birthStr;
+					params["peo_blood_id"]= document.getElementById("bloodType").value;
+					params["peo_zy_id"]=document.getElementById("career").value;
+					params["peo_by_id"]=document.getElementById("military").value;
+					params["peo_edu_deg_id"]=document.getElementById("degree").value;
+					params["peo_hyzk"]=document.getElementById("marry").value;
+					params["peo_eco_id"]=document.getElementById("income").value;
+					params["peo_religion_id"]=document.getElementById("RELIGION").value;
+					params["peo_dao_gao_id"]=document.getElementById("daogaoAdress").value;
+					params["peo_work_unit"]=document.getElementById("danweidizhi").value;
+					params["peo_hk_xz_id"]=document.getElementById("popuInfo").value;
+					params["peo_hk_addr"]=document.getElementById("hkdz").value;
+					params["peo_social_id"]=document.getElementById("yiliaoqingkuang").value;
+					params["peo_is_able"]=document.getElementById("jiankangzhuangkuang").value;
+					params["peo_zzmm_id"]=document.getElementById("polit").value;
+					params["peo_join_party_date"]=rudangshijianInfo;
+					params["peo_party_zw"]=document.getElementById("dangneizhiwu").value;
+					params["peo_inhome_id"]=document.getElementById("yesOrNot").value;
+					params["peo_is_lcrk"]=document.getElementById("peo_is_lcrk").value;
+					params["peo_attr_id"]=document.getElementById("peo_attr_id").value;
+					params["peo_jbqk_id"]=document.getElementById("jibingleixingid").value;
+					params["peo_ecoyy_id"]=pinkunyuanyinInfo;
+					params["peo_yz_relation"]=relation;
+					params["peo_zdry_id"]=zdryInfo;
+					params["peo_single_child_card"]=sctypeInfo;
+					params["peo_single_child_num"]=scnumInfo;
+					params["peo_xsqk_id"]=scenjoyInfo;
+					params["peo_hobby"]=document.getElementById("peo_hobby").value;
+					params["peo_byyx"]=document.getElementById("peo_byyx").value;
+					params["peo_marry_date"]=common.jointime(document.getElementById("peo_marry_date").value);
+					params["peo_by_org"]=document.getElementById("peo_by_org").value;
+					params["peo_by_indate"]=common.jointime(document.getElementById("peo_by_indate").value);
+					params["peo_by_outdate"]=common.jointime(document.getElementById("peo_by_outdate").value);
+					params["peo_retire_date"]=common.jointime(document.getElementById("peo_retire_date").value);
+					params["peo_weight"]=common.jointime(document.getElementById("peo_weight").value);
+					params["peo_stature"]=common.jointime(document.getElementById("peo_height").value);
+					params["peo_cjgy"]=document.getElementById("Publicwelfare").value;
+					params["peo_card_pic"]=idcardPicAdd;
+					params["peo_ylqk"]=document.getElementById("peo_ylqk").value;
+					params["socialpic"]=sociaPicAdd;
+					params["peo_dis_card_pic"]=disablePicAdd;
+					params["peo_single_child_pic"]=singlPicAdd;
+					params["peo_is_flow"]= document.getElementById("peoisflow").value;
+					//结亲信息
+					params["kinsman_name"]= document.getElementById("kinsman_name").value;
+					params["kinsman_phone"]= document.getElementById("kinsman_phone").value;
+					params["kinsman_unit"] = document.getElementById("kinsman_unit").value;
+					
 				mui.ajax(urlforapp+':8080/app?cmd=modifylivepeople',{
 					data:params,
 					headers:{'Content-Type':'application/json'},	
@@ -771,8 +701,8 @@ mui.plusReady(function () {
 //设置返回的刷新事件
 	mui.init({
 				beforeback: function(){
-					var list = plus.webview.getWebviewById('tab-webview-subpage-chat.html');
-					mui.fire(list,'updateInfo');
+//					var list = plus.webview.getWebviewById('tab-webview-subpage-chat.html');
+//					mui.fire(list,'updateInfo');
 					//获得列表界面的webview
 					var list = plus.webview.getWebviewById('tab-webview-subpage-about.html');
 					//触发列表界面的自定义事件（refresh）,从而进行数据刷新

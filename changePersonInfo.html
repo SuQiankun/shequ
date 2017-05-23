@@ -206,6 +206,7 @@
 		</header>
 			<div class="mui-content">
 			<div class="mui-card">
+					
 					<div class="mui-card-header">
 						<h4 style="font-weight: normal;">
 						<span style="font-size: 20px;" class="mui-icon mui-icon-map"></span>
@@ -223,7 +224,7 @@
 								<label style="width: 30%;">姓名</label>
 								<input style="width: 65%;" id="nameStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
-								<div class="mui-input-row">
+							<div class="mui-input-row">
 								<label style="width: 30%;">性别</label>
 								<select id="sexID" style="width: 65%;" class="mui-btn-block"></select>
 							</div>
@@ -244,18 +245,18 @@
 							<div class="mui-input-row">
 								<label style="width: 30%;">出生日期</label>
 								<div id="result" style="line-height: 40px; display: inline-block; " class="ui-alert"></div>
-								<label  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择出生时间" data-input-clear="5">点击选择出生日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<label  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择出生时间">点击选择出生日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">身份证号</label>
-								<input style="width: 65%;" id="idcardStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input style="width: 65%;" id="idcardStr" type="text" class="mui-input-clear" placeholder="请输入" ><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row" style="height: 100%;">
 									<label style="width: 35%;"> 身份证照片</label>
 									<img id="idcardPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src="" data-preview-src="" data-preview-group="1" /  >
-									<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
+								<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
 										<button type="button" id="uploadIDCARD"  class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
 									</div>
 							</div>
@@ -497,6 +498,7 @@ function getAdress(){
 
 			document.getElementById("changePersonInfo").addEventListener('tap',function(){
 				var self = plus.webview.currentWebview();
+				var params = {};
 				//获取参数 人员id 人员姓名 民族 id  身份证号 电话号码,性别 id ,出生日期,籍贯
 				var peoid = self.personid;
 				var nameStr = document.getElementById('nameStr').value;
@@ -512,36 +514,25 @@ function getAdress(){
 				if(nationStr == '' || nationStr == null){mui.alert('请选择民族');return;}
 				if(nameStr == '' || nameStr == null){mui.alert('请输入姓名');return;}
 				if(sexStr == '' || sexStr == null){mui.alert('请选择性别');return;}
-
+				
+				if(idcardStr == '' || idcardStr == null){
+					mui.alert('请输入身份证信息');return;
+				}
+				
 				//入党时间
 				var rudangshijianInfo = common.jointime(document.getElementById("rudangshijian").value);
-				//独生子女
-				var scnumInfo = document.getElementById("singlechild").value;
-				//兵役信息
-				var bingyiInfo = 
-				//在家居住
-				var zaijiajuzhuInfo = 
+			
 				//重点地州
 				var zdryInfo = document.getElementById("peo_zdry_id").value;
-				//流动人口
-				var lcrkInfo = 
-				//人员属性
-				var attidInfo = 
-				//光荣证类型
-				var sctypeInfo = document.getElementById("singlechild").value;
-				if (sctypeInfo == '' || sctypeInfo == null ||sctypeInfo == undefined) {mui.alert('请选择光荣证类型');return false;}
-				//光荣证号
-				var scnumInfo = document.getElementById("singlechildnum").value;
-				//光荣证享受情况
-				var scenjoyInfo = document.getElementById("singlechildenjoy").value;
-				if (scenjoyInfo == '' || scenjoyInfo == null ||scenjoyInfo == undefined) {mui.alert('请选择享受情况');return false;}
+			
 			
 
 				if (document.getElementById("polit").value == '26c0381f2de54fd8887ab42d99da1481' && rudangshijianInfo == null) {mui.alert('请选择入党时间');return false;}
 				//贫困原因
 				var pinkunyuanyinInfo = document.getElementById("pinkunyuanyin").value;
 				if (document.getElementById("income").value == '2bcb7f1428e3463590ee4ddf8833fa8d' && pinkunyuanyinInfo.length < 4) {mui.alert('请选择贫困原因');return false;}
-				var params = {};
+			
+		
 					params["peo_id"] = self.personid;
 					params["peo_yz_relation"] =relation; 
 					params["peo_name"]=nameStr;
@@ -552,31 +543,130 @@ function getAdress(){
 					params["peo_sex"]=sexStr;
 					params["peo_birthday"]=birthStr;
 					params["peo_blood_id"]= document.getElementById("bloodType").value;
-					params["peo_zy_id"]=document.getElementById("career").value;
 					params["peo_by_id"]=document.getElementById("military").value;
 					params["peo_edu_deg_id"]=document.getElementById("degree").value;
-					params["peo_hyzk"]=document.getElementById("marry").value;
-					params["peo_eco_id"]=document.getElementById("income").value;
 					params["peo_religion_id"]=document.getElementById("RELIGION").value;
 					params["peo_dao_gao_id"]=document.getElementById("daogaoAdress").value;
-					params["peo_work_unit"]=document.getElementById("danweidizhi").value;
-					params["peo_hk_xz_id"]=document.getElementById("popuInfo").value;
-					params["peo_hk_addr"]=document.getElementById("hkdz").value;
-					params["peo_social_id"]=document.getElementById("yiliaoqingkuang").value;
-					params["peo_is_able"]=document.getElementById("jiankangzhuangkuang").value;
-					params["peo_zzmm_id"]=document.getElementById("polit").value;
-					params["peo_join_party_date"]=rudangshijianInfo;
-					params["peo_party_zw"]=document.getElementById("dangneizhiwu").value;
-					params["peo_inhome_id"]=document.getElementById("yesOrNot").value;
-					params["peo_is_lcrk"]=document.getElementById("peo_is_lcrk").value;
-					params["peo_attr_id"]=document.getElementById("peo_attr_id").value;
-					params["peo_jbqk_id"]=document.getElementById("jibingleixingid").value;
 					params["peo_ecoyy_id"]=pinkunyuanyinInfo;
 					params["peo_yz_relation"]=relation;
 					params["peo_zdry_id"]=zdryInfo;
-					params["peo_single_child_card"]=sctypeInfo;
-					params["peo_single_child_num"]=scnumInfo;
-					params["peo_xsqk_id"]=scenjoyInfo;
+					
+				
+					
+					if(document.getElementById("yiliaoqingkuang").value == '' || document.getElementById("yiliaoqingkuang").value == null){
+						mui.alert('请选择医疗情况');
+						return;
+					}else{
+						params["peo_social_id"]=document.getElementById("yiliaoqingkuang").value;
+					}
+					
+					if(document.getElementById("peo_ylqk").value == '' || document.getElementById("peo_ylqk").value == null){
+						mui.alert('请选择养老情况');
+						return;
+					}else{
+						params["peo_ylqk"]=document.getElementById("peo_ylqk").value;
+					}
+					
+					if(document.getElementById("jiankangzhuangkuang").value == '' || document.getElementById("jiankangzhuangkuang").value == null){
+						mui.alert('请选择健康情况');
+						return;
+					}else{
+						params["peo_is_able"]=document.getElementById("jiankangzhuangkuang").value;
+					}
+					
+					if(document.getElementById("income").value == '' || document.getElementById("income").value == null){
+						mui.alert('请选择经济情况');
+						return;
+					}else{
+						params["peo_eco_id"]=document.getElementById("income").value;
+					}
+					
+					if(document.getElementById("popuInfo").value == '' || document.getElementById("popuInfo").value == null){
+						mui.alert('请选择户口性质');
+						return;
+					}else{
+						params["peo_hk_xz_id"]=document.getElementById("popuInfo").value;
+					}
+					
+					if(document.getElementById("peoisflow").value == '' || document.getElementById("peoisflow").value == null){
+						mui.alert('请选择是否为流动人口');
+						return;
+					}else{
+						params["peo_is_flow"]=document.getElementById("peoisflow").value;
+					}
+					
+					if(document.getElementById("career").value == '' || document.getElementById("career").value == null){
+						mui.alert('请选择职业');
+						return;
+					}else{
+						params["peo_zy_id"]=document.getElementById("career").value;
+					}
+					if(document.getElementById("peo_attr_id").value == '' || document.getElementById("peo_attr_id").value == null){
+						mui.alert('请选择是否为流动人口');
+						return;
+					}else{
+						params["peo_attr_id"]=document.getElementById("peo_attr_id").value;
+					}
+		
+					if(document.getElementById("danweidizhi").value == '' || document.getElementById("danweidizhi").value == null){
+						mui.alert('请输入工作单位');
+						return;
+					}else{
+						params["peo_work_unit"]=document.getElementById("danweidizhi").value;
+					}
+					if(document.getElementById("marry").value == '' || document.getElementById("marry").value == null){
+						mui.alert('请选择婚姻状况');
+						return;
+					}else{
+						params["peo_hyzk"]=document.getElementById("marry").value;
+					}
+					
+					var str = $("#marry").find("option:selected").text();
+					if(str == '请选择' || str == '未婚'){
+					}else{
+						//光荣证类型
+						var sctypeInfo = document.getElementById("singlechild").value;
+						if (sctypeInfo == '' || sctypeInfo == null ||sctypeInfo == undefined) {
+							mui.alert('请选择光荣证类型');
+							return false;
+						}
+						params["peo_single_child_card"]=sctypeInfo;
+						
+						//光荣证号
+						params["peo_single_child_num"] =  document.getElementById("singlechildnum").value;
+						
+						//光荣证享受情况
+						var scenjoyInfo = document.getElementById("singlechildenjoy").value;
+						if (scenjoyInfo == '' || scenjoyInfo == null ||scenjoyInfo == undefined) {mui.alert('请选择享受情况');return false;}
+						params["peo_xsqk_id"]=scenjoyInfo;
+						
+					}
+					
+						
+					if(document.getElementById("peo_is_lcrk").value == '' || document.getElementById("peo_is_lcrk").value == null){
+						mui.alert('请选择是否为流动人口');
+						return;
+					}else{
+						params["peo_is_lcrk"]=document.getElementById("peo_is_lcrk").value;
+					}
+		
+					if(document.getElementById("polit").value == '' || document.getElementById("polit").value == null){
+						mui.alert('请选择政治面貌');
+						return;
+					}else{
+						params["peo_zzmm_id"]=document.getElementById("polit").value;
+					}
+					if(document.getElementById("hkdz").value == '' || document.getElementById("hkdz").value == null){
+						mui.alert('请输入户口所在地');
+						return;
+					}else{
+						params["peo_hk_addr"]=document.getElementById("hkdz").value;
+					}
+					
+					params["peo_join_party_date"]=rudangshijianInfo;
+					params["peo_party_zw"]=document.getElementById("dangneizhiwu").value;
+					params["peo_inhome_id"]=document.getElementById("yesOrNot").value;
+					params["peo_jbqk_id"]=document.getElementById("jibingleixingid").value;
 					params["peo_hobby"]=document.getElementById("peo_hobby").value;
 					params["peo_byyx"]=document.getElementById("peo_byyx").value;
 					params["peo_marry_date"]=common.jointime(document.getElementById("peo_marry_date").value);
@@ -588,11 +678,9 @@ function getAdress(){
 					params["peo_stature"]=common.jointime(document.getElementById("peo_height").value);
 					params["peo_cjgy"]=document.getElementById("Publicwelfare").value;
 					params["peo_card_pic"]=idcardPicAdd;
-					params["peo_ylqk"]=document.getElementById("peo_ylqk").value;
 					params["socialpic"]=sociaPicAdd;
 					params["peo_dis_card_pic"]=disablePicAdd;
 					params["peo_single_child_pic"]=singlPicAdd;
-					params["peo_is_flow"]= document.getElementById("peoisflow").value;
 					//结亲信息
 					params["kinsman_name"]= document.getElementById("kinsman_name").value;
 					params["kinsman_phone"]= document.getElementById("kinsman_phone").value;
