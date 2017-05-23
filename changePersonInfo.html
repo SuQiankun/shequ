@@ -757,49 +757,8 @@ mui.plusReady(function () {
 	});
 	
 	
-			mui.previewImage();
-			/**
-			 * @param {元素的id} element
-			 */
-			function creatTimeLime(element){
-				var info = document.getElementById(element);
-				document.getElementById(element).addEventListener('tap', function() {
-				var dDate = new Date();
-				dDate.setFullYear(2016, 7, 16);
-				var minDate = new Date();
-				minDate.setFullYear(1800, 0, 1);
-				var maxDate = new Date();
-				maxDate.setFullYear(2050, 01, 01);
-				plus.nativeUI.pickDate(function(e) {
-					var d = e.date;
-					info.textContent = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-				}, function(e) {
-//					info.innerText = self.birth;
-				}, {
-					title: "请选择日期",
-					date: dDate,
-					minDate: minDate,
-					maxDate: maxDate
-				});})};
-			
-//			document.getElementById("rudangshijian").addEventListener('tap',function(){
-//				creatTimeLime("rudangshijian");
-//			});
-//			document.getElementById("pickDateBtn").addEventListener('tap',function(){
-//					creatTimeLime("pickDateBtn");
-//			});
-//			document.getElementById("peo_marry_date").addEventListener('tap',function(){
-//				creatTimeLime("peo_marry_date")
-//			});
-//			document.getElementById("peo_by_indate").addEventListener('tap',function(){
-//				creatTimeLime("peo_by_indate")
-//			});
-//			document.getElementById("peo_by_outdate").addEventListener('tap',function(){
-//				creatTimeLime("peo_by_outdate")
-//			});
-//			document.getElementById("peo_retire_date").addEventListener('tap',function(){
-//				creatTimeLime("peo_retire_date")
-//			});
+	mui.previewImage();
+
 </script>
 <!--上传图片的操作-->
 <script type="text/javascript">
