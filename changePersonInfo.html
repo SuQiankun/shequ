@@ -233,7 +233,7 @@
 							</div>
 							<div class="mui-input-row">
 									<label style="width: 30%;" class="redTitle">族别</label>
-									<select id="nationID" style="width: 65%;" class="mui-btn-block"></select>
+									<select id="nationID" style="width: 65%;" class="mui-btn-block" onchange="showZhongdiandizhou()"></select>
 							</div>
 							
 							<div class="mui-input-row">
@@ -266,31 +266,37 @@
 							
 						
 						<!--内容 part 2-->
-						<div class="mui-input-row">
-								<label style="width: 30%;">籍贯</label>
-								<input style="width: 65%;" id="jgStr" type="text" class="mui-input-clear" placeholder="" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
-						</div>
+							<div class="mui-input-row">
+									<label style="width: 30%;">籍贯</label>
+									<input style="width: 65%;" id="jgStr" type="text" class="mui-input-clear" placeholder="" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							
 							<div class="mui-input-row">
 								<label style="width: 30%;"class="redTitle" >户口性质</label>
 								<select id="popuInfo" name=""><option value="">请选择</option></select>
 							</div>
+							
 							<div class="mui-input-row">
 								<label style="width: 35%;" class="redTitle">户口所在地</label>
 								<input style="width: 65%;" id="hkdz" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>	
+							
+							<div class="mui-input-row" id="liurushijian" style="display: none;">
+								<label style="width: 35%;" class="redTitle">流入时间</label>
+								<input style="width: 65%;" id="liuruTime" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
 						
-							<div class="mui-input-row">
+							<div class="mui-input-row" id="hidezddz">
 								<label style="width: 30%;" class="redTitle">重点地州</label>
 								<select id="peo_zdry_id" style="width: 65%;" class="mui-btn-block"></select>
 							</div>
-							
-							
 							
 							<div class="mui-input-row">
 								<label style="width: 50%;font-size: 13px;" class="redTitle">是否为流动人口</label>
 								<select id="peoisflow"style="width: 50%;">
 								<option value="">请选择</option><option value="084500e2b1384e809d49b2db44923fd0">是</option><option value="43420be04461467d963b8936d23a591a">否</option><option value="6e942eb47c67469db061c86fa65d0025">其他</option>									</select>
 							</div>
+							
 							<div class="mui-input-row">
 								<label style="width: 35%;">结亲人姓名</label>
 								<input style="width: 65%;" id="kinsman_name" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
@@ -412,22 +418,20 @@
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;" class="redTitle">婚姻状况</label>
-								<select id="marry"><option value="">请选择</option></select>
+								<select id="marry" onchange="showMarryInfo()"><option value="">请选择</option></select>
 							</div>
 							
+							<div id="marryInfo">
 							<div class="mui-input-row">
 								<label style="width: 30%;">结婚时间</label>
 								<input  id="peo_marry_date" style="width: 65%;" type="text" class="mui-input-clear" placeholder="输入格式 1993-03-16" >
 							</div>
-							
-
 							<div class="mui-input-row">
 								<label style="width: 35%;">光荣证类型</label>
 								<select id="singlechild">
 									<option value="">请选择</option>
 								</select>
 							</div>
-							
 							<div class="mui-input-row">
 								<label style="width: 35%;">光荣证编号</label>
 								<input style="width: 65%;" id="singlechildnum" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
@@ -436,13 +440,14 @@
 								<label style="width: 45%;" >光荣证享受情况</label>
 								<select id="singlechildenjoy" style="width: 55%;"><option value="">请选择</option></select>
 							</div>
-								<div class="mui-input-row" style="height: 100%;">
-										<label style="width: 35%;"> 光荣证证照片</label>
-										<img id="singlechildPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src=""  data-preview-src="" data-preview-group="1"/ >
-										<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
-											<button id="uploadSinglePIC" type="button" class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
-										</div>
-								</div>
+							<div class="mui-input-row" style="height: 100%;">
+									<label style="width: 35%;"> 光荣证证照片</label>
+									<img id="singlechildPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src=""  data-preview-src="" data-preview-group="1"/ >
+									<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
+										<button id="uploadSinglePIC" type="button" class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
+							</div>
+							</div>
+							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">兵役</label>
 								<select id="military" onchange="showBingyi()"><option value="">请选择</option></select>
@@ -742,6 +747,13 @@ mui.plusReady(function () {
 				document.getElementById("nationID").innerHTML = area_name;
 				},
 				error: function(xhr,type,errorThrown){}});
+				var nationString = $('#nationID').find('option:selected').text();
+				if(nationString == '维吾尔族'){
+					$('#hidezddz').show();
+				}else{
+					$('#hidezddz').hide();	
+				}
+				
 				//设置初始数据
 				changePeoInfo.setInitData(web.peoList,web.personid);
 				
@@ -799,6 +811,23 @@ mui.plusReady(function () {
 				$('#rudangshijiandiv').hide();	
 			}
 	}
+	function showMarryInfo(){
+			var str = $('#marry').find('option:selected').text();
+			if(str == '未婚' || str == '请选择'){
+				$('#marryInfo').hide();
+			}else{
+				$('#marryInfo').show();	
+			}
+	}
+	function showZhongdiandizhou(){
+		var nationString = $('#nationID').find('option:selected').text();
+			if(nationString == '维吾尔族'){
+				$('#hidezddz').show();
+			}else{
+				$('#hidezddz').hide();	
+			}
+	}
+	
 //设置返回的刷新事件
 	mui.init({
 				beforeback: function(){
@@ -810,8 +839,8 @@ mui.plusReady(function () {
 					mui.fire(list,'getindex');
 					return true;
 				}
-			});
-		
+		});
+
 </script>
 
 <script src="js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
@@ -849,7 +878,6 @@ mui.plusReady(function () {
 	
 	
 	mui.previewImage();
-
 </script>
 <!--上传图片的操作-->
 <script type="text/javascript">

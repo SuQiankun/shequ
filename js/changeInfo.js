@@ -117,6 +117,11 @@ var changePeoInfo = {
 								});
 								//婚姻情况
 								hyzk = data.data[i].peo_hyzk;
+								if (hyzk == '未婚' || hyzk == '请选择') {
+									$("#marryInfo").hide();
+								}else{
+									$("#marryInfo").show();
+								}
 								common.getReligion('marry','marry',hyzk);
 								
 								//结婚时间
