@@ -13,6 +13,28 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<style>
+						
+			.mui-plus .plus{
+				display: inline;
+			}
+			
+			.plus{
+				display: none;
+			}
+			
+			#topPopover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+			}
+			#topPopover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			.mui-popover {
+				height: 300px;
+			}
+			
 			.redTitle{
 				color: red;
 			}
@@ -208,6 +230,8 @@
 		    <h1 class="mui-title">修改资料</h1>
 		</header>
 			<div class="mui-content">
+						
+		
 			<div class="mui-card">
 					
 					<div class="mui-card-header">
@@ -245,7 +269,7 @@
 								<input style="width: 65%;" id="phoneStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
-							<div class="mui-input-row">
+							<div class="mui-input-row" style="display: none;">
 								<label style="width: 30%;">出生日期</label>
 								<div id="result" style="line-height: 40px; display: inline-block; " class="ui-alert"></div>
 								<label  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择出生时间">点击选择出生日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
@@ -277,29 +301,35 @@
 							</div>
 							
 							<div class="mui-input-row">
-								<label style="width: 35%;" class="redTitle">户口所在地</label>
-								<input style="width: 65%;" id="hkdz" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								
+								<label style="width: 35%;" class="redTitle"><a href="#middlePopover">户口所在地</a></label>
+								<input style="width: 65%;" id="hkdz" type="text" class="mui-input-clear" placeholder="请输入" ></span>
 							</div>	
 							
 							<div class="mui-input-row" id="liurushijian" style="display: none;">
 								<label style="width: 35%;" class="redTitle">流入时间</label>
-								<input style="width: 65%;" id="liuruTime" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input style="width: 65%;" id="liuruTime" type="text" class="mui-input-clear" placeholder="请输入" ><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 						
-							<div class="mui-input-row" id="hidezddz">
+							<div class="mui-input-row" id="hidezddz" style="display: none;">
 								<label style="width: 30%;" class="redTitle">重点地州</label>
 								<select id="peo_zdry_id" style="width: 65%;" class="mui-btn-block"></select>
 							</div>
 							
-							<div class="mui-input-row">
+							<div class="mui-input-row" id="expirdateDiv" style="display: none;" >
+								<label style="width: 40%; font-size: 13px;">租房到期时间</label>
+								<input style="width: 60%;" id="expirdate" type="text" class="mui-input-clear" placeholder="请输入" ></span>
+							</div>
+							
+							<!--<div class="mui-input-row">
 								<label style="width: 50%;font-size: 13px;" class="redTitle">是否为流动人口</label>
 								<select id="peoisflow"style="width: 50%;">
 								<option value="">请选择</option><option value="084500e2b1384e809d49b2db44923fd0">是</option><option value="43420be04461467d963b8936d23a591a">否</option><option value="6e942eb47c67469db061c86fa65d0025">其他</option>									</select>
-							</div>
+							</div>-->
 							
 							<div class="mui-input-row">
 								<label style="width: 35%;">结亲人姓名</label>
-								<input style="width: 65%;" id="kinsman_name" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input style="width: 65%;" id="kinsman_name" type="text" class="mui-input-clear" placeholder="请输入" ><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 35%;">结亲人电话</label>
@@ -466,7 +496,7 @@
 								<input  id="peo_by_outdate" style="width: 65%;" type="text" class="mui-input-clear" placeholder="输入格式 1993-03-16" > 
 							</div>
 							
-							<div class="mui-input-row">
+							<div class="mui-input-row" style="display: none;">
 								<label style="width: 30%;">在家居住</label>
 								<select id="yesOrNot" name=""><option value="">请选择</option></select>
 							</div>
@@ -485,12 +515,42 @@
 						</div>
 					</div>
 				</div>
-				
+		<div id="middlePopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+				<ul class="mui-table-view">
+						<li class="mui-table-view-cell"style="color: red;">昌吉市户口</li>
+						<li class="mui-table-view-cell"> 昌吉市中山路街道***</li>
+						<li class="mui-table-view-cell"> 昌吉市大西渠乡***</li>
+						<li class="mui-table-view-cell"> 昌吉市三畦村***</li>
+						<li class="mui-table-view-cell"> 昌吉市军户农场***</li>
+						<li class="mui-table-view-cell"style="color: red;">昌吉州户口</li>
+						<li class="mui-table-view-cell"> 昌吉州奇台县***</li>
+						<li class="mui-table-view-cell"> 昌吉州五家渠市***</li>
+						<li class="mui-table-view-cell"> 昌吉州共青团农场***</li>
+						<li class="mui-table-view-cell"> 昌吉州105农场***</li>
+						<li class="mui-table-view-cell"style="color: red;">新疆户口</li>
+						<li class="mui-table-view-cell"> 阿克苏地区阿拉尔市***</li>
+						<li class="mui-table-view-cell"> 乌鲁木齐市水磨沟区***</li>
+						<li class="mui-table-view-cell"> 乌鲁木齐市大阪城乡***</li>
+						<li class="mui-table-view-cell"> 阿克苏市****</li>
+						<li class="mui-table-view-cell"> 博州地区***</li>
+						<li class="mui-table-view-cell"> 喀什市***</li>
+						<li class="mui-table-view-cell"> 喀什地区***</li>
+						<li class="mui-table-view-cell"style="color: red;">疆外户口</li>
+						<li class="mui-table-view-cell"> 甘肃省通渭县囊乡派出所</li>
+						<li class="mui-table-view-cell"> 安徽省临泉县陶老乡陶前寨村黑龙潭前队******</li>
+						<li class="mui-table-view-cell"> 河南省扶沟县******</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 			</div>
 <script src="js/mui.min.js"></script>
 <script src="js/changeInfo.js"></script>
 <script>
-function getAdress(){
+		function getAdress(){
 				var reID =  document.getElementById("RELIGION").value;
 				var numberStr = '';
 				switch (reID){
@@ -519,16 +579,6 @@ function getAdress(){
 				if(birthStr == '' || birthStr == null){mui.alert('请输入出生日期');return;}
 				if(relation == '' || relation == null){mui.alert('请选择与业主关系');return;}
 				if(nationStr == '' || nationStr == null){mui.alert('请选择民族');return;}
-				
-				var nationTitle = $("#nationID").find("option:selected").text();
-				if(nationTitle == '维吾尔族'){					
-					if(document.getElementById("peo_zdry_id").value == '' || document.getElementById("peo_zdry_id").value == null){
-						mui.alert('请选择重点地州情况');
-						return;
-					}else{
-						params["peo_zdry_id"]=document.getElementById("peo_zdry_id").value;
-					}
-				}
 					
 				if(nameStr == '' || nameStr == null){mui.alert('请输入姓名');return;}
 				if(sexStr == '' || sexStr == null){mui.alert('请选择性别');return;}
@@ -555,12 +605,12 @@ function getAdress(){
 					params["peo_sex"]=sexStr;
 					params["peo_birthday"]=birthStr;
 					params["peo_blood_id"]= document.getElementById("bloodType").value;
-					params["peo_by_id"]=document.getElementById("military").value;
 					params["peo_edu_deg_id"]=document.getElementById("degree").value;
 					params["peo_religion_id"]=document.getElementById("RELIGION").value;
 					params["peo_dao_gao_id"]=document.getElementById("daogaoAdress").value;
 					params["peo_ecoyy_id"]=pinkunyuanyinInfo;
 					params["peo_yz_relation"]=relation;
+					
 					if(document.getElementById("yiliaoqingkuang").value == '' || document.getElementById("yiliaoqingkuang").value == null){
 						mui.alert('请选择医疗情况');
 						return;
@@ -596,12 +646,6 @@ function getAdress(){
 						params["peo_hk_xz_id"]=document.getElementById("popuInfo").value;
 					}
 					
-					if(document.getElementById("peoisflow").value == '' || document.getElementById("peoisflow").value == null){
-						mui.alert('请选择是否为流动人口');
-						return;
-					}else{
-						params["peo_is_flow"]=document.getElementById("peoisflow").value;
-					}
 					
 					if(document.getElementById("career").value == '' || document.getElementById("career").value == null){
 						mui.alert('请选择职业');
@@ -609,8 +653,9 @@ function getAdress(){
 					}else{
 						params["peo_zy_id"]=document.getElementById("career").value;
 					}
+					
 					if(document.getElementById("peo_attr_id").value == '' || document.getElementById("peo_attr_id").value == null){
-						mui.alert('请选择是否为流动人口');
+						mui.alert('请选择人员属性');
 						return;
 					}else{
 						params["peo_attr_id"]=document.getElementById("peo_attr_id").value;
@@ -622,6 +667,7 @@ function getAdress(){
 					}else{
 						params["peo_work_unit"]=document.getElementById("danweidizhi").value;
 					}
+					
 					if(document.getElementById("marry").value == '' || document.getElementById("marry").value == null){
 						mui.alert('请选择婚姻状况');
 						return;
@@ -629,30 +675,8 @@ function getAdress(){
 						params["peo_hyzk"]=document.getElementById("marry").value;
 					}
 					
-					var str = $("#marry").find("option:selected").text();
-					if(str == '请选择' || str == '未婚'){
-					}else{
-						//光荣证类型
-						var sctypeInfo = document.getElementById("singlechild").value;
-						if (sctypeInfo == '' || sctypeInfo == null ||sctypeInfo == undefined) {
-							mui.alert('请选择光荣证类型');
-							return false;
-						}
-						params["peo_single_child_card"]=sctypeInfo;
-						
-						//光荣证号
-						params["peo_single_child_num"] =  document.getElementById("singlechildnum").value;
-						
-						//光荣证享受情况
-						var scenjoyInfo = document.getElementById("singlechildenjoy").value;
-						if (scenjoyInfo == '' || scenjoyInfo == null ||scenjoyInfo == undefined) {mui.alert('请选择享受情况');return false;}
-						params["peo_xsqk_id"]=scenjoyInfo;
-						
-					}
-					
-						
 					if(document.getElementById("peo_is_lcrk").value == '' || document.getElementById("peo_is_lcrk").value == null){
-						mui.alert('请选择是否为流动人口');
+						mui.alert('请选择是否为流出人口');
 						return;
 					}else{
 						params["peo_is_lcrk"]=document.getElementById("peo_is_lcrk").value;
@@ -664,11 +688,57 @@ function getAdress(){
 					}else{
 						params["peo_zzmm_id"]=document.getElementById("polit").value;
 					}
+					
 					if(document.getElementById("hkdz").value == '' || document.getElementById("hkdz").value == null){
 						mui.alert('请输入户口所在地');
 						return;
 					}else{
 						params["peo_hk_addr"]=document.getElementById("hkdz").value;
+					}
+					
+					if(document.getElementById("hkdz").value.indexOf('昌吉市') >= 0){
+							params["peo_is_flow"]='43420be04461467d963b8936d23a591a';
+					}else{
+							params["peo_is_flow"]='084500e2b1384e809d49b2db44923fd0';
+							params["expirdate"] = document.getElementById("expirdate").value;
+					}
+				
+				var nationTitle = $("#nationID").find("option:selected").text();
+				
+				if(nationTitle == '维吾尔族'){
+					if (document.getElementById("hkdz").value.indexOf('阿克苏') >= 0) {
+						params["peo_zdry_id"]='74a39cd14b6649fda637976d4a8c7edd';
+					}
+					if (document.getElementById("hkdz").value.indexOf('和田') >= 0) {
+						params["peo_zdry_id"]='8fefc57dd1b44874aaceffaf8c545ba7';
+					}
+					if (document.getElementById("hkdz").value.indexOf('喀什') >= 0) {
+						params["peo_zdry_id"]='24129b6a36f5456e8b835f2e943dc36e';
+					}
+					if (document.getElementById("hkdz").value.indexOf('克州') >= 0) {
+						params["peo_zdry_id"]='0e50ea56e1694c0bb1a03c4d255d0b8b';
+					}
+				}
+					
+					//光荣证 & 结婚时间
+					var str = $("#marry").find("option:selected").text();
+					if(str == '请选择' || str == '未婚'){
+					}else{
+						var sctypeInfo = document.getElementById("singlechild").value;
+						if (sctypeInfo == '' || sctypeInfo == null ||sctypeInfo == undefined) {mui.alert('请选择光荣证类型');return false;}
+						params["peo_single_child_card"]=sctypeInfo;
+						params["peo_single_child_num"] =  document.getElementById("singlechildnum").value;
+						var scenjoyInfo = document.getElementById("singlechildenjoy").value;
+						if (scenjoyInfo == '' || scenjoyInfo == null ||scenjoyInfo == undefined) {mui.alert('请选择享受情况');return false;}
+						params["peo_xsqk_id"]=scenjoyInfo;
+					}
+					//兵役信息
+					params["peo_by_id"]=document.getElementById("military").value;
+					var byInfo = $("#military").find("option:selected").text();
+					if (byInfo == '未服') {}else{
+						params["peo_by_org"]=document.getElementById("peo_by_org").value;
+						params["peo_by_indate"]=common.jointime(document.getElementById("peo_by_indate").value);
+						params["peo_by_outdate"]=common.jointime(document.getElementById("peo_by_outdate").value);
 					}
 					
 					params["peo_join_party_date"]=rudangshijianInfo;
@@ -678,16 +748,11 @@ function getAdress(){
 					params["peo_hobby"]=document.getElementById("peo_hobby").value;
 					params["peo_byyx"]=document.getElementById("peo_byyx").value;
 					params["peo_marry_date"]=common.jointime(document.getElementById("peo_marry_date").value);
-					params["peo_by_org"]=document.getElementById("peo_by_org").value;
-					params["peo_by_indate"]=common.jointime(document.getElementById("peo_by_indate").value);
-					params["peo_by_outdate"]=common.jointime(document.getElementById("peo_by_outdate").value);
 					params["peo_retire_date"]=common.jointime(document.getElementById("peo_retire_date").value);
 					params["peo_weight"]=common.jointime(document.getElementById("peo_weight").value);
 					params["peo_stature"]=common.jointime(document.getElementById("peo_height").value);
 					params["peo_cjgy"]=document.getElementById("Publicwelfare").value;
 					params["peo_card_pic"]=idcardPicAdd;
-					params["socialpic"]=sociaPicAdd;
-					params["peo_dis_card_pic"]=disablePicAdd;
 					params["peo_single_child_pic"]=singlPicAdd;
 					//结亲信息
 					params["kinsman_name"]= document.getElementById("kinsman_name").value;
@@ -736,14 +801,15 @@ mui.plusReady(function () {
 				type:'get',
 				success:function(data){
 				var area_name = '<option value="">请选择</option>';
+				
 				for (i=0;i<data.data.length;i++) {
-						//判断是否加载初始值;
-						if( data.data[i].val == web.nation){
-							area_name +='<option selected="selected"  value="'+data.data[i].ids+'">'+ data.data[i].val+'</option>';
-						}else{
-							area_name +='<option value="'+data.data[i].ids+'">'+ data.data[i].val+'</option>';
-						}
+					//判断是否加载初始值;
+					if( data.data[i].val == web.nation){
+						area_name +='<option selected="selected"  value="'+data.data[i].ids+'">'+ data.data[i].val+'</option>';
+					}else{
+						area_name +='<option value="'+data.data[i].ids+'">'+ data.data[i].val+'</option>';
 					}
+				}
 				document.getElementById("nationID").innerHTML = area_name;
 				},
 				error: function(xhr,type,errorThrown){}});
@@ -759,7 +825,6 @@ mui.plusReady(function () {
 				
 			});
 </script>
-
 <script>
 /**
  * 设置图片
@@ -780,17 +845,18 @@ mui.plusReady(function () {
 			getJibingType();
 		}else if(str == '健康'){$('#jibingdivid').hide();}
 	}
+	
 	function getJibingType(){
 		var params = plus.storage.getItem('疾病类型');
 		common.getDictTypeInfo(params,jblx,function(result){
 			document.getElementById("jibingleixingid").innerHTML = result;
 		});
 	}
+	
 	function showBingyi(){
 		var str = $("#military").find("option:selected").text();
 		console.log(str.trim());
 		console.log(str.length)
-//		if(str.indexOf('未')>=0 ||str.indexOf('请')>=0 ){
 		if(str == '请选择' || str == '未服' ){
 				$('#div_by_org').hide();
 				$('#div_by_indate').hide();
@@ -827,6 +893,13 @@ mui.plusReady(function () {
 				$('#hidezddz').hide();	
 			}
 	}
+	$("#hkdz").bind('input propertychange',function(){
+		if ($(this).val().indexOf('昌吉市')>=0) {
+			$('#expirdateDiv').hide();
+		}else{
+			$('#expirdateDiv').show();			
+		}
+	});
 	
 //设置返回的刷新事件
 	mui.init({
@@ -854,8 +927,6 @@ mui.plusReady(function () {
         var result = arr.join('');
 		return result;
 	}
-	
-	
 	$("#peo_retire_date").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'peo_retire_date');
 	});
@@ -930,6 +1001,13 @@ mui.plusReady(function () {
 				}else{wt.close();}});
 		task.addFile(p,{key:"upimg"}); 	task.start();
 	}
+		mui('.mui-scroll-wrapper').scroll();
+			mui('body').on('shown', '.mui-popover', function(e) {
+				//console.log('shown', e.detail.id);//detail为当前popover元素
+			});
+			mui('body').on('hidden', '.mui-popover', function(e) {
+				//console.log('hidden', e.detail.id);//detail为当前popover元素
+			});
 	</script>
 </body>
 </html>

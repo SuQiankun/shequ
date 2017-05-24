@@ -530,6 +530,7 @@ getDaogaoList: function getDaogaoList(cmd,actionid,params,callback) {
 							return;}
 					// 拼接插入的 html
 					for (i=0;i<data.data.length;i++) {
+						
 					//判断数据是否为空,如果为空,设置默认值;
 					 var name = common.changestr(data.data[i].peo_name);
 					 var sex = common.changestr(data.data[i].peo_sex);
@@ -541,7 +542,6 @@ getDaogaoList: function getDaogaoList(cmd,actionid,params,callback) {
 					 var birth = common.changestr(data.data[i].peo_birthday);
 					 var username = common.changestr(data.data[i].bhr_username);
 					 var names =   common.changestr(data.data[i].bhr_names);
-					 
 					 var att = common.changestr(data.data[i].peo_attr_id);
 					//重点人员标记
 					var resultstr = checkPersonInfo(data.data[i].peo_attr_id,data.data[i].peoid,att,data.data[i].peo_inhome_id);

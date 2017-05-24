@@ -157,10 +157,10 @@
 	<script>
 		//添加跳转上传图片
 		document.getElementById('uploadimg').addEventListener('tap',function(){
-					mui.openWindow({
-					    url: 'upload.html', 
-					    id:'upload',
-				     });
+				mui.openWindow({
+				    url: 'upload.html', 
+				    id:'upload',
+			     });
 		});		
 		//添加点击预警信息界面
 		document.getElementById('showMessage').addEventListener('tap',function(){
@@ -261,11 +261,11 @@
 	}
 	
 	function getHomeData(){
-		var userid = 'wgy%23'+plus.storage.getItem('userId');
-		var changzhu = document.getElementById("changzhu");
+			var userid = 'wgyapp%23'+plus.storage.getItem('userId');
+			var changzhu = document.getElementById("changzhu");
 			var liudong = document.getElementById("liudong");
 			var minzu = document.getElementById("minzu");
-				var chuzu = document.getElementById("chuzu");
+			var chuzu = document.getElementById("chuzu");
 		mui.ajax(urlforapp+'/platform/index/getsumdata?myid='+userid,{
 			dataType:'json',//服务器返回json格式数据
 			type:'get',//HTTP请求类型
@@ -274,15 +274,18 @@
 
 				//流动人口
 				changzhu.textContent = data.ldrs + '/'+ data.ldhs;
+				
 				//出租房屋/人数
 				liudong.textContent = data.czrs + '/'+ data.czhs;
+				
 				//重点民语系
 				minzu.textContent = data.zdmyxrs + '/'+ data.zdmyxhs;
 				//重点地州
-					chuzu.textContent = data.zdsdzrs +'/'+data.zdsdzhs;
+				chuzu.textContent = data.zdsdzrs +'/'+data.zdsdzhs;
 				
 			},
 			error:function(xhr,type,errorThrown){
+				
 			}
 		});
 	}

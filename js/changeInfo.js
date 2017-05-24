@@ -97,7 +97,6 @@ var changePeoInfo = {
 								common.getDictTypeInfo(plus.storage.getItem('人员属性'),data.data[0].peo_attr_id,function(result){
 									document.getElementById("peo_attr_id").innerHTML = result;
 								});
-								
 								//重点四地州
 								zdry = data.data[i].peo_zdry_id;
 								common.getDictTypeInfo(plus.storage.getItem('重点地州'),data.data[0].peo_zdry_id,function(result){
@@ -195,7 +194,16 @@ var changePeoInfo = {
 								});
 								//户口地址
 								hkdz = data.data[i].peo_hk_addr;
+								if(hkdz.indexOf('昌吉市')>=0){
+									$("#expirdateDiv").hide();
+								}else{
+									$("#expirdateDiv").show();
+								}
 								document.getElementById("hkdz").value = common.changestr(hkdz);
+								//租房到期时间
+								var expirdate = data.data[i].expirdate;
+								document.getElementById("expirdate").value = expirdate;
+								
 								//光荣证类型
 								scid = data.data[i].peo_single_child_card;
 								common.getDictTypeInfo(plus.storage.getItem('grzlx'),scid,function(result){
@@ -215,10 +223,10 @@ var changePeoInfo = {
 									document.getElementById("Publicwelfare").innerHTML = result;
 								});
 								//是否为流动人口
-								var isflow = data.data[i].peo_is_flow;
-								common.getDictTypeInfo(plus.storage.getItem('是否状态'),isflow,function(result){
-									document.getElementById("peoisflow").innerHTML = result;
-								});
+//								var isflow = data.data[i].peo_is_flow;
+//								common.getDictTypeInfo(plus.storage.getItem('是否状态'),isflow,function(result){
+//									document.getElementById("peoisflow").innerHTML = result;
+//								});
 								//设置图片
 								setImageAction('idcardPIC','身份证照片暂无',data.data[i].peo_card_pic);
 								idcardPicAdd = data.data[i].peo_card_pic;

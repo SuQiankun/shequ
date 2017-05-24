@@ -158,14 +158,13 @@
 				</div>
 			<!--房产信息 end -->
 			<div id="personList" class="mui-content" ></div>
-				 <!-- id="addbuttonDiv"-->
-				<div class="mui-content-padded" style="text-align: center; " > 		
+				 <!-- -->
+				<div class="mui-content-padded" id="addbuttonDiv" style="text-align: center; " > 		
 					<button onclick="addPersion()" style="padding: 10px 15px; margin: 16px 10px;" type="button" class="mui-btn mui-btn-primary ">新增成员</button>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button onclick="addVisit()" style="padding: 10px 15px; margin: 16px 10px;" type="button" class="mui-btn mui-btn-warning  ">走访记录</button>
 				</div>
-				
-			</div>
+
 		</div>
 		
 		<script src="js/mui.min.js"></script>
@@ -220,9 +219,12 @@
 					$('#serpersonList').show()
 					$('#personList').hide()
 					$("#houselist").hide()
+					$("#addbuttonDiv").hide();
 			}else{
 					$('#serpersonList').hide();
 					$('#personList').show();
+					
+					
 			}
 		});
 	 	 //获取网格列表
@@ -454,7 +456,7 @@
 		function searchWithName(){
 			common.searchWithName();	
 		}
-	
+		document.addEventListener('updateWithName', function() {searchWithName();});		        
 	</script>	
 
 	<script>
