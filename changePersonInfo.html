@@ -703,19 +703,19 @@
 							params["expirdate"] = document.getElementById("expirdate").value;
 					}
 				
+				params["peo_zdry_id"]='af7fa78208f5442d96d8d9faa9b19885';
 				var nationTitle = $("#nationID").find("option:selected").text();
-				
 				if(nationTitle == '维吾尔族'){
-					if (document.getElementById("hkdz").value.indexOf('阿克苏') >= 0) {
+					if (document.getElementById("hkdz").value.indexOf(plus.storage.getItem('74a39cd14b6649fda637976d4a8c7edd')) >= 0) {
 						params["peo_zdry_id"]='74a39cd14b6649fda637976d4a8c7edd';
 					}
-					if (document.getElementById("hkdz").value.indexOf('和田') >= 0) {
+					if (document.getElementById("hkdz").value.indexOf(plus.storage.getItem('8fefc57dd1b44874aaceffaf8c545ba7')) >= 0) {
 						params["peo_zdry_id"]='8fefc57dd1b44874aaceffaf8c545ba7';
 					}
-					if (document.getElementById("hkdz").value.indexOf('喀什') >= 0) {
+					if (document.getElementById("hkdz").value.indexOf(plus.storage.getItem('24129b6a36f5456e8b835f2e943dc36e')) >= 0) {
 						params["peo_zdry_id"]='24129b6a36f5456e8b835f2e943dc36e';
 					}
-					if (document.getElementById("hkdz").value.indexOf('克州') >= 0) {
+					if (document.getElementById("hkdz").value.indexOf(plus.storage.getItem('0e50ea56e1694c0bb1a03c4d255d0b8b')) >= 0) {
 						params["peo_zdry_id"]='0e50ea56e1694c0bb1a03c4d255d0b8b';
 					}
 				}
