@@ -137,8 +137,7 @@
 		<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			mui.plusReady(function () {
-				
-
+	
 	
 				plus.runtime.getProperty(plus.runtime.appid, function(inf) {
 						//获取当前版本号
@@ -161,16 +160,16 @@
 							if(status == 302) { // 下载成功
 									var params = JSON.stringify(d);
 									var jsonStr = $.parseJSON(params);
-									var url = jsonStr.__responseHeaders__.Location;
-									var dtask = plus.downloader.createDownload(url, {'filename':"_downloads/newVersion.apk"}, function(d, status) {
-										if(status == 200) {
-											var path = d.filename;
-											plus.runtime.install(path);
-										} else {
-											alert("Download failed: " + status);
-										}
-									});
-									dtask.start();	
+										var url = jsonStr.__responseHeaders__.Location;
+										var dtask = plus.downloader.createDownload(url, {'filename':"_downloads/newVersion.apk"}, function(d, status) {
+											if(status == 200) {
+												var path = d.filename;
+												plus.runtime.install(path);
+											} else {
+												alert("Download failed: " + status);
+											}
+										});
+										dtask.start();	
 								}else if(status == 200){
 									alert("Download failed: " + status);
 								} else { //下载失败

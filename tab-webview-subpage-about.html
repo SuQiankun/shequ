@@ -70,53 +70,60 @@
 				<div class="mui-content">	
 					<div class="mui-content">
 				        <ul class="mui-table-view mui-grid-view mui-grid-9" style="background: #fff;pointer-events: none; position:;" >
-				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
+				           
+				           <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				             	<i class="iconfont icon-zhusu" style="color: #0DAED3;" ></i>
 			                    <h4 id="zhuhu">*</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 14px;">人数/户数</div> 
+			                    <div class="mui-media-body" style="color: #888; font-size: 14px;">总人数/户数</div> 
 				            </li>
 				           
 				             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
-				            	<i class="iconfont icon-xiangqu1" style="color: #FFB400;" ></i>
+				          	  	<i class="iconfont icon-xiangqu1" style="color: #FFB400;" ></i>
 			                   	<h4 id="minzu">0</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >重点民语系人/户</div> 
 				            </li>
+				            
 				             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
-				            	<i class="iconfont icon-jianyuede" style="color: #F37B53;" ></i>
+				          	  	<i class="iconfont icon-jianyuede" style="color: #F37B53;" ></i>
 			                   	<h4 id="chuzu">*</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >重点地州民语/户</div> 
+			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >四地州民语系/户</div> 
 				            </li>
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-geren" style="color: #9D4A9C;" ></i>
 			                   	<h4 id="changzhu">0/0</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >流动人口/流动户</div> 
 				            </li>
+				            
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 								<i class="iconfont icon-feiji" style="color: #74B749;" ></i>
 			                   	<h4 id="liudong">0/0</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >出租人数/出租户</div> 
 				            </li>
+				            
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				            	<i class="iconfont icon-shoucang" style="color: #DE577B;" ></i>
 			                   	<h4 id="zhongdian">0/0</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 10px;" >重点人口/重点户</div> 
 				            </li>
-				           
+				              
+				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+				            	<i class="iconfont icon-listview" style="color: #FFB400;" ></i>
+			                   	<h4 id="emptyHouse">*</h4>
+			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >空房</div> 
+				            </li>
+				            
 				             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				             	<i class="iconfont icon-zonghe" style="color: #DE577B;" ></i>
 			                    <h4 id="yearvisit">0/0</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >年计划/实际</div> 
 				            </li>
+				            
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-				            	<i class="iconfont icon-listview" style="color: #FFB400;" ></i>
-			                   	<h4 id="mouthVisit">0/0</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >月计划/实际</div> 
-				            </li>
-				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-				            	<i class="iconfont icon-24xiaoshiqiantai" style="color: #74B749;" ></i>
+				           	 	<i class="iconfont icon-24xiaoshiqiantai" style="color: #74B749;" ></i>
 			                   	<h4 id="todaycnt">0</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >日累计</div> 
 				            </li>
+				            
 				        </ul> 
 					</div>
 					
@@ -222,7 +229,7 @@
 		var zhongdian = document.getElementById("zhongdian");
 //		var minzu = document.getElementById("minzu");
 		var yearvisit = document.getElementById("yearvisit");
-		var mouthvisit = document.getElementById("mouthVisit");
+//		var mouthvisit = document.getElementById("mouthVisit");
 		var todaycnt = document.getElementById("todaycnt");
 		var weizoufang = document.getElementById("weizoufang");
 					mui.ajax(urlforapp+'/platform/index/',{
@@ -248,7 +255,7 @@
 							weizoufang.textContent = data.data[0].unvisited;
 //							zhuhu.textContent = data.data[0].zhuhu;
 							yearvisit.textContent = data.data[0].yearplan + '/'+data.data[0].yearvisited;
-							mouthvisit.textContent = data.data[0].monthplan + '/'+data.data[0].monthvisited;
+//							mouthvisit.textContent = data.data[0].monthplan + '/'+data.data[0].monthvisited;
 							todaycnt.textContent = data.data[0].todaycnt;	
 							
 						},
@@ -265,6 +272,7 @@
 			var liudong = document.getElementById("liudong");
 			var minzu = document.getElementById("minzu");
 			var chuzu = document.getElementById("chuzu");
+			var emotyHouse = document.getElementById("emptyHouse");
 		mui.ajax(urlforapp+'/platform/index/getsumdata?myid='+userid,{
 			dataType:'json',//服务器返回json格式数据
 			type:'get',//HTTP请求类型
@@ -281,7 +289,8 @@
 				minzu.textContent = data.zdmyxrs + '/'+ data.zdmyxhs;
 				//重点地州
 				chuzu.textContent = data.zdsdzrs +'/'+data.zdsdzhs;
-				
+				//空房
+				emotyHouse.textContent = data.emptyhouse;
 			},
 			error:function(xhr,type,errorThrown){
 				
