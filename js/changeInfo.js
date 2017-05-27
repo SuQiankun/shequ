@@ -196,13 +196,17 @@ var changePeoInfo = {
 								hkdz = data.data[i].peo_hk_addr;
 								if(hkdz.indexOf('昌吉市')>=0){
 									$("#expirdateDiv").hide();
+									$("#liurushijian").hide();
 								}else{
 									$("#expirdateDiv").show();
+									$("#liurushijian").show();
 								}
 								document.getElementById("hkdz").value = common.changestr(hkdz);
 								//租房到期时间
 								var expirdate = data.data[i].expirdate;
 								document.getElementById("expirdate").value = expirdate;
+								
+								document.getElementById("liuruTime").value = data.data[i].peo_lrsj;
 								
 								//光荣证类型
 								scid = data.data[i].peo_single_child_card;

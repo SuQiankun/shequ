@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -33,7 +32,7 @@
 						<form class="mui-input-group" >
 							<div class="mui-input-row">
 								<label style="width: 40%;">反馈问题类型:</label>
-								<select name="" style="width: 60%;">
+								<select id="problemType" style="width: 60%;">
 									<option value="">请选择</option>
 								</select>
 							</div>
@@ -46,7 +45,7 @@
 					</div>
 					<div class="mui-card-footer">
 						<div class="mui-button-row" style="margin: 0 auto;">
-							<button type="button" id="commitVisitInfo" class="mui-btn mui-btn-primary" >提交</button>&nbsp;&nbsp;
+							<button type="button" class="mui-btn mui-btn-primary" onclick="commitVisit()" >提交</button>&nbsp;&nbsp;
 						</div>
 					</div>
 					<div class="mui-card">
@@ -71,22 +70,21 @@
 		<script src="js/mui.min.js"></script>
 		
 		<script type="text/javascript">
-			
 			mui.init({
 
 				beforeback: function(){
 					//获得列表界面的webview
 					var list = plus.webview.getWebviewById('tab-webview-subpage-about.html');
 					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
-					mui.fire(list,'getindex');
-					//返回true，继续页面关闭逻辑
-					return true;
-					}
+						mui.fire(list,'getindex');
+							//返回true，继续页面关闭逻辑
+						return true;
+						}
 					}); 
 					
+					
 			//提交更新记录
-			document.getElementById("commitVisitInfo").addEventListener('tap',function(){
-
+			function commitVisit(){
 				var visitdate = new Date().valueOf();
 				var memoinfo = document.getElementById("memoinfo").value;
 				if (memoinfo.length < 1) {
@@ -98,7 +96,7 @@
 				var xiaoquid = self.xiaoquID;
 				var loudongid = self.loudongID;
 				var fanghaoid = self.fanghaoID;
-				
+				var probleType = document.getElementById("problemType").value;
 				mui.ajax(urlforapp+':8080/app?cmd=addvisitrecord',{
 					data:{
 						"VisitDate":visitdate,
@@ -106,13 +104,14 @@
 						"PEO_XQ_ID":xiaoquid,
 						"PEO_LD_ID":loudongid,
 						"PEO_HS_NUM":fanghaoid,
-						"MemoInfo":memoinfo
+						"MemoInfo":memoinfo,
+						"zftype":probleType,
 					},
 					dataType:'json',//服务器返回json格式数据
 					type:'post',//HTTP请求类型
 					timeout:10000,//超时时间设置为10秒；
 					success:function(data){
-						if (data.data == '写入成功') {							
+						if (data.code == 200) {							
 							mui.alert('添加走访记录成功');
 							setTimeout('mui.back()',1000);	
 						} else{
@@ -120,20 +119,23 @@
 						}
 					},
 					error:function(xhr,type,errorThrown){
-						mui.alert('添加失败');
+						mui.alert('添加失败'); 
 					}
-				});		
-			});
+				});	
+			}
 				
 		</script>
 <script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" >
 			mui.plusReady(function () {
 				var self = plus.webview.currentWebview();
-				
 				document.getElementById("xiaoquname").textContent = self.xiaoquName;
 				document.getElementById("loudongname").textContent = self.loudongName;
 				document.getElementById("fanghaoname").textContent = self.fanghaoName;
+				
+					common.getDictTypeInfo('a560c092d4bf48609dceed899948130d','',function(result){
+						document.getElementById("problemType").innerHTML = result;
+					});
 			
 				});
 		

@@ -1,9 +1,10 @@
 
 //var urlforapp =  'http://124.117.230.75';
-//var urlforapp =  'http://192.168.1.7';
-var urlforapp =  'http://117.146.77.26';
+var urlforapp =  'http://192.168.1.7';
+//var urlforapp =  'http://117.146.77.26';
 var peoListData;
 var houseData;
+var birth;
 
 
 var idcardPicAdd;
@@ -80,19 +81,24 @@ getXiaoqu: function getXiaoqqu(params,callback){
 				success:function(data){
 				var area_name = '<option >请选择</option>';
 				
-				for (i=0;i<data.data.length;i++) {
-					if (data.data.length  > 1) {
-						area_name +=
-						'<option value="'+
-						data.data[i].area_id	
-						+'">'+ data.data[i].area_name+'</option>';
-					} else{
-						area_name +=
-						'<option value="'+
-						data.data[i].area_id
-						+'" selected = selected>'+ data.data[i].area_name+'</option>';
+				if (data.code == 200) {
+					for (i=0;i<data.data.length;i++) {
+						if (data.data.length  > 1) {
+							area_name +=
+							'<option value="'+
+							data.data[i].area_id	
+							+'">'+ data.data[i].area_name+'</option>';
+						} else{
+							area_name +=
+							'<option value="'+
+							data.data[i].area_id
+							+'" selected = selected>'+ data.data[i].area_name+'</option>';
+						}
 					}
+				} else{
+					mui.alert(data.data);
 				}
+
 				callback(area_name);
 				},
 				error: function(xhr,type,errorThrown){}});
@@ -102,26 +108,29 @@ getLoudong: function getloudong(params,callback){
 			if (params == null || params == undefined || params=='') {
 				return false;
 			}
-		
 		mui.ajax(urlforapp+':8080/app?cmd=getbuildingbyvillageid&villageid='+params,{
 				dataType:'json',
 				type:'get',
 				success:function(data){
 				var area_name = '<option value="" >请选择</option>';
-				
-				for (i=0;i<data.data.length;i++) {
-					if (data.data.length  > 1) {
-						area_name +=
-						'<option value="'+
-						data.data[i].area_id	
-						+'">'+ data.data[i].area_name+'</option>';
+					if (data.code == 200) {
+						for (i=0;i<data.data.length;i++) {
+							if (data.data.length  > 1) {
+								area_name +=
+								'<option value="'+
+								data.data[i].area_id	
+								+'">'+ data.data[i].area_name+'</option>';
+							} else{
+								area_name +=
+								'<option value="'+
+								data.data[i].area_id
+								+'" selected = selected>'+ data.data[i].area_name+'</option>';
+							}
+						}
 					} else{
-						area_name +=
-						'<option value="'+
-						data.data[i].area_id
-						+'" selected = selected>'+ data.data[i].area_name+'</option>';
+						mui.alert(data.data);
 					}
-				}
+				
 					callback(area_name);
 				},
 				error: function(xhr,type,errorThrown){
@@ -136,23 +145,30 @@ getRoomList: function getRoomList(params,callback){
 				dataType:'json',
 				type:'get',
 				success:function(data){
+		
 				var area_name = '<option value ="">请选择</option>';
-				for (i=0;i<data.data.length;i++) {
-					if (data.data.length  > 1) {
-							area_name += 
-							'<option value="'+
-							data.data[i].house_num_id
-							+'">'+ data.data[i].house_num+'</option>';
-					} else{
-						area_name += 
-							'<option value="'+
-							data.data[i].house_num_id
-							+'" selected = selected>'+ data.data[i].house_num+'</option>';
+					if (data.code == 200) {
+							for (i=0;i<data.data.length;i++) {
+								if (data.data.length  > 1) {
+										area_name += 
+										'<option value="'+
+										data.data[i].house_num_id
+										+'">'+ data.data[i].house_num+'</option>';
+								} else{
+									area_name += 
+										'<option value="'+
+										data.data[i].house_num_id
+										+'" selected = selected>'+ data.data[i].house_num+'</option>';
+								}
+							}
+					}else{
+						mui.alert(data.data);
 					}
-				}
+		
 				callback(area_name);			
 				},
 				error: function(xhr,type,errorThrown){
+					
 				}
 			});	
 },

@@ -149,15 +149,11 @@
 					dataType:'json',//服务器返回json格式数据
 					type:'post',//HTTP请求类型
 					success:function(data){
-						if (data.data == '新增人员成功!') {
-							mui.confirm('新增人员成功!')
-							mui.back();
-							//获得页面
-//							var webid = plus.webview.getWebviewById('tab-web-main.html');
-							
-						} else{
-					
-							mui.confirm('新增人员失败!')
+						if(data.code == 200){
+								mui.alert('修改成功!');
+								mui.back();
+						}else{
+							mui.alert('错误:'+data.data);
 						}
 					},
 					error:function(xhr,type,errorThrown){

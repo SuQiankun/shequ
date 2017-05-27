@@ -157,7 +157,7 @@
 											
 						var url = "https://www.pgyer.com/app/install/e23b6c443ee8f5ae196adaf153330527"; // 下载文件地址
 						var dtask = plus.downloader.createDownload(url, {}, function(d, status) {
-							if(status == 302) { // 下载成功
+							if(status == 302) {
 									var params = JSON.stringify(d);
 									var jsonStr = $.parseJSON(params);
 										var url = jsonStr.__responseHeaders__.Location;
@@ -177,11 +177,11 @@
 								}
 							});
 							dtask.start();
-											
-											
-											
 										} else{
-											mui.alert('期待您的更新!');
+											setTimeout(function(){
+												mui.alert("即将退出!")
+												plus.runtime.quit();
+											},1000)
 										}
 									});
 									

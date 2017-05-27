@@ -269,15 +269,15 @@
 								<input style="width: 65%;" id="phoneStr" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
-							<div class="mui-input-row" style="display: none;">
-								<label style="width: 30%;">出生日期</label>
+							<div class="mui-input-row" id="pickDateDiv" style="display: none;">
+								<label style="width: 30%;" class="redTitle">出生日期</label>
 								<div id="result" style="line-height: 40px; display: inline-block; " class="ui-alert"></div>
-								<label  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择出生时间">点击选择出生日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="格式: 1998-03-06"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;" class="redTitle">身份证号</label>
-								<input style="width: 65%;" id="idcardStr" type="text" class="mui-input-clear" placeholder="请输入" ><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input style="width: 65%;" id="idcardStr" type="text" onblur="setBirthDate(this)" class="mui-input-clear" placeholder="请输入" ><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row" style="height: 100%;">
@@ -308,7 +308,7 @@
 							
 							<div class="mui-input-row" id="liurushijian" style="display: none;">
 								<label style="width: 35%;" class="redTitle">流入时间</label>
-								<input style="width: 65%;" id="liuruTime" type="text" class="mui-input-clear" placeholder="请输入" ><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input style="width: 65%;" id="liuruTime" type="text" class="mui-input-clear" placeholder="格式: 1993-03-16" ><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 						
 							<div class="mui-input-row" id="hidezddz" style="display: none;">
@@ -318,7 +318,7 @@
 							
 							<div class="mui-input-row" id="expirdateDiv" style="display: none;" >
 								<label style="width: 40%; font-size: 13px;">租房到期时间</label>
-								<input style="width: 60%;" id="expirdate" type="text" class="mui-input-clear" placeholder="请输入" ></span>
+								<input style="width: 60%;" id="expirdate" type="text" class="mui-input-clear" placeholder="格式: 1993-03-16" ></span>
 							</div>
 							
 							<!--<div class="mui-input-row">
@@ -480,7 +480,7 @@
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">兵役</label>
-								<select id="military" onchange="showBingyi()"><option value="">请选择</option></select>
+								<select id="military" onchange="showBingyi(this)"><option value="">请选择</option></select>
 							</div>
 							
 							<div class="mui-input-row" id="div_by_org">
@@ -550,6 +550,28 @@
 <script src="js/mui.min.js"></script>
 <script src="js/changeInfo.js"></script>
 <script>
+		function setBirthDate(params){
+			  var sfz=$(params).val();
+			  if(sfz.length==15||sfz.length==18){
+				   if (sfz.length==18) {
+				   	$("#pickDateDiv").hide();
+				    var sr =sfz.substring(6,14);
+				    var sr1=sr.substring(0,4)+"-"+sr.substring(4,6)+"-"+sr.substring(6,8);
+				    var d=Date.parse(sr1);
+					    if(isNaN(d)){
+					     alert('身份证中的生日信息可能有误，请检查');
+					    }else{
+					     $("#pickDateBtn").val(sr1);
+					    }
+				   }
+				   if (sfz.length == 15) {
+				   		mui.alert('您输入的身份证是15位,请手动填写出生日期');
+				   		$("#pickDateDiv").show();
+				   }
+			  }else{
+			 	  mui.alert('身份证号码位数不对！');
+			  }		
+		}
 		function getAdress(){
 				var reID =  document.getElementById("RELIGION").value;
 				var numberStr = '';
@@ -586,6 +608,7 @@
 				if(idcardStr == '' || idcardStr == null){
 					mui.alert('请输入身份证信息');return;
 				}
+				params["peo_birthday"] = $("#pickDateBtn").val();
 				
 				//入党时间
 				var rudangshijianInfo = common.jointime(document.getElementById("rudangshijian").value);
@@ -603,7 +626,6 @@
 					params["peo_card_num"]=idcardStr;
 					params["peo_phone"]=phoneStr;
 					params["peo_sex"]=sexStr;
-					params["peo_birthday"]=birthStr;
 					params["peo_blood_id"]= document.getElementById("bloodType").value;
 					params["peo_edu_deg_id"]=document.getElementById("degree").value;
 					params["peo_religion_id"]=document.getElementById("RELIGION").value;
@@ -700,6 +722,7 @@
 							params["peo_is_flow"]='43420be04461467d963b8936d23a591a';
 					}else{
 							params["peo_is_flow"]='084500e2b1384e809d49b2db44923fd0';
+							params["peo_lrsj"] = document.getElementById("liuruTime").value;
 							params["expirdate"] = document.getElementById("expirdate").value;
 					}
 				
@@ -722,6 +745,7 @@
 					
 					//光荣证 & 结婚时间
 					var str = $("#marry").find("option:selected").text();
+					
 					if(str == '请选择' || str == '未婚'){
 					}else{
 						var sctypeInfo = document.getElementById("singlechild").value;
@@ -765,10 +789,12 @@
 					dataType:'json',
 					type:'post',
 					success:function(data){
-					if (data.data == '修改人员资料成功!') {
-							mui.alert('修改成功!');
-							setTimeout('mui.back()',1000);	
-					} else{mui.alert('修改失败!');}
+						if(data.code == 200){
+								mui.alert('修改成功!');
+								setTimeout('mui.back()',1000);	
+						}else{
+							mui.alert('错误:'+data.data);
+						}
 					},
 					error:function(xhr,type,errorThrown){mui.alert('连接失败,请检查网络设置!')}
 				});
@@ -893,11 +919,13 @@ mui.plusReady(function () {
 				$('#hidezddz').hide();	
 			}
 	}
-	$("#hkdz").bind('input propertychange',function(){
+	$("#hkdz").blur(function(){
 		if ($(this).val().indexOf('昌吉市')>=0) {
 			$('#expirdateDiv').hide();
+			$("#liurushijian").hide();
 		}else{
-			$('#expirdateDiv').show();			
+			$('#expirdateDiv').show();
+			$("#liurushijian").show();
 		}
 	});
 	
@@ -946,7 +974,15 @@ mui.plusReady(function () {
 	$("#peo_marry_date").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'peo_marry_date');
 	});
-	
+	$("#pickDateBtn").bind('input propertychange',function(){
+		common.insertSplit($(this).val(),'pickDateBtn');
+	});
+	$("#liuruTime").bind('input propertychange',function(){
+			common.insertSplit($(this).val(),'liuruTime');
+	});
+	$("#expirdate").bind('input propertychange',function(){
+		common.insertSplit($(this).val(),'expirdate');
+	});
 	
 	mui.previewImage();
 </script>

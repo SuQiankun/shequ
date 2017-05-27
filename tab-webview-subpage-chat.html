@@ -249,9 +249,7 @@
 				var selected_val = document.getElementById('communityInfo').value;
 				
 				common.getLoudong(selected_val,function(result){
-					setTimeout(function(){
-						document.getElementById("LouDongID").innerHTML = result;
-					},2000);
+					document.getElementById("LouDongID").innerHTML = result;
 					getRoomInfo();
 				});
 		 }
@@ -266,11 +264,11 @@
 				
 				for (i=0;i<data.data.length;i++) {
 					//加入是否走访的标记
-					if (data.data[i].visited.length > 1){
-						area_name +=
-						'<option style="color: #2AC845;" value="'+
-						data.data[i].house_num_id
-						+'">'+ data.data[i].house_num+'&nbsp&nbsp √</option>';
+					if (data.data[i].visited  > 0){
+							area_name +=
+							'<option style="color: #2AC845;" value="'+
+							data.data[i].house_num_id
+							+'">'+ data.data[i].house_num+'&nbsp&nbsp √</option>';
 					}else{
 							area_name +=
 						'<option value="'+
@@ -294,7 +292,7 @@
 		document.getElementById("searchPersionList").addEventListener('tap',function(){	searchPeoInfo();});
 
 		function searchPeoInfo(){
-				common.searchPersonInfo()
+			common.searchPersonInfo()
 		}
 		
 		//更新字符串 --> 重点人员字符串处理
@@ -321,7 +319,7 @@
 			return titleStr;
 		}
 		
-		//  获取房间
+		//  获取房间信息
 		function getHouseInfo(params){
 			$('#houselist').show()
 			mui.ajax(urlforapp+':8080/app?cmd=getfcinfobyhouseid&houseid='+params,{

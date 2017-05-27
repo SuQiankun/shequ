@@ -114,14 +114,14 @@
 				            
 				             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				             	<i class="iconfont icon-zonghe" style="color: #DE577B;" ></i>
-			                    <h4 id="yearvisit">0/0</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >年计划/实际</div> 
+			                    <h4 id="changzhuText">0/0</h4>
+			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >常住人/户数</div> 
 				            </li>
 				            
 				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-				           	 	<i class="iconfont icon-24xiaoshiqiantai" style="color: #74B749;" ></i>
-			                   	<h4 id="todaycnt">0</h4>
-			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >日累计</div> 
+				           	 	<i style="font-size:36px; color: #74B749;" class="mui-icon mui-icon-person"  ></i>
+			                   	<h4 id="shijiText">0</h4>
+			                    <div class="mui-media-body" style="color: #888; font-size: 14px;" >实际人/户数</div> 
 				            </li>
 				            
 				        </ul> 
@@ -129,7 +129,12 @@
 					
 					<div class="mui-content">
 				        <ul class="mui-table-view mui-grid-view mui-grid-9" style="background: #fff;" >
-				           
+				             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-2" ><a >
+				       	     	<i class="iconfont icon-24xiaoshiqiantai" style="color: #74B749;" ></i>	
+			                	<h4 style="font-size: 16px;" id="todaycnt">0</h4>
+			                   <div class="mui-media-body" style="color: #888; font-size: 14px;" >日累计</div></a>
+				            </li>
+				            
 				           <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-2" id="uploadimg"><a >
 				            	<i class="iconfont icon-mudedi" style="color: #74B749;" ></i>
 			                   	<h4 style="font-size: 16px;" id="weizoufang">0</h4>
@@ -161,13 +166,6 @@
 			<div style="height: 10px;" ></div>	
 	<script src="js/Common.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		//添加跳转上传图片
-		document.getElementById('uploadimg').addEventListener('tap',function(){
-				mui.openWindow({
-				    url: 'upload.html', 
-				    id:'upload',
-			     });
-		});		
 		//添加点击预警信息界面
 		document.getElementById('showMessage').addEventListener('tap',function(){
 					mui.openWindow({
@@ -190,13 +188,14 @@
 	mui.plusReady(function(){
 	
 			var resultStr =  plus.navigator.getCookie(urlforapp+'/');
-	    			var resultArr = resultStr.split(';');
+	    		var resultArr = resultStr.split(';');
 			    for (i = 0; i< resultArr.length;i++) {
 						var keyStr = resultArr[i].split('=');
 						if ( strcmp(keyStr[0],"userName") == 0 ) {
 							plus.storage.setItem('username',decodeURI((keyStr[1])));
 						}
-			    }
+			   }
+			    
 			function strcmp(a, b) {
 			    a = a.toString().trim(), b = b.toString();
 			    for (var i=0,n=Math.max(a.length, b.length); i<n && a.charAt(i) === b.charAt(i); ++i);
@@ -232,6 +231,7 @@
 //		var mouthvisit = document.getElementById("mouthVisit");
 		var todaycnt = document.getElementById("todaycnt");
 		var weizoufang = document.getElementById("weizoufang");
+		
 					mui.ajax(urlforapp+'/platform/index/',{
 						data:{
 							   "fromapp": "1",
@@ -241,20 +241,13 @@
 						timeout:10000,//超时时间设置为10秒；
 						success:function(data){
 							zhuhu.textContent =  data.data[0].zhuhu  + '/' + data.data[0].hushu;
-							//流出人口
-						//	chuzu.textContent = data.data[0].lcrk +'/'+data.data[0].emptyhouse;
-							//chuzu.textContent = data.data[0].chuzu;
-							//流动人口.流动户
-//							changzhu.textContent = data.data[0].liudong + '/'+ data.data[0].liudonghu;
-							//低保/贫困
-//							liudong.textContent = data.data[0].dibao + '/'+ data.data[0].pinkun;
 							//重点人口 重点户
 							zhongdian.textContent = data.data[0].zhongdian + '/'+ data.data[0].zhongdianhu;
 						//	minzu.textContent = data.data[0].minzu;
 							//未走访
 							weizoufang.textContent = data.data[0].unvisited;
 //							zhuhu.textContent = data.data[0].zhuhu;
-							yearvisit.textContent = data.data[0].yearplan + '/'+data.data[0].yearvisited;
+//							yearvisit.textContent = data.data[0].yearplan + '/'+data.data[0].yearvisited;
 //							mouthvisit.textContent = data.data[0].monthplan + '/'+data.data[0].monthvisited;
 							todaycnt.textContent = data.data[0].todaycnt;	
 							
@@ -273,6 +266,8 @@
 			var minzu = document.getElementById("minzu");
 			var chuzu = document.getElementById("chuzu");
 			var emotyHouse = document.getElementById("emptyHouse");
+			var changzhuText = document.getElementById("changzhuText");
+			var shijiText = document.getElementById("shijiText");
 		mui.ajax(urlforapp+'/platform/index/getsumdata?myid='+userid,{
 			dataType:'json',//服务器返回json格式数据
 			type:'get',//HTTP请求类型
@@ -281,16 +276,19 @@
 
 				//流动人口
 				changzhu.textContent = data.ldrs + '/'+ data.ldhs;
-				
 				//出租房屋/人数
 				liudong.textContent = data.czrs + '/'+ data.czhs;
-				
 				//重点民语系
 				minzu.textContent = data.zdmyxrs + '/'+ data.zdmyxhs;
 				//重点地州
 				chuzu.textContent = data.zdsdzrs +'/'+data.zdsdzhs;
 				//空房
 				emotyHouse.textContent = data.emptyhouse;
+				//1.	常住人口 = 总数 – 空房 – 流动人口
+				changzhuText.textContent = (data.zhs - data.emptyhouse - data.ldhs) + '/'+ ( data.zrs - data.emptyhouse - data.ldrs) ;
+				shijiText.textContent = (data.zhs - data.emptyhouse) + '/'+ ( data.zrs - data.emptyhouse ) ;
+
+				
 			},
 			error:function(xhr,type,errorThrown){
 				
