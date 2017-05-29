@@ -285,9 +285,8 @@
 				//空房
 				emotyHouse.textContent = data.emptyhouse;
 				//1.	常住人口 = 总数 – 空房 – 流动人口
-				changzhuText.textContent = (data.zhs - data.emptyhouse - data.ldhs) + '/'+ ( data.zrs - data.emptyhouse - data.ldrs) ;
-				shijiText.textContent = (data.zhs - data.emptyhouse) + '/'+ ( data.zrs - data.emptyhouse ) ;
-
+				changzhuText.textContent = ( data.zrs - data.emptyhouse - data.ldrs) + '/'+ (data.zhs - data.emptyhouse - data.ldhs) ;
+				shijiText.textContent = ( data.zrs - data.emptyhouse ) + '/'+  (data.zhs - data.emptyhouse);
 				
 			},
 			error:function(xhr,type,errorThrown){

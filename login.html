@@ -137,8 +137,6 @@
 		<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			mui.plusReady(function () {
-	
-	
 				plus.runtime.getProperty(plus.runtime.appid, function(inf) {
 						//获取当前版本号
 						var currentVersionss = inf.version;
@@ -154,7 +152,7 @@
 									var btnArray = ['否', '是'];
 									mui.confirm('新版本','是否前去更新',btnArray,function(e){
 									if (e.index == 1) {
-											
+									var wait = plus.nativeUI.showWaiting('下载中...');
 						var url = "https://www.pgyer.com/app/install/e23b6c443ee8f5ae196adaf153330527"; // 下载文件地址
 						var dtask = plus.downloader.createDownload(url, {}, function(d, status) {
 							if(status == 302) {
@@ -163,17 +161,21 @@
 										var url = jsonStr.__responseHeaders__.Location;
 										var dtask = plus.downloader.createDownload(url, {'filename':"_downloads/newVersion.apk"}, function(d, status) {
 											if(status == 200) {
+												wait.close();
 												var path = d.filename;
 												plus.runtime.install(path);
 											} else {
-												alert("Download failed: " + status);
+												wait.close();
+												alert("下载失败: " + status);
 											}
 										});
 										dtask.start();	
 								}else if(status == 200){
-									alert("Download failed: " + status);
+									wait.close();
+									alert("下载失败: " + status);
 								} else { //下载失败
-									alert("Download failed: " + status);
+									wait.close();
+									alert("下载失败: " + status);
 								}
 							});
 							dtask.start();

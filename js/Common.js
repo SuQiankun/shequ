@@ -1,7 +1,7 @@
 
 //var urlforapp =  'http://124.117.230.75';
-var urlforapp =  'http://192.168.1.7';
-//var urlforapp =  'http://117.146.77.26';
+//var urlforapp =  'http://192.168.1.7';
+var urlforapp =  'http://117.146.77.26';
 var peoListData;
 var houseData;
 var birth;
@@ -23,16 +23,20 @@ getSheQu: function getSheQu(callback) {
 				success:function(data){
 				var area_name ='<option value="">请选择</option>';
 				for (i=0;i<data.data.length;i++) {
-					if (data.data.length  > 1) {
-						area_name +=
-						'<option value="'+
-						data.data[i].area_id	
-						+'">'+ data.data[i].area_name+'</option>';
+						if (data.code == 200) {
+							if (data.data.length  > 1) {
+							area_name +=
+							'<option value="'+
+							data.data[i].area_id	
+							+'">'+ data.data[i].area_name+'</option>';
+						} else{
+							area_name +=
+							'<option value="'+
+							data.data[i].area_id
+							+'" selected = selected>'+ data.data[i].area_name+'</option>';
+						}
 					} else{
-						area_name +=
-						'<option value="'+
-						data.data[i].area_id
-						+'" selected = selected>'+ data.data[i].area_name+'</option>';
+						mui.alert('请求失败:'+data.data);
 					}
 				}
 				
@@ -623,5 +627,14 @@ getDaogaoList: function getDaogaoList(cmd,actionid,params,callback) {
 	        document.getElementById(idStr).value += '-';
 	    }
 	},
-	
+	checkDateFormat: function (params,tip){
+			var sfz=$(params).val();
+			var d=Date.parse(sfz);
+		    if(isNaN(d)){
+		     mui.alert(tip+'格式不正确,请核查! 例如: 2000-01-01,即 yyyy(四位年份)-mm(两位月份)-dd(两位天份)的格式');
+		     return false;
+		    }else{
+		    	 $(params).val(sfz);
+		    }
+	},
 }

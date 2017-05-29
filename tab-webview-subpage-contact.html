@@ -4,15 +4,12 @@
 		<meta charset="utf-8">
 		<title>Hello MUI</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<script src="js/Common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/mui.min.js"></script>
 		<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/json.js" type="text/javascript" charset="utf-8"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link href="css/mui.picker.min.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="css/mui.min.css">
@@ -109,7 +106,7 @@
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">身份证号</label>
-								<input  id="idcardStr" style="width: 65%;" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input  id="idcardStr" style="width: 65%;" type="text" class="mui-input-clear" placeholder="请输入" onblur="setBirthDate(this)"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">手机号</label>
@@ -125,9 +122,10 @@
 								<select  id="relationList" style="width: 65%;"class="mui-btn-block" >
 								</select>
 							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">出生日期</label>
-								<label  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="点击选择出生时间" data-input-clear="5">点击选择出生日期<span class="mui-icon mui-icon-clear mui-hidden"></span>
+							<div class="mui-input-row" id="pickDateDiv" style="display: none;">
+								<label style="width: 30%;" class="redTitle">出生日期</label>
+								<div id="result" style="line-height: 40px; display: inline-block; " class="ui-alert"></div>
+								<input  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="格式: 1998-03-06"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;">籍贯</label>
@@ -147,32 +145,51 @@
 			</div>
 		</div>
 	<script src="../js/mui.min.js"></script>	
-	<!--时间选择器-->	
-	<script>
-				var info = document.getElementById("pickDateBtn");
-				document.getElementById("pickDateBtn").addEventListener('tap', function() {
-				var dDate = new Date();
-				dDate.setFullYear(2016, 7, 16);
-				var minDate = new Date();
-				minDate.setFullYear(1800, 0, 1);
-				var maxDate = new Date();
-				maxDate.setFullYear(2050, 01, 01);
-				plus.nativeUI.pickDate(function(e) {
-					var d = e.date;
-					info.textContent = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-				}, function(e) {
-					info.innerText = "您没有选择日期";
-				}, {
-					title: "请选择日期",
-					date: dDate,
-					minDate: minDate,
-					maxDate: maxDate
-				});
-			})
-		</script>
+	<!-- 数据校验-->
+<script type="text/javascript">
+	
+	function checkTimeFormat(params,tip){
+			var sfz=$(params).val();
+			
+			if (sfz.length > 2) {
+				var d=Date.parse(sfz);
+			    if(isNaN(d)){
+			     mui.alert(tip+'格式不正确,请核查! 例如: 2000-01-01,即 yyyy(四位年份)-mm(两位月份)-dd(两位天份)的格式');
+			    }else{
+			    	 $(params).val(sfz);
+			    }
+			}else{
+				$(params).val(null);
+			}
+	}
+	$("#pickDateBtn").bind('input propertychange',function(){
+		common.insertSplit($(this).val(),'pickDateBtn');
+	});
+</script>
 	<!--提交新增人员-->
 	<script type="text/javascript">
-		
+	function setBirthDate(params){
+			  var sfz=$(params).val();
+			  if(sfz.length==15||sfz.length==18){
+				   if (sfz.length==18) {
+				   	$("#pickDateDiv").hide();
+				    var sr =sfz.substring(6,14);
+				    var sr1=sr.substring(0,4)+"-"+sr.substring(4,6)+"-"+sr.substring(6,8);
+				    var d=Date.parse(sr1);
+					    if(isNaN(d)){
+					     mui.alert('身份证中的生日信息可能有误，请检查');
+					    }else{
+					     $("#pickDateBtn").val(sr1);
+					    }
+				   }
+				   if (sfz.length == 15) {
+				   		mui.alert('您输入的身份证是15位,请手动填写出生日期');
+				   		$("#pickDateDiv").show();
+				   }
+			  }else{
+			 	  mui.alert('身份证号码位数不对！');
+			  }		
+		}
 		function addNewPersonInfo(){
 			//获取参数列表
 			var shequID = document.getElementById("shequID").value;
@@ -180,6 +197,17 @@
 			var xiaoquID = document.getElementById("communityInfo").value;
 			var loudongID = document.getElementById("LouDongID").value;
 			var fanghaoID = document.getElementById("FangHaoID").value;
+	
+			//
+				var name = document.getElementById("nameStr").value;
+				var sex = document.getElementById("sexStr").value;
+				var idcard = document.getElementById("idcardStr").value;
+				var phone = document.getElementById("phoneStr").value;
+				var nation = document.getElementById("nationID").value;
+				var birth = $("#pickDateBtn").val();
+				var jg = document.getElementById("jgStr").value;
+				var relation = document.getElementById("relationList").value;
+
 			if(shequID == '' || shequID == null || shequID == undefined || shequID == '请选择'){
 					mui.alert('请选择社区');
 					return false;
@@ -200,23 +228,7 @@
 			if(fanghaoID == '' || fanghaoID == null || fanghaoID == undefined || fanghaoID == '请选择'){
 					mui.alert('请选择房间号');
 					return false;
-				}
-			//
-				var name = document.getElementById("nameStr").value;
-				var sex = document.getElementById("sexStr").value;
-				var idcard = document.getElementById("idcardStr").value;
-				var phone = document.getElementById("phoneStr").value;
-				var nation = document.getElementById("nationID").value;
-				var birth = common.jointime(document.getElementById("pickDateBtn").textContent);
-				var jg = document.getElementById("jgStr").value;
-				var relation = document.getElementById("relationList").value;
-
-		
-				if (birth.length == 16 || birth == '' || birth == null || birth == undefined) {
-						mui.alert('请选择出生日期');
-						return false;
-				}
-				
+			}
 				if(nation == '' || nation == null){
 					mui.alert('请选择民族');
 					return;
@@ -235,17 +247,6 @@
 					return;
 				}
 				
-			//发送请求 
-//				if (idcard.length != 18) {
-//					mui.toast('请检查身份证号是否正确');
-//					return;
-//				}
-//				if(phone.length != 11){
-//					mui.toast('请手机号码是否正确');
-//					return;
-//				}
-
-			
 				var data = {
 					"peo_hs_num":fanghaoID,
 					"peo_sq_id":shequID,
@@ -263,21 +264,19 @@
 				};
 				
 				var params = $.toJSON(data);
-				
 				mui.ajax(urlforapp+':8080/app?cmd=newlive',{
 					data:params,
 					headers:{'Content-Type':'application/json'},	
 					dataType:'json',//服务器返回json格式数据
 					type:'post',//HTTP请求类型
 					success:function(data){
-						if (data.data == '新增人员成功!') {
+						if (data.code == 200 ) {
 							mui.alert('新增人员成功!');
 							//新增人员成功后清除数据
 							clearData();
 							//
 						//获得列表界面的webview
 						var list = plus.webview.getWebviewById('tab-webview-subpage-about.html');
-						//触发列表界面的自定义事件（getindex）,从而进行数据刷新
 						mui.fire(list,'getindex');
 						} else{
 							mui.alert('新增人员失败!')

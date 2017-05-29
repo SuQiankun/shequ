@@ -8,10 +8,15 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<script src="js/mui.min.js"></script>
+		<script src="js/jquery-3.2.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link href="css/mui.picker.min.css" rel="stylesheet" type="text/css" />
 	</head>
-
+<style type="text/css">
+		.redTitle{
+				color: red;
+			}
+</style>
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
@@ -24,11 +29,11 @@
 					<div class="mui-card-content">
 							<form class="mui-input-group"  >
 							<div class="mui-input-row">
-								<label style="width: 30%;">姓名</label>
+								<label style="width: 30%;" class="redTitle">姓名</label>
 								<input id="nameStr" style="width: 65%;" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							<div class="mui-input-row">
-								<label style="width: 30%;">性别</label>
+								<label style="width: 30%;" class="redTitle" >性别</label>
 								<select   id="sexStr" style="width: 65%;" class="mui-btn-block">
 									<option value="">请选择</option>
 									<option value="c1670767bf2840a1aab00f364f781cdb">男</option>
@@ -36,29 +41,29 @@
 								</select>
 							</div>
 							<div class="mui-input-row">
-								<label style="width: 30%;">身份证号</label>
-								<input  id="idcardStr" style="width: 65%;" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<label style="width: 30%;" class="redTitle">身份证号</label>
+								<input  id="idcardStr" style="width: 65%;" type="text" class="mui-input-clear" placeholder="请输入" onblur="setBirthDate(this)"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							<div class="mui-input-row">
-								<label style="width: 30%;">手机号</label>
+								<label style="width: 30%;" class="redTitle">手机号</label>
 								<input  id="phoneStr" style="width: 65%;" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">族别</label>
+							<div class="mui-input-row" >
+								<label style="width: 30%;" class="redTitle">族别</label>
 								<select  id="nationID" style="width: 65%;"  class="mui-btn-block" >
 								</select>
 							</div>
-							<div class="mui-input-row">
-								<label style="width: 35%;">与业主关系</label>
+							<div class="mui-input-row" >
+								<label style="width: 35%;" class="redTitle">与业主关系</label>
 								<select  id="relationList" style="width: 65%;"class="mui-btn-block" >
 								</select>
 							</div>
-							<div class="mui-input-row">
-								<label style="width: 30%;">出生日期</label>
-								<label  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" data-input-clear="5">点击选择出生日期<br />
+							<div class="mui-input-row" id="pickDateDiv" style="display: none;">
+								<label style="width: 30%;" class="redTitle">出生日期</label>
+								<input  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="格式: 1998-03-06"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							<div class="mui-input-row">
-								<label style="width: 30%;">籍贯</label>
+								<label style="width: 30%;" class="redTitle">籍贯</label>
 								<input  id="jgStr" style="width: 65%;" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
@@ -78,7 +83,28 @@
 		<script src="js/Common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/json.js" type="text/javascript" charset="utf-8"></script>
 		<script>
-			
+			function setBirthDate(params){
+			  var sfz=$(params).val();
+			  if(sfz.length==15||sfz.length==18){
+				   if (sfz.length==18) {
+				   	$("#pickDateDiv").hide();
+				    var sr =sfz.substring(6,14);
+				    var sr1=sr.substring(0,4)+"-"+sr.substring(4,6)+"-"+sr.substring(6,8);
+				    var d=Date.parse(sr1);
+					    if(isNaN(d)){
+					     alert('身份证中的生日信息可能有误，请检查');
+					    }else{
+					     $("#pickDateBtn").val(sr1);
+					    }
+				   }
+				   if (sfz.length == 15) {
+				   		mui.alert('您输入的身份证是15位,请手动填写出生日期');
+				   		$("#pickDateDiv").show();
+				   }
+			  }else{
+			 	  mui.alert('身份证号码位数不对！');
+			  }		
+		}		
 			function addPerson(){
 				
 				 //获取参数列表
@@ -89,21 +115,16 @@
 				var idcard = document.getElementById("idcardStr").value;
 				var phone = document.getElementById("phoneStr").value;
 				var nation = document.getElementById("nationID").value;
-				var birth = common.jointime(document.getElementById("pickDateBtn").textContent);
+				var birth = $("#pickDateBtn").val();
 				var jg = document.getElementById("jgStr").value;
 				var relation = document.getElementById("relationList").value;
-
-				if (birth.length == 16 || birth == '' || birth == null || birth == undefined) {
-						mui.alert('请选择出生日期');
-						return false;
-				}
+				
 				
 				if(nation == '' || nation == null){
 					mui.alert('请选择民族');
 					return;
 				}
-				
-				
+	
 				if(name == '' || name == null){
 					mui.alert('请输入姓名');
 					return;
