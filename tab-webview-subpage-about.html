@@ -160,7 +160,7 @@
 			<div style="height: 10px;" ></div>	
 			
 				<h6 style="text-align: center;" >2017 © 社区管理系统 East Riches</h6>
-				<h6 style="text-align: center;" >version 1.0.8</h6>
+				<h6 style="text-align: center;" >version 1.0.9</h6>
 
 			<div style="height: 10px;" ></div>
 			<div style="height: 10px;" ></div>	
@@ -173,6 +173,7 @@
 					    id:'showMessgae',
 				     });
 		});
+		
 		//跳转到走访记录页面
 //		document.getElementById('visitID').addEventListener('tap',function(){
 //			mui.openWindow({
@@ -180,13 +181,14 @@
 //					    id:'visitID',
 //			});
 //		});
+
 		//刷新首页的数据
 		document.addEventListener('getindex', function() {
 				getIndexData();
 		});
 
 	mui.plusReady(function(){
-	
+			
 			var resultStr =  plus.navigator.getCookie(urlforapp+'/');
 	    		var resultArr = resultStr.split(';');
 			    for (i = 0; i< resultArr.length;i++) {

@@ -292,7 +292,7 @@
 						<!--内容 part 2-->
 							<div class="mui-input-row">
 									<label style="width: 30%;">籍贯</label>
-									<input style="width: 65%;" id="jgStr" type="text" class="mui-input-clear" placeholder="" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+									<input style="width: 65%;" id="jgStr" type="text" class="mui-input-clear" placeholder="" onblur="checkJiGuanFormat(this)"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row">
@@ -307,8 +307,8 @@
 							</div>	
 							
 							<div class="mui-input-row" id="liurushijian" style="display: none;">
-								<label style="width: 35%;" class="redTitle">流入时间</label>
-								<input style="width: 65%;" id="liuruTime" type="text" class="mui-input-clear" placeholder="格式: 1993-03-16" ><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<label style="width: 35%;" class="redTitle"  >流入时间</label>
+								<input style="width: 65%;" id="liuruTime" type="text" class="mui-input-clear" placeholder="格式: 1993-03-16" ><span class="mui-icon mui-icon-clear mui-hidden" onblur='checkTimeFormat(this,"流入时间")'></span>
 							</div>
 						
 							<div class="mui-input-row" id="hidezddz" style="display: none;">
@@ -317,8 +317,8 @@
 							</div>
 							
 							<div class="mui-input-row" id="expirdateDiv" style="display: none;" >
-								<label style="width: 40%; font-size: 13px;">租房到期时间</label>
-								<input style="width: 60%;" id="expirdate" type="text" class="mui-input-clear" placeholder="格式: 1993-03-16" ></span>
+								<label style="width: 40%; font-size: 13px;"  >租房到期时间</label>
+								<input style="width: 60%;" id="expirdate" type="text" class="mui-input-clear" placeholder="格式: 1993-03-16" onblur='checkTimeFormat(this,"租房到期时间")'  ></span>
 							</div>
 							
 							<!--<div class="mui-input-row">
@@ -361,7 +361,7 @@
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;">退休时间</label>
-								<input id="peo_retire_date" style="width: 65%;" type="text" class="mui-input-clear" placeholder="输入格式 1993-03-16" >
+								<input id="peo_retire_date" style="width: 65%;" type="text" class="mui-input-clear" placeholder="输入格式 1993-03-16" onblur='checkTimeFormat(this,"退休时间")' >
 							</div>
 							<div class="mui-input-row">
 								<label  style="width: 30%;" class="redTitle">经济状况</label>
@@ -459,19 +459,19 @@
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 35%;">光荣证类型</label>
-								<select id="singlechild">
+								<select id="singlechild" onchange="singleChildType(this)">
 									<option value="">请选择</option>
 								</select>
 							</div>
-							<div class="mui-input-row">
+							<div class="mui-input-row" id="sgDIV">
 								<label style="width: 35%;">光荣证编号</label>
 								<input style="width: 65%;" id="singlechildnum" type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
-							<div class="mui-input-row">
+							<div class="mui-input-row" id="sgEnjoyDIV">
 								<label style="width: 45%;" >光荣证享受情况</label>
-								<select id="singlechildenjoy" style="width: 55%;"><option value="">请选择</option></select>
+								<select id="singlechildenjoy" style="width: 55%;" onchange="testType(this)"><option value="">请选择</option></select>
 							</div>
-							<div class="mui-input-row" style="height: 100%;">
+							<div class="mui-input-row" style="height: 100%;" id="sgPICDIV">
 									<label style="width: 35%;"> 光荣证证照片</label>
 									<img id="singlechildPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src=""  data-preview-src="" data-preview-group="1"/ >
 									<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
@@ -550,8 +550,16 @@
 			</div>
 <script src="js/mui.min.js"></script>
 <script src="js/changeInfo.js"></script>
-<!-- 时间格式数据校验-->
+<!-- 输入格式数据校验-->
 <script type="text/javascript">
+	
+	function checkJiGuanFormat(params){
+			var str = $(params).val();
+			if(str.length <= 3){
+				mui.alert('请输入完整籍贯,省份名称+区县');
+				return false;
+			}
+	}
 	
 	function checkTimeFormat(params,tip){
 			var sfz=$(params).val();
@@ -567,7 +575,20 @@
 				$(params).val(null);
 			}
 	}
-	
+	// 如果是
+	function singleChildType(params){
+		if ($(params).val() == 'cfc08d40d32f4c0885214df6e15f89be') {
+			$("#sgDIV").hide();
+			$("#sgEnjoyDIV").hide();
+			$("#sgPICDIV").hide();
+			$("#singlechildenjoy").val('e242c69415c84ebcaafa221ed5a5f09a');
+			
+		}else{
+			$("#sgDIV").show();
+			$("#sgEnjoyDIV").show();
+			$("#sgPICDIV").show();
+		}
+	}	
 </script>
 <script>
 		function setBirthDate(params){
@@ -632,7 +653,13 @@
 				//入党时间
 				var rudangshijianInfo = document.getElementById("rudangshijian").value;
 				if (document.getElementById("polit").value == '26c0381f2de54fd8887ab42d99da1481' && rudangshijianInfo == null) {mui.alert('请选择入党时间');return false;}
-				params["peo_join_party_date"]=$('#rudangshijian').val();	
+				
+				if ($('#rudangshijian').val() == '暂无') {
+					params["peo_join_party_date"]= null;
+				} else{
+					params["peo_join_party_date"]=$('#rudangshijian').val();	
+				}
+				
 				
 				//贫困原因
 				var pinkunyuanyinInfo = document.getElementById("pinkunyuanyin").value;
@@ -770,10 +797,12 @@
 						if (sctypeInfo == '' || sctypeInfo == null ||sctypeInfo == undefined) {mui.alert('请选择光荣证类型');return false;}
 						params["peo_single_child_card"]=sctypeInfo;
 						params["peo_single_child_num"] =  document.getElementById("singlechildnum").value;
+						
 						var scenjoyInfo = document.getElementById("singlechildenjoy").value;
 						if (scenjoyInfo == '' || scenjoyInfo == null ||scenjoyInfo == undefined) {mui.alert('请选择享受情况');return false;}
 						params["peo_xsqk_id"]=scenjoyInfo;
 					}
+					
 					//兵役信息
 					params["peo_by_id"]=document.getElementById("military").value;
 					var byInfo = $("#military").find("option:selected").text();
@@ -783,14 +812,25 @@
 						params["peo_by_outdate"]=$("#peo_by_outdate").val();	
 					}
 					//TODO 结婚时间
-					params["peo_marry_date"]=$("#peo_marry_date").val();
+					if ($("#peo_marry_date").val() == '暂无') {
+						params["peo_marry_date"]=null;
+					}else{
+						params["peo_marry_date"]=$("#peo_marry_date").val();						
+					}
+					
 					params["peo_party_zw"]=document.getElementById("dangneizhiwu").value;
 					params["peo_inhome_id"]=document.getElementById("yesOrNot").value;
 					params["peo_jbqk_id"]=document.getElementById("jibingleixingid").value;
 					params["peo_hobby"]=document.getElementById("peo_hobby").value;
 					params["peo_byyx"]=document.getElementById("peo_byyx").value;
 					//TODO 退休时间
-					params["peo_retire_date"]=$("#peo_retire_date").val();	
+					if ($("#peo_retire_date").val() == '暂无') {
+						params["peo_retire_date"]= null;
+					} else{
+						params["peo_retire_date"]=$("#peo_retire_date").val();	
+					}
+					
+					
 					params["peo_weight"]=common.jointime(document.getElementById("peo_weight").value);
 					params["peo_stature"]=common.jointime(document.getElementById("peo_height").value);
 					params["peo_cjgy"]=document.getElementById("Publicwelfare").value;
@@ -950,9 +990,9 @@ mui.plusReady(function () {
 //设置返回的刷新事件
 	mui.init({
 				beforeback: function(){
-				var list = plus.webview.getWebviewById('tab-webview-subpage-chat.html');
-				mui.fire(list,'updateWithName');					
-				//获得列表界面的webview
+						var list = plus.webview.getWebviewById('tab-webview-subpage-chat.html');
+						mui.fire(list,'updateWithName');		
+					//获得列表界面的webview
 					var list = plus.webview.getWebviewById('tab-webview-subpage-about.html');
 					//触发列表界面的自定义事件（refresh）,从而进行数据刷新
 					mui.fire(list,'getindex');

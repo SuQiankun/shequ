@@ -39,7 +39,7 @@ var changePeoInfo = {
 								//兵役状况
 								bingyi = data.data[i].peo_by_id;
 								common.getBingyi('military','military',bingyi);
-								if(bingyi == '请选择' || bingyi == '未服' ){
+								if(bingyi == '请选择' || bingyi == '未服' || bingyi == ''){
 									$('#div_by_org').hide();
 									$('#div_by_indate').hide();
 									$('#div_by_outdate').hide();
@@ -213,6 +213,17 @@ var changePeoInfo = {
 								common.getDictTypeInfo(plus.storage.getItem('grzlx'),scid,function(result){
 									document.getElementById("singlechild").innerHTML = result;							
 								});
+								if (scid.indexOf('无' > 0)) {
+									$("#sgDIV").hide();
+									$("#sgEnjoyDIV").hide();
+									$("#sgPICDIV").hide();
+									$("#singlechildenjoy").val('e242c69415c84ebcaafa221ed5a5f09a');
+									
+								}else{
+									$("#sgDIV").show();
+									$("#sgEnjoyDIV").show();
+									$("#sgPICDIV").show();
+								}
 								//光荣证编号
 								scnumber = data.data[i].peo_single_child_num;
 								document.getElementById("singlechildnum").value = common.changestr(scnumber);
