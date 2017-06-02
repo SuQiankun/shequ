@@ -263,7 +263,7 @@
 							
 							<div class="mui-input-row">
 								<label style="width: 35%;" class="redTitle">与业主关系</label>
-								<select id="ownRealt" style="width: 65%;" class="mui-btn-block"></select>
+								<select id="ownRealt" style="width: 65%;"  class="mui-btn-block"></select>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;" class="redTitle">手机号码</label>
@@ -273,7 +273,7 @@
 							<div class="mui-input-row" id="pickDateDiv" style="display: none;">
 								<label style="width: 30%;" class="redTitle">出生日期</label>
 								<div id="result" style="line-height: 40px; display: inline-block; " class="ui-alert"></div>
-								<input  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="格式: 1998-03-06"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input  id="pickDateBtn" onblur="setOtherInfo(this)" style="width: 65%;" type="text" class="mui-input-clear" placeholder="格式: 1998-03-06"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row">
@@ -444,7 +444,7 @@
 							</div>
 							<div class="mui-input-row" id="dangyuanTypeDIV">
 								<label style="width: 30%;" class="redTitle">党员类型</label>
-								<select id="dangyuanType" name="" ><option value="">请选择</option></select>
+								<select id="dangyuanType" ><option value="">请选择</option></select>
 							</div>
 							<div id="dangneizhiwudiv" class="mui-input-row">
 								<label style="width: 30%;">党内职务</label>
@@ -605,7 +605,7 @@ function setBirthDate(params){
 			     	mui.alert('身份证中的生日信息可能有误，请检查');
 			    }else{
 			     	$("#pickDateBtn").val(sr1);
-			     	//checkAge(sr1);
+			   		judgeShowOrHide(sr1);
 			    }
 		   }
 		   if (sfz.length == 15) {
@@ -614,19 +614,52 @@ function setBirthDate(params){
 		   }
 	  }else{
 	 	  mui.alert('身份证号码位数不对！');
-	  }		
 }
-			// TODO 年龄小于18
-			function checkAge(params){
-				var years = params.substring(0,4);
-				console.log(years);
-				var dateTmp= new Date();
-				var currentYears = dateTmp.getFullYear();
-				console.log(currentYears);
-				console.log(currentYears - years);
+}
+
+	function judgeShowOrHide(params){
+		var age = checkAge(params);
+		if (age>=18) {
+		}else if(age < 7 ){
+			$("#marry").val('e4724e120f4b414f88119d58e208e2ad');
+			$("#peo_ylqk").val('22026015364543398d0288dbc102eb0e');
+			$("#career").val('de2ffbb591554877a8ad9fc33f109522');
+		}else{						
+			$("#marry").val('e4724e120f4b414f88119d58e208e2ad');
+			$("#peo_ylqk").val('22026015364543398d0288dbc102eb0e');
+		}
+	}
+
+	 function setOtherInfo(params){
+	 	var birth = $(params).val();
+			judgeShowOrHide(birth);
+	 }
+
+	// 计算年龄
+	function checkAge(params) {
+		
+		var dateTmp = new Date();
+		var currentYears = dateTmp.getFullYear();
+		var currentMouths = dateTmp.getMonth()+1;
+		var currentDays = dateTmp.getDate();
+	
+		var years = params.substring(0,4);
+		var mouths = params.substring(5,7);
+		var days = params.substring(8,11);
+		var age = 0;
+		
+		if(currentMouths * 1 - mouths * 1 < 0) {
+			age = (currentYears * 1 - years * 1) - 1;
+		} else {
+			if(currentDays - days >= 0) { 
+				age = (currentYears * 1 - years * 1);
+			} else {
+				age = (currentYears * 1 - years * 1) - 1;
 			}
-	
-	
+		}
+		return age;
+	}
+
 </script>
 <script>
 
@@ -674,10 +707,14 @@ function setBirthDate(params){
 				if ($('#rudangshijian').val() == '暂无') {
 					params["peo_join_party_date"]= null;
 					 // TODO 党员类型 
-					 
+//					params["peo_dylx"]= null; 
 				} else{
-					params["peo_join_party_date"]=$('#rudangshijian').val();	
+					params["peo_join_party_date"]=$('#rudangshijian').val();
+					
 				}
+				params["peo_dylx"]=$('#dangyuanType').val();
+					
+				console.log($('#dangyuanType').val());
 				
 				
 				//贫困原因

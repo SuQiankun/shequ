@@ -224,6 +224,7 @@
 			}
 		</style>
 	</head>
+
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
@@ -262,7 +263,7 @@
 							
 							<div class="mui-input-row">
 								<label style="width: 35%;" class="redTitle">与业主关系</label>
-								<select id="ownRealt" style="width: 65%;" class="mui-btn-block"></select>
+								<select id="ownRealt" style="width: 65%;"  class="mui-btn-block"></select>
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;" class="redTitle">手机号码</label>
@@ -272,7 +273,7 @@
 							<div class="mui-input-row" id="pickDateDiv" style="display: none;">
 								<label style="width: 30%;" class="redTitle">出生日期</label>
 								<div id="result" style="line-height: 40px; display: inline-block; " class="ui-alert"></div>
-								<input  id="pickDateBtn" style="width: 65%;" type="text" class="mui-input-clear" placeholder="格式: 1998-03-06"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input  id="pickDateBtn" onblur="setOtherInfo(this)" style="width: 65%;" type="text" class="mui-input-clear" placeholder="格式: 1998-03-06"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row">
@@ -307,8 +308,8 @@
 							</div>	
 							
 							<div class="mui-input-row" id="liurushijian" style="display: none;">
-								<label style="width: 35%;" class="redTitle"  >流入时间</label>
-								<input style="width: 65%;" id="liuruTime" type="text" class="mui-input-clear" placeholder="格式: 1993-03-16" ><span class="mui-icon mui-icon-clear mui-hidden" onblur='checkTimeFormat(this,"流入时间")'></span>
+								<label style="width: 35%;" class="redTitle">流入时间</label>
+								<input style="width: 65%;" id="liuruTime" type="text" class="mui-input-clear" placeholder="格式: 1993-03-16"  onblur='checkTimeFormat(this,"流入时间")' ><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 						
 							<div class="mui-input-row" id="hidezddz" style="display: none;">
@@ -317,7 +318,7 @@
 							</div>
 							
 							<div class="mui-input-row" id="expirdateDiv" style="display: none;" >
-								<label style="width: 40%; font-size: 13px;"  >租房到期时间</label>
+								<label style="width: 40%; font-size: 13px;">租房到期时间</label>
 								<input style="width: 60%;" id="expirdate" type="text" class="mui-input-clear" placeholder="格式: 1993-03-16" onblur='checkTimeFormat(this,"租房到期时间")'  ></span>
 							</div>
 							
@@ -441,7 +442,10 @@
 								<label style="width: 30%;">入党时间</label>
 								<input  id="rudangshijian" style="width: 65%;" type="text" class="mui-input-clear" placeholder="输入格式 1993-03-16"  onblur='checkTimeFormat(this,"入党时间")' >
 							</div>
-							
+							<div class="mui-input-row" id="dangyuanTypeDIV">
+								<label style="width: 30%;" class="redTitle">党员类型</label>
+								<select id="dangyuanType" ><option value="">请选择</option></select>
+							</div>
 							<div id="dangneizhiwudiv" class="mui-input-row">
 								<label style="width: 30%;">党内职务</label>
 								<input id="dangneizhiwu" style="width: 65%;"  type="text" class="mui-input-clear" placeholder="请输入" ><span class="mui-icon mui-icon-clear mui-hidden"></span>
@@ -589,30 +593,76 @@
 			$("#sgPICDIV").show();
 		}
 	}	
+function setBirthDate(params){
+	  var sfz=$(params).val();
+	  if(sfz.length==15||sfz.length==18){
+		   if (sfz.length==18) {
+		   	$("#pickDateDiv").hide();
+		    var sr =sfz.substring(6,14);
+		    var sr1=sr.substring(0,4)+"-"+sr.substring(4,6)+"-"+sr.substring(6,8);
+		    var d=Date.parse(sr1);
+			    if(isNaN(d)){
+			     	mui.alert('身份证中的生日信息可能有误，请检查');
+			    }else{
+			     	$("#pickDateBtn").val(sr1);
+			   		judgeShowOrHide(sr1);
+			    }
+		   }
+		   if (sfz.length == 15) {
+		   		mui.alert('您输入的身份证是15位,请手动填写出生日期');
+		   		$("#pickDateDiv").show();
+		   }
+	  }else{
+	 	  mui.alert('身份证号码位数不对！');
+}
+}
+
+	function judgeShowOrHide(params){
+		var age = checkAge(params);
+		if (age>=18) {
+		}else if(age < 7 ){
+			$("#marry").val('e4724e120f4b414f88119d58e208e2ad');
+			$("#peo_ylqk").val('22026015364543398d0288dbc102eb0e');
+			$("#career").val('de2ffbb591554877a8ad9fc33f109522');
+		}else{						
+			$("#marry").val('e4724e120f4b414f88119d58e208e2ad');
+			$("#peo_ylqk").val('22026015364543398d0288dbc102eb0e');
+		}
+	}
+
+	 function setOtherInfo(params){
+	 	var birth = $(params).val();
+			judgeShowOrHide(birth);
+	 }
+
+	// 计算年龄
+	function checkAge(params) {
+		
+		var dateTmp = new Date();
+		var currentYears = dateTmp.getFullYear();
+		var currentMouths = dateTmp.getMonth()+1;
+		var currentDays = dateTmp.getDate();
+	
+		var years = params.substring(0,4);
+		var mouths = params.substring(5,7);
+		var days = params.substring(8,11);
+		var age = 0;
+		
+		if(currentMouths * 1 - mouths * 1 < 0) {
+			age = (currentYears * 1 - years * 1) - 1;
+		} else {
+			if(currentDays - days >= 0) { 
+				age = (currentYears * 1 - years * 1);
+			} else {
+				age = (currentYears * 1 - years * 1) - 1;
+			}
+		}
+		return age;
+	}
+
 </script>
 <script>
-		function setBirthDate(params){
-			  var sfz=$(params).val();
-			  if(sfz.length==15||sfz.length==18){
-				   if (sfz.length==18) {
-				   	$("#pickDateDiv").hide();
-				    var sr =sfz.substring(6,14);
-				    var sr1=sr.substring(0,4)+"-"+sr.substring(4,6)+"-"+sr.substring(6,8);
-				    var d=Date.parse(sr1);
-					    if(isNaN(d)){
-					     mui.alert('身份证中的生日信息可能有误，请检查');
-					    }else{
-					     $("#pickDateBtn").val(sr1);
-					    }
-				   }
-				   if (sfz.length == 15) {
-				   		mui.alert('您输入的身份证是15位,请手动填写出生日期');
-				   		$("#pickDateDiv").show();
-				   }
-			  }else{
-			 	  mui.alert('身份证号码位数不对！');
-			  }		
-		}
+
 		function getAdress(){
 				var reID =  document.getElementById("RELIGION").value;
 				var numberStr = '';
@@ -656,9 +706,15 @@
 				
 				if ($('#rudangshijian').val() == '暂无') {
 					params["peo_join_party_date"]= null;
+					 // TODO 党员类型 
+//					params["peo_dylx"]= null; 
 				} else{
-					params["peo_join_party_date"]=$('#rudangshijian').val();	
+					params["peo_join_party_date"]=$('#rudangshijian').val();
+					
 				}
+				params["peo_dylx"]=$('#dangyuanType').val();
+					
+				console.log($('#dangyuanType').val());
 				
 				
 				//贫困原因
@@ -811,7 +867,6 @@
 						params["peo_by_indate"]=$("#peo_by_indate").val();	
 						params["peo_by_outdate"]=$("#peo_by_outdate").val();	
 					}
-					//TODO 结婚时间
 					if ($("#peo_marry_date").val() == '暂无') {
 						params["peo_marry_date"]=null;
 					}else{
@@ -823,7 +878,6 @@
 					params["peo_jbqk_id"]=document.getElementById("jibingleixingid").value;
 					params["peo_hobby"]=document.getElementById("peo_hobby").value;
 					params["peo_byyx"]=document.getElementById("peo_byyx").value;
-					//TODO 退休时间
 					if ($("#peo_retire_date").val() == '暂无') {
 						params["peo_retire_date"]= null;
 					} else{
@@ -956,9 +1010,11 @@ mui.plusReady(function () {
 			if(str == '党员'){
 				$('#dangneizhiwudiv').show();
 				$('#rudangshijiandiv').show();
+				$("#dangyuanTypeDIV").show();
 			}else{
 			 	$('#dangneizhiwudiv').hide();
-				$('#rudangshijiandiv').hide();	
+				$('#rudangshijiandiv').hide();
+				$("#dangyuanTypeDIV").hide();
 			}
 	}
 	function showMarryInfo(){
@@ -991,7 +1047,7 @@ mui.plusReady(function () {
 	mui.init({
 				beforeback: function(){
 						var list = plus.webview.getWebviewById('tab-webview-subpage-chat.html');
-						mui.fire(list,'updateWithName');		
+						mui.fire(list,'updateWithName');	
 					//获得列表界面的webview
 					var list = plus.webview.getWebviewById('tab-webview-subpage-about.html');
 					//触发列表界面的自定义事件（refresh）,从而进行数据刷新

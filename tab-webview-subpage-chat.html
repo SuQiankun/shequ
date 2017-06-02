@@ -328,9 +328,7 @@
 					houseData = data;
 					
 					if (data.data[0] == null || data.data[0] == 'undefined' || data.data[0] == '') {
-						console.log('-----'+JSON.stringify(data));
 					} else{
-						console.log('-----'+JSON.stringify(data.data));
 						document.getElementById("yz_name").innerText = common.changestr(data.data[0].yz_name);
 						document.getElementById("yz_phone").innerText = common.changestr(data.data[0].tel);
 						document.getElementById("yz_fcznum").innerText = common.changestr(data.data[0].fc_fcz_num); 

@@ -132,16 +132,24 @@ var changePeoInfo = {
 								if(zzmm == '党员'){
 										$('#dangneizhiwudiv').show();
 										$('#rudangshijiandiv').show();
+										$('#dangyuanTypeDIV').show()
 								}else{
 										$('#dangneizhiwudiv').hide();
 										$('#rudangshijiandiv').hide();
+										$("#dangyuanTypeDIV").hide();
 								}
+								
 								//入党时间
 								partydate = data.data[i].peo_join_party_date;
 								document.getElementById("rudangshijian").value= common.changestr(partydate);
 								//党内职务
 								partyzw = data.data[i].peo_party_zw;
 								document.getElementById("dangneizhiwu").value = common.changestr(partyzw);
+								var dangyuanType = data.data[i].peo_dylx;
+								
+								common.getDictTypeInfo(plus.storage.getItem('党员类型'),dangyuanType,function(result){
+									document.getElementById("dangyuanType").innerHTML = result;									
+								});
 								//学历信息
 								xueli = data.data[i].peo_edu_deg_id;
 								common.getReligion('degree','degree',xueli);

@@ -102,7 +102,7 @@
 				var data = {
 				      "yz_name": document.getElementById("yz_name").value,
 				      "fc_house_room_num": document.getElementById("yz_housecount").value,
-//				      "fc_id": document.getElementById("fc_id").value,
+				      "fc_id": document.getElementById("fc_id").value,
 				      "cardid": document.getElementById("yz_carnum").value,
 				      "tel": document.getElementById("yz_phone").value,
 				      "fc_house_structure_id": document.getElementById("housestruct").value,
@@ -134,7 +134,7 @@
 							
 						},
 						error:function(xhr,type,errorThrown){
-							console.log('fail');
+							mui.alert('网络连接错误!')
 						}
 					});
 				}
@@ -143,8 +143,6 @@
 mui.plusReady(function () {
    				var self = plus.webview.currentWebview();
 				var data = self.housedata;
-				console.log(JSON.stringify(self));
-//				return false;
 				/*
 				 *判断如果返回的数据为空的话,可以继续下拉框 
 				 * */
