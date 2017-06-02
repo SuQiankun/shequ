@@ -5,7 +5,7 @@ var urlforapp =  'http://117.146.77.26';
 var peoListData;
 var houseData;
 var birth;
-
+var visitParams = new Array();
 
 var idcardPicAdd;
 var sociaPicAdd;
