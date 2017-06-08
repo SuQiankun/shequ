@@ -177,6 +177,7 @@ getRoomList: function getRoomList(params,callback){
 			});	
 },
 
+
 getDictTypeInfo: function getDictTypeInfo(params,type,callback){
 	mui.ajax(urlforapp+':8080/app?cmd=getdictbytype&dictype='+params,{
 			dataType:'json',//服务器返回json格式数据
@@ -203,25 +204,7 @@ getDictTypeInfo: function getDictTypeInfo(params,type,callback){
 			}
 		});
 },
-	//获取type信息;
-getType: function getType(cmd,actionid,params) {
-		var areaStr = '';
-		//获取宗教信仰列表
-			  mui.ajax(urlforapp+':8080/app?cmd=getdictbytype&dictype='+cmd,{
-				dataType:'json',
-				type:'get',
-				success:function(data){
-				area_name = '<option value="">请选择</option>';
-				for (i=0;i<data.data.length;i++) {
-					area_name +='<option value="'+data.data[i].ids+'" >'+ data.data[i].val+'</option>';
-				}
-				
-				areaStr = area_name;
-				document.getElementById(actionid).innerHTML = area_name;
-				},
-				error: function(xhr,type,errorThrown){}});
-				return areaStr;
-	},
+
 	//获取兵役设置初始化信息;
 	getBingyi: function getBingyi(cmd,actionid,params) {
 		//获取兵役状况
@@ -419,7 +402,6 @@ getDaogaoList: function getDaogaoList(cmd,actionid,params,callback) {
 						 break;
 			}
 			callback(area_name);	
-		
 	},
 	showTip: function showTip(params,description){
 		

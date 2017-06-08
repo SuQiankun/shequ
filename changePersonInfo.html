@@ -617,7 +617,7 @@ function setBirthDate(params){
 }
 }
 
-	function judgeShowOrHide(params){
+function judgeShowOrHide(params){
 		var age = checkAge(params);
 		if (age>=18) {
 		}else if(age < 7 ){
@@ -630,13 +630,12 @@ function setBirthDate(params){
 		}
 	}
 
-	 function setOtherInfo(params){
+function setOtherInfo(params){
 	 	var birth = $(params).val();
 			judgeShowOrHide(birth);
 	 }
-
 	// 计算年龄
-	function checkAge(params) {
+function checkAge(params) {
 		
 		var dateTmp = new Date();
 		var currentYears = dateTmp.getFullYear();
@@ -659,7 +658,6 @@ function setBirthDate(params){
 		}
 		return age;
 	}
-
 </script>
 <script>
 

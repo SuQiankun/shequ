@@ -221,9 +221,16 @@
 			} else if (psw.length < 1){
 				mui.alert('请输入账号');
 				return;
+			}
+			
+			if (account.indexOf('admin') >= 0 || account.indexOf('Admin') >= 0) {
+				mui.alert('检测到您是管理员,请在 PC 端登录');
+				return false;
 			} 
-				var waittip = plus.nativeUI.showWaiting();
-				waittip.setTitle('登录中...')			
+			
+			var waittip = plus.nativeUI.showWaiting();
+			waittip.setTitle('登录中...')			
+			
 			jQuery.ajax({
 			    url: urlforapp+"/platform/login/vali",
 			    type: "post",
@@ -237,18 +244,20 @@
 			    
 			})
 			.done(function(data, textStatus, jqXHR) {
-				if(data.data == 'success'){
+				
+				if(data.data == 200 ){
 					waittip.close();
 					plus.storage.setItem('username', account);
-						getUSEID();
+					getUSEID();
 						mui.openWindow({
 							url: 'tab-webview-main.html',
 							id: 'main', 
 						});
 				}else{
-					waittip.close();
-						mui.toast("请检查账号密码!");
-					}
+						waittip.close();
+						mui.alert(data.data);;
+				}
+				
 			})
 			.fail(function(jqXHR, textStatus, errorThrown) {
 			    waittip.close();
