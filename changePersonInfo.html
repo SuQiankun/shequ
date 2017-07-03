@@ -560,12 +560,12 @@
 <script type="text/javascript">
 	// 职业选择为 学生或者学龄前 设置婚姻状况和养老情况
 	$("#career").change(function(){
+		console.log(document.getElementById("military").value+'----');
 		var valStr = $(this).find('option:selected').text();
 		if (valStr.indexOf('学生')>-1 || valStr.indexOf('学龄前')>-1 ) {
-				
 			$("#marry").val('e4724e120f4b414f88119d58e208e2ad');
 			$("#peo_ylqk").val('22026015364543398d0288dbc102eb0e');
-
+			$("#military").val('b5c18fecd7f642e0b2ab14e609eed59f');	
 		} else{
 		}
 

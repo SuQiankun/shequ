@@ -70,6 +70,7 @@ var changePeoInfo = {
 								if (data.data[i].peo_zy_id.indexOf('学生')>-1 || data.data[i].peo_zy_id.indexOf('学龄前')>-1 ) {
 									$("#marry").val('e4724e120f4b414f88119d58e208e2ad');
 									$("#peo_ylqk").val('22026015364543398d0288dbc102eb0e');
+									$("#military").val('b5c18fecd7f642e0b2ab14e609eed59f');
 								} else{}
 								
 								//户口性质
