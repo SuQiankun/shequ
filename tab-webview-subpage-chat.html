@@ -201,7 +201,7 @@
 					    		loudongName:loudongName,
 					    		fanghaoName:fanghaoName,
 					    },
-			});
+				});
 		}
 		
 		//判断是否隐藏 内容区域
@@ -360,7 +360,6 @@
 			});
 			
 		}
-		
 		//跳转到新增人员的界面;
 		function addPersion(){
 			
@@ -441,7 +440,6 @@
 					    },
 				    });
 		}
-//	#TODO
 		//跳转到修改房产信息的列表
 		function changeHouseInfo(){
 			
@@ -468,6 +466,20 @@
 		function searchWithName(){
 			common.searchWithName();	
 		}
+		//删除操作 
+	function deletePersonInfo(peoid,name){
+		var btnArray = ['取消', '删除'];
+		mui.confirm('你要删除'+name+'的信息吗？', '警告', btnArray, function(e) {
+			if (e.index == 1) {
+//						common.deletepeoInfo();
+				//删除后刷新界面
+				searchPeoInfo();
+				} else {
+				return false;
+			}
+		})
+	}
+		
 		document.addEventListener('updateWithName', function() {searchWithName();});		        
 	</script>	
 
