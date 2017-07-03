@@ -628,26 +628,24 @@ checkDateFormat: function (params,tip){
 	    }
 },
 
-//deletepeoInfo:function(callback){
-//	mui.ajax('',{
-//		data:{
-//			
-//		},
-//		dataType:'json',//服务器返回json格式数据
-//		type:'post',//HTTP请求类型
-//		timeout:10000,//超时时间设置为10秒；
-//		success:function(data){
-//			if (data.code == 200) {
-//				var str = '成功'''
-//			}else{
-//				mui.alert(data.data);
-//			}
-//			callback(str);
-//		},
-//		error:function(xhr,type,errorThrown){
-//			
-//		}
-//	});
-//	
-//},
+deletepeoInfo: function(params,callback){
+	mui.ajax(urlforapp+':8080/app?cmd=deletepeoinfo&peoid='+params,{
+		dataType:'json',//服务器返回json格式数据
+		type:'get',//HTTP请求类型
+		timeout:10000,//超时时间设置为10秒；
+		success:function(data){
+			var str;
+			if (data.code == 200) {
+				str = '删除成功';
+			}else{
+				str = '删除失败';
+			}
+			callback(str);
+		},
+		error:function(xhr,type,errorThrown){
+			
+		}
+	});
+	
+},
 }

@@ -471,9 +471,16 @@
 		var btnArray = ['取消', '删除'];
 		mui.confirm('你要删除'+name+'的信息吗？', '警告', btnArray, function(e) {
 			if (e.index == 1) {
-//						common.deletepeoInfo();
-				//删除后刷新界面
-				searchPeoInfo();
+				var wait = plus.nativeUI.showWaiting();
+				wait.setTitle('删除中...');
+				 common.deletepeoInfo(peoid,function(tipstr){
+					setTimeout(function(){
+						mui.alert(tipstr);	
+						wait.close();
+					},1000)
+					//删除后刷新界面
+					searchPeoInfo();
+				 });
 				} else {
 				return false;
 			}
