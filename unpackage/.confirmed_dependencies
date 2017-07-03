@@ -12,7 +12,8 @@
       "changePersonInfo.html",
       "tab-webview-main.html",
       "houseInfo.html",
-      "PersonListInfo.html"
+      "PersonListInfo.html",
+      "visitList.html"
     ]
   },
   "tab-webview-main.html": {
@@ -71,7 +72,8 @@
       "js/Common.js",
       "images/IMG_2935.JPG",
       "images/IMG_2934.JPG",
-      "images/IMG_2936.JPG"
+      "images/IMG_2936.JPG",
+      "fonts/mui.ttf"
     ],
     "refer": [
       "showMessage.html",

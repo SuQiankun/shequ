@@ -20,44 +20,30 @@
 	</head>
 	<body class="mui-ios mui-ios-9 mui-ios-9-1">
 		
-		<div id="slider" class="mui-slider"  style="height: 150px;">
-			<div class="mui-slider-group mui-slider-loop" style="height: 150px;">
-				<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+		<div id="slider" class="mui-slider"  >
+			<div class="mui-slider-group mui-slider-loop" style="height: 200px;">
 				<div class="mui-slider-item mui-slider-item-duplicate" >
-					<a >
-						<img src="images/fhj.jpeg" >
-					</a>
+					<a ><img src="images/fhj.jpeg" ></a>
 				</div>
 				<!-- 第一张 -->
 				<div class="mui-slider-item">
-					<a >
-						<img src="images/IMG_2934.JPG">
-					</a>
+					<a ><img src="images/IMG_2934.JPG"></a>
 				</div>
 				<!-- 第二张 -->
 				<div class="mui-slider-item">
-					<a >
-						<img src="images/IMG_2935.JPG">
-					</a>
+					<a ><img src="images/IMG_2935.JPG"></a>
 				</div>
 					<!-- 第一张 -->
 				<div class="mui-slider-item">
-					<a >
-						<img src="images/IMG_2936.JPG">
-					</a>
+					<a ><img src="images/IMG_2936.JPG"></a>
 				</div>
 				<!-- 第二张 -->
 				<div class="mui-slider-item">
-					<a >
-						<img src="images/IMG_2934.JPG">
-					</a>
+					<a ><img src="images/IMG_2934.JPG"></a>
 				</div>
-				
 				<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
 				<div class="mui-slider-item mui-slider-item-duplicate">
-					<a >
-						<img src="images/timg.jpg">
-					</a>
+					<a ><img src="images/timg.jpg"></a>
 				</div>
 			</div>
 			<div class="mui-slider-indicator">
@@ -70,8 +56,8 @@
 				<div class="mui-content">	
 					<div class="mui-content">
 				        <ul class="mui-table-view mui-grid-view mui-grid-9" style="background: #fff;pointer-events: none; position:;" >
-				           
-				           <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
+
+							<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"> 
 				             	<i class="iconfont icon-zhusu" style="color: #0DAED3;" ></i>
 			                    <h4 id="zhuhu">*</h4>
 			                    <div class="mui-media-body" style="color: #888; font-size: 14px;">总人数/户数</div> 
@@ -165,7 +151,7 @@
 			<div style="height: 10px;" ></div>	
 			
 				<h6 style="text-align: center;" >2017 © 社区管理系统 East Riches</h6>
-				<h6 style="text-align: center;" >version 1.1.1</h6>
+				<h6 style="text-align: center;" >version 1.1.2</h6>
 
 			<div style="height: 10px;" ></div>
 			<div style="height: 10px;" ></div>	
@@ -173,10 +159,10 @@
 	<script>
 		//添加点击预警信息界面
 		document.getElementById('showMessage').addEventListener('tap',function(){
-					mui.openWindow({
-					    url: 'showMessage.html', 
-					    id:'showMessgae',
-				     });
+				mui.openWindow({
+				    url: 'showMessage.html', 
+				    id:'showMessgae',
+			     });
 		});
 		
 		//跳转到走访记录页面

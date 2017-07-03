@@ -66,6 +66,12 @@ var changePeoInfo = {
 								//职业
 								zhiye = data.data[i].peo_zy_id;
 								common.getReligion('career','career',zhiye);
+								
+								if (data.data[i].peo_zy_id.indexOf('学生')>-1 || data.data[i].peo_zy_id.indexOf('学龄前')>-1 ) {
+									$("#marry").val('e4724e120f4b414f88119d58e208e2ad');
+									$("#peo_ylqk").val('22026015364543398d0288dbc102eb0e');
+								} else{}
+								
 								//户口性质
 								hkxz = data.data[i].peo_hk_xz_id;
 								common.getReligion('popuInfo','popuInfo',hkxz);
@@ -218,8 +224,8 @@ var changePeoInfo = {
 								
 								//光荣证类型
 								scid = data.data[i].peo_single_child_card;
-								common.getDictTypeInfo(plus.storage.getItem('grzlx'),scid,function(result){
-									document.getElementById("singlechild").innerHTML = result;							
+								common.getDictTypeInfo(plus.storage.getItem('光荣证类型'),scid,function(result){
+									document.getElementById("singlechild").innerHTML = result;
 								});
 								if (scid.indexOf('无' > 0)) {
 									$("#sgDIV").hide();
@@ -239,6 +245,7 @@ var changePeoInfo = {
 								scenjoy = data.data[i].peo_xsqk_id;
 								common.getDictTypeInfo(plus.storage.getItem('光荣证政策享受情况'),data.data[i].peo_xsqk_id,function(result){
 									document.getElementById("singlechildenjoy").innerHTML = result;
+									
 								});
 								//是否参加公益活动
 								var joinPublicwelfare = data.data[i].peo_cjgy;

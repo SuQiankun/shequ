@@ -397,7 +397,7 @@
 							</div>
 							<div class="mui-input-row">
 								<label style="width: 30%;" class="redTitle">职业</label>
-								<select id="career"><option value="">请选择</option></select>
+								<select id="career" ><option value="">请选择</option></select>
 							</div>
 							
 							<div class="mui-input-row">
@@ -473,7 +473,7 @@
 							</div>
 							<div class="mui-input-row" id="sgEnjoyDIV">
 								<label style="width: 45%;" >光荣证享受情况</label>
-								<select id="singlechildenjoy" style="width: 55%;" onchange="testType(this)"><option value="">请选择</option></select>
+								<select id="singlechildenjoy" style="width: 55%;" ><option value="">请选择</option></select>
 							</div>
 							<div class="mui-input-row" style="height: 100%;" id="sgPICDIV">
 									<label style="width: 35%;"> 光荣证证照片</label>
@@ -520,6 +520,7 @@
 						</div>
 					</div>
 				</div>
+				
 		<div id="middlePopover" class="mui-popover">
 			<div class="mui-popover-arrow"></div>
 			<div class="mui-scroll-wrapper">
@@ -551,11 +552,26 @@
 				</div>
 			</div>
 		</div>
+			
 			</div>
 <script src="js/mui.min.js"></script>
 <script src="js/changeInfo.js"></script>
 <!-- 输入格式数据校验-->
 <script type="text/javascript">
+	// 职业选择为 学生或者学龄前 设置婚姻状况和养老情况
+	$("#career").change(function(){
+		var valStr = $(this).find('option:selected').text();
+		if (valStr.indexOf('学生')>-1 || valStr.indexOf('学龄前')>-1 ) {
+				
+			$("#marry").val('e4724e120f4b414f88119d58e208e2ad');
+			$("#peo_ylqk").val('22026015364543398d0288dbc102eb0e');
+
+		} else{
+		}
+
+		
+	});
+	
 	
 	function checkJiGuanFormat(params){
 			var str = $(params).val();
@@ -567,7 +583,6 @@
 	
 	function checkTimeFormat(params,tip){
 			var sfz=$(params).val();
-			
 			if (sfz.length > 2) {
 				var d=Date.parse(sfz);
 			    if(isNaN(d)){
@@ -586,7 +601,6 @@
 			$("#sgEnjoyDIV").hide();
 			$("#sgPICDIV").hide();
 			$("#singlechildenjoy").val('e242c69415c84ebcaafa221ed5a5f09a');
-			
 		}else{
 			$("#sgDIV").show();
 			$("#sgEnjoyDIV").show();
@@ -614,7 +628,7 @@ function setBirthDate(params){
 		   }
 	  }else{
 	 	  mui.alert('身份证号码位数不对！');
-}
+	}
 }
 
 function judgeShowOrHide(params){
@@ -845,8 +859,7 @@ function checkAge(params) {
 					
 					//光荣证 & 结婚时间
 					var str = $("#marry").find("option:selected").text();
-					if(str == '请选择' || str == '未婚'){
-					}else{
+					if(str == '请选择' || str == '未婚'){}else{
 						var sctypeInfo = document.getElementById("singlechild").value;
 						if (sctypeInfo == '' || sctypeInfo == null ||sctypeInfo == undefined) {mui.alert('请选择光荣证类型');return false;}
 						params["peo_single_child_card"]=sctypeInfo;
@@ -893,6 +906,7 @@ function checkAge(params) {
 					params["kinsman_phone"]= document.getElementById("kinsman_phone").value;
 					params["kinsman_unit"] = document.getElementById("kinsman_unit").value;
 					
+				
 				mui.ajax(urlforapp+':8080/app?cmd=modifylivepeople',{
 					data:params,
 					headers:{'Content-Type':'application/json'},	
