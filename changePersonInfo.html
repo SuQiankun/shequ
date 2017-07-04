@@ -316,7 +316,10 @@
 								<label style="width: 30%;" class="redTitle">重点地州</label>
 								<select id="peo_zdry_id" style="width: 65%;" class="mui-btn-block"></select>
 							</div>
-							
+							<div class="mui-input-row" id="indateDiv" style="display: none;" >
+								<label style="width: 40%; font-size: 13px;">租房开始时间</label>
+								<input style="width: 60%;" id="peo_liveindate" type="text" class="mui-input-clear" placeholder="格式: 1993-03-16" onblur='checkTimeFormat(this,"租房到期时间")'  ></span>
+							</div>
 							<div class="mui-input-row" id="expirdateDiv" style="display: none;" >
 								<label style="width: 40%; font-size: 13px;">租房到期时间</label>
 								<input style="width: 60%;" id="expirdate" type="text" class="mui-input-clear" placeholder="格式: 1993-03-16" onblur='checkTimeFormat(this,"租房到期时间")'  ></span>
@@ -838,6 +841,7 @@ function checkAge(params) {
 							params["peo_is_flow"]='084500e2b1384e809d49b2db44923fd0';
 							params["peo_lrsj"] = document.getElementById("liuruTime").value;
 							params["expirdate"] = document.getElementById("expirdate").value;
+							params['peo_liveindate'] = document.getElementById("peo_liveindate").value;
 					}
 				
 				params["peo_zdry_id"]='af7fa78208f5442d96d8d9faa9b19885';
@@ -1049,8 +1053,10 @@ mui.plusReady(function () {
 		if ($(this).val().indexOf('昌吉市')>=0) {
 			$('#expirdateDiv').hide();
 			$("#liurushijian").hide();
+			$('#indateDiv').hide();
 		}else{
 			$('#expirdateDiv').show();
+			$('#indateDiv').show();
 			$("#liurushijian").show();
 		}
 	});
@@ -1108,6 +1114,9 @@ mui.plusReady(function () {
 	});
 	$("#expirdate").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'expirdate');
+	});
+	$("#peo_liveindate").bind('input propertychange',function(){
+		common.insertSplit($(this).val(),'peo_liveindate');
 	});
 	
 	mui.previewImage();

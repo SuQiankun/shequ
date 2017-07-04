@@ -212,7 +212,9 @@ var changePeoInfo = {
 								if(hkdz.indexOf('昌吉市')>=0){
 									$("#expirdateDiv").hide();
 									$("#liurushijian").hide();
+									$('#indateDiv').hide();
 								}else{
+									$('#indateDiv').show();
 									$("#expirdateDiv").show();
 									$("#liurushijian").show();
 								}
