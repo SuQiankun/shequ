@@ -1,4 +1,3 @@
-
 //var urlforapp =  'http://124.117.230.75';
 //var urlforapp =  'http://192.168.3.102';
 var urlforapp =  'http://117.146.77.26';
@@ -51,9 +50,9 @@ getWangge: function getWangge(params,callback){
 	if (params == 'null' || params == undefined || params == '') {return false;}
 	//URL未定义 
 	mui.ajax(urlforapp+':8080/app?cmd=getgridlistbycommunityid&communityid='+params,{
-		dataType:'json',//服务器返回json格式数据
-		type:'get',//HTTP请求类型
-		timeout:10000,//超时时间设置为10秒；
+		dataType:'json',
+		type:'get',
+		timeout:10000,
 		success:function(data){
 			var area_name = '<option value="" >请选择</option>';
 				for (i=0;i<data.data.length;i++) {
@@ -412,7 +411,8 @@ showTip: function showTip(params,description){
 	},
 	//模糊搜索
 searchWithName: function(){
-				var waitTip = plus.nativeUI.showWaiting();
+	
+		var waitTip = plus.nativeUI.showWaiting();
 	 	var NameStr = document.getElementById("searchName").value;
 	 	
 		mui.ajax(urlforapp+':8080/app?cmd=getlivepeoplebyname&peo_name='+NameStr,{
@@ -422,6 +422,7 @@ searchWithName: function(){
 			success:function(data){
 			peoListData = data;
 			var area_name='' ;
+			
 			//判断状态码
 			if (data.code == '200') {
 				if (data.data.length > 0) {
@@ -510,6 +511,7 @@ searchWithName: function(){
 },
 //根据房间号搜索人员列表
 searchPersonInfo: function(){
+	
 	var selected_val = document.getElementById('FangHaoID').value;
 			if (selected_val == null || selected_val ==undefined || selected_val == '') {
 				mui.toast('请选择房间号');

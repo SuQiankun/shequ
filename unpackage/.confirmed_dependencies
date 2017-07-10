@@ -173,7 +173,12 @@
       "js/changeInfo.js",
       "css/mui.min.css",
       "js/mui.previewimage.js",
-      "css/mui.picker.min.css"
+      "css/mui.picker.min.css",
+      "js/mui.min.js",
+      "js/jquery-3.2.0.min.js",
+      "fonts/mui.ttf",
+      "js/json.js",
+      "js/Common.js"
     ],
     "refer": []
   }

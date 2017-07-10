@@ -273,12 +273,12 @@
 							<div class="mui-input-row" id="pickDateDiv" style="display: none;">
 								<label style="width: 30%;" class="redTitle">出生日期</label>
 								<div id="result" style="line-height: 40px; display: inline-block; " class="ui-alert"></div>
-								<input  id="pickDateBtn" onblur="setOtherInfo(this)" style="width: 65%;" type="text" class="mui-input-clear" placeholder="格式: 1998-03-06"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input  id="pickDateBtn" onbind="setOtherInfo(this)" style="width: 65%;" type="text" class="mui-input-clear" placeholder="格式: 1998-03-06"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;" class="redTitle">身份证号</label>
-								<input style="width: 65%;" id="idcardStr" type="text" onblur="setBirthDate(this)" class="mui-input-clear" placeholder="请输入" ><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input style="width: 65%;" id="idcardStr"  type="text"  class="mui-input-clear" placeholder="请输入" > <span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row" style="height: 100%;">
@@ -293,7 +293,7 @@
 						<!--内容 part 2-->
 							<div class="mui-input-row">
 									<label style="width: 30%;">籍贯</label>
-									<input style="width: 65%;" id="jgStr" type="text" class="mui-input-clear" placeholder="" onblur="checkJiGuanFormat(this)"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+									<input style="width: 65%;" id="jgStr" type="text" class="mui-input-clear" placeholder=""><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row">
@@ -302,7 +302,6 @@
 							</div>
 							
 							<div class="mui-input-row">
-								
 								<label style="width: 35%;" class="redTitle"><a href="#middlePopover">户口所在地</a></label>
 								<input style="width: 65%;" id="hkdz" type="text" class="mui-input-clear" placeholder="请输入" ></span>
 							</div>	
@@ -316,10 +315,12 @@
 								<label style="width: 30%;" class="redTitle">重点地州</label>
 								<select id="peo_zdry_id" style="width: 65%;" class="mui-btn-block"></select>
 							</div>
+							
 							<div class="mui-input-row" id="indateDiv" style="display: none;" >
 								<label style="width: 40%; font-size: 13px;">租房开始时间</label>
 								<input style="width: 60%;" id="peo_liveindate" type="text" class="mui-input-clear" placeholder="格式: 1993-03-16" onblur='checkTimeFormat(this,"租房到期时间")'  ></span>
 							</div>
+							
 							<div class="mui-input-row" id="expirdateDiv" style="display: none;" >
 								<label style="width: 40%; font-size: 13px;">租房到期时间</label>
 								<input style="width: 60%;" id="expirdate" type="text" class="mui-input-clear" placeholder="格式: 1993-03-16" onblur='checkTimeFormat(this,"租房到期时间")'  ></span>
@@ -570,19 +571,21 @@
 		} else{
 		}
 	});
-	
-	function checkJiGuanFormat(params){
-			var str = $(params).val();
-			if(str.length <= 3){
-				mui.alert('请输入完整籍贯,省份名称+区县');
-				return false;
+
+
+	$("#jgStr").bind('input propertychange',function(){
+			var str = $(this).val();
+			if(str.length <= 3){ 
+				$(this).css('color',"red");
+			}else{
+				$(this).css('color',"black");
 			}
-	}
+	});
 	
 	function checkTimeFormat(params,tip){
 			var sfz=$(params).val();
 			
-			if (sfz.length > 2) {
+			if (sfz.length > 12) {
 				var d=Date.parse(sfz);
 			    if(isNaN(d)){
 			     mui.alert(tip+'格式不正确,请核查! 例如: 2000-01-01,即 yyyy(四位年份)-mm(两位月份)-dd(两位天份)的格式');
@@ -593,6 +596,7 @@
 				$(params).val(null);
 			}
 	}
+	
 	// 如果是
 	function singleChildType(params){
 		if ($(params).val() == 'cfc08d40d32f4c0885214df6e15f89be') {
@@ -607,8 +611,12 @@
 			$("#sgPICDIV").show();
 		}
 	}	
-function setBirthDate(params){
-	  var sfz=$(params).val();
+	//idcardStr 
+	// 之前用的是blur 作为输入监控, 但是一些机器不兼容
+	
+$("#idcardStr").bind('input propertychange',function(){
+
+	  var sfz=$(this).val();
 	  if(sfz.length==15||sfz.length==18){
 		   if (sfz.length==18) {
 		   	$("#pickDateDiv").hide();
@@ -623,12 +631,15 @@ function setBirthDate(params){
 			    }
 		   }
 		   if (sfz.length == 15) {
-		   		mui.alert('您输入的身份证是15位,请手动填写出生日期');
+//		   		mui.alert('您输入的身份证是15位,请手动填写出生日期');
 		   		$("#pickDateDiv").show();
 		   }
 	  }else{
-	 	  mui.alert('身份证号码位数不对！');
-}
+//	 	  mui.alert('身份证号码位数不对！');
+		}
+});
+function setBirthDate(params){
+	
 }
 
 	function judgeShowOrHide(params){
@@ -644,10 +655,12 @@ function setBirthDate(params){
 		}
 	}
 
-	 function setOtherInfo(params){
-	 	var birth = $(params).val();
+
+
+$('#pickDateBtn').bind('input propertychange',function(){
+	var birth = $(this).val();
 			judgeShowOrHide(birth);
-	 }
+});
 
 	// 计算年龄
 	function checkAge(params) {
@@ -728,7 +741,6 @@ function setBirthDate(params){
 				}
 				params["peo_dylx"]=$('#dangyuanType').val();
 					
-				console.log($('#dangyuanType').val());
 				
 				
 				//贫困原因
@@ -739,7 +751,9 @@ function setBirthDate(params){
 					params["peo_id"] = self.personid;
 					params["peo_yz_relation"] =relation; 
 					params["peo_name"]=nameStr;
-					params["peo_jg_id"]=jgStr;
+					
+				if (jgStr.length<3) {mui.alert('请输入完整籍贯信息,省市地区'); return false;}else{params["peo_jg_id"]=jgStr;}
+					
 					params["peo_card_num"]=idcardStr;
 					params["peo_phone"]=phoneStr;
 					params["peo_sex"]=sexStr;
@@ -1048,17 +1062,18 @@ mui.plusReady(function () {
 				$('#hidezddz').hide();	
 			}
 	}
-	$("#hkdz").blur(function(){
-		if ($(this).val().indexOf('昌吉市')>=0) {
-			$('#expirdateDiv').hide();
-			$("#liurushijian").hide();
-			$('#indateDiv').hide();
-		}else{
-			$('#expirdateDiv').show();
-			$('#indateDiv').show();
-			$("#liurushijian").show();
-		}
-	});
+// 之前用的是blur 作为输入监控, 但是一些机器不兼容
+$("#hkdz").bind('input propertychange',function(){
+	if ($(this).val().indexOf('昌吉市')>=0) {
+		$('#expirdateDiv').hide();
+		$("#liurushijian").hide();
+		$('#indateDiv').hide();
+	}else{
+		$('#expirdateDiv').show();
+		$('#indateDiv').show();
+		$("#liurushijian").show();
+	}
+});
 	
 //设置返回的刷新事件
 	mui.init({
@@ -1086,36 +1101,56 @@ mui.plusReady(function () {
         var result = arr.join('');
 		return result;
 	}
+
 	$("#peo_retire_date").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'peo_retire_date');
+		var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
+		
 	});
 	
 	$("#rudangshijian").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'rudangshijian');
+			var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
 	});
 	
 	$("#peo_by_outdate").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'peo_by_outdate');
+			var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
 	});
 	
 	$("#peo_by_indate").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'peo_by_indate');
+			var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
 	});
 	
 	$("#peo_marry_date").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'peo_marry_date');
+			var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
 	});
 	$("#pickDateBtn").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'pickDateBtn');
+			var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
 	});
 	$("#liuruTime").bind('input propertychange',function(){
 			common.insertSplit($(this).val(),'liuruTime');
+				var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
 	});
 	$("#expirdate").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'expirdate');
+			var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
 	});
 	$("#peo_liveindate").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'peo_liveindate');
+		var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
 	});
 	mui.previewImage();
 </script>

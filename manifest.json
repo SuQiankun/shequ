@@ -3,7 +3,7 @@
 	"id": "H5905AE52",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "移动社区管理平台",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.1.3",/*应用版本名称*/
+		"name": "1.1.4",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -327,7 +327,12 @@
 					"js/changeInfo.js",
 					"css/mui.min.css",
 					"js/mui.previewimage.js",
-					"css/mui.picker.min.css"
+					"css/mui.picker.min.css",
+					"js/mui.min.js",
+					"js/jquery-3.2.0.min.js",
+					"fonts/mui.ttf",
+					"js/json.js",
+					"js/Common.js"
 				],
 				"refer": [],
 				"priority": 0

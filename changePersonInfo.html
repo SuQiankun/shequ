@@ -273,27 +273,28 @@
 							<div class="mui-input-row" id="pickDateDiv" style="display: none;">
 								<label style="width: 30%;" class="redTitle">出生日期</label>
 								<div id="result" style="line-height: 40px; display: inline-block; " class="ui-alert"></div>
-								<input  id="pickDateBtn" onblur="setOtherInfo(this)" style="width: 65%;" type="text" class="mui-input-clear" placeholder="格式: 1998-03-06"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input  id="pickDateBtn" onbind="setOtherInfo(this)" style="width: 65%;" type="text" class="mui-input-clear" placeholder="格式: 1998-03-06"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row">
 								<label style="width: 30%;" class="redTitle">身份证号</label>
-								<input style="width: 65%;" id="idcardStr" type="text" onblur="setBirthDate(this)" class="mui-input-clear" placeholder="请输入" ><span class="mui-icon mui-icon-clear mui-hidden"></span>
+								<input style="width: 65%;" id="idcardStr" type="text"  class="mui-input-clear" placeholder="请输入" ><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row" style="height: 100%;">
-									<label style="width: 35%;"> 身份证照片</label>
-									<img id="idcardPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src="" data-preview-src="" data-preview-group="1" /  >
+								<label style="width: 35%;"> 身份证照片</label>
+								<img id="idcardPIC" style="height: 100px; width: 180px; margin-top: 10px;"  src="" data-preview-src="" data-preview-group="1" /  >
+								
 								<div  style="width: 65%;float: right; padding: 0; margin: 0;" class="mui-btn-block" align="center" >
-										<button type="button" id="uploadIDCARD"  class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
-									</div>
+									<button type="button" id="uploadIDCARD"  class=" btn mui-btn mui-btn-block" style="float: left; width: 80px;  font-size: 14px; padding: 5px 5px; margin-top:6px; margin-right: 20px;">点击修改</button>
+								</div>
 							</div>
 							
 						
 						<!--内容 part 2-->
 							<div class="mui-input-row">
 									<label style="width: 30%;">籍贯</label>
-									<input style="width: 65%;" id="jgStr" type="text" class="mui-input-clear" placeholder="" onblur="checkJiGuanFormat(this)"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+									<input style="width: 65%;" id="jgStr" type="text" class="mui-input-clear" placeholder="" ><span class="mui-icon mui-icon-clear mui-hidden"></span>
 							</div>
 							
 							<div class="mui-input-row">
@@ -576,13 +577,18 @@
 	});
 	
 	
-	function checkJiGuanFormat(params){
-			var str = $(params).val();
+
+	$("#jgStr").bind('input propertychange',function(){
+			var str = $(this).val();
 			if(str.length <= 3){
-				mui.alert('请输入完整籍贯,省份名称+区县');
-				return false;
+				console.log('小于3');
+				 
+				$(this).css('color',"red");
+			}else{
+				$(this).css('color',"black");
 			}
-	}
+	});
+	
 	
 	function checkTimeFormat(params,tip){
 			var sfz=$(params).val();
@@ -610,8 +616,8 @@
 			$("#sgPICDIV").show();
 		}
 	}	
-function setBirthDate(params){
-	  var sfz=$(params).val();
+$("#idcardStr").bind('input propertychange',function(){
+	  var sfz=$(this).val();
 	  if(sfz.length==15||sfz.length==18){
 		   if (sfz.length==18) {
 		   	$("#pickDateDiv").hide();
@@ -626,13 +632,13 @@ function setBirthDate(params){
 			    }
 		   }
 		   if (sfz.length == 15) {
-		   		mui.alert('您输入的身份证是15位,请手动填写出生日期');
+//		   		mui.alert('您输入的身份证是15位,请手动填写出生日期');
 		   		$("#pickDateDiv").show();
 		   }
 	  }else{
-	 	  mui.alert('身份证号码位数不对！');
-	}
-}
+//	 	  mui.alert('身份证号码位数不对！');
+		}
+});
 
 function judgeShowOrHide(params){
 		var age = checkAge(params);
@@ -740,7 +746,7 @@ function checkAge(params) {
 					params["peo_id"] = self.personid;
 					params["peo_yz_relation"] =relation; 
 					params["peo_name"]=nameStr;
-					params["peo_jg_id"]=jgStr;
+					if (jgStr.length<3) {mui.alert('请输入完整籍贯信息,省市地区'); return false;}else{params["peo_jg_id"]=jgStr;}
 					params["peo_card_num"]=idcardStr;
 					params["peo_phone"]=phoneStr;
 					params["peo_sex"]=sexStr;
@@ -1049,17 +1055,18 @@ mui.plusReady(function () {
 				$('#hidezddz').hide();	
 			}
 	}
-	$("#hkdz").blur(function(){
-		if ($(this).val().indexOf('昌吉市')>=0) {
-			$('#expirdateDiv').hide();
-			$("#liurushijian").hide();
-			$('#indateDiv').hide();
-		}else{
-			$('#expirdateDiv').show();
-			$('#indateDiv').show();
-			$("#liurushijian").show();
-		}
-	});
+// 之前用的是blur 作为输入监控, 但是一些机器不兼容
+$("#hkdz").bind('input propertychange',function(){
+	if ($(this).val().indexOf('昌吉市')>=0) {
+		$('#expirdateDiv').hide();
+		$("#liurushijian").hide();
+		$('#indateDiv').hide();
+	}else{
+		$('#expirdateDiv').show();
+		$('#indateDiv').show();
+		$("#liurushijian").show();
+	}
+});
 	
 //设置返回的刷新事件
 	mui.init({
@@ -1089,34 +1096,52 @@ mui.plusReady(function () {
 	}
 	$("#peo_retire_date").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'peo_retire_date');
+		var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
 	});
 	
 	$("#rudangshijian").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'rudangshijian');
+		var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
 	});
 	
 	$("#peo_by_outdate").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'peo_by_outdate');
+		var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
 	});
 	
 	$("#peo_by_indate").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'peo_by_indate');
+		var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
 	});
 	
 	$("#peo_marry_date").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'peo_marry_date');
+		var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
 	});
 	$("#pickDateBtn").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'pickDateBtn');
+		var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
 	});
 	$("#liuruTime").bind('input propertychange',function(){
 			common.insertSplit($(this).val(),'liuruTime');
+			var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
 	});
 	$("#expirdate").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'expirdate');
+		var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
 	});
 	$("#peo_liveindate").bind('input propertychange',function(){
 		common.insertSplit($(this).val(),'peo_liveindate');
+		var str =$(this).val(); 
+		if (str.length != 10) {$(this).css('color','red');} else{$(this).css('color','black');}
 	});
 	
 	mui.previewImage();

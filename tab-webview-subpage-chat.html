@@ -175,6 +175,7 @@
 		 * 
 		 */
 		function addVisit(){
+			
 				var shequ = document.getElementById('shequID').value;
 				var wangge = document.getElementById("wangge").value;
 				var xiaoqu = document.getElementById('communityInfo').value;
@@ -276,13 +277,10 @@
 						data.data[i].house_num_id
 						+'"> '+ data.data[i].house_num+'</option>';
 					}
-					
 				}
-				document.getElementById("FangHaoID").innerHTML = area_name;
-								
+					document.getElementById("FangHaoID").innerHTML = area_name;
 				},
-				error: function(xhr,type,errorThrown){
-						
+					error: function(xhr,type,errorThrown){
 				}
 			});
 		 }
@@ -293,7 +291,7 @@
 		document.getElementById("searchPersionList").addEventListener('tap',function(){	searchPeoInfo();});
 
 		function searchPeoInfo(){
-			common.searchPersonInfo()
+			common.searchPersonInfo();
 		}
 		
 		//更新字符串 --> 重点人员字符串处理
@@ -385,6 +383,7 @@
 			
 		//跳转到修改人员资料的界面,
 		function changePersonInfo(peroid){
+			
 				var name =  document.getElementById(peroid+'name').textContent;
 				var sex =  document.getElementById(peroid+'sex').textContent;
 				var nation =  document.getElementById(peroid+'nation').textContent;
@@ -443,11 +442,11 @@
 		//跳转到修改房产信息的列表
 		function changeHouseInfo(){
 			
-			let shequid = document.getElementById("shequID").value;
-			let wanggeid = document.getElementById("wangge").value;
-			let xiaoquid = document.getElementById("communityInfo").value;
-			let loudong = document.getElementById("LouDongID").value;
-			let fangjianid = document.getElementById("FangHaoID").value;
+			var shequid = document.getElementById("shequID").value;
+			var wanggeid = document.getElementById("wangge").value;
+			var xiaoquid = document.getElementById("communityInfo").value;
+			var loudong = document.getElementById("LouDongID").value;
+			var fangjianid = document.getElementById("FangHaoID").value;
 			
 			mui.openWindow({
 		   		url: 'houseInfo.html', 
@@ -466,6 +465,7 @@
 		function searchWithName(){
 			common.searchWithName();	
 		}
+		
 		//删除操作 
 	function deletePersonInfo(peoid,name){
 		var btnArray = ['取消', '删除'];
