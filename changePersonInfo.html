@@ -946,7 +946,8 @@ mui.plusReady(function () {
 			  document.getElementById('pickDateBtn').value = splitDate(web.idcard);
 			  document.getElementById('jgStr').value = web.jg;
 			  document.getElementById("pickDateBtn").textContent = web.birth;
-			  document.getElementById("personID").innerText = web.personid;	  
+			  document.getElementById("personID").innerText = web.personid;	 
+			  
 				//判断是否加载初始值;
 				if (web.sex == '男') {
 					var area_name = '<option selected="selected" value="c1670767bf2840a1aab00f364f781cdb">男</option><option  value="c14b60b63693440089304675e6dbcfc8">女</option>';
@@ -981,7 +982,7 @@ mui.plusReady(function () {
 				}
 				
 				//设置初始数据
-				changePeoInfo.setInitData(web.peoList,web.personid);
+				changePeoInfo.setInitData(web.peoList,web.personid,web.housetype);
 				
 			});
 </script>

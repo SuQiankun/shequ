@@ -392,7 +392,7 @@
 				var jg =  	document.getElementById(peroid+'jg').textContent;
 				var phone =  document.getElementById(peroid+'phone').textContent;
 				var birth =  document.getElementById(peroid+'birth').textContent;
-				
+				var housetype = document.getElementById("housesurce").textContent;
 				// 将获取到的 data 作为一个参数传递到另外一个页面;减少代码量
 					mui.openWindow({
 					    url: 'changePersonInfo.html', 
@@ -408,6 +408,7 @@
 							jg:jg,
 							phone:phone,
 							birth:birth,
+							housetype:housetype,
 					    },
 				    });
 		}

@@ -32,7 +32,7 @@
 		var zdry; //重点四地州
 		
 var changePeoInfo = {
-	setInitData: function(data,peoid){
+	setInitData: function(data,peoid,housetype){
 					//循环遍历,如果是当前人员 取出数据
 					for (i=0;i<data.data.length;i++) {
 						if (data.data[i].peo_id == peoid) {
@@ -210,19 +210,20 @@ var changePeoInfo = {
 								//户口地址
 								hkdz = data.data[i].peo_hk_addr;
 								if(hkdz.indexOf('昌吉市')>=0){
-									$("#expirdateDiv").hide();
 									$("#liurushijian").hide();
-									$('#indateDiv').hide();
 								}else{
+									$("#liurushijian").show();
+								}
+								if (housetype.indexOf('租') >= 0) {
 									$('#indateDiv').show();
 									$("#expirdateDiv").show();
-									$("#liurushijian").show();
+								} else{
+									$("#expirdateDiv").hide();	$('#indateDiv').hide();
 								}
 								document.getElementById("hkdz").value = common.changestr(hkdz);
 								//租房到期时间
 								var expirdate = data.data[i].expirdate;
 								document.getElementById("expirdate").value = expirdate;
-								
 								document.getElementById("liuruTime").value = data.data[i].peo_lrsj;
 								
 								//光荣证类型
