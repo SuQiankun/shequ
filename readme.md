@@ -36,7 +36,7 @@
  
 > addPerson  ---> 新增人员
  
- 页面的都没操作使用的事jquery & mui自带方法;
+ 页面的都dom操作使用的事jquery & mui自带方法;
  使用前可以查看mui的官方文档
 
 [mui 官方文档](http://dev.dcloud.net.cn/mui/ui/). 
